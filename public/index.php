@@ -1,0 +1,245 @@
+<?php
+if (PHP_SAPI == 'cli-server') {
+    // To help the built-in PHP dev server, check if the request was actually for
+    // something which should probably be served as a static file
+    $url  = parse_url($_SERVER['REQUEST_URI']);
+    $file = __DIR__ . $url['path'];
+    if (is_file($file)) {
+        return false;
+    }
+}
+
+require __DIR__ . '/../vendor/autoload.php';
+
+session_start();
+
+
+
+/**
+ * SETTINGS BLOCK
+ */
+
+// Load .env
+$dotenv = new Dotenv\Dotenv(__DIR__ .'/../');
+$dotenv->load();
+function env($key, $defaultValue='') {
+    return isset($_ENV[$key]) ? $_ENV[$key] : $defaultValue;
+}
+
+$settings = [
+    'settings' => [
+        'displayErrorDetails' => env('APP_ENV', 'local') != 'production',
+        'addContentLengthHeader' => false, // Allow the web server to send the content-length header
+        'debugMode' => env('APP_DEBUG', 'true') == 'true',
+
+        // Renderer settings
+        'renderer' => [
+            'template_path' => __DIR__ . '/../templates/',
+			'cache_path' => env('APP_ENV', 'local') != 'production' ? '' : __DIR__ . '/../cache/'
+        ],
+
+        // Monolog settings
+        'logger' => [
+            'name' => env('APP_NAME', 'App'),
+            'path' => env('docker') ? 'php://stdout' : __DIR__ . '/../logs/app.log',
+            'level' => \Monolog\Logger::DEBUG,
+        ],
+
+        // Database
+        'db' => [
+			'connection' => env('DB_CONNECTION'),
+			'host' => env('DB_HOST'),
+			'port' => env('DB_PORT'),
+			'database' => env('DB_DATABASE'),
+			'username' => env('DB_USERNAME'),
+			'password' => env('DB_PASSWORD'),
+        ],
+    ],
+];
+
+// Instantiate the app
+$app = new \Slim\App($settings);
+
+/**
+ * # SETTINGS BLOCK
+ */
+
+
+
+/**
+ * DEPENDENCIES BLOCK
+ */
+
+// Set up dependencies
+$container = $app->getContainer();
+
+// view renderer
+$container['view'] = function ($c) {
+    $settings = $c->get('settings')['renderer'];
+	$view = new \Slim\Views\Twig($settings['template_path'], [
+        // 'cache' => $settings['cache_path']
+    ]);
+    
+    // Instantiate and add Slim specific extension
+    $router = $c->get('router');
+    $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
+    $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
+    $view->addExtension(new \Knlv\Slim\Views\TwigMessages(new Slim\Flash\Messages()));
+
+    return $view;
+};
+
+// not found handler
+$container['notFoundHandler'] = function($c) {
+    return function (\Slim\Http\Request $request, \Slim\Http\Response $response) use ($c) {
+        return $c->view->render($response->withStatus(404), 'errors/404.html');
+        // API
+        // return $response->withJson([
+        //     'status' => 404,
+        //     'message' => "Not Found"
+        // ], 404);
+    };
+};
+
+// error handler
+if (!$container->get('settings')['debugMode'])
+{
+    $container['errorHandler'] = function($c) {
+        return function (\Slim\Http\Request $request, \Slim\Http\Response $response) use ($c) {
+            return $c->view->render($response->withStatus(500), 'errors/500.phtml');
+            // API
+            // return $response->withJson([
+            //     'status' => 500,
+            //     'message' => "Error"
+            // ], 500);
+        };
+    };
+    $container['phpErrorHandler'] = function ($c) {
+        return $c['errorHandler'];
+    };
+}
+
+// flash messages
+$container['flash'] = function() {
+    return new \Slim\Flash\Messages();
+};
+
+// // session helper
+// require_once __DIR__ . '/../src/Session.php';
+// $container['session'] = function() {
+//     return Session::getInstance();
+// };
+
+// monolog
+$container['logger'] = function ($c) {
+    $settings = $c->get('settings')['logger'];
+    $logger = new Monolog\Logger($settings['name']);
+    $logger->pushProcessor(new Monolog\Processor\UidProcessor());
+    $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
+    return $logger;
+};
+
+// db
+$container['db'] = function($c) {
+    $settings = $c->get('settings')['db'];
+	$connection = $settings['connection'];
+	$host = $settings['host'];
+	$port = $settings['port'];
+	$database = $settings['database'];
+	$username = $settings['username'];
+	$password = $settings['password'];
+	
+	$dsn = "$connection:host=$host;port=$port;dbname=$database";
+	$options = [
+		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+		PDO::ATTR_EMULATE_PREPARES   => false,
+	];
+	
+	try {
+		return new PDO($dsn, $username, $password, $options);
+	} catch (PDOException $e) {
+		throw new PDOException($e->getMessage(), (int)$e->getCode());
+	}
+};
+
+// // active user
+// $container['user'] = function($c) {
+//     $session = \App\Session::getInstance();
+// 	$user_id = $session->user_id;
+// 	if (empty($user_id)) {
+// 		return null;
+// 	}
+
+// 	$stmt = $c->db->prepare("SELECT * FROM users WHERE id=:id AND is_active=true");
+// 	$stmt->execute([':id' => $user_id]);
+// 	$user = $stmt->fetch();
+// 	return $user ?: null;
+// };
+
+/**
+ * # DEPENDENCIES BLOCK
+ */
+
+
+
+/**
+ * MIDDLEWARES BLOCK
+ */
+/**
+ * # MIDDLEWARES BLOCK
+ */
+
+
+
+/**
+ * HELPERS BLOCK
+ */
+
+// Menambahkan fungsi env() pada Twig
+$env = new Twig_SimpleFunction('env', function ($key, $default) {
+	return isset($_ENV[$key]) ? $_ENV[$key] : $default;
+});
+$container->get('view')->getEnvironment()->addFunction($env);
+
+// Menambahkan fungsi asset() pada Twig
+$asset = new Twig_SimpleFunction('asset', function ($path) {
+	return $_ENV['APP_URL'] .'/'. $path;
+});
+$container->get('view')->getEnvironment()->addFunction($asset);
+
+// // Menambahkan fungsi session() pada Twig
+// $session = new Twig_SimpleFunction('session', function () {
+// 	return \App\Session::getInstance();
+// });
+// $container->get('view')->getEnvironment()->addFunction($session);
+
+// // Menambahkan fungsi user() pada Twig -> untuk mendapatkan current user
+// $user = new Twig_SimpleFunction('user', function () use ($container) {
+// 	return $container->get('user');
+// });
+// $container->get('view')->getEnvironment()->addFunction($user);
+
+/**
+ * # HELPERS BLOCK
+ */
+
+
+
+/**
+ * ROUTES BLOCK
+ */
+
+require __DIR__ . '/../src/main.php';
+require __DIR__ . '/../src/curahhujan.php';
+require __DIR__ . '/../src/tma.php';
+require __DIR__ . '/../src/map.php';
+
+/**
+ * # ROUTES BLOCK
+ */
+
+
+
+// Run app
+$app->run();

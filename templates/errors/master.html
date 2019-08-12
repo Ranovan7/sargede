@@ -1,0 +1,12 @@
+{% extends 'layouts/master.html' %}
+
+{% block content %}
+<!-- Error Text -->
+<div class="text-center py-5">
+    <div class="error mx-auto h1" data-text="{% block code %}{% endblock %}">{{ block('code') }}</div>
+    <p class="lead text-gray-800 mb-5">{% block message %}{% endblock %}</p>
+    {% if user() %}
+        <a href="{{ path_for('dashboard') }}">&larr; Back to Dashboard</a>
+    {% endif %}
+</div>    
+{% endblock %}

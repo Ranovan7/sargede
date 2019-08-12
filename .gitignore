@@ -1,0 +1,11 @@
+.git/
+.hg/
+.svn/
+cache/
+logs/*.log
+public/uploads/*
+vendor/
+raw/*
+.env
+*.zip
+composer.lock

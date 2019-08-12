@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+    <div class="container">
+        <a href="{{ path_for('dashboard') }}" class="navbar-brand">primaGateway</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-main">
+            <!-- Sidebar -->
+            <ul class="navbar-nav ml-auto">
+
+                <!-- Nav Item - Tenant -->
+                <li class="nav-item">
+                    {% if user()['tenant_id'] <= 0 %}
+                        <a class="nav-link" href="{{ path_for('tenant') }}">
+                            Tenant
+                        </a>
+                    {% endif %}
+                </li>
+
+                <!-- Nav Item - Logger -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path_for('logger') }}">
+                        Logger
+                    </a>
+                </li>
+
+                {% if user()['tenant_id'] <= 0 %}
+                    <!-- Nav Item - User -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path_for('users') }}">
+                            Users
+                        </a>
+                    </li>
+                {% endif %}
+
+                <!-- Nav Item - Logout -->
+                <li class="nav-item">
+                    <form action="{{ path_for('logout') }}" method="post" id="form-logout"></form>
+                    <a class="nav-link" href="#" onclick="$('#form-logout').submit()">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+            <!-- End of Sidebar -->
+        </div>
+    </div>
+</nav>
