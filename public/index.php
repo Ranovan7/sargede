@@ -1,4 +1,8 @@
 <?php
+
+use Slim\Http\Request;
+use Slim\Http\Response;
+
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
     // something which should probably be served as a static file
@@ -91,13 +95,8 @@ $container['view'] = function ($c) {
 
 // not found handler
 $container['notFoundHandler'] = function($c) {
-    return function (\Slim\Http\Request $request, \Slim\Http\Response $response) use ($c) {
+    return function (Request $request, Response $response) use ($c) {
         return $c->view->render($response->withStatus(404), 'errors/404.html');
-        // API
-        // return $response->withJson([
-        //     'status' => 404,
-        //     'message' => "Not Found"
-        // ], 404);
     };
 };
 
@@ -105,13 +104,8 @@ $container['notFoundHandler'] = function($c) {
 if (!$container->get('settings')['debugMode'])
 {
     $container['errorHandler'] = function($c) {
-        return function (\Slim\Http\Request $request, \Slim\Http\Response $response) use ($c) {
+        return function ($request, $response) use ($c) {
             return $c->view->render($response->withStatus(500), 'errors/500.phtml');
-            // API
-            // return $response->withJson([
-            //     'status' => 500,
-            //     'message' => "Error"
-            // ], 500);
         };
     };
     $container['phpErrorHandler'] = function ($c) {
@@ -230,6 +224,9 @@ $container->get('view')->getEnvironment()->addFunction($asset);
  * ROUTES BLOCK
  */
 
+$app->get('/test', function(Request $request, Response $response) {
+    return $this->view->render($response, 'template.html');
+});
 require __DIR__ . '/../src/main.php';
 require __DIR__ . '/../src/curahhujan.php';
 require __DIR__ . '/../src/tma.php';

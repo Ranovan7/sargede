@@ -1,6 +1,23 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-light fixed-top">
+    <div class="container d-flex flex-row align-items-center text-primary">
+        <div class="flex-1 d-flex flex-row align-items-center">
+            <div class="flex-1">
+                <img class="mr-2" src="/img/logo-sda.jpg" alt="" width="40">
+            </div>
+            <div class="flex-1">
+                <h2 class="h6 font-weight-normal small mb-0">KEMENTRIAN PEKERJAAN UMUM DAN PERUMAHAN RAKYAT</h2>
+                <h2 class="h6 font-weight-bold mb-0">DIREKTORAT JENDERAL SUMBER DAYA AIR</h2>
+            </div>
+        </div>
+        <div class="flex-1 text-right">
+            <h2 class="h6 font-weight-normal small mb-0">BALAI WILAYAH SUNGAI</h2>
+            <h2 class="h6 font-weight-bold mb-0">SULAWESI II GORONTALO</h2>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top fixed-top-2">
     <div class="container">
-        <a href="{{ path_for('dashboard') }}" class="navbar-brand">primaGateway</a>
+        {# <a href="/dashboard" class="navbar-brand">{{ env('APP_NAME', 'App') }}</a> #}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,38 +26,37 @@
             <!-- Sidebar -->
             <ul class="navbar-nav ml-auto">
 
-                <!-- Nav Item - Tenant -->
                 <li class="nav-item">
-                    {% if user()['tenant_id'] <= 0 %}
-                        <a class="nav-link" href="{{ path_for('tenant') }}">
-                            Tenant
-                        </a>
-                    {% endif %}
-                </li>
-
-                <!-- Nav Item - Logger -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path_for('logger') }}">
-                        Logger
+                    <a class="nav-link" href="/">
+                        Home
                     </a>
                 </li>
 
-                {% if user()['tenant_id'] <= 0 %}
-                    <!-- Nav Item - User -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path_for('users') }}">
-                            Users
-                        </a>
-                    </li>
-                {% endif %}
-
-                <!-- Nav Item - Logout -->
                 <li class="nav-item">
-                    <form action="{{ path_for('logout') }}" method="post" id="form-logout"></form>
+                    <a class="nav-link" href="/curahhujan">
+                        Curah Hujan
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/tma">
+                        Tinggi Muka Air
+                    </a>
+                </li>
+
+                {# <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        Peta
+                    </a>
+                </li> #}
+
+                {# <!-- Nav Item - Logout -->
+                <li class="nav-item">
+                    <form action="/logout" method="post" id="form-logout"></form>
                     <a class="nav-link" href="#" onclick="$('#form-logout').submit()">
                         Logout
                     </a>
-                </li>
+                </li> #}
 
             </ul>
             <!-- End of Sidebar -->

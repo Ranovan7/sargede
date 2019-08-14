@@ -2,5 +2,7 @@ syntax: glob
 .env
 .git
 db
+public/php_errors.log
+raw
 vendor
 composer.lock

@@ -1,5 +1,8 @@
 <?php
 
+use Slim\Http\Request;
+use Slim\Http\Response;
+
 // Map
 
 $app->group('/map', function() {

@@ -26,18 +26,17 @@
         {% block css %}{% endblock %}
     </head>
 
-    <body
-        id="page-top">
+    <body id="page-top">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            {% if user() %}
+            {# {% if user() %} #}
                 {% include 'layouts/navbar.html' %}
-            {% endif %}
+            {# {% endif %} #}
 
             <!-- Content Wrapper -->
-            <div class="py-5 container" id="content-wrapper">
+            <div class="container" id="content-wrapper">
 
                 <!-- Main Content -->
                 <div class="mt-3 py-3" id="content">
