@@ -2,5 +2,130 @@
 
 {% set title = "Home" %}
 {% block content %}
-    Home
+    <section class="content-header mb-5">
+	<h1>home</h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Dashboard</li>
+    </ol>
+    </section>
+    <div class="row">
+      <div class="col">
+    	<h3>Hujan
+    		<a href="#" id="sejak" data-toggle="tooltip" title="Klik untuk mengganti" data-placement="top">
+    			90
+    		</a>
+    		<span class="text-danger">
+    			&bullet;
+    		</span>
+    	</h3>
+    	<p class="text-muted mb-5">
+    		<i>Hujan yang terjadi selama 90 hari lalu.</i>
+    	</p>
+        <table class="table table-hover">
+            <!-- <p><i>Tidak ada hujan dalam <b>90 hari</b> terakhir.</i></p> -->
+    		<tr>
+    			<td colspan="2">
+    				<span class="hari" data-tgl="2019-8-19">
+    					<span class="text-muted ml-3 font-weight-light">
+    						19 Agustus 2019
+    					</span>
+    				</span>
+    			</td>
+				<td>Hujan</td>
+				<td>Selama</td>
+    		</tr>
+			<tr>
+				<th></th>
+				<td>
+					<i class="fas fa-map-marker-alt"></i>
+					<a href="#">Pos Air 1
+					</a>
+				</td>
+				<td class="text-right"><b>10</b> mm</td>
+				<td class="text-right"><b>30</b> menit</td>
+			</tr>
+            <tr>
+                <td colspan="4">
+                    <span class="hari" data-tgl="2019-8-19">
+                        <span class="text-muted ml-3 font-weight-light">
+                            19 Agustus 2019
+                        </span>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+				<th></th>
+				<td>
+					<i class="fas fa-map-marker-alt"></i>
+					<a href="#">Pos Air 1
+					</a>
+				</td>
+				<td class="text-right"><b>16</b> mm</td>
+				<td class="text-right"><b>55</b> menit</td>
+			</tr>
+            <tr>
+				<th></th>
+				<td>
+					<i class="fas fa-map-marker-alt"></i>
+					<a href="#">Pos Air 2
+					</a>
+				</td>
+				<td class="text-right"><b>8</b> mm</td>
+				<td class="text-right"><b>30</b> menit</td>
+			</tr>
+        </table>
+      </div>
+      <div class="col col-md-6" style="border-left: solid 1px #ccc;">
+        <h3>Tinggi Muka Air</h3>
+    	<p class="text-muted mb-5">
+    		<i>Data Tinggi Muka Air terbaru.</i>
+    	</p>
+    	<table class="table table-hover">
+    		<tr>
+                <td>Lokasi</td>
+    			<td>Tinggi Muka Air</td>
+    		</tr>
+            <!-- <p><i>Belum ada data Tinggi Muka Air.</i></p> -->
+    		<tr>
+    			<td>
+    				<i class="fas fa-map-marker-alt"></i>
+    				<a href="#">
+                        Pos Air 21
+    				</a>
+    			</td>
+    			<td class="text-right">
+                    63 meter
+                    <br>
+                    <small  class="hari text-muted" data-tgl="19 Agustus 2019 16:00"></small>
+                </td>
+    		</tr>
+            <tr>
+    			<td>
+    				<i class="fas fa-map-marker-alt"></i>
+    				<a href="#">
+                        Pos Air 22
+    				</a>
+    			</td>
+    			<td class="text-right">
+                    100 meter
+                    <br>
+                    <small  class="hari text-muted" data-tgl="19 Agustus 2019 16:00"></small>
+                </td>
+    		</tr>
+            <tr>
+    			<td>
+    				<i class="fas fa-map-marker-alt"></i>
+    				<a href="#">
+                        Pos Air 23
+    				</a>
+    			</td>
+    			<td class="text-right">
+                    30 meter
+                    <br>
+                    <small  class="hari text-muted" data-tgl="19 Agustus 2019 16:00"></small>
+                </td>
+    		</tr>
+        </table>
+      </div>
+    </div>
 {% endblock %}
