@@ -7,9 +7,101 @@
 {% endblock %}
 
 {% block content %}
-    Curah Hujan - per Jam dalam Sehari
+    <section class="content-header">
+    <h1><span class="badge badge-primary">ARR</span> {{ pos.nama }}</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ path_for('curahhujan') }}">Curah
+          Hujan</a></li>
+        <li class="breadcrumb-item">{{ pos.nama }}</li>
+    </ol>
+    </section>
+    <div class="row">
+        <div class="col-md-3">
+            {% if filter %}
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <a class="btn btn-primary" href="{{ path_for('curahhujan.jamjaman', {'id': pos.id}, {'sampling': prev_day}) }}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                  </div>
+                  <div class="form-control" align="center">
+                      <span id="datepicker">{{ sampling.strftime("%d %B %Y") }}</span>
+                  </div>
+                  <!-- <input id="datepicker" type="text" class="form-control"> -->
+                  <div class="input-group-append">
+                    <a class="btn btn-primary" href="{{ path_for('curahhujan.jamjaman', {'id': pos.id}, {'sampling': next_day}) }}">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group" role="group" style="float: right">
+                <a class="btn btn-primary disabled" href="#">Jam-jaman</a>
+                <a class="btn btn-primary" href="{{ path_for('curahhujan.harian', {'id': pos.id}) }}">Harian</a>
+                <a class="btn btn-primary" href="{{ path_for('curahhujan.bulanan', {'id': pos.id}) }}">Bulanan</a>
+                <a class="btn btn-primary" href="{{ path_for('curahhujan.maksimum', {'id': pos.id}) }}">Maksimum</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
+    <canvas id="chChart" style="width: 100%; height: 400px; border: solid 1px #eee;" class="chartjs-render-monitor"></canvas>
+    </div>
+    <hr>
 {% endblock %}
 
 {% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script>
+        $('#datepicker').datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
+        });
+        $('#datepicker').on('changeDate', function () {
+            window.location = "{{ path_for('curahhujan.jamjaman', {'id': pos.id}) }}?sampling=" + $('#datepicker').datepicker('getFormattedDate')
+        });
+    </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        let ctx = document.getElementById('chChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ result.labels }},
+                datasets: [
+                {% for dataset in result.datasets %}
+                {
+                    label: '{{ dataset.name }}',
+                    data: {{ dataset.data }},
+                    backgroundColor: 'rgba({{ colors[loop.index0] }},0.5)',
+                    borderColor: 'rgba({{ colors[loop.index0] }},1)',
+                    borderWidth: 1
+                },
+                {% endfor %}
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                tooltips: {
+                    callbacks: {
+                        label: (item, data) => `${data.datasets[item.datasetIndex].label} : ${item.yLabel} mm`,
+                    },
+                },
+            }
+        });
+    </script>
 {% endblock %}

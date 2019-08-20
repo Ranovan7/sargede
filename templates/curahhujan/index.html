@@ -2,7 +2,13 @@
 
 {% set title = "Curah Hujan" %}
 {% block css %}
-
+    <style>
+        .table thead th {
+            text-align: center;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+    </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
@@ -10,61 +16,53 @@
     <section class="content-header">
     <h1>Curah Hujan</h1>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item">Curah Hujan</li>
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Curah Hujan</li>
     </ol>
     </section>
     <table class="table table-bordered">
-    	<thead>
-    		<tr>
-                <th rowspan="3">No</th>
-    			<th rowspan="3">Lokasi / Pos</th>
-                <th>
-                  <a href="#">
-                      <i class="fas fa-chevron-left"></i>
-                  </a>
-                </th>
-                <th colspan="2"><span id="datepicker">19 Agustus 2019</span></th>
-                <th>
-                  <a href="#">
-                      <i class="fas fa-chevron-right"></i>
-                  </a>
-                </th>
-    			<th rowspan="3">Total Telemetri</th>
-    			<th rowspan="3">Manual 24 jam</th>
+        <thead>
+            <tr>
+          <th rowspan="3">No</th>
+                <th rowspan="3">Lokasi / Pos</th>
+          <th>
+              <a href="{{ path_for('curahhujan', query_params={'sampling': prev_day}) }}">
+                  <i class="fas fa-chevron-left"></i>
+              </a>
+          </th>
+          <th colspan="2"><span id="datepicker">{{ sampling }}</span></th>
+          <th>
+              <a href="{{ path_for('curahhujan', query_params={'sampling': next_day}) }}">
+                  <i class="fas fa-chevron-right"></i>
+              </a>
+          </th>
+                <th rowspan="3">Total Telemetri</th>
+                <th rowspan="3">Manual 24 jam</th>
+        </tr>
+        <tr>
+          <th colspan="4">Waktu (WITA)</th>
+        </tr>
+        <tr>
+                <th>07 - 13</th>
+                <th>13 - 19</th>
+                <th>19 - 01</th>
+                <th>01 - 07</th>
             </tr>
+        </thead>
+        <tbody>
+        {% for l in lokasi %}
             <tr>
-              <th colspan="4">Waktu (WITA)</th>
-            </tr>
-            <tr>
-    			<th>07 - 13</th>
-    			<th>13 - 19</th>
-    			<th>19 - 01</th>
-    			<th>01 - 07</th>
-    		</tr>
-    	</thead>
-    	<tbody>
-            <tr>
-              <td>1</td>
-              <td><a href="#">Pos Air 1</a></td>
-              <td>0 mm</td>
-              <td>0 mm</td>
-              <td>18 mm</td>
-              <td>0 mm</td>
-              <td>0 mm</td>
+              <td>{{ l.id }}</td>
+              <td><a href="{{ path_for('curahhujan.jamjaman', {'id': l.id}) }}">{{ l.nama }}</a></td>
+              <td>{{ result[loop.index0].first }} mm</td>
+              <td>{{ result[loop.index0].second }} mm</td>
+              <td>{{ result[loop.index0].third }} mm</td>
+              <td>{{ result[loop.index0].fourth }} mm</td>
+              <td>{{ result[loop.index0].all }} mm</td>
               <td></td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td><a href="#">Pos Air 2</a></td>
-              <td>0 mm</td>
-              <td>10 mm</td>
-              <td>0 mm</td>
-              <td>0 mm</td>
-              <td>0 mm</td>
-              <td></td>
-            </tr>
-    	</tbody>
+        {% endfor %}
+        </tbody>
     </table>
 {% endblock %}
 
