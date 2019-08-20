@@ -12,120 +12,112 @@
       <div class="col">
     	<h3>Hujan
     		<a href="#" id="sejak" data-toggle="tooltip" title="Klik untuk mengganti" data-placement="top">
-    			90
+    			{{ hujan_sejak }}
     		</a>
     		<span class="text-danger">
     			&bullet;
     		</span>
     	</h3>
-    	<p class="text-muted mb-5">
-    		<i>Hujan yang terjadi selama 90 hari lalu.</i>
-    	</p>
-        <table class="table table-hover">
-            <!-- <p><i>Tidak ada hujan dalam <b>90 hari</b> terakhir.</i></p> -->
-    		<tr>
-    			<td colspan="2">
-    				<span class="hari" data-tgl="2019-8-19">
-    					<span class="text-muted ml-3 font-weight-light">
-    						19 Agustus 2019
-    					</span>
-    				</span>
-    			</td>
-				<td>Hujan</td>
-				<td>Selama</td>
-    		</tr>
-			<tr>
-				<th></th>
-				<td>
-					<i class="fas fa-map-marker-alt"></i>
-					<a href="#">Pos Air 1
-					</a>
-				</td>
-				<td class="text-right"><b>10</b> mm</td>
-				<td class="text-right"><b>30</b> menit</td>
-			</tr>
-            <tr>
-                <td colspan="4">
-                    <span class="hari" data-tgl="2019-8-19">
-                        <span class="text-muted ml-3 font-weight-light">
-                            19 Agustus 2019
-                        </span>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-				<th></th>
-				<td>
-					<i class="fas fa-map-marker-alt"></i>
-					<a href="#">Pos Air 1
-					</a>
-				</td>
-				<td class="text-right"><b>16</b> mm</td>
-				<td class="text-right"><b>55</b> menit</td>
-			</tr>
-            <tr>
-				<th></th>
-				<td>
-					<i class="fas fa-map-marker-alt"></i>
-					<a href="#">Pos Air 2
-					</a>
-				</td>
-				<td class="text-right"><b>8</b> mm</td>
-				<td class="text-right"><b>30</b> menit</td>
-			</tr>
-        </table>
+        {% if not list_hujan %}
+            <p><i>Tidak ada hujan dalam <b>90 hari</b> terakhir.</i></p>
+        {% else %}
+        	<p class="text-muted mb-5">
+        		<i>Hujan yang terjadi selama 90 hari lalu.</i>
+        	</p>
+            <table class="table table-hover">
+                {% for hujan in list_hujan %}
+                    <tr>
+                        <td colspan="{% if loop.first %}2{% else %}4{% endif %}">
+                            <span class="hari" data-tgl="{{ hujan.waktu }}">
+                                <span class="text-muted ml-3 font-weight-light">
+                                    {{ hujan.waktu }}
+                                </span>
+                            </span>
+                        </td>
+                        {% if loop.first %}
+                            <td>Hujan</td>
+                            <td>Selama</td>
+                        {% endif %}
+                    </tr>
+                    {% for data in hujan.daftar %}
+                        <tr>
+                            <th></th>
+                            <td>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <a href="#">{{ data.pos }}
+                                </a>
+                            </td>
+                            <td class="text-right"><b>{{ data.ch }}</b> mm</td>
+                            <td class="text-right"><b>{{ data.durasi }}</b> menit</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        {% endif %}
       </div>
       <div class="col col-md-6" style="border-left: solid 1px #ccc;">
         <h3>Tinggi Muka Air</h3>
-    	<p class="text-muted mb-5">
-    		<i>Data Tinggi Muka Air terbaru.</i>
-    	</p>
+        {% if not list_tma %}
+            <p><i>Belum ada data Tinggi Muka Air.</i></p>
+        {% else %}
+        	<p class="text-muted mb-5">
+        		<i>Data Tinggi Muka Air terbaru.</i>
+        	</p>
+        {% endif %}
     	<table class="table table-hover">
-    		<tr>
-                <td>Lokasi</td>
-    			<td>Tinggi Muka Air</td>
-    		</tr>
-            <!-- <p><i>Belum ada data Tinggi Muka Air.</i></p> -->
-    		<tr>
-    			<td>
-    				<i class="fas fa-map-marker-alt"></i>
-    				<a href="#">
-                        Pos Air 21
-    				</a>
-    			</td>
-    			<td class="text-right">
-                    63 meter
-                    <br>
-                    <small  class="hari text-muted" data-tgl="19 Agustus 2019 16:00"></small>
-                </td>
-    		</tr>
-            <tr>
-    			<td>
-    				<i class="fas fa-map-marker-alt"></i>
-    				<a href="#">
-                        Pos Air 22
-    				</a>
-    			</td>
-    			<td class="text-right">
-                    100 meter
-                    <br>
-                    <small  class="hari text-muted" data-tgl="19 Agustus 2019 16:00"></small>
-                </td>
-    		</tr>
-            <tr>
-    			<td>
-    				<i class="fas fa-map-marker-alt"></i>
-    				<a href="#">
-                        Pos Air 23
-    				</a>
-    			</td>
-    			<td class="text-right">
-                    30 meter
-                    <br>
-                    <small  class="hari text-muted" data-tgl="19 Agustus 2019 16:00"></small>
-                </td>
-    		</tr>
+            {% for tma in list_tma %}
+                <tr>
+        			<td colspan="{% if loop.first %}3{% else %}4{% endif %}">
+        				<span class="hari" data-tgl="{{ tma.waktu }} {{ tma.jam }}">
+        					<span class="text-muted ml-3 font-weight-light">
+        						{{ tma.waktu }} {{ tma.jam }}
+        					</span>
+        				</span>
+        			</td>
+        			{% if loop.first %}
+        				<td>Tinggi Muka Air</td>
+        			{% endif %}
+        		</tr>
+        		<tr>
+                    <th></th>
+        			<td colspan="2">
+        				<i class="fas fa-map-marker-alt"></i>
+        				<a href="#">
+                            {{ tma.pos }}
+        				</a>
+        			</td>
+        			<td class="text-right">
+                        <b>{{ tma.wlev }}</b> meter
+                        <br>
+                        <small  class="hari text-muted" data-tgl="{{ tma.waktu }} {{ tma.jam }}"></small>
+                    </td>
+        		</tr>
+            {% endfor %}
         </table>
       </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/js/moment.min.js"></script>
+    <script src="/static/js/id.js"></script>
+    <script src="/static/js/bootstrap-editable.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          });
+    			moment.locale('id');
+          $('.hari').each(function (i, e) {
+            console.log($(e).prepend(moment($(e).data('tgl')).fromNow()));
+          });
+          $('#sejak').popover({
+                html: true,
+    			placement: 'right',
+                title: "Sejak ? hari",
+    			content: "<form><input type='text' name='sejak' value='{{ hujan_sejak }}' size='4' class='text-right'> <button type='submit' class='btn btn-primary btn-sm'><i class='fas fa-check'></i></button> <button class='btn btn-secondary btn-sm' aria-label='Close'><i class='fas fa-times'></i></button></form>"
+          });
+
+        });
+    </script>
 {% endblock %}
