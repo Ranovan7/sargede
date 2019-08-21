@@ -8,6 +8,9 @@
             vertical-align: middle;
             border-color: inherit;
         }
+        .datepicker {
+            z-index: 10000 !important;
+        }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 {% endblock %}
@@ -26,14 +29,14 @@
           <th rowspan="3">No</th>
                 <th rowspan="3">Lokasi / Pos</th>
           <th>
-              <a href="{{ path_for('curahhujan', query_params={'sampling': prev_day}) }}">
-                  <i class="fas fa-chevron-left"></i>
+              <a href="{{ path_for('curahhujan') }}?sampling={{ prev_date }}">
+                  &lt;<i class="fas fa-chevron-left"></i>
               </a>
           </th>
           <th colspan="2"><span id="datepicker">{{ sampling }}</span></th>
           <th>
-              <a href="{{ path_for('curahhujan', query_params={'sampling': next_day}) }}">
-                  <i class="fas fa-chevron-right"></i>
+              <a href="{{ path_for('curahhujan') }}?sampling={{ next_date }}">
+                  &gt;<i class="fas fa-chevron-right"></i>
               </a>
           </th>
                 <th rowspan="3">Total Telemetri</th>
@@ -50,15 +53,15 @@
             </tr>
         </thead>
         <tbody>
-        {% for l in lokasi %}
+        {% for r in result %}
             <tr>
-              <td>{{ l.id }}</td>
-              <td><a href="{{ path_for('curahhujan.jamjaman', {'id': l.id}) }}">{{ l.nama }}</a></td>
-              <td>{{ result[loop.index0].first }} mm</td>
-              <td>{{ result[loop.index0].second }} mm</td>
-              <td>{{ result[loop.index0].third }} mm</td>
-              <td>{{ result[loop.index0].fourth }} mm</td>
-              <td>{{ result[loop.index0].all }} mm</td>
+              <td>{{ r.lokasi.id }}</td>
+              <td><a href="{{ path_for('curahhujan.jamjaman', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a></td>
+              <td>{{ r.durasi_07_13 }} mm</td>
+              <td>{{ r.durasi_13_19 }} mm</td>
+              <td>{{ r.durasi_19_01 }} mm</td>
+              <td>{{ r.durasi_01_07 }} mm</td>
+              <td>{{ r.durasi_all }} mm</td>
               <td></td>
             </tr>
         {% endfor %}
@@ -75,7 +78,7 @@
         format: 'yyyy-mm-dd'
     });
     $('#datepicker').on('changeDate', function () {
-        window.location = "#" // + $('#datepicker').datepicker('getFormattedDate')
+        window.location = "{{ path_for('curahhujan') }}?sampling=" + $('#datepicker').datepicker('getFormattedDate')
     });
     </script>
 {% endblock %}

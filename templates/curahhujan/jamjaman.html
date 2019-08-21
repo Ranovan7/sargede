@@ -3,7 +3,11 @@
 {% set title = "Curah Hujan" %}
 
 {% block css %}
-
+    <style>
+        .datepicker {
+            z-index: 10000 !important;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -18,24 +22,22 @@
     </section>
     <div class="row">
         <div class="col-md-3">
-            {% if filter %}
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <a class="btn btn-primary" href="{{ path_for('curahhujan.jamjaman', {'id': pos.id}, {'sampling': prev_day}) }}">
-                        <i class="fas fa-chevron-left"></i>
-                    </a>
-                  </div>
-                  <div class="form-control" align="center">
-                      <span id="datepicker">{{ sampling.strftime("%d %B %Y") }}</span>
-                  </div>
-                  <!-- <input id="datepicker" type="text" class="form-control"> -->
-                  <div class="input-group-append">
-                    <a class="btn btn-primary" href="{{ path_for('curahhujan.jamjaman', {'id': pos.id}, {'sampling': next_day}) }}">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                  </div>
-                </div>
-            {% endif %}
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <a class="btn btn-primary" href="{{ path_for('curahhujan.jamjaman', {'id': lokasi.id}, {'sampling': prev_date}) }}">
+                    &lt<i class="fas fa-chevron-left"></i>
+                </a>
+              </div>
+              <div class="form-control" align="center">
+                  <span id="datepicker">{{ sampling }}</span>
+              </div>
+              <!-- <input id="datepicker" type="text" class="form-control"> -->
+              <div class="input-group-append">
+                <a class="btn btn-primary" href="{{ path_for('curahhujan.jamjaman', {'id': lokasi.id}, {'sampling': next_date}) }}">
+                    &gt<i class="fas fa-chevron-right"></i>
+                </a>
+              </div>
+            </div>
         </div>
         <div class="col-md-3">
 
@@ -65,7 +67,7 @@
             format: 'yyyy-mm-dd'
         });
         $('#datepicker').on('changeDate', function () {
-            window.location = "{{ path_for('curahhujan.jamjaman', {'id': pos.id}) }}?sampling=" + $('#datepicker').datepicker('getFormattedDate')
+            window.location = "{{ path_for('curahhujan.jamjaman', {'id': lokasi.id}) }}?sampling=" + $('#datepicker').datepicker('getFormattedDate')
         });
     </script>
 
@@ -75,17 +77,14 @@
         let myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: {{ result.labels }},
+                labels: [{{ result.labels|join(", ") }}],
                 datasets: [
-                {% for dataset in result.datasets %}
-                {
-                    label: '{{ dataset.name }}',
-                    data: {{ dataset.data }},
-                    backgroundColor: 'rgba({{ colors[loop.index0] }},0.5)',
-                    borderColor: 'rgba({{ colors[loop.index0] }},1)',
-                    borderWidth: 1
-                },
-                {% endfor %}
+                    {
+                        data: [{{ result.datasets|join(",") }}],
+                        backgroundColor: 'rgba(0,0,255,0.5)',
+                        borderColor: 'rgba(0,0,255,1)',
+                        borderWidth: 1
+                    },
                 ]
             },
             options: {
