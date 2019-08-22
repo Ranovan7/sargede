@@ -85,20 +85,18 @@ $app->group('/curahhujan', function() {
                 'datasets' => [],
                 'labels' => []
             ];
-            $check = 6;
-            $i = 0;
-            foreach ($ch as $c) {
-                $current = date('H', $c['sampling']);
-                if ($current != $check) {
-                    $check = $current;
-                    $i += 1;
-                    $result['datasets'][] = 0;
-                    $result['labels'][] = date('Y-m-d H', strtotime($c['sampling']));;
-                };
 
-                $result['datasets'][$i] += $c['rain'];
-            };
-            // echo implode(",", $result['datasets']);
+            for($i = 0; $i < 24; ++$i) {
+                $hour = ($i + 7) % 24;
+                $result['labels'][] = "{$hour}:00";
+                $result['datasets'][] = 0;
+            }
+            $curr = 0;
+            foreach ($ch as $c) {
+                $current = date('H', strtotime($c['sampling']));
+                $j = (intval($current) - 7 + 24) % 24;
+                $result['datasets'][$j] += $c['rain'];
+            }
 
             return $this->view->render($response, 'curahhujan/jamjaman.html', [
                 'sampling' => tanggal_format(strtotime($hari)),

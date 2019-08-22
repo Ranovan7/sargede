@@ -77,10 +77,11 @@
         let myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [{{ result.labels|join(", ") }}],
+                labels: {{ result.labels|json_encode|raw }},
                 datasets: [
                     {
-                        data: [{{ result.datasets|join(",") }}],
+                        label: "Curah Hujan {{ sampling }}",
+                        data: {{ result.datasets|json_encode|raw }},
                         backgroundColor: 'rgba(0,0,255,0.5)',
                         borderColor: 'rgba(0,0,255,1)',
                         borderWidth: 1
