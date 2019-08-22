@@ -22,38 +22,40 @@ $app->group('/tma', function() {
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
                                     ORDER BY sampling")->fetchAll();
             
-            $jam6 = [0,0];
-            $jam12 = [0,0];
-            $jam18 = [0,0];
-            $jam0 = [0,0];
+            $jam6 = 0;
+            $jam12 = 0;
+            $jam18 = 0;
+            $jam0 = 0;
             $latest_wlev = 0;
             $latest_time = "";
 
             foreach ($wlev as $w) {
                 $time = date('H:i:s', strtotime($w['sampling']));
-                if ($time < '06:05:00') {
-                    $jam6[0] += $w['wlev'];
-                    $jam6[1]++;
-                } else if ($time < '12:05:00') {
-                    $jam12[0] += $w['wlev'];
-                    $jam12[1]++;
-                } else if ($time < '18:05:00') {
-                    $jam18[0] += $w['wlev'];
-                    $jam18[1]++;
-                } else {
-                    $jam0[0] += $w['wlev'];
-                    $jam0[1]++;
+                switch ($time) {
+                    case '06:00:00':
+                        $jam6 = $w['wlev'];
+                        break;
+                    case '12:00:00':
+                        $jam12 = $w['wlev'];
+                        break;
+                    case '18:00:00':
+                        $jam18 = $w['wlev'];
+                        break;
+                    case '00:00:00':
+                    case '24:00:00':
+                        $jam0 = $w['wlev'];
+                        break;
                 }
 
                 $latest_wlev = $w['wlev'];
                 $latest_time = $w['sampling'];
             }
 
-            $jam6 = $jam6[1] > 0 ? number_format($jam6[0]/$jam6[1],2) : '-';
-            $jam12 = $jam12[1] > 0 ? number_format($jam12[0]/$jam12[1],2) : '-';
-            $jam18 = $jam18[1] > 0 ? number_format($jam18[0]/$jam18[1],2) : '-';
-            $jam0 = $jam0[1] > 0 ? number_format($jam0[0]/$jam0[1],2) : '-';
-            $latest_wlev = $latest_wlev > 0 ? number_format($latest_wlev,2) : '-';
+            $jam6 = $jam6 > 0 ? number_format($jam6,1) : '-';
+            $jam12 = $jam12 > 0 ? number_format($jam12,1) : '-';
+            $jam18 = $jam18 > 0 ? number_format($jam18,1) : '-';
+            $jam0 = $jam0 > 0 ? number_format($jam0,1) : '-';
+            $latest_wlev = $latest_wlev > 0 ? number_format($latest_wlev,1) : '-';
             if (!empty($latest_time)) {
                 $latest_time = tanggal_format(strtotime($latest_time), true);
             }

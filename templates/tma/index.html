@@ -97,7 +97,7 @@
     <script>
         $('#datepicker').datepicker({todayHighlight: true, autoclose: true, format: 'yyyy-mm-dd'});
         $('#datepicker').on('changeDate', function () {
-            window.location = "{ path_for('tma') }}?sampling=" + $('#datepicker').datepicker('getFormattedDate')
+            window.location = "{{ path_for('tma') }}?sampling=" + $('#datepicker').datepicker('getFormattedDate')
         });
     </script>
 {% endblock %}
