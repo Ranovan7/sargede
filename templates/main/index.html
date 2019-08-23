@@ -18,14 +18,14 @@
     			&bullet;
     		</span>
     	</h3>
-        {% if not list_hujan %}
+        {% if not result.curahhujan %}
             <p><i>Tidak ada hujan dalam <b>90 hari</b> terakhir.</i></p>
         {% else %}
         	<p class="text-muted mb-5">
         		<i>Hujan yang terjadi selama 90 hari lalu.</i>
         	</p>
             <table class="table table-hover">
-                {% for hujan in list_hujan %}
+                {% for hujan in result.curahhujan %}
                     <tr>
                         <td colspan="{% if loop.first %}2{% else %}4{% endif %}">
                             <span class="hari" data-tgl="{{ hujan.waktu }}">
@@ -44,7 +44,8 @@
                             <th></th>
                             <td>
                                 <i class="fas fa-map-marker-alt"></i>
-                                <a href="#">{{ data.pos }}
+                                <a href="{{ path_for('curahhujan.jamjaman', {'id': data.id}) }}?sampling={{ hujan.date }}">
+                                    {{ data.lokasi }}
                                 </a>
                             </td>
                             <td class="text-right"><b>{{ data.ch }}</b> mm</td>
@@ -57,7 +58,7 @@
       </div>
       <div class="col col-md-6" style="border-left: solid 1px #ccc;">
         <h3>Tinggi Muka Air</h3>
-        {% if not list_tma %}
+        {% if not result.tma %}
             <p><i>Belum ada data Tinggi Muka Air.</i></p>
         {% else %}
         	<p class="text-muted mb-5">
@@ -65,7 +66,7 @@
         	</p>
         {% endif %}
     	<table class="table table-hover">
-            {% for tma in list_tma %}
+            {% for tma in result.tma %}
                 <tr>
         			<td colspan="{% if loop.first %}3{% else %}4{% endif %}">
         				<span class="hari" data-tgl="{{ tma.waktu }} {{ tma.jam }}">
@@ -83,7 +84,7 @@
         			<td colspan="2">
         				<i class="fas fa-map-marker-alt"></i>
         				<a href="#">
-                            {{ tma.pos }}
+                            {{ tma.lokasi }}
         				</a>
         			</td>
         			<td class="text-right">
