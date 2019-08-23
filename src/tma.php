@@ -30,19 +30,19 @@ $app->group('/tma', function() {
             $latest_time = "";
 
             foreach ($wlev as $w) {
-                $time = date('H:i:s', strtotime($w['sampling']));
+                $time = date('H:i', strtotime($w['sampling']));
                 switch ($time) {
-                    case '06:00:00':
+                    case '06:00':
                         $jam6 = $w['wlev'];
                         break;
-                    case '12:00:00':
+                    case '12:00':
                         $jam12 = $w['wlev'];
                         break;
-                    case '18:00:00':
+                    case '18:00':
                         $jam18 = $w['wlev'];
                         break;
-                    case '00:00:00':
-                    case '24:00:00':
+                    case '00:00':
+                    case '24:00':
                         $jam0 = $w['wlev'];
                         break;
                 }
@@ -57,7 +57,7 @@ $app->group('/tma', function() {
             $jam0 = $jam0 > 0 ? number_format($jam0,1) : '-';
             $latest_wlev = $latest_wlev > 0 ? number_format($latest_wlev,1) : '-';
             if (!empty($latest_time)) {
-                $latest_time = tanggal_format(strtotime($latest_time), true);
+                $latest_time = date('H:i', strtotime($latest_time));
             }
             
             $result[] = [

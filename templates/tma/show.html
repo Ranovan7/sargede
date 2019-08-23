@@ -15,12 +15,9 @@
         <li class="breadcrumb-item">{{ lokasi.nama }}</li>
     </ol>
     </section>
-    <div class="row">
-        <div class="col-md-3">
-
-        </div>
+    <div class="row justify-content-center">
         <div class="col-md-6">
-            <form class="text-center" action="{{ url }}" method="GET"> <!-- full_url_for('tma.show', id=lokasi.id) -->
+            <form class="text-center" action="{{ path_for('tma.show', {id:lokasi.id}) }}" method="GET"> <!-- full_url_for('tma.show', id=lokasi.id) -->
                 <div class="input-group" style="vertical-align: middle;">
                     <p>Dari &emsp;</p>
                     <input id='dateStart' name='start_date' class="form-control form-control-sm" type="text" autocomplete="off" value="{{ start_date }}">
@@ -30,9 +27,6 @@
                     <input class="btn btn-sm btn-outline-primary" type="submit" name="submit" value="Submit">
                 </div>
             </form>
-        </div>
-        <div class="col-md-3">
-
         </div>
     </div>
     <br>
