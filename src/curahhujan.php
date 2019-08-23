@@ -67,8 +67,8 @@ $app->group('/curahhujan', function() {
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
             $hari = $request->getParam('sampling', "2019-06-01");//date('Y-m-d');
-            $prev_date = date('Y-m-d', strtotime($hari .' -1month'));
-            $next_date = date('Y-m-d', strtotime($hari .' +1month'));
+            $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
+            $next_date = date('Y-m-d', strtotime($hari .' +1day'));
 
             // preparing initial datasets (0s) and labels (hour)
             $result = [
@@ -97,7 +97,7 @@ $app->group('/curahhujan', function() {
             foreach ($ch as $c) {
                 $current = date('H', strtotime($c['sampling']));
                 $j = (intval($current) - 7 + 24) % 24;
-                $result['datasets'][$j] += $c['rain'];
+                $result['datasets'][$j] = round($result['datasets'][$j] + $c['rain'], 2);
             }
 
             return $this->view->render($response, 'curahhujan/jamjaman.html', [
@@ -152,7 +152,7 @@ $app->group('/curahhujan', function() {
             foreach ($ch as $c) {
                 $current = date('d', strtotime($c['sampling'] ." -7hour"));
                 $j = intval($current) - 1;
-                $result['datasets'][$j] += $c['rain'];
+                $result['datasets'][$j] = round($result['datasets'][$j] + $c['rain'], 2);
             }
 
             return $this->view->render($response, 'curahhujan/harian.html', [
@@ -166,16 +166,170 @@ $app->group('/curahhujan', function() {
     });
 
     $this->group('/{id}/bulanan', function() {
+        // this route shows the cumulation of precipitation/rain
+        // each month from all data
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
-            return $this->view->render($response, 'curahhujan/bulanan.html');
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+
+            // fetch all curahhujan (rain) data
+            $ch = $this->db->query("SELECT * FROM periodik
+                                    WHERE lokasi_id = {$lokasi_id} AND rain IS NOT NULL
+                                    ORDER BY sampling")->fetchAll();
+
+            // preparing initial datasets (0s) and labels (day)
+            $result = [
+                'datasets' => [],
+                'labels' => [],
+                'colors' => [],
+                'title' => []
+            ];
+            $result['labels'] = [
+                'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember',
+            ];
+            $result['colors'] = [
+                "0,0,255",
+                "0,255,0",
+                "255,0,0",
+                "255,0,255",
+                "0,255,255",
+                "255,255,0"
+            ];
+
+            foreach ($ch as $c) {
+                $year = date('Y', strtotime($c['sampling']));
+                if (array_key_exists($year, $result['datasets'])) {
+                    $month = date('m', strtotime($c['sampling'] .' -7hour'));
+                    $i = intval($month) -1;
+                    $result['datasets'][$year][$i] = round($result['datasets'][$year][$i] + $c['rain'], 2);
+                } else {
+                    // initialize array for the year of current periodik data
+                    $result['datasets'][$year] = [];
+                    for ($i = 0; $i < 12; $i++) {
+                        $result['datasets'][$year][] = 0;
+                    }
+                    $result['title'][] = $year;
+                }
+            }
+
+            return $this->view->render($response, 'curahhujan/bulanan.html', [
+                'sampling' => "Curah Hujan Bulanan",
+                'lokasi' => $lokasi,
+                'result' => $result
+            ]);
         })->setName('curahhujan.bulanan');
     });
 
     $this->group('/{id}/maksimum', function() {
+        // this route shows the max cumulation of precipitation/rain
+        // each of day each month from all data
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
-            return $this->view->render($response, 'curahhujan/maksimum.html');
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+
+            // fetch all curahhujan (rain) data
+            $ch = $this->db->query("SELECT * FROM periodik
+                                    WHERE lokasi_id = {$lokasi_id} AND rain IS NOT NULL
+                                    ORDER BY sampling")->fetchAll();
+
+            // preparing initial datasets (0s) and labels (day)
+            $result = [
+                'datasets' => [],
+                'labels' => [],
+                'colors' => [],
+                'title' => []
+            ];
+            $result['labels'] = [
+                'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember',
+            ];
+            $result['colors'] = [
+                "0,0,255",
+                "0,255,0",
+                "255,0,0",
+                "255,0,255",
+                "0,255,255",
+                "255,255,0"
+            ];
+
+            $curr_month = 1;
+            $curr_day = 1;
+            $curr_max = 0;      // current max value for the month
+            $curr_cal = 0;      // current day value calculation
+            foreach ($ch as $c) {
+                $year = date('Y', strtotime($c['sampling']));
+                if (array_key_exists($year, $result['datasets'])) {
+                    $month = date('m', strtotime($c['sampling'] .' -7hour'));
+                    $day = date('d', strtotime($c['sampling'] .' -7hour'));
+
+                    // check if month changes,
+                    // if true set month max then reset all curr
+                    if ($month != $curr_month) {
+                        // set max value to datasets
+                        $i = (intval($month) - 2 + 12) % 12;
+                        $curr_max = max($curr_max, $curr_cal);
+
+                        // check if year changes
+                        if ($i == 11) {
+                            $result['datasets'][$year - 1][$i] += round($curr_max, 2);
+                        } else {
+                            $result['datasets'][$year][$i] += round($curr_max, 2);
+                        }
+
+                        // change curr_month, reset others
+                        $curr_month = $month;
+                        $curr_day = 1;
+                        $curr_max = 0;
+                        $curr_cal = 0;
+                    }
+
+                    // check if day changes
+                    if ($day != $curr_day) {
+                        $curr_max = max($curr_max, $curr_cal);
+                        $curr_cal = 0;
+                        $curr_day = $day;
+                    }
+
+                    // update curr_cal
+                    $curr_cal += $c['rain'];
+                } else {
+                    // initialize array for the year of current periodik data
+                    $result['datasets'][$year] = [];
+                    for ($i = 0; $i < 12; $i++) {
+                        $result['datasets'][$year][] = 0;
+                    }
+                    $result['title'][] = $year;
+                }
+            }
+
+            return $this->view->render($response, 'curahhujan/maksimum.html', [
+                'sampling' => "Curah Hujan Maksimum",
+                'lokasi' => $lokasi,
+                'result' => $result
+            ]);
         })->setName('curahhujan.maksimum');
     });
 });
