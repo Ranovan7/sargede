@@ -24,7 +24,7 @@
                     <p>&emsp; Hingga &emsp;</p>
                     <input id='dateEnd' name='end_date' class="form-control form-control-sm" type="text" autocomplete="off" value="{{ end_date }}">
                     <p>&emsp;</p>
-                    <input class="btn btn-sm btn-outline-primary" type="submit" name="submit" value="Submit">
+                    <button class="btn btn-sm btn-outline-primary" type="submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -58,15 +58,15 @@
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: {{ result.labels }},
+            labels: {{ result.labels | json_encode() | raw }},
             datasets: [
             {% for dataset in result.datasets %}
             {
-                label: '{{ dataset.name }}',
-                data: {{ dataset.data }},
-                backgroundColor: 'rgba({{ colors[loop.index0] }},0.5)',
-                borderColor: 'rgba({{ colors[loop.index0] }},1)',
-                fill: false
+                label: '{{ dataset.label }}',
+                data: {{ dataset.data | json_encode(constant('JSON_NUMERIC_CHECK')) | raw }},
+                backgroundColor: '{{ dataset.backgroundColor }}',
+                borderColor: '{{ dataset.borderColor }}',
+                fill: {{ dataset.fill ? 'true' : 'false' }}
             },
             {% endfor %}
             ]
