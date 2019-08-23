@@ -23,17 +23,17 @@
                     <th class="align-middle" rowspan="3">No</th>
                     <th class="align-middle text-center" rowspan="3">Lokasi / Pos</th>
                     <th class="align-middle text-center" colspan="3" rowspan="2">Level Siaga</th>
-                    <th class="text-center" colspan="1">
-                        <a href="{{ path_for('tma') }}?sampling={{ prev_date }}">
-                            &lt;<i class="fas fa-chevron-left"></i>
+                    <th class="text-center p-0" colspan="1">
+                        <a class="d-block" href="{{ path_for('tma') }}?sampling={{ prev_date }}">
+                            &lt;
                         </a>
                     </th>
                     <th class="text-center" colspan="6">
                         <span id='datepicker'>{{ sampling }}</span>
                     </th>
-                    <th class="text-center" colspan="1">
-                        <a href="{{ path_for('tma') }}?sampling={{ next_date }}">
-                            &gt;<i class="fas fa-chevron-right"></i>
+                    <th class="text-center p-0" colspan="1">
+                        <a class="d-block" href="{{ path_for('tma') }}?sampling={{ next_date }}">
+                            &gt;
                         </a>
                     </th>
                 </tr>
