@@ -83,8 +83,8 @@
                     <th></th>
         			<td colspan="2">
         				<i class="fas fa-map-marker-alt"></i>
-        				<a href="#">
-                            {{ tma.lokasi }}
+        				<a href="{{ path_for('tma.show', {'id': tma.lokasi.id}) }}">
+                            {{ tma.lokasi.nama }}
         				</a>
         			</td>
         			<td class="text-right">

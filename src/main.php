@@ -21,33 +21,16 @@ $app->get('[/]', function(Request $request, Response $response, $args) {
                                 AND periodik.sampling BETWEEN '{$from}' AND '{$to}'
                             ORDER BY periodik.sampling DESC")->fetchAll();
 
-    $tma = [
-        [
-            'waktu' => "19 Agustus 2019",
-            'jam' => "16:00",
-            'pos' => "Pos Air 21",
-            'wlev' => 58
-        ],
-        [
-            'waktu' => "19 Agustus 2019",
-            'jam' => "17:00",
-            'pos' => "Pos Air 22",
-            'wlev' => 100
-        ],
-        [
-            'waktu' => "19 Agustus 2019",
-            'jam' => "17:00",
-            'pos' => "Pos Air 23",
-            'wlev' => 30
-        ],
-    ];
+    $lokasi_tma = $this->db->query("SELECT * FROM lokasi
+                            WHERE lokasi.jenis = '2'
+                            ORDER BY lokasi.id")->fetchAll();
 
     $result = [
         'tma' => [],
         'curahhujan' => []
     ];
-    $result['tma'] = $tma;
 
+    // generating curahhujan data
     $current_date = Null;
     foreach ($ch as $c) {
         // check sampling (date) change every iteration to append new array
@@ -76,6 +59,19 @@ $app->get('[/]', function(Request $request, Response $response, $args) {
                 'durasi' => 5
             ];
         }
+    }
+
+    // generating tma data
+    foreach ($lokasi_tma as $lokasi) {
+        $latest = $this->db->query("SELECT * FROM periodik
+                                WHERE lokasi_id = {$lokasi['id']} AND wlev IS NOT NULL
+                                ORDER BY sampling DESC")->fetch();
+        $result['tma'][] = [
+            'waktu' => tanggal_format(strtotime($latest['sampling'])),
+            'jam' => date('H:i', strtotime($latest['sampling'])),
+            'lokasi' => $lokasi,
+            'wlev' => round($latest['wlev'], 2)
+        ];
     }
 
     return $this->view->render($response, 'main/index.html', [
