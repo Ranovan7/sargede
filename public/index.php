@@ -83,7 +83,7 @@ $container['view'] = function ($c) {
 	$view = new \Slim\Views\Twig($settings['template_path'], [
         // 'cache' => $settings['cache_path']
     ]);
-    
+
     // Instantiate and add Slim specific extension
     $router = $c->get('router');
     $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
@@ -142,14 +142,14 @@ $container['db'] = function($c) {
 	$database = $settings['database'];
 	$username = $settings['username'];
 	$password = $settings['password'];
-	
+
 	$dsn = "$connection:host=$host;port=$port;dbname=$database";
 	$options = [
 		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 		PDO::ATTR_EMULATE_PREPARES   => false,
 	];
-	
+
 	try {
 		return new PDO($dsn, $username, $password, $options);
 	} catch (PDOException $e) {
@@ -264,6 +264,7 @@ require __DIR__ . '/../src/main.php';
 require __DIR__ . '/../src/curahhujan.php';
 require __DIR__ . '/../src/tma.php';
 require __DIR__ . '/../src/map.php';
+require __DIR__ . '/../src/user.php';
 
 /**
  * # ROUTES BLOCK
