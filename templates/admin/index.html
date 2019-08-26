@@ -1,0 +1,62 @@
+{% extends 'layouts/master.html' %}
+
+{% set title = "Admin" %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+    <section class="content-header mb-5">
+        <h1>Admin</h1>
+        <p>Data-data pengukuran <b>Manual</b> dari para <b>Pengamat</b></p>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item">Admin</li>
+        </ol>
+    </section>
+    <div class="row">
+        <div class="col">
+            <h2>Curah Hujan <small class="text-muted">Data Manual terbaru</small></h2>
+        <table class="table table-bordered table-hover">
+          <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>POS</th>
+                        <th>Hujan (mm)</th>
+                    </tr>
+          </thead>
+          <tbody>
+            {% for h in hujans %}
+            <tr>
+              <td>{{ h.sampling }}</td>
+              <td>{{ h.lokasi.nama }}</td>
+              <td class="text-right">{{ h.manual }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        <div class="col">
+        <h2>TMA <small class="text-muted">Data Manual terbaru</small></h2>
+            <table class="table table-bordered table-hover">
+              <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>POS</th>
+                            <th>Jam 6</th>
+                            <th>Jam 12</th>
+                            <th>Jam 18</th>
+                            <th>TMA (meter)</th>
+                        </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

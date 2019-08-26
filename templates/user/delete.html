@@ -7,7 +7,26 @@
 {% endblock %}
 
 {% block content %}
-    User - Delete User Page
+    <section class="content-header">
+        <h1 class="text-danger">Delete User </h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/user/">User</a></li>
+            <li class="breadcrumb-item">{{ user.username }}</li>
+        </ol>
+    </section>
+    <div class="row">
+        <div class="col-md-6">
+            Yakin akan menghapus user {{ user.username }}?
+            <a class="btn btn-primary" href="/user/">
+                Tidak
+            </a>
+            <input type="submit" class="btn-danger btn" value="Ya, Hapus">
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
 {% endblock %}
 
 {% block js %}

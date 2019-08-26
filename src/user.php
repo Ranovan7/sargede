@@ -14,17 +14,6 @@ $app->group('/user', function() {
         ]);
     })->setName('user');
 
-    $this->group('/{id}/password', function() {
-
-        $this->get('[/]', function(Request $request, Response $response, $args) {
-
-            return $this->view->render($response, 'user/password.html', [
-                'key' => 'value',
-            ]);
-        })->setName('user.password');
-
-    });
-
     $this->group('/add', function() {
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
@@ -34,14 +23,48 @@ $app->group('/user', function() {
             ]);
         })->setName('user.add');
 
+        $this->post('[/]', function(Request $request, Response $response, $args) {
+
+            return $this->view->render($response, 'user/add.html', [
+                'key' => 'value',
+            ]);
+        })->setName('user.add');
+
     });
 
-    $this->group('/{id}/del', function() {
+    $this->group('/{id}', function() {
 
-        $this->get('[/]', function(Request $request, Response $response, $args) {
+        // change password
+        $this->get('/password', function(Request $request, Response $response, $args) {
+            $id = $request->getAttribute('id');
+
+            return $this->view->render($response, 'user/password.html', [
+                'user_id' => $id,
+            ]);
+        })->setName('user.password');
+
+        $this->post('/password', function(Request $request, Response $response, $args) {
+            $id = $request->getAttribute('id');
+
+            return $this->view->render($response, 'user/password.html', [
+                'user_id' => $id,
+            ]);
+        })->setName('user.password');
+
+        // delete
+        $this->get('/del', function(Request $request, Response $response, $args) {
+            $id = $request->getAttribute('id');
 
             return $this->view->render($response, 'user/delete.html', [
-                'key' => 'value',
+                'user_id' => $id,
+            ]);
+        })->setName('user.delete');
+
+        $this->post('/del', function(Request $request, Response $response, $args) {
+            $id = $request->getAttribute('id');
+
+            return $this->view->render($response, 'user/delete.html', [
+                'user_id' => $id,
             ]);
         })->setName('user.delete');
 

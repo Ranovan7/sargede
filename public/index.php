@@ -265,6 +265,7 @@ require __DIR__ . '/../src/curahhujan.php';
 require __DIR__ . '/../src/tma.php';
 require __DIR__ . '/../src/map.php';
 require __DIR__ . '/../src/user.php';
+require __DIR__ . '/../src/admin.php';
 
 /**
  * # ROUTES BLOCK

@@ -1,0 +1,55 @@
+{% extends 'layouts/master.html' %}
+
+{% set title = "Admin" %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+    <section class="content-header mb-5">
+        <h1>{{ current_user.lokasi.nama }}
+            <small class="text-muted">{{ current_user.lokasi.str_jenis }}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item">Admin</li>
+        </ol>
+    </section>
+    <div class="row">
+        <div class="col">
+        <h2>TMA</h2>
+            <form action="." method="POST" >
+          {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.sampling.label }}
+                    {{ form.sampling }}
+                </div>
+                <div class="form-group">
+                    {{ form.manual.label }}
+                    {{ form.manual }}
+                </div>
+                <input type="submit" class="btn btn-primary" value="Simpan">
+            </form>
+        <table>
+          <thead>
+          </thead>
+          <tbody>
+            {% for d in tmas %}
+                <tr>
+                    <td>{{ d.sampling }}</td>
+                    <td>{{ d.manual }}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

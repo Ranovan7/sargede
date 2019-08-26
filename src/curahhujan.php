@@ -108,11 +108,8 @@ $app->group('/curahhujan', function() {
                 'result' => $result
             ]);
         })->setName('curahhujan.jamjaman');
-    });
 
-    $this->group('/{id}/harian', function() {
-
-        $this->get('[/]', function(Request $request, Response $response, $args) {
+        $this->get('/harian', function(Request $request, Response $response, $args) {
             $hari = $request->getParam('sampling', "2019-06-01");//date('Y-m-d');
             $prev_date = date('Y-m-d', strtotime($hari .' -1month'));
             $next_date = date('Y-m-d', strtotime($hari .' +1month'));
@@ -163,13 +160,8 @@ $app->group('/curahhujan', function() {
                 'result' => $result
             ]);
         })->setName('curahhujan.harian');
-    });
 
-    $this->group('/{id}/bulanan', function() {
-        // this route shows the cumulation of precipitation/rain
-        // each month from all data
-
-        $this->get('[/]', function(Request $request, Response $response, $args) {
+        $this->get('/bulanan', function(Request $request, Response $response, $args) {
             $lokasi_id = $request->getAttribute('id');
             $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
 
@@ -230,13 +222,8 @@ $app->group('/curahhujan', function() {
                 'result' => $result
             ]);
         })->setName('curahhujan.bulanan');
-    });
 
-    $this->group('/{id}/maksimum', function() {
-        // this route shows the max cumulation of precipitation/rain
-        // each of day each month from all data
-
-        $this->get('[/]', function(Request $request, Response $response, $args) {
+        $this->get('/maksimum', function(Request $request, Response $response, $args) {
             $lokasi_id = $request->getAttribute('id');
             $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
 
@@ -331,5 +318,6 @@ $app->group('/curahhujan', function() {
                 'result' => $result
             ]);
         })->setName('curahhujan.maksimum');
+
     });
 });
