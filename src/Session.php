@@ -15,7 +15,7 @@ class Session
     const SESSION_NOT_STARTED = FALSE;
 
     // app key
-    private $appKey = "G3TappKEYFromENV";
+    private $appKey = "";
     
     // The state of the session
     private $sessionState = self::SESSION_NOT_STARTED;
@@ -26,7 +26,7 @@ class Session
     
     private function __construct() 
     {
-        $this->appKey = $_ENV['APP_KEY'] ?: 'I@mTh3B0ne0fMy$word';
+        $this->appKey = isset($_ENV['APP_KEY']) ? $_ENV['APP_KEY'] : 'I@mTh3B0ne0fMy$word';
     }
     
     

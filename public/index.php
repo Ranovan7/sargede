@@ -118,11 +118,11 @@ $container['flash'] = function() {
     return new \Slim\Flash\Messages();
 };
 
-// // session helper
-// require_once __DIR__ . '/../src/Session.php';
-// $container['session'] = function() {
-//     return Session::getInstance();
-// };
+// session helper
+require_once __DIR__ . '/../src/Session.php';
+$container['session'] = function() {
+    return Session::getInstance();
+};
 
 // monolog
 $container['logger'] = function ($c) {
@@ -157,19 +157,20 @@ $container['db'] = function($c) {
 	}
 };
 
-// // active user
-// $container['user'] = function($c) {
-//     $session = \App\Session::getInstance();
-// 	$user_id = $session->user_id;
-// 	if (empty($user_id)) {
-// 		return null;
-// 	}
+// get active user, cara menggunakan: $this->user
+$container['user'] = function($c) {
+    $session = Session::getInstance();
+	$user_id = $session->user_id;
+	if (empty($user_id)) {
+		return null;
+	}
 
-// 	$stmt = $c->db->prepare("SELECT * FROM users WHERE id=:id AND is_active=true");
-// 	$stmt->execute([':id' => $user_id]);
-// 	$user = $stmt->fetch();
-// 	return $user ?: null;
-// };
+    // hide password, just because
+	$stmt = $c->db->prepare("SELECT id,username,role,lokasi_id FROM public.user WHERE id=:id");
+	$stmt->execute([':id' => $user_id]);
+	$user = $stmt->fetch();
+	return $user ?: null;
+};
 
 /**
  * # DEPENDENCIES BLOCK
@@ -201,6 +202,18 @@ $asset = new Twig_SimpleFunction('asset', function ($path) {
 	return $_ENV['APP_URL'] .'/'. $path;
 });
 $container->get('view')->getEnvironment()->addFunction($asset);
+
+// Menambahkan fungsi session() pada Twig
+$session = new Twig_SimpleFunction('session', function () {
+	return Session::getInstance();
+});
+$container->get('view')->getEnvironment()->addFunction($session);
+
+// Menambahkan fungsi user() pada Twig -> untuk mendapatkan current user
+$user = new Twig_SimpleFunction('user', function () use ($container) {
+	return $container->get('user');
+});
+$container->get('view')->getEnvironment()->addFunction($user);
 
 /**
  * HELPER UNTUK DUMP + DIE
@@ -234,18 +247,6 @@ function tanggal_format($time, $usetime=false) {
     }
     return date('j', $time) .' '. $month .' '. date('Y', $time) . ($usetime ? ' '. date('H:i', $time) : '');
 }
-
-// // Menambahkan fungsi session() pada Twig
-// $session = new Twig_SimpleFunction('session', function () {
-// 	return \App\Session::getInstance();
-// });
-// $container->get('view')->getEnvironment()->addFunction($session);
-
-// // Menambahkan fungsi user() pada Twig -> untuk mendapatkan current user
-// $user = new Twig_SimpleFunction('user', function () use ($container) {
-// 	return $container->get('user');
-// });
-// $container->get('view')->getEnvironment()->addFunction($user);
 
 /**
  * # HELPERS BLOCK

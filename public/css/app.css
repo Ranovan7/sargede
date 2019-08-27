@@ -6,6 +6,15 @@ body {
     margin-top: 56px;
 }
 
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+}
+.content-header > .breadcrumb {
+    background-color: transparent;
+}
+
 .table > thead > tr > th {
     text-align: center;
 }
