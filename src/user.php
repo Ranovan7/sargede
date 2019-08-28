@@ -8,9 +8,12 @@ use Slim\Http\Response;
 $app->group('/user', function() {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
+        $lokasi = $this->db->query("SELECT * FROM lokasi")->fetchAll();
+        $user = $this->db->query('SELECT * FROM "user"')->fetchAll();
 
         return $this->view->render($response, 'user/index.html', [
-            'key' => 'value',
+            'lokasi' => $lokasi,
+            'users' => $user
         ]);
     })->setName('user');
 
@@ -18,12 +21,16 @@ $app->group('/user', function() {
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
 
-            return $this->view->render($response, 'user/add.html', [
-                'key' => 'value',
-            ]);
+            return $this->view->render($response, 'user/add.html');
         })->setName('user.add');
 
         $this->post('[/]', function(Request $request, Response $response, $args) {
+
+            $username = $request->getParam('username');
+            $password = $request->getParam('password');
+
+            echo $username;
+            echo $password;
 
             return $this->view->render($response, 'user/add.html', [
                 'key' => 'value',
@@ -45,6 +52,9 @@ $app->group('/user', function() {
 
         $this->post('/password', function(Request $request, Response $response, $args) {
             $id = $request->getAttribute('id');
+            $password = $request->getParam('password');
+
+            echo $password;
 
             return $this->view->render($response, 'user/password.html', [
                 'user_id' => $id,
