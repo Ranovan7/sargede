@@ -28,27 +28,53 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="/">
+                        <i class="fas fa-home mr-2"></i>
                         Home
+                        <span class="sr-only">(current)</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/curahhujan">
+                        <i class="fas fa-cloud-rain ml-4 mr-2"></i>
                         Curah Hujan
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/tma">
+                        <i class="fas fa-level-up-alt ml-4 mr-2"></i>
                         Tinggi Muka Air
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/map">
+                        <i class="fas fa-map ml-4 mr-2"></i>
                         Map
                     </a>
                 </li>
+                {% if user() %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                          role="button" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          <i class="fas fa-user ml-4 mr-2"></i>
+                          Data
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="/admin/">Data Harian</a>
+                          {% if user().role == '1' %}
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="/user">User</a>
+                          {% endif %}
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+        			<a class="nav-link" href="/login"><i class="fas fa-key ml-4 mr-2"></i></a>
+                {% endif %}
 
                 {# <!-- Nav Item - Logout -->
                 <li class="nav-item">
