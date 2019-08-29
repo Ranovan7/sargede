@@ -35,7 +35,8 @@ $app->group('/admin', function() {
         // cek masa aktif login
         if (empty($user_refresh_time) || $user_refresh_time < $now) {
             $this->session->destroy();
-            die('Silahkan login untuk melanjutkan');
+            // die('Silahkan login untuk melanjutkan');
+            return $this->response->withRedirect('/login');
         }
 
         // cek user exists, ada di index.php

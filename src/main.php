@@ -88,11 +88,11 @@ $app->get('/dashboard', function(Request $request, Response $response, $args) {
 // Auth User
 
 $app->get('/login', function(Request $request, Response $response, $args) {
-
+    return $this->view->render($response, 'main/login.html');
 });
 // dummy login flow, bisa di uncomment ke POST
-$app->get('/lg', function(Request $request, Response $response, $args) {
-// $app->post('/login', function(Request $request, Response $response, $args) {
+// $app->get('/lg', function(Request $request, Response $response, $args) {
+$app->post('/login', function(Request $request, Response $response, $args) {
     $credentials = $request->getParams();
     if (empty($credentials['username']) || empty($credentials['password'])) {
         die("Masukkan username dan password");
@@ -108,7 +108,8 @@ $app->get('/lg', function(Request $request, Response $response, $args) {
     $this->session->user_id = $user['id'];
     $this->session->user_refresh_time = strtotime("+1hour");
 
-    die("Welcommmen {$user['username']}!");
+    // die("Welcommmen {$user['username']}!");
+    return $this->response->withRedirect('/admin');
 });
 
 // generate admin, warning!
@@ -142,5 +143,6 @@ $app->get('/gen', function(Request $request, Response $response, $args) {
 
 $app->get('/logout', function(Request $request, Response $response, $args) {
     $this->session->destroy();
-    die("Sayonara!");
+    // die("Sayonara!");
+    return $this->response->withRedirect('/');
 });
