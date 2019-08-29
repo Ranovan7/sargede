@@ -68,13 +68,6 @@
     	<table class="table table-hover">
             {% for tma in result.tma %}
                 <tr>
-        			<!-- <td colspan="{% if loop.first %}3{% else %}4{% endif %}">
-        				<span class="hari" data-tgl="{{ tma.waktu }} {{ tma.jam }}">
-        					<span class="text-muted ml-3 font-weight-light">
-        						{{ tma.waktu }} {{ tma.jam }}
-        					</span>
-        				</span>
-        			</td> -->
         			{% if loop.first %}
                         <td colspan="3">Lokasi</td>
         				<td>Tinggi Muka Air</td>
