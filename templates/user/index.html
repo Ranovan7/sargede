@@ -69,8 +69,12 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td>{{ u.username }}</td>
-            <td>{{ u.str_role }}</td>
-            <td>{{ u.lokasi.nama }} {{ u.lokasi.jenis}}</td>
+            {% if u.role == "1" %}
+                <td>Admin</td>
+            {% else %}
+                <td>Petugas</td>
+            {% endif %}
+            <td>{{ u.lokasi_nama }} {{ u.lokasi_jenis}}</td>
             <td>
                 <a href="{{ path_for('user.password', {id:u.id}) }}" class="small">
                     Atur Ulang Password

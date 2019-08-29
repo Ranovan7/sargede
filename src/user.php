@@ -9,7 +9,9 @@ $app->group('/user', function() {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
         $lokasi = $this->db->query("SELECT * FROM lokasi")->fetchAll();
-        $user = $this->db->query("SELECT * FROM public.user")->fetchAll();
+        $user = $this->db->query("SELECT public.user.*, lokasi.nama AS lokasi_nama
+                                    FROM public.user
+                                    LEFT JOIN lokasi ON public.user.lokasi_id=lokasi.id")->fetchAll();
 
         return $this->view->render($response, 'user/index.html', [
             'lokasi' => $lokasi,
@@ -26,15 +28,20 @@ $app->group('/user', function() {
 
         $this->post('[/]', function(Request $request, Response $response, $args) {
 
-            $username = $request->getParam('username');
-            $password = $request->getParam('password');
+            $form = $request->getParams();
 
-            echo $username;
-            echo $password;
+            echo $form['username'];
+            echo $form['password'];
+            echo $form['lokasi'];
 
-            return $this->view->render($response, 'user/add.html', [
-                'key' => 'value',
+            $stmt = $this->db->prepare("INSERT INTO public.user (username, password, role, lokasi_id) VALUES (:username, :password, 2, :lokasi_id)");
+            $stmt->execute([
+                ':username' => $form['username'],
+                ':password' => password_hash($form['password'], PASSWORD_DEFAULT),
+                ':lokasi_id' => $form['lokasi']
             ]);
+
+            return $this->response->withRedirect('/user');
         })->setName('user.add');
 
     });
@@ -59,11 +66,9 @@ $app->group('/user', function() {
                 ':password' => password_hash($credentials['password'], PASSWORD_DEFAULT),
                 ':id' => $id
             ]);
-            die("Password {$user['username']} diubah!"); // change to redirect next
+            // die("Password {$user['username']} diubah!"); // change to redirect next
 
-            return $this->view->render($response, 'user/password.html', [
-                'user_id' => $id,
-            ]);
+            return $this->response->withRedirect('/user');
         })->setName('user.password');
 
         // delete
@@ -84,11 +89,9 @@ $app->group('/user', function() {
             $stmt->execute([
                 ':id' => $id
             ]);
-            die("User {$user['username']} dihapus!"); // change to redirect next
+            // die("User {$user['username']} dihapus!"); // change to redirect next
 
-            return $this->view->render($response, 'user/delete.html', [
-                'user' => $user,
-            ]);
+            return $this->response->withRedirect('/user');
         })->setName('user.delete');
 
     })->add(function(Request $request, Response $response, $next) { // middleware untuk mendapatkan lokasi
