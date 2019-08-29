@@ -68,14 +68,15 @@
     	<table class="table table-hover">
             {% for tma in result.tma %}
                 <tr>
-        			<td colspan="{% if loop.first %}3{% else %}4{% endif %}">
+        			<!-- <td colspan="{% if loop.first %}3{% else %}4{% endif %}">
         				<span class="hari" data-tgl="{{ tma.waktu }} {{ tma.jam }}">
         					<span class="text-muted ml-3 font-weight-light">
         						{{ tma.waktu }} {{ tma.jam }}
         					</span>
         				</span>
-        			</td>
+        			</td> -->
         			{% if loop.first %}
+                        <td colspan="3">Lokasi</td>
         				<td>Tinggi Muka Air</td>
         			{% endif %}
         		</tr>
@@ -100,9 +101,9 @@
 {% endblock %}
 
 {% block js %}
-    <script src="/static/js/moment.min.js"></script>
-    <script src="/static/js/id.js"></script>
-    <script src="/static/js/bootstrap-editable.min.js"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/id.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-editable.min.js') }}"></script>
     <script>
         $(document).ready(function() {
           $(function () {
