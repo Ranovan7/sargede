@@ -17,11 +17,13 @@
     </section>
     <div class="row">
         <div class="col-md-6">
-            Yakin akan menghapus user {{ user.username }}?
-            <a class="btn btn-primary" href="/user/">
-                Tidak
-            </a>
-            <input type="submit" class="btn-danger btn" value="Ya, Hapus">
+            <form action="{{ path_for('user.delete', {id:user.id}) }}" method="POST">
+                Yakin akan menghapus user {{ user.username }}?
+                <a class="btn btn-primary" href="/user/">
+                    Tidak
+                </a>
+                <input type="submit" class="btn-danger btn" value="Ya, Hapus">
+            </form>
         </div>
         <div class="col-md-6">
 

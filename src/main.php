@@ -97,7 +97,7 @@ $app->get('/lg', function(Request $request, Response $response, $args) {
     if (empty($credentials['username']) || empty($credentials['password'])) {
         die("Masukkan username dan password");
     }
-    
+
     $stmt = $this->db->prepare("SELECT * FROM public.user WHERE username=:username");
     $stmt->execute([':username' => $credentials['username']]);
     $user = $stmt->fetch();
@@ -140,7 +140,7 @@ $app->get('/gen', function(Request $request, Response $response, $args) {
     }
 });
 
-$app->post('/logout', function(Request $request, Response $response, $args) {
+$app->get('/logout', function(Request $request, Response $response, $args) {
     $this->session->destroy();
     die("Sayonara!");
 });

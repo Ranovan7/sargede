@@ -72,11 +72,11 @@
             <td>{{ u.str_role }}</td>
             <td>{{ u.lokasi.nama }} {{ u.lokasi.jenis}}</td>
             <td>
-                <a href="{{ path_for('user.password', {id:user.id}) }}" class="small">
+                <a href="{{ path_for('user.password', {id:u.id}) }}" class="small">
                     Atur Ulang Password
                 </a>
                 {% if u.username != 'admin' %}
-                    <a href="{{ path_for('user.delete', {id:user.id}) }}" class="float-right text-danger" title="DELETE">
+                    <a href="{{ path_for('user.delete', {id:u.id}) }}" class="float-right text-danger" title="DELETE">
                         &times;
                     </a>
                 {% endif %}

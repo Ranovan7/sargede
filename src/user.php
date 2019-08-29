@@ -9,7 +9,7 @@ $app->group('/user', function() {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
         $lokasi = $this->db->query("SELECT * FROM lokasi")->fetchAll();
-        $user = $this->db->query('SELECT * FROM "user"')->fetchAll();
+        $user = $this->db->query("SELECT * FROM public.user")->fetchAll();
 
         return $this->view->render($response, 'user/index.html', [
             'lokasi' => $lokasi,
@@ -52,9 +52,14 @@ $app->group('/user', function() {
 
         $this->post('/password', function(Request $request, Response $response, $args) {
             $id = $request->getAttribute('id');
-            $password = $request->getParam('password');
+            $credentials = $request->getParams();
 
-            echo $password;
+            $stmt = $this->db->prepare("UPDATE public.user SET password=:password WHERE id=:id");
+            $stmt->execute([
+                ':password' => password_hash($credentials['password'], PASSWORD_DEFAULT),
+                ':id' => $id
+            ]);
+            die("Password {$user['username']} diubah!"); // change to redirect next
 
             return $this->view->render($response, 'user/password.html', [
                 'user_id' => $id,
@@ -64,17 +69,25 @@ $app->group('/user', function() {
         // delete
         $this->get('/del', function(Request $request, Response $response, $args) {
             $id = $request->getAttribute('id');
+            $user = $user = $this->db->query("SELECT * FROM public.user WHERE id={$id}")->fetch();
 
             return $this->view->render($response, 'user/delete.html', [
-                'user_id' => $id,
+                'user' => $user,
             ]);
         })->setName('user.delete');
 
         $this->post('/del', function(Request $request, Response $response, $args) {
             $id = $request->getAttribute('id');
+            $user = $user = $this->db->query("SELECT * FROM public.user WHERE id={$id}")->fetch();
+
+            $stmt = $this->db->prepare("DELETE FROM public.user WHERE id=:id");
+            $stmt->execute([
+                ':id' => $id
+            ]);
+            die("User {$user['username']} dihapus!"); // change to redirect next
 
             return $this->view->render($response, 'user/delete.html', [
-                'user_id' => $id,
+                'user' => $user,
             ]);
         })->setName('user.delete');
 
