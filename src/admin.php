@@ -26,17 +26,32 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                                 tma.lokasi_id,
                                 tma.received,
                                 tma.petugas,
-                                tma.telemetri,
+                                tma.manual,
                                 lokasi.nama
                             FROM
                                 tma LEFT JOIN lokasi ON (lokasi.id = tma.lokasi_id)
                             WHERE
-                                tma.manual = 1
+                                tma.manual IS NOT NULL
                                 AND tma.sampling BETWEEN '{$from}' AND '{$to}'
+                            ORDER BY sampling")->fetchAll();
+            $chs = $this->db->query("SELECT
+                                curahujan.id,
+                                curahujan.sampling,
+                                curahujan.lokasi_id,
+                                curahujan.received,
+                                curahujan.petugas,
+                                curahujan.manual,
+                                lokasi.nama AS lokasi_nama
+                            FROM
+                                curahujan LEFT JOIN lokasi ON (lokasi.id = curahujan.lokasi_id)
+                            WHERE
+                                curahujan.manual IS NOT NULL
+                                -- AND curahujan.sampling BETWEEN '{$from}' AND '{$to}'
                             ORDER BY sampling")->fetchAll();
 
             return $this->view->render($response, 'admin/index.html', [
                 'tmas' => $tmas,
+                'chs' => $chs
             ]);
         }
         else
@@ -63,13 +78,13 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
 
                     switch ($time) {
                         case '06:00':
-                            $tmas[$date]['jam6'] = $tma['telemetri'];
+                            $tmas[$date]['jam6'] = $tma['manual'];
                             break;
                         case '12:00':
-                            $tmas[$date]['jam12'] = $tma['telemetri'];
+                            $tmas[$date]['jam12'] = $tma['manual'];
                             break;
                         case '18:00':
-                            $tmas[$date]['jam18'] = $tma['telemetri'];
+                            $tmas[$date]['jam18'] = $tma['manual'];
                             break;
                     }
                 }
@@ -81,8 +96,24 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             }
             else // ch
             {
+                $chs_temp = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$user['lokasi_id']}")->fetchAll();
+
+                $chs = [];
+                foreach ($chs_temp as $ch) {
+                    $date = date('Y-m-d', strtotime($ch['sampling']));
+
+                    if (!isset($chs[$date])) {
+                        $chs[$date] = [
+                            'sampling' => $date,
+                            'manual' => 0,
+                        ];
+                    }
+                    $chs[$date]['manual'] = $ch['manual'];
+                }
+
                 return $this->view->render($response, 'admin/curahhujan.html', [
-                    'key' => 'value',
+                    'lokasi' => $lokasi,
+                    'chs' => $chs,
                 ]);
             }
         }
@@ -103,30 +134,28 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $jam = [ '06:00:00', '12:00:00', '18:00:00' ];
 
             $form = $request->getParams();
-            foreach ($form['jam'] as $index => $telemetri) {
-                if (empty($telemetri)) { continue; }
+            foreach ($form['jam'] as $index => $manual) {
+                if (empty($manual)) { continue; }
 
                 $stmt = $this->db->prepare("INSERT INTO tma (
                                     sampling,
                                     manual,
                                     lokasi_id,
                                     received,
-                                    petugas,
-                                    telemetri
+                                    petugas
                                 ) VALUES (
                                     :sampling,
-                                    1,
+                                    :manual,
                                     :lokasi_id,
                                     :received,
-                                    :petugas,
-                                    :telemetri
+                                    :petugas
                                 )");
                 $stmt->execute([
                     ':sampling' => $form['sampling'] ." {$jam[$index]}",
                     ':lokasi_id' => $lokasi['id'],
                     ':received' => $now,
                     ':petugas' => $user['id'],
-                    ':telemetri' => $telemetri,
+                    ':manual' => $manual,
                 ]);
             }
 
@@ -137,35 +166,28 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $user = $request->getAttribute('user'); // didapat dari middleware
             $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
             $now = date('Y-m-d H:i:s');
-            $jam = [ '06:00:00', '12:00:00', '18:00:00' ];
 
             $form = $request->getParams();
-            // foreach ($form['jam'] as $index => $telemetri) {
-            //     if (empty($telemetri)) { continue; }
-            //
-            //     $stmt = $this->db->prepare("INSERT INTO tma (
-            //                         sampling,
-            //                         manual,
-            //                         lokasi_id,
-            //                         received,
-            //                         petugas,
-            //                         telemetri
-            //                     ) VALUES (
-            //                         :sampling,
-            //                         1,
-            //                         :lokasi_id,
-            //                         :received,
-            //                         :petugas,
-            //                         :telemetri
-            //                     )");
-            //     $stmt->execute([
-            //         ':sampling' => $form['sampling'] ." {$jam[$index]}",
-            //         ':lokasi_id' => $lokasi['id'],
-            //         ':received' => $now,
-            //         ':petugas' => $user['id'],
-            //         ':telemetri' => $telemetri,
-            //     ]);
-            // }
+            $stmt = $this->db->prepare("INSERT INTO curahujan (
+                                sampling,
+                                manual,
+                                lokasi_id,
+                                received,
+                                petugas
+                            ) VALUES (
+                                :sampling,
+                                :manual,
+                                :lokasi_id,
+                                :received,
+                                :petugas
+                            )");
+            $stmt->execute([
+                ':sampling' => $form['sampling'] ." 07:00:00",
+                ':lokasi_id' => $lokasi['id'],
+                ':received' => $now,
+                ':petugas' => $user['id'],
+                ':manual' => $form['manual'],
+            ]);
 
             return $response->withRedirect('/admin');
         })->setName('admin.add.curahhujan');

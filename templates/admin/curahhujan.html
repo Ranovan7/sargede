@@ -8,9 +8,10 @@
 
 {% block content %}
     <section class="content-header mb-5">
-        <h1>{{ current_user.lokasi.nama }}
+        <h1>{{ lokasi.nama }}
             <small class="text-muted">
-                {{ current_user.lokasi.str_jenis }}
+                (CH)
+                <!-- {{ user().lokasi.str_jenis }} -->
             </small>
         </h1>
         <ol class="breadcrumb">
@@ -35,8 +36,8 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label class="form-text" for="hujan">Curah Hujan</label>
-                            <input class="form-control" type="number" name="hujan" id="hujan" value="">
+                            <label class="form-text" for="manual">Curah Hujan</label>
+                            <input class="form-control" type="number" step="0.1" name="manual" id="manual" value="">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -55,10 +56,10 @@
                 </tr>
               </thead>
               <tbody>
-                {% for d in chs %}
+                {% for ch in chs %}
                     <tr>
-                    <td>{{ d.sampling }}</td>
-                    <td class="text-right">{{ d.manual }}</td>
+                    <td>{{ ch.sampling }}</td>
+                    <td class="text-right">{{ ch.manual }}</td>
                     </tr>
                 {% endfor %}
               </tbody>

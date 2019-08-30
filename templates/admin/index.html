@@ -27,12 +27,12 @@
                     </tr>
           </thead>
           <tbody>
-            {% for h in hujans %}
-            <tr>
-              <td>{{ h.sampling }}</td>
-              <td>{{ h.lokasi.nama }}</td>
-              <td class="text-right">{{ h.manual }}</td>
-            </tr>
+            {% for ch in chs %}
+                <tr>
+                  <td>{{ ch.sampling }}</td>
+                  <td>{{ ch.lokasi_nama }}</td>
+                  <td class="text-right">{{ ch.manual }}</td>
+                </tr>
             {% endfor %}
           </tbody>
         </table>
