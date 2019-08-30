@@ -9,7 +9,7 @@ $app->group('/user', function() {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
         $lokasi = $this->db->query("SELECT * FROM lokasi")->fetchAll();
-        $user = $this->db->query("SELECT public.user.*, lokasi.nama AS lokasi_nama
+        $user = $this->db->query("SELECT public.user.*, lokasi.nama AS lokasi_nama, lokasi.jenis AS lokasi_jenis
                                     FROM public.user
                                     LEFT JOIN lokasi ON public.user.lokasi_id=lokasi.id")->fetchAll();
 

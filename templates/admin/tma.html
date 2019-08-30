@@ -21,31 +21,31 @@
         </h2>
         <div class="collapse bg-light shadow rounded"  id="form-add">
             <form class="row align-items-end p-3" action="{{ path_for('admin.add.tma') }}" method="POST">
-                <div class="col-4">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label class="form-text" for="sampling">Tanggal</label>
                         <input class="form-control" type="date" name="sampling" id="sampling" required value="{{ 'now' | date('Y-m-d') }}">
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label class="form-text" for="jam[0]">Jam 6</label>
                         <input class="form-control" type="number" name="jam[0]" id="jam[0]" value="">
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label class="form-text" for="jam[1]">Jam 12</label>
                         <input class="form-control" type="number" name="jam[1]" id="jam[1]" value="">
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label class="form-text" for="jam[2]">Jam 18</label>
                         <input class="form-control" type="number" name="jam[2]" id="jam[2]" value="">
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Simpan</button>
                     </div>
@@ -65,9 +65,27 @@
                 {% for tma in tmas %}
                     <tr>
                         <td>{{ tma.sampling | date('Y-m-d') }}</td>
-                        <td>{{ tma.jam6 | number_format(2) }}</td>
-                        <td>{{ tma.jam12 | number_format(2) }}</td>
-                        <td>{{ tma.jam18 | number_format(2) }}</td>
+                        <td align="right">
+                            {% if tma.jam6 %}
+                                {{ tma.jam6 | number_format(2) }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td align="right">
+                            {% if tma.jam12 %}
+                                {{ tma.jam12 | number_format(2) }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td align="right">
+                            {% if tma.jam18 %}
+                                {{ tma.jam18 | number_format(2) }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

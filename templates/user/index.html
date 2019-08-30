@@ -42,7 +42,14 @@
                   <label for="lokasi">Lokasi</label>
                   <select class="form-control" id="lokasi" name="lokasi">
                       {% for l in lokasi %}
-                            <option value="{{ l.id }}">{{ l.nama }}</option>
+                            <option value="{{ l.id }}">
+                                {{ l.nama }}
+                                {% if l.jenis == '1' or l.jenis == '4' %}
+                                    (CH)
+                                {% elseif l.jenis == '2' %}
+                                    (TMA)
+                                {% endif %}
+                            </option>
                       {% endfor %}
                   </select>
               </div>
@@ -74,7 +81,14 @@
             {% else %}
                 <td>Petugas</td>
             {% endif %}
-            <td>{{ u.lokasi_nama }} {{ u.lokasi_jenis}}</td>
+            <td>
+                {{ u.lokasi_nama }}
+                {% if u.lokasi_jenis == '1' or u.lokasi_jenis == '4' %}
+                    (CH)
+                {% elseif u.lokasi_jenis == '2' %}
+                    (TMA)
+                {% endif %}
+            </td>
             <td>
                 <a href="{{ path_for('user.password', {id:u.id}) }}" class="small">
                     Atur Ulang Password

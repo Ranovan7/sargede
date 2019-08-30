@@ -46,7 +46,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             if ($lokasi['jenis'] == 2) // tma
             {
                 $tmas_temp = $this->db->query("SELECT * FROM tma WHERE lokasi_id={$user['lokasi_id']}")->fetchAll();
-                
+
                 $tmas = [];
                 foreach ($tmas_temp as $tma) {
                     $date = date('Y-m-d', strtotime($tma['sampling']));
@@ -107,7 +107,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 if (empty($telemetri)) { continue; }
 
                 $stmt = $this->db->prepare("INSERT INTO tma (
-                                    sampling, 
+                                    sampling,
                                     manual,
                                     lokasi_id,
                                     received,
@@ -133,8 +133,45 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             return $response->withRedirect('/admin');
         })->setName('admin.add.tma');
 
+        $this->post('/curahhujan', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user'); // didapat dari middleware
+            $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
+            $now = date('Y-m-d H:i:s');
+            $jam = [ '06:00:00', '12:00:00', '18:00:00' ];
+
+            $form = $request->getParams();
+            // foreach ($form['jam'] as $index => $telemetri) {
+            //     if (empty($telemetri)) { continue; }
+            //
+            //     $stmt = $this->db->prepare("INSERT INTO tma (
+            //                         sampling,
+            //                         manual,
+            //                         lokasi_id,
+            //                         received,
+            //                         petugas,
+            //                         telemetri
+            //                     ) VALUES (
+            //                         :sampling,
+            //                         1,
+            //                         :lokasi_id,
+            //                         :received,
+            //                         :petugas,
+            //                         :telemetri
+            //                     )");
+            //     $stmt->execute([
+            //         ':sampling' => $form['sampling'] ." {$jam[$index]}",
+            //         ':lokasi_id' => $lokasi['id'],
+            //         ':received' => $now,
+            //         ':petugas' => $user['id'],
+            //         ':telemetri' => $telemetri,
+            //     ]);
+            // }
+
+            return $response->withRedirect('/admin');
+        })->setName('admin.add.curahhujan');
+
     })->add(function(Request $request, Response $response, $next) {
-    
+
         // hanya user role pengamat yg dapat akses
         $user = $request->getAttribute('user');
         if ($user['role'] != 2) {

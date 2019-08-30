@@ -20,25 +20,34 @@
     </section>
     <div class="row">
         <div class="col-md-6">
-        <h2>Curah Hujan <small>Manual</small> <a href="#" class="btn
-            btn-primary">Tambah</a></h2>
-            <form action="." method="POST" id="formAdd">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{ form.sampling.label }}
-                    {{ form.sampling }}
-                    <small id="samplingHelp" class="form-text text-muted">
-                        Pengukuran hujan pagi ini adalah <b>sampling hari kemarin</b>
-                    </small>
-                </div>
-                <div class="form-group">
-                    {{ form.manual.label }}
-                    {{ form.manual }}
-                </div>
-                <input type="submit" class="btn btn-primary" value="Simpan">
-            </form>
+            <h2>
+                Curah Hujan
+                <small>Manual</small>
+                <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#form-add">Tambah</button>
+            </h2>
+            <div class="collapse bg-light shadow rounded"  id="form-add">
+                <form class="row align-items-end p-3" action="{{ path_for('admin.add.curahhujan') }}" method="POST">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-text" for="sampling">Tanggal</label>
+                            <input class="form-control" type="date" name="sampling" id="sampling" required value="{{ 'now' | date('Y-m-d') }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="form-text" for="hujan">Curah Hujan</label>
+                            <input class="form-control" type="number" name="hujan" id="hujan" value="">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         <div class="">&nbsp;</div>
-            <table class="table table-border table-hover">
+            <table class="table table-bordered table-hover mt-4">
               <thead>
                 <tr>
                   <th>Sampling</th>
