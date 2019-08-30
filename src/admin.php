@@ -20,20 +20,48 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         // ADMIN
         if ($user['role'] == 1)
         {
-            $tmas = $this->db->query("SELECT
+            $tmas_temp = $this->db->query("SELECT
                                 tma.id,
                                 tma.sampling,
                                 tma.lokasi_id,
                                 tma.received,
                                 tma.petugas,
                                 tma.manual,
-                                lokasi.nama
+                                lokasi.nama AS lokasi_nama
                             FROM
                                 tma LEFT JOIN lokasi ON (lokasi.id = tma.lokasi_id)
                             WHERE
                                 tma.manual IS NOT NULL
-                                AND tma.sampling BETWEEN '{$from}' AND '{$to}'
+                                -- AND tma.sampling BETWEEN '{$from}' AND '{$to}'
                             ORDER BY sampling")->fetchAll();
+            $tmas = [];
+            foreach ($tmas_temp as $tma) {
+                $date = date('Y-m-d', strtotime($tma['sampling']));
+                $time = date('H:i', strtotime($tma['sampling']));
+
+                if (!isset($tmas[$date])) {
+                    $tmas[$date] = [
+                        'sampling' => $date,
+                        'jam6' => "-",
+                        'jam12' => "-",
+                        'jam18' => "-",
+                        'lokasi' => $tma['lokasi_nama']
+                    ];
+                }
+
+                switch ($time) {
+                    case '06:00':
+                        $tmas[$date]['jam6'] = $tma['manual'];
+                        break;
+                    case '12:00':
+                        $tmas[$date]['jam12'] = $tma['manual'];
+                        break;
+                    case '18:00':
+                        $tmas[$date]['jam18'] = $tma['manual'];
+                        break;
+                }
+            }
+
             $chs = $this->db->query("SELECT
                                 curahujan.id,
                                 curahujan.sampling,

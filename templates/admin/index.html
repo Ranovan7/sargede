@@ -51,6 +51,16 @@
                         </tr>
               </thead>
               <tbody>
+                  {% for tma in tmas %}
+                      <tr>
+                          <th>{{ tma.sampling }}</th>
+                          <th>{{ tma.lokasi }}</th>
+                          <th class="text-right">{{ tma.jam6 }}</th>
+                          <th class="text-right">{{ tma.jam12 }}</th>
+                          <th class="text-right">{{ tma.jam18 }}</th>
+                          <th class="text-right">-</th>
+                      </tr>
+                  {% endfor %}
               </tbody>
             </table>
         </div>
