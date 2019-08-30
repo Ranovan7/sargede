@@ -1,55 +1,78 @@
 {% extends 'layouts/master.html' %}
 
-{% set title = "Admin" %}
+{% set title = "Pengamat Tinggi Mata Air" %}
 
-{% block css %}
-
-{% endblock %}
+{% block css %}{% endblock %}
 
 {% block content %}
     <section class="content-header mb-5">
-        <h1>{{ current_user.lokasi.nama }}
-            <small class="text-muted">{{ current_user.lokasi.str_jenis }}</small>
-        </h1>
+        <h1>{{ lokasi.nama }}</h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item">
+                <a href="/">Dashboard</a>
+            </li>
             <li class="breadcrumb-item">Admin</li>
         </ol>
     </section>
-    <div class="row">
-        <div class="col">
-        <h2>TMA</h2>
-            <form action="." method="POST" >
-          {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{ form.sampling.label }}
-                    {{ form.sampling }}
+    <div class="">
+        <h2 class="text-muted">
+            Tinggi Mata Air
+            <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#form-add">Tambah</button>
+        </h2>
+        <div class="collapse bg-light shadow rounded"  id="form-add">
+            <form class="row align-items-end p-3" action="{{ path_for('admin.add.tma') }}" method="POST">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="form-text" for="sampling">Tanggal</label>
+                        <input class="form-control" type="date" name="sampling" id="sampling" required value="{{ 'now' | date('Y-m-d') }}">
+                    </div>
                 </div>
-                <div class="form-group">
-                    {{ form.manual.label }}
-                    {{ form.manual }}
+                <div class="col-2">
+                    <div class="form-group">
+                        <label class="form-text" for="jam[0]">Jam 6</label>
+                        <input class="form-control" type="number" name="jam[0]" id="jam[0]" value="">
+                    </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Simpan">
+                <div class="col-2">
+                    <div class="form-group">
+                        <label class="form-text" for="jam[1]">Jam 12</label>
+                        <input class="form-control" type="number" name="jam[1]" id="jam[1]" value="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label class="form-text" for="jam[2]">Jam 18</label>
+                        <input class="form-control" type="number" name="jam[2]" id="jam[2]" value="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                    </div>
+                </div>
             </form>
-        <table>
-          <thead>
-          </thead>
-          <tbody>
-            {% for d in tmas %}
+        </div>
+        <table class="table table-bordered table-hover mt-4">
+            <thead>
                 <tr>
-                    <td>{{ d.sampling }}</td>
-                    <td>{{ d.manual }}</td>
+                    <th>Tanggal</th>
+                    <th>Jam 6</th>
+                    <th>Jam 12</th>
+                    <th>Jam 18</th>
                 </tr>
-            {% endfor %}
-          </tbody>
+            </thead>
+            <tbody>
+                {% for tma in tmas %}
+                    <tr>
+                        <td>{{ tma.sampling | date('Y-m-d') }}</td>
+                        <td>{{ tma.jam6 | number_format(2) }}</td>
+                        <td>{{ tma.jam12 | number_format(2) }}</td>
+                        <td>{{ tma.jam18 | number_format(2) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
         </table>
-        </div>
-        <div class="col">
-            &nbsp;
-        </div>
     </div>
 {% endblock %}
 
-{% block js %}
-
-{% endblock %}
+{% block js %}{% endblock %}
