@@ -32,7 +32,6 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                                 tma LEFT JOIN lokasi ON (lokasi.id = tma.lokasi_id)
                             WHERE
                                 tma.manual IS NOT NULL
-                                -- AND tma.sampling BETWEEN '{$from}' AND '{$to}'
                             ORDER BY sampling DESC")->fetchAll();
             $tmas = [];
             foreach ($tmas_temp as $tma) {
@@ -78,7 +77,6 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                                 curahujan LEFT JOIN lokasi ON (lokasi.id = curahujan.lokasi_id)
                             WHERE
                                 curahujan.manual IS NOT NULL
-                                -- AND curahujan.sampling BETWEEN '{$from}' AND '{$to}'
                             ORDER BY sampling DESC")->fetchAll();
 
             return $this->view->render($response, 'admin/index.html', [

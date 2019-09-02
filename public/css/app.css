@@ -40,3 +40,13 @@ body {
 .text-primary {
     color: #7300ED!important
 }
+
+/* datepicker */
+.table thead th {
+    text-align: center;
+    vertical-align: middle;
+    /* border-color: inherit; */
+}
+.datepicker {
+    z-index: 10000 !important;
+}
