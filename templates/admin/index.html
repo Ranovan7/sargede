@@ -51,15 +51,17 @@
                         </tr>
               </thead>
               <tbody>
-                  {% for tma in tmas %}
+                  {% for date, tma_date in tmas %}
+                    {% for tma in tma_date %}
                       <tr>
-                          <th>{{ tma.sampling }}</th>
-                          <th>{{ tma.lokasi }}</th>
-                          <th class="text-right">{{ tma.jam6 }}</th>
-                          <th class="text-right">{{ tma.jam12 }}</th>
-                          <th class="text-right">{{ tma.jam18 }}</th>
-                          <th class="text-right">-</th>
+                          <td>{{ date }}</td>
+                          <td>{{ tma.lokasi }}</td>
+                          <td class="text-right">{{ tma.jam6 }}</td>
+                          <td class="text-right">{{ tma.jam12 }}</td>
+                          <td class="text-right">{{ tma.jam18 }}</td>
+                          <td class="text-right">-</td>
                       </tr>
+                    {% endfor %}
                   {% endfor %}
               </tbody>
             </table>

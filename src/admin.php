@@ -38,9 +38,13 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             foreach ($tmas_temp as $tma) {
                 $date = date('Y-m-d', strtotime($tma['sampling']));
                 $time = date('H:i', strtotime($tma['sampling']));
+                $lokasi_id = $tma['lokasi_id'];
 
                 if (!isset($tmas[$date])) {
-                    $tmas[$date] = [
+                    $tmas[$date] = [];
+                }
+                if (!isset($tmas[$date][$lokasi_id])) {
+                    $tmas[$date][$lokasi_id] = [
                         'sampling' => $date,
                         'jam6' => "-",
                         'jam12' => "-",
@@ -51,13 +55,13 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
 
                 switch ($time) {
                     case '06:00':
-                        $tmas[$date]['jam6'] = $tma['manual'];
+                        $tmas[$date][$lokasi_id]['jam6'] = $tma['manual'];
                         break;
                     case '12:00':
-                        $tmas[$date]['jam12'] = $tma['manual'];
+                        $tmas[$date][$lokasi_id]['jam12'] = $tma['manual'];
                         break;
                     case '18:00':
-                        $tmas[$date]['jam18'] = $tma['manual'];
+                        $tmas[$date][$lokasi_id]['jam18'] = $tma['manual'];
                         break;
                 }
             }

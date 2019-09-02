@@ -64,7 +64,7 @@ $app->group('/tma', function() {
 
             // MANUAL
             $wlev_manual = $this->db->query("SELECT * FROM tma
-                                    WHERE lokasi_id = {$l['id']} AND telemetri IS NOT NULL
+                                    WHERE lokasi_id = {$l['id']} AND manual IS NOT NULL
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
                                     ORDER BY sampling")->fetchAll();
 
@@ -76,13 +76,13 @@ $app->group('/tma', function() {
                 $time = date('H:i', strtotime($w['sampling']));
                 switch ($time) {
                     case '06:00':
-                        $jam6_manual = $w['telemetri'];
+                        $jam6_manual = $w['manual'];
                         break;
                     case '12:00':
-                        $jam12_manual = $w['telemetri'];
+                        $jam12_manual = $w['manual'];
                         break;
                     case '18:00':
-                        $jam18_manual = $w['telemetri'];
+                        $jam18_manual = $w['manual'];
                         break;
                 }
             }
