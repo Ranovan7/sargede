@@ -8,7 +8,7 @@ use Slim\Http\Response;
 $app->group('/curahhujan', function() {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
-        $hari = $request->getParam('sampling', "2019-06-26");//date('Y-m-d');
+        $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-26");
         $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
         $next_date = date('Y-m-d', strtotime($hari .' +1day'));
 
@@ -66,7 +66,7 @@ $app->group('/curahhujan', function() {
     $this->group('/{id}', function() {
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
-            $hari = $request->getParam('sampling', "2019-06-01");//date('Y-m-d');
+            $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-01");
             $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
             $next_date = date('Y-m-d', strtotime($hari .' +1day'));
 
@@ -110,7 +110,7 @@ $app->group('/curahhujan', function() {
         })->setName('curahhujan.jamjaman');
 
         $this->get('/harian', function(Request $request, Response $response, $args) {
-            $hari = $request->getParam('sampling', "2019-06-01");//date('Y-m-d');
+            $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-01");
             $prev_date = date('Y-m-d', strtotime($hari .' -1month'));
             $next_date = date('Y-m-d', strtotime($hari .' +1month'));
 

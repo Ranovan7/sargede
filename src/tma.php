@@ -8,7 +8,7 @@ use Slim\Http\Response;
 $app->group('/tma', function() {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
-        $hari = $request->getParam('sampling', "2019-06-26");//date('Y-m-d');
+        $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-26");
         $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
         $next_date = date('Y-m-d', strtotime($hari .' +1day'));
         $from = "{$hari} 00:00:00";
@@ -118,7 +118,7 @@ $app->group('/tma', function() {
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
             $lokasi = $request->getAttribute('lokasi');
-            $now = "2019-06-28";//date('Y-m-d');
+            $now = date('Y-m-d');//"2019-06-28";
             $start_date = $request->getParam('start_date', date('Y-m-d', strtotime("$now -2day")));
             $end_date = $request->getParam('end_date', $now);
 

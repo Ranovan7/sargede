@@ -30,9 +30,9 @@ $app->group('/user', function() {
 
             $form = $request->getParams();
 
-            echo $form['username'];
-            echo $form['password'];
-            echo $form['lokasi'];
+            // echo $form['username'];
+            // echo $form['password'];
+            // echo $form['lokasi'];
 
             $stmt = $this->db->prepare("INSERT INTO public.user (username, password, role, lokasi_id) VALUES (:username, :password, 2, :lokasi_id)");
             $stmt->execute([

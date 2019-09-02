@@ -30,6 +30,9 @@ function env($key, $defaultValue='') {
     return isset($_ENV[$key]) ? $_ENV[$key] : $defaultValue;
 }
 
+// get timezone from ENV, default "Asia/Jakarta"
+date_default_timezone_set(env('APP_TIMEZONE', "Asia/Jakarta"));
+
 $settings = [
     'settings' => [
         'displayErrorDetails' => env('APP_ENV', 'local') != 'production',

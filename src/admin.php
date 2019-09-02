@@ -11,11 +11,11 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         // get user yg didapat dari middleware
         $user = $request->getAttribute('user');
 
-        $hari = $request->getParam('sampling', "2019-06-26");//date('Y-m-d');
-        $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
-        $next_date = date('Y-m-d', strtotime($hari .' +1day'));
-        $from = "{$hari} 00:00:00";
-        $to = "{$hari} 23:55:00";
+        // $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-26");
+        // $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
+        // $next_date = date('Y-m-d', strtotime($hari .' +1day'));
+        // $from = "{$hari} 00:00:00";
+        // $to = "{$hari} 23:55:00";
 
         // ADMIN
         if ($user['role'] == 1)
@@ -33,7 +33,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                             WHERE
                                 tma.manual IS NOT NULL
                                 -- AND tma.sampling BETWEEN '{$from}' AND '{$to}'
-                            ORDER BY sampling")->fetchAll();
+                            ORDER BY sampling DESC")->fetchAll();
             $tmas = [];
             foreach ($tmas_temp as $tma) {
                 $date = date('Y-m-d', strtotime($tma['sampling']));
@@ -79,7 +79,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                             WHERE
                                 curahujan.manual IS NOT NULL
                                 -- AND curahujan.sampling BETWEEN '{$from}' AND '{$to}'
-                            ORDER BY sampling")->fetchAll();
+                            ORDER BY sampling DESC")->fetchAll();
 
             return $this->view->render($response, 'admin/index.html', [
                 'tmas' => $tmas,
@@ -92,7 +92,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$user['lokasi_id']}")->fetch();
             if ($lokasi['jenis'] == 2) // tma
             {
-                $tmas_temp = $this->db->query("SELECT * FROM tma WHERE lokasi_id={$user['lokasi_id']}")->fetchAll();
+                $tmas_temp = $this->db->query("SELECT * FROM tma WHERE lokasi_id={$user['lokasi_id']} ORDER BY sampling DESC")->fetchAll();
 
                 $tmas = [];
                 foreach ($tmas_temp as $tma) {
@@ -121,14 +121,24 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     }
                 }
 
+                $current_hour = date('H');
+                if ($current_hour < 12) {
+                    $inputjam = '06:00';
+                } else if ($current_hour < 18) {
+                    $inputjam = '12:00';
+                } else {
+                    $inputjam = '18:00';
+                }
+
                 return $this->view->render($response, 'admin/tma.html', [
                     'lokasi' => $lokasi,
                     'tmas' => $tmas,
+                    'inputjam' => $inputjam,
                 ]);
             }
             else // ch
             {
-                $chs_temp = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$user['lokasi_id']}")->fetchAll();
+                $chs_temp = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$user['lokasi_id']} ORDER BY sampling DESC")->fetchAll();
 
                 $chs = [];
                 foreach ($chs_temp as $ch) {
@@ -163,33 +173,28 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $user = $request->getAttribute('user'); // didapat dari middleware
             $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
             $now = date('Y-m-d H:i:s');
-            $jam = [ '06:00:00', '12:00:00', '18:00:00' ];
 
             $form = $request->getParams();
-            foreach ($form['jam'] as $index => $manual) {
-                if (empty($manual)) { continue; }
-
-                $stmt = $this->db->prepare("INSERT INTO tma (
-                                    sampling,
-                                    manual,
-                                    lokasi_id,
-                                    received,
-                                    petugas
-                                ) VALUES (
-                                    :sampling,
-                                    :manual,
-                                    :lokasi_id,
-                                    :received,
-                                    :petugas
-                                )");
-                $stmt->execute([
-                    ':sampling' => $form['sampling'] ." {$jam[$index]}",
-                    ':lokasi_id' => $lokasi['id'],
-                    ':received' => $now,
-                    ':petugas' => $user['id'],
-                    ':manual' => $manual,
-                ]);
-            }
+            $stmt = $this->db->prepare("INSERT INTO tma (
+                                sampling,
+                                manual,
+                                lokasi_id,
+                                received,
+                                petugas
+                            ) VALUES (
+                                :sampling,
+                                :manual,
+                                :lokasi_id,
+                                :received,
+                                :petugas
+                            )");
+            $stmt->execute([
+                ':sampling' => $form['sampling'] ." {$form['jam']}",
+                ':lokasi_id' => $lokasi['id'],
+                ':received' => $now,
+                ':petugas' => $user['id'],
+                ':manual' => $form['manual'],
+            ]);
 
             return $response->withRedirect('/admin');
         })->setName('admin.add.tma');
