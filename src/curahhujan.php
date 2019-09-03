@@ -45,13 +45,18 @@ $app->group('/curahhujan', function() {
                 $durasi_all += $c['rain'];
             };
 
+            $ch_manual = $this->db->query("SELECT * FROM curahujan
+                                WHERE lokasi_id = {$l['id']} AND manual IS NOT NULL
+                                    AND sampling = '{$hari}'")->fetch();
+
             $result[] = [
                 'lokasi' => $l,
                 'durasi_07_13' => $durasi_07_13,
                 'durasi_13_19' => $durasi_13_19,
                 'durasi_19_01' => $durasi_19_01,
                 'durasi_01_07' => $durasi_01_07,
-                'durasi_all' => $durasi_all
+                'durasi_all' => $durasi_all,
+                'durasi_manual' => $ch_manual ? $ch_manual['manual'] : null,
             ];
         }
 

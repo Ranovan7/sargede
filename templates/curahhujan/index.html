@@ -52,7 +52,7 @@
               <td>{{ r.durasi_19_01 }} mm</td>
               <td>{{ r.durasi_01_07 }} mm</td>
               <td>{{ r.durasi_all }} mm</td>
-              <td></td>
+              <td>{{ r.durasi_manual != null ? r.durasi_manual ~" mm" : '-' }}</td>
             </tr>
         {% endfor %}
         </tbody>

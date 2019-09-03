@@ -33,7 +33,11 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label class="form-text" for="jam">Jam</label>
-                        <input class="form-control" type="time" name="jam" id="jam" required value="{{ inputjam }}">
+                        <select name="jam" id="jam" class="form-control" required>
+                            <option value="06:00" {{ inputjam == "06:00" ? 'selected' : '' }}>6</option>
+                            <option value="12:00" {{ inputjam == "12:00" ? 'selected' : '' }}>12</option>
+                            <option value="18:00" {{ inputjam == "18:00" ? 'selected' : '' }}>18</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-2">

@@ -142,7 +142,7 @@ $app->group('/tma', function() {
                 while ($prev_time <= $current_time) {
                     $prev_tanggal = tanggal_format($prev_time, true);
                     $result['labels'][] = $prev_tanggal;
-                    $data[] = $prev_time == $current_time ? number_format($w['wlev'],2) : 0;
+                    $data[] = $prev_time == $current_time && $w['wlev'] > 0 ? number_format($w['wlev'],2) : 0;
                     $prev_time += 300;
                 }
             }
