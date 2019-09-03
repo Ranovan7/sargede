@@ -7,7 +7,7 @@
 <style>
     .masthead h1 {
       font-family: 'Varela Round';
-      font-size: 4rem;;
+      font-size: 2rem;;
       line-height: 4rem;
       letter-spacing: .8rem;
       /* -webkit-text-fill-color: white; */
@@ -15,7 +15,7 @@
 
     .masthead h2 {
       max-width: 25rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     .masthead {
@@ -23,7 +23,7 @@
       width: 100%;
       height: auto;
       min-height: 35rem;
-      padding: 12rem 0;
+      padding: 1rem 0;
       /* background: linear-gradient(
         to bottom,
         rgba(22,22,22,.3) 0,
@@ -53,26 +53,6 @@
         rgba(22,22,22,.9) 100%
       ); */
     }
-
-    /* unvisited link */
-    a:link {
-      color: grey;
-    }
-
-    /* visited link */
-    a:visited {
-      color: grey;
-    }
-
-    /* mouse over link */
-    a:hover {
-      color: silver;
-    }
-
-    /* selected link */
-    a:active {
-      color: silver;
-    }
 </style>
 
 {% endblock %}
@@ -80,10 +60,13 @@
 {% block content %}
     <div>
         <header class="masthead">
+            <div class="text-center mb-2">
+                <img src="{{ asset('img/logo_pu.png/') }}" alt="Logo PU" class="img-fluid mx-auto" width="250" height="250">
+            </div>
             <div class="container d-flex h-100 align-items-center col-lg-8 col-xs-12">
               <div class="mx-auto text-center">
                 <h1 class="mx-auto my-0">BWSSUL2 Gorontalo</h1>
-                <h2 class="mx-auto mt-2 mb-5">Balai Besar Wilayah Sungai Gorontalo</h2>
+                <h2 class="mx-auto mt-2 mb-4">Balai Besar Wilayah Sungai Gorontalo</h2>
                 <div class="container align-items-center" align="center">
                     <a class="btn btn-primary" href="/tma">Tinggi Muka Air</a>
                     <a class="btn btn-primary" href="/curahhujan">Curah Hujan</a>

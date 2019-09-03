@@ -1,6 +1,6 @@
-body {
+/* body {
     padding-top: 105px;
-}
+} */
 
 .fixed-top-2 {
     margin-top: 56px;
@@ -33,13 +33,13 @@ body {
     margin: 0 .5rem;
 }
 
-.bg-primary {
+/* .bg-primary {
     background-color: #7300ED!important
-}
+} */
 
-.text-primary {
+/* .text-primary {
     color: #7300ED!important
-}
+} */
 
 /* datepicker */
 .table thead th {
