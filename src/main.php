@@ -6,8 +6,12 @@ use Slim\Http\Response;
 // Main Route
 
 // home
-
 $app->get('[/]', function(Request $request, Response $response, $args) {
+    return $this->view->render($response, 'main/home.html');
+});
+
+// dashboard
+$app->get('/dashboard', function(Request $request, Response $response, $args) {
     $sejak = intval($request->getParam('sejak', 90));
     $end = date("Y-m-d");
     $start = date('Y-m-d', strtotime($end ." -{$sejak}day"));
@@ -79,11 +83,6 @@ $app->get('[/]', function(Request $request, Response $response, $args) {
         'result' => $result,
     ]);
 });
-
-$app->get('/dashboard', function(Request $request, Response $response, $args) {
-
-});
-
 
 // Auth User
 
