@@ -36,6 +36,10 @@
                 {% include 'layouts/navbar.html' %}
             {# {% endif %} #}
 
+            {% if title == "Home" %}
+                {% include 'layouts/home.html' %}
+            {% endif %}
+
             <!-- Content Wrapper -->
             <div class="container" id="content-wrapper">
 
