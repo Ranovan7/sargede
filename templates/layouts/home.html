@@ -1,8 +1,3 @@
-{% extends 'layouts/master.html' %}
-
-{% set title = "Home" %}
-
-{% block css %}
 <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 <style>
     .masthead h1 {
@@ -23,7 +18,7 @@
       width: 100%;
       height: auto;
       min-height: 35rem;
-      padding: 1rem 0;
+      padding: 2.5rem 0;
       /* background: linear-gradient(
         to bottom,
         rgba(22,22,22,.3) 0,
@@ -55,30 +50,25 @@
     }
 </style>
 
-{% endblock %}
-
-{% block content %}
-    <div>
-        <header class="masthead">
-            <div class="text-center mb-2">
-                <img src="{{ asset('img/logo_pu.png') }}" alt="Logo PU" class="img-fluid mx-auto" width="250" height="250">
+<div>
+    <header class="masthead bg-primary">
+        <div class="text-center mb-4">
+            <img src="{{ asset('img/logo_pu.png') }}" alt="Logo PU" class="img-fluid mx-auto" width="175" height="175">
+        </div>
+        <div class="container d-flex h-100 align-items-center col-lg-8 col-xs-12">
+          <div class="mx-auto text-center">
+            <h1 class="mx-auto my-0">Balai Wilayah Sungai</h1>
+            <h1 class="mx-auto my-0">Sulawesi II</h1>
+            <h1>Gorontalo</h1>
+            <!-- <h2 class="mx-auto mt-2 mb-4">Balai Besar Wilayah Sungai Gorontalo</h2> -->
+            <div class="container align-items-center mt-4 mb-4" align="center">
+                <a class="btn btn-warning mb-2" href="/tma">Tinggi Muka Air</a>
+                <a class="btn btn-warning mb-2" href="/curahhujan">Curah Hujan</a>
             </div>
-            <div class="container d-flex h-100 align-items-center col-lg-8 col-xs-12">
-              <div class="mx-auto text-center">
-                <h1 class="mx-auto my-0">BWSSUL2 Gorontalo</h1>
-                <h2 class="mx-auto mt-2 mb-4">Balai Besar Wilayah Sungai Gorontalo</h2>
-                <div class="container align-items-center" align="center">
-                    <a class="btn btn-primary mb-2" href="/tma">Tinggi Muka Air</a>
-                    <a class="btn btn-primary mb-2" href="/curahhujan">Curah Hujan</a>
-                </div>
-              </div>
-            </div>
-        </header>
+          </div>
+        </div>
+    </header>
 
-    </div>
+</div>
 
-{% endblock %}
-
-{% block js %}
-
-{% endblock %}
+<hr>
