@@ -115,7 +115,11 @@ $app->group('/curahhujan', function() {
         })->setName('curahhujan.jamjaman');
 
         $this->get('/harian', function(Request $request, Response $response, $args) {
-            $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-01");
+            $sampling = $request->getParam('sampling', date('Y-m-d'));//"2019-06-01");
+            $month = date('m', strtotime($sampling));
+            $year = date('Y', strtotime($sampling));
+            $hari = date('Y-m-d', strtotime("{$year}-{$month}-1"));
+
             $prev_date = date('Y-m-d', strtotime($hari .' -1month'));
             $next_date = date('Y-m-d', strtotime($hari .' +1month'));
 
