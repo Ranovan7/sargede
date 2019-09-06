@@ -1,0 +1,97 @@
+{% extends 'layouts/master.html' %}
+
+{% set title = "Lokasi" %}
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>{{ title }}</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item">{{ title }}</li>
+        </ol>
+    </section>
+    <div>
+        <table class="table table-bordered table-hover" id="accordion">
+          <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama POS</th>
+                    <th></th>
+                </tr>
+          </thead>
+            {% for l in lokasis %}
+                <tbody>
+                    <tr>
+                      <td>{{ loop.index }}</td>
+                      <td>
+                          {{ l.nama }}
+                          {% if l.jenis == '1' or l.jenis == '4' %}
+                              (CH)
+                          {% elseif l.jenis == '2' %}
+                              (TMA)
+                          {% endif %}
+                      </td>
+                      <td align="center">
+                          <a href="#" data-toggle="collapse" data-target="#ubah{{ loop.index }}">
+                              <i class='fas fa-edit'></i>
+                          </a>
+                      </td>
+                    </tr>
+              </tbody>
+              <tbody class="collapse" id="ubah{{ loop.index }}" data-parent="#accordion">
+                  <tr>
+                      <td colspan="4">
+                          <form class="align-items-end p-3" action="{{ path_for('lokasi.update', {id:l.id}) }}" method="POST">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-text" for="nama">Nama</label>
+                                          <input class="form-control" type="text" name="sampling" id="nama" value="{{ l.nama }}">
+                                      </div>
+                                  </div>
+                              </div>
+                              {% if l.jenis == "2" %}
+                                  <div class="row">
+                                      <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label class="form-text" for="siaga1">Siaga 1</label>
+                                              <input class="form-control" type="number" step="0.1" name="siaga1" id="siaga1" value="">
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label class="form-text" for="siaga2">Siaga 2</label>
+                                              <input class="form-control" type="number" step="0.1" name="siaga2" id="siaga2" value="">
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label class="form-text" for="siaga3">Siaga 3</label>
+                                              <input class="form-control" type="number" step="0.1" name="siaga3" id="siaga3" value="">
+                                          </div>
+                                      </div>
+                                  </div>
+                              {% endif %}
+                              <div class="row">
+                                  <div class="form-group col-sm-2">
+                                      <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </td>
+                  </tr>
+              </tbody>
+
+          {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
