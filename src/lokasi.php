@@ -14,6 +14,28 @@ $app->group('/lokasi', function() {
         ]);
     })->setName('lokasi');
 
+    $this->group('/{id}', function() {
+
+        // change password
+        $this->get('/update', function(Request $request, Response $response, $args) {
+            $id = $request->getAttribute('id');
+
+            die("Mengakses Update Lokasi");
+            return $this->view->render($response, 'user/password.html', [
+                'user_id' => $id,
+            ]);
+        })->setName('lokasi.update');
+
+        $this->post('/update', function(Request $request, Response $response, $args) {
+            $id = $request->getAttribute('id');
+            $credentials = $request->getParams();
+
+            die("Mengakses Update Lokasi");
+            return $this->response->withRedirect('/user');
+        })->setName('lokasi.update');
+
+    });
+
 })->add(function(Request $request, Response $response, $next) {
 
     $user_refresh_time = $this->session->user_refresh_time;
