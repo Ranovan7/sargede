@@ -289,12 +289,21 @@ function tanggal_format($time, $usetime=false) {
 $app->get('/test', function(Request $request, Response $response) {
     return $this->view->render($response, 'template.html');
 });
+
+$app->group('/api', function() {
+    $app = $this;
+
+    require __DIR__ . '/../src/api/main.php';
+    require __DIR__ . '/../src/api/periodik.php';
+});
+
 require __DIR__ . '/../src/main.php';
 require __DIR__ . '/../src/curahhujan.php';
 require __DIR__ . '/../src/tma.php';
 require __DIR__ . '/../src/map.php';
 require __DIR__ . '/../src/user.php';
 require __DIR__ . '/../src/admin.php';
+require __DIR__ . '/../src/lokasi.php';
 
 /**
  * # ROUTES BLOCK
