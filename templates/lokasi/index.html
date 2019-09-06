@@ -16,7 +16,30 @@
         </ol>
     </section>
     <div>
-        <h3>Data Lokasi</h3>
+        <table class="table table-bordered table-hover">
+          <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama POS</th>
+                    <th>Jenis</th>
+                </tr>
+          </thead>
+          <tbody>
+            {% for l in lokasis %}
+                <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ l.nama }}</td>
+                  <td>
+                      {% if l.jenis == '1' or l.jenis == '4' %}
+                          CH
+                      {% elseif l.jenis == '2' %}
+                          TMA
+                      {% endif %}
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
     </div>
 {% endblock %}
 
