@@ -37,11 +37,11 @@
                                 {% include 'includes/flash.html' %}
 
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Selamat Datang</h1>
+																	<h1 class="h4 text-gray-900 mb-4">{{ env('APP_NAME', 'App')}}</h1>
                                 </div>
                                 <form action="" method="post" class="user">
                                     <div class="form-group">
-                                        <input class="form-control form-control-user" name="username" id="username" placeholder="Enter Username" type="text" required autofocus>
+                                        <input class="form-control form-control-user" name="username" id="username" placeholder="Username" type="text" required autofocus>
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control form-control-user" name="password" id="password" placeholder="Password" type="password" required>
@@ -55,7 +55,8 @@
                                     <div class="mt-5">
                                         <button type="submit" class="btn btn-primary btn-block font-weight-bold">
                                             Login
-                                        </button>
+																				</button><br>
+																				<a href="/">Batal</a>
                                     </div>
                                 </form>
                             </div>
