@@ -4,12 +4,24 @@
 
 {% block css %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <style>
+        #mymap-wrapper {
+            padding-top: 56px;
+        }
+        @media (min-width: 576px) {
+            #mymap-wrapper {
+                padding-top: 105px;
+            }
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
-    <div id="mymap" style="width: 100%;height: 600px;">
+<div id="mymap-wrapper" class="position-fixed w-100 h-100" style="left:0;bottom:0">
+    <div id="mymap" class="w-100 h-100">
 
     </div>
+</div>
 {% endblock %}
 
 {% block js %}
