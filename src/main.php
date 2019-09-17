@@ -108,33 +108,33 @@ $app->post('/login', function(Request $request, Response $response, $args) {
 });
 
 // generate admin, warning!
-$app->get('/gen', function(Request $request, Response $response, $args) {
-    $credentials = $request->getParams();
-    if (empty($credentials['username']) || empty($credentials['password'])) {
-        die("Masukkan username dan password");
-    }
+// $app->get('/gen', function(Request $request, Response $response, $args) {
+//     $credentials = $request->getParams();
+//     if (empty($credentials['username']) || empty($credentials['password'])) {
+//         die("Masukkan username dan password");
+//     }
 
-    $stmt = $this->db->prepare("SELECT * FROM public.user WHERE username=:username");
-    $stmt->execute([':username' => $credentials['username']]);
-    $user = $stmt->fetch();
+//     $stmt = $this->db->prepare("SELECT * FROM public.user WHERE username=:username");
+//     $stmt->execute([':username' => $credentials['username']]);
+//     $user = $stmt->fetch();
 
-    // jika belum ada di DB, tambahkan
-    if (!$user) {
-        $stmt = $this->db->prepare("INSERT INTO public.user (username, password, role) VALUES (:username, :password, 1)");
-        $stmt->execute([
-            ':username' => $credentials['username'],
-            ':password' => password_hash($credentials['password'], PASSWORD_DEFAULT)
-        ]);
-        die("Username {$credentials['username']} ditambahkan!");
-    } else { // else update password
-        $stmt = $this->db->prepare("UPDATE public.user SET password=:password WHERE id=:id");
-        $stmt->execute([
-            ':password' => password_hash($credentials['password'], PASSWORD_DEFAULT),
-            ':id' => $user['id']
-        ]);
-        die("Password {$user['username']} diubah!");
-    }
-});
+//     // jika belum ada di DB, tambahkan
+//     if (!$user) {
+//         $stmt = $this->db->prepare("INSERT INTO public.user (username, password, role) VALUES (:username, :password, 1)");
+//         $stmt->execute([
+//             ':username' => $credentials['username'],
+//             ':password' => password_hash($credentials['password'], PASSWORD_DEFAULT)
+//         ]);
+//         die("Username {$credentials['username']} ditambahkan!");
+//     } else { // else update password
+//         $stmt = $this->db->prepare("UPDATE public.user SET password=:password WHERE id=:id");
+//         $stmt->execute([
+//             ':password' => password_hash($credentials['password'], PASSWORD_DEFAULT),
+//             ':id' => $user['id']
+//         ]);
+//         die("Password {$user['username']} diubah!");
+//     }
+// });
 
 $app->get('/logout', function(Request $request, Response $response, $args) {
     $this->flash->addMessage('messages', 'Berhasil Logout');

@@ -8,58 +8,39 @@ use Slim\Http\Response;
 $app->group('/lokasi', function() {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
-        $lokasis = $this->db->query("SELECT * FROM lokasi")->fetchAll();
+        $lokasis = $this->db->query("SELECT * FROM lokasi ORDER BY nama")->fetchAll();
         return $this->view->render($response, 'lokasi/index.html', [
             'lokasis' => $lokasis
         ]);
     })->setName('lokasi');
 
-    $this->group('/{id}', function() {
-
-        // change password
-        $this->get('/update', function(Request $request, Response $response, $args) {
-            $id = $request->getAttribute('id');
-
-            die("Mengakses Update Lokasi");
-            return $this->view->render($response, 'user/password.html', [
-                'user_id' => $id,
-            ]);
-        })->setName('lokasi.update');
+    $this->group('/{id:[0-9]+}', function() {
 
         $this->post('/update', function(Request $request, Response $response, $args) {
-            $id = $request->getAttribute('id');
-            $credentials = $request->getParams();
+            $id = intval($args['id']);
+            $stmt = $this->db->prepare("SELECT * FROM lokasi WHERE id=:id");
+            $stmt->execute([':id' => $id]);
+            $lokasi = $stmt->fetch();
+            if (!$lokasi) {
+                throw new \Slim\Exception\NotFoundException($request, $response);
+            }
 
-            die("Mengakses Update Lokasi");
-            return $this->response->withRedirect('/user');
+            $form = $request->getParams();
+            // dump($form);
+            $stmt = $this->db->prepare("UPDATE lokasi SET nama=:nama, jenis=:jenis, ll=:ll, siaga1=:siaga1, siaga2=:siaga2, siaga3=:siaga3 WHERE id=:id");
+            $res = $stmt->execute([
+                ':nama' => $form['nama'],
+                ':jenis' => $form['jenis'],
+                ':ll' => isset($form['ll']) ? $form['ll'] : $lokasi['ll'],
+                ':siaga1' => $form['siaga1'] != '' ? $form['siaga1'] : $lokasi['siaga1'],
+                ':siaga2' => $form['siaga2'] != '' ? $form['siaga2'] : $lokasi['siaga2'],
+                ':siaga3' => $form['siaga3'] != '' ? $form['siaga3'] : $lokasi['siaga3'],
+                ':id' => $lokasi['id'],
+            ]);
+            
+            return $this->response->withRedirect('/lokasi');
         })->setName('lokasi.update');
 
     });
 
-})->add(function(Request $request, Response $response, $next) {
-
-    $user_refresh_time = $this->session->user_refresh_time;
-    $now = time();
-
-    // cek masa aktif login
-    if (empty($user_refresh_time) || $user_refresh_time < $now) {
-        $this->session->destroy();
-        // die('Silahkan login untuk melanjutkan');
-        return $this->response->withRedirect('/login');
-    }
-
-    // cek user exists, ada di index.php
-    $user = $this->user;
-    if (!$user) {
-        throw new \Slim\Exception\NotFoundException($request, $response);
-    }
-    if ($user['role'] != "1") {
-        $this->flash->addMessage('errors', 'Hanya admin yang diperbolehkan mengakses laman tersebut.');
-        return $this->response->withRedirect('/login');
-    }
-
-    // inject user ke dalam request agar bisa diakses di route
-    $request = $request->withAttribute('user', $user);
-
-    return $next($request, $response);
-});
+})->add($adminRoleMiddleware)->add($loggedinMiddleware);

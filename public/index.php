@@ -200,11 +200,23 @@ $loggedinMiddleware = function(Request $request, Response $response, $next) {
     // cek user exists, ada di index.php
     $user = $this->user;
     if (!$user) {
-        throw new \Slim\Exception\NotFoundException($request, $response);
+        $this->flash->addMessage('errors', 'Silahkan login untuk melanjutkan.');
+        return $this->response->withRedirect('/login');
     }
 
     // inject user ke dalam request agar bisa diakses di route
     $request = $request->withAttribute('user', $user);
+
+    return $next($request, $response);
+};
+
+$adminRoleMiddleware = function(Request $request, Response $response, $next) {
+
+    $user = $this->user;
+    if (!$user || $user['role'] != '1') {
+        $this->flash->addMessage('errors', 'Hanya admin yang diperbolehkan mengakses laman tersebut.');
+        return $this->response->withRedirect('/admin');
+    }
 
     return $next($request, $response);
 };
