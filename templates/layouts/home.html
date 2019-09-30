@@ -1,47 +1,39 @@
 <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 <style>
     .masthead h1 {
-      font-family: 'Varela Round';
-      font-size: 2rem;;
-      line-height: 2rem;
-      /* -webkit-text-fill-color: white; */
+        font-family: 'Varela Round';
+        font-size: 2rem;
+        line-height: 2rem;
+        /* -webkit-text-fill-color: white; */
     }
 
     .masthead h2 {
-      max-width: 25rem;
-      font-size: 1.5rem;
+        /* max-width: 25rem; */
+        font-size: 1.5rem;
     }
 
     .masthead {
-      position: relative;
-      width: 100%;
-      height: auto;
-			color: #eee;
-      min-height: 35rem;
-      padding: 2.5rem 0;
-      /* background: linear-gradient(
+        position: relative;
+        width: 100%;
+        height: auto;
+        color: #eee;
+        min-height: 35rem;
+        padding: 2.5rem 0;
+        /* background: linear-gradient(
         to bottom,
         rgba(22,22,22,.3) 0,
         rgba(22,22,22,.7) 75%,
         #161616 100%
       ); */
-      /* background-position: center;
+        /* background-position: center;
       background-repeat: no-repeat;
       background-attachment: scroll;
       background-size: cover; */
     }
 
-    .d-flex {
-      display: flex!important;
-    }
-
-    .h-100 {
-      height: 100%!important;
-    }
-
     .daftar-sec {
-      padding: 10rem 0;
-      /* background: linear-gradient(
+        padding: 10rem 0;
+        /* background: linear-gradient(
         to bottom,
         #161616 0,
         rgba(22,22,22,.7) 25%,
@@ -50,23 +42,15 @@
     }
 </style>
 
-<div>
-    <header class="masthead bg-primary">
-        <div class="text-center mb-4">
-            <img src="{{ asset('img/logo_pu_mono.png') }}" alt="Kementerian Pekerjaan Umum dan Perumahan Rakyat" class="img-fluid mx-auto" width="100" height="100">
+<div class="">
+    <header class="masthead bg-primary text-center d-flex flex-column h-100 align-items-center justify-content-center">
+        <div class="mb-4 text-center">
+            <img src="{{ asset('img/logo_pu_mono.png') }}" alt="Kementerian Pekerjaan Umum dan Perumahan Rakyat" class="img-fluid" width="100" height="100">
         </div>
-        <div class="container d-flex h-100 align-items-center col-lg-8 col-xs-12">
-          <div class="mx-auto text-center">
-            <h2 class="mx-auto my-0">Balai Wilayah Sungai</h2>
-            <h1 class="mx-auto my-0">Sulawesi II</h1>
-            <h1>Gorontalo</h1>
-            <!-- <h2 class="mx-auto mt-2 mb-4">Balai Besar Wilayah Sungai Gorontalo</h2> -->
-            <div class="container align-items-center mt-4 mb-4" align="center">
-                <a class="btn btn-warning mb-2" href="/tma">Tinggi Muka Air</a>
-                <a class="btn btn-warning mb-2" href="/curahhujan">Curah Hujan</a>
-            </div>
-          </div>
-        </div>
+        <h2 class="my-0">Balai Wilayah Sungai</h2>
+        <h1 class="my-0">Sulawesi II</h1>
+        <h1>Gorontalo</h1>
+        <a class="btn btn-warning my-4" href="#content-wrapper">Info Hidrologi</a>
     </header>
 
 </div>
