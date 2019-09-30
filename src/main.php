@@ -64,13 +64,21 @@ $app->get('/', function(Request $request, Response $response, $args) {
     foreach ($lokasi_tma as $lokasi) {
         $latest = $this->db->query("SELECT * FROM periodik
                                 WHERE lokasi_id = {$lokasi['id']} AND wlev IS NOT NULL
+                                    AND sampling BETWEEN '{$from}' AND '{$to}'
                                 ORDER BY sampling DESC")->fetch();
-        $result['tma'][] = [
-            'waktu' => tanggal_format(strtotime($latest['sampling'])),
-            'jam' => date('H:i', strtotime($latest['sampling'])),
-            'lokasi' => $lokasi,
-            'wlev' => round($latest['wlev'], 2)
-        ];
+
+        if ($latest) {
+            $result['tma'][] = [
+                'waktu' => tanggal_format(strtotime($latest['sampling'])),
+                'jam' => date('H:i', strtotime($latest['sampling'])),
+                'lokasi' => $lokasi,
+                'wlev' => max(round($latest['wlev'], 2), 0)
+            ];
+        } else {
+            $result['tma'][] = [
+                'lokasi' => $lokasi,
+            ];
+        }
     }
 
     return $this->view->render($response, 'main/index.html', [
