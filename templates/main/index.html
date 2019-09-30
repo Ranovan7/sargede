@@ -92,9 +92,13 @@
         				</a>
         			</td>
         			<td class="text-right">
-                        <b>{{ tma.wlev }}</b> meter
-                        <br>
-                        <small  class="hari text-muted" data-tgl="{{ tma.waktu }} {{ tma.jam }}"></small>
+                        {% if tma.wlev or tma.wlev == 0 %}
+                            <b>{{ tma.wlev }}</b> meter
+                            <br>
+                            <small class="hari text-muted" data-tgl="{{ tma.waktu }} {{ tma.jam }}"></small>
+                        {% else %}
+                            Tidak Ada Data
+                        {% endif %}
                     </td>
         		</tr>
             {% endfor %}
