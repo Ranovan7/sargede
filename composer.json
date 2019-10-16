@@ -1,6 +1,6 @@
 {
     "name": "rpahlevy/sargede",
-    "description": "Sargede",
+    "description": "Sargede, primabase berbasis slimframework php",
     "keywords": ["microframework", "rest", "router", "psr7"],
     "require": {
         "php": ">=5.6",
