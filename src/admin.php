@@ -173,26 +173,43 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $now = date('Y-m-d H:i:s');
 
             $form = $request->getParams();
-            $stmt = $this->db->prepare("INSERT INTO tma (
-                                sampling,
-                                manual,
-                                lokasi_id,
-                                received,
-                                petugas
-                            ) VALUES (
-                                :sampling,
-                                :manual,
-                                :lokasi_id,
-                                :received,
-                                :petugas
-                            )");
-            $stmt->execute([
-                ':sampling' => $form['sampling'] ." {$form['jam']}",
-                ':lokasi_id' => $lokasi['id'],
-                ':received' => $now,
-                ':petugas' => $user['id'],
-                ':manual' => $form['manual'],
-            ]);
+            // check if exists, if not insert if yes update
+            $sampling = $form['sampling'] ." {$form['jam']}";
+            $available = $this->db->query("SELECT * FROM tma WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+            if (!empty($available)) {
+                $stmt = $this->db->prepare("UPDATE tma SET
+                                    manual=:manual,
+                                    received=:received,
+                                    petugas=:petugas
+                                 WHERE sampling=:sampling");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." {$form['jam']}",
+                    ':received' => $now,
+                    ':petugas' => $user['id'],
+                    ':manual' => $form['manual'],
+                ]);
+            } else {
+                $stmt = $this->db->prepare("INSERT INTO tma (
+                                    sampling,
+                                    manual,
+                                    lokasi_id,
+                                    received,
+                                    petugas
+                                ) VALUES (
+                                    :sampling,
+                                    :manual,
+                                    :lokasi_id,
+                                    :received,
+                                    :petugas
+                                )");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." {$form['jam']}",
+                    ':lokasi_id' => $lokasi['id'],
+                    ':received' => $now,
+                    ':petugas' => $user['id'],
+                    ':manual' => $form['manual'],
+                ]);
+            }
 
             return $response->withRedirect('/admin');
         })->setName('admin.add.tma');
@@ -203,26 +220,43 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $now = date('Y-m-d H:i:s');
 
             $form = $request->getParams();
-            $stmt = $this->db->prepare("INSERT INTO curahujan (
-                                sampling,
-                                manual,
-                                lokasi_id,
-                                received,
-                                petugas
-                            ) VALUES (
-                                :sampling,
-                                :manual,
-                                :lokasi_id,
-                                :received,
-                                :petugas
-                            )");
-            $stmt->execute([
-                ':sampling' => $form['sampling'] ." 07:00:00",
-                ':lokasi_id' => $lokasi['id'],
-                ':received' => $now,
-                ':petugas' => $user['id'],
-                ':manual' => $form['manual'],
-            ]);
+            // check if exists, if not insert if yes update
+            $sampling = $form['sampling'];
+            $available = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+            if (!empty($available)) {
+                $stmt = $this->db->prepare("UPDATE curahujan SET
+                                    manual=:manual,
+                                    received=:received,
+                                    petugas=:petugas
+                                 WHERE sampling=:sampling");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." 07:00:00",
+                    ':received' => $now,
+                    ':petugas' => $user['id'],
+                    ':manual' => $form['manual'],
+                ]);
+            } else {
+                $stmt = $this->db->prepare("INSERT INTO curahujan (
+                                    sampling,
+                                    manual,
+                                    lokasi_id,
+                                    received,
+                                    petugas
+                                ) VALUES (
+                                    :sampling,
+                                    :manual,
+                                    :lokasi_id,
+                                    :received,
+                                    :petugas
+                                )");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." 07:00:00",
+                    ':lokasi_id' => $lokasi['id'],
+                    ':received' => $now,
+                    ':petugas' => $user['id'],
+                    ':manual' => $form['manual'],
+                ]);
+            }
 
             return $response->withRedirect('/admin');
         })->setName('admin.add.curahhujan');

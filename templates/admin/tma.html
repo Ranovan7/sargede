@@ -65,7 +65,7 @@
             <tbody>
                 {% for tma in tmas %}
                     <tr>
-                        <td>{{ tma.sampling | date('Y-m-d') }}</td>
+                        <td>{{ tma.sampling | date('d M Y') }}</td>
                         <td align="right">
                             {% if tma.jam6 %}
                                 {{ tma.jam6 | number_format(2) }}
