@@ -38,7 +38,7 @@
                 {% for hujan in result.curahhujan %}
                     <tr>
                         <td colspan="{% if loop.first %}2{% else %}4{% endif %}">
-                            <span class="hari" data-tgl="{{ hujan.waktu }}">
+                            <span class="hari" data-tgl="{{ hujan.date }}">
                                 <span class="text-muted ml-3 font-weight-light">
                                     {{ hujan.waktu }}
                                 </span>
@@ -95,7 +95,7 @@
                         {% if tma.wlev or tma.wlev == 0 %}
                             <b>{{ tma.wlev }}</b> meter
                             <br>
-                            <small class="hari text-muted" data-tgl="{{ tma.waktu }} {{ tma.jam }}"></small>
+                            <small class="hari text-muted" data-tgl="{{ tma.waktu }} {{ tma.jam }}:00"></small>
                         {% else %}
                             Tidak Ada Data
                         {% endif %}
