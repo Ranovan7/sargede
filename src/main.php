@@ -69,7 +69,7 @@ $app->get('/', function(Request $request, Response $response, $args) {
 
         if ($latest) {
             $result['tma'][] = [
-                'waktu' => tanggal_format(strtotime($latest['sampling'])),
+                'waktu' => date("Y-m-d", strtotime($latest['sampling'])),
                 'jam' => date('H:i', strtotime($latest['sampling'])),
                 'lokasi' => $lokasi,
                 'wlev' => max(round($latest['wlev'], 2), 0)

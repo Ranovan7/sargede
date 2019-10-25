@@ -54,7 +54,7 @@
                 datasets: [
                     {% for data in result.datasets %}
                     {
-                        label: "Curah Hujan Maksimum {{ result.title[loop.index0] }}",
+                        label: "Curah Hujan Bulanan {{ result.title[loop.index0] }}",
                         data: {{ data|json_encode|raw }},
                         backgroundColor: 'rgba({{ result.colors[loop.index0] }},0.5)',
                         borderColor: 'rgba({{ result.colors[loop.index0] }},1)',
