@@ -58,7 +58,7 @@
               <tbody>
                 {% for ch in chs %}
                     <tr>
-                    <td>{{ ch.sampling }}</td>
+                    <td>{{ ch.sampling | date('d M Y') }}</td>
                     <td class="text-right">{{ ch.manual }}</td>
                     </tr>
                 {% endfor %}

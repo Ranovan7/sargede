@@ -105,6 +105,7 @@ $app->post('/login', function(Request $request, Response $response, $args) {
     $user = $stmt->fetch();
     if (!$user || !password_verify($credentials['password'], $user['password'])) {
         $this->flash->addMessage('messages', "Username / password salah!");
+        return $this->view->render($response, 'main/login.html');
     }
 
     $this->session->user_id = $user['id'];
