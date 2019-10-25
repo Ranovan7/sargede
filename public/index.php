@@ -312,6 +312,8 @@ $app->group('/api', function() {
 require __DIR__ . '/../src/main.php';
 require __DIR__ . '/../src/curahhujan.php';
 require __DIR__ . '/../src/tma.php';
+require __DIR__ . '/../src/kualitas.php';
+require __DIR__ . '/../src/klimatologi.php';
 require __DIR__ . '/../src/map.php';
 require __DIR__ . '/../src/user.php';
 require __DIR__ . '/../src/admin.php';

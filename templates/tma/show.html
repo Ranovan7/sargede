@@ -64,9 +64,10 @@
             {
                 label: '{{ dataset.label }}',
                 data: {{ dataset.data | json_encode(constant('JSON_NUMERIC_CHECK')) | raw }},
-                backgroundColor: '{{ dataset.backgroundColor }}',
-                borderColor: '{{ dataset.borderColor }}',
-                fill: {{ dataset.fill ? 'true' : 'false' }}
+                backgroundColor: 'rgba(0, 0, 255, 1)',
+                borderColor: 'rgba(0, 0, 255, 1)',
+                fill: {{ dataset.fill ? 'true' : 'false' }},
+                pointRadius: 1
             },
             {% endfor %}
             ]
