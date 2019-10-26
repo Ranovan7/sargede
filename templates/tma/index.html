@@ -2,21 +2,12 @@
 
 {% set title = "Tinggi Muka Air" %}
 {% block css %}
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"/>
-    <style>
-        table.table-bordered > thead > tr > th{
-          border:1px solid black;
-        }
-        table.table-bordered > tbody > tr > td{
-          border:1px solid black;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
     <section class="content-header">
-        <h1>{{ title }}</h1>
+      <h1>{{ title }} <span class="text-muted sampling">{{ sampling }}</span></h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/">Home</a>
@@ -24,43 +15,23 @@
             <li class="breadcrumb-item">{{ title }}</li>
         </ol>
     </section>
-    <div class="table-responsive">
+    <div class="table-responsiv">
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
-                    <th class="align-middle" rowspan="3">No</th>
-                    <th class="align-middle text-center" rowspan="3">Lokasi / Pos</th>
+                    <th class="align-middle" rowspan="2">No</th>
+                    <th class="align-middle text-center" rowspan="2">Lokasi / Pos</th>
                     <th class="align-middle text-center" colspan="3" rowspan="2">Level Siaga</th>
-                    <th class="text-center p-0" colspan="1">
-                        <a class="d-block" href="{{ path_for('tma') }}?sampling={{ prev_date }}">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                    </th>
-                    <th class="text-center" colspan="6">
-                        <span id='datepicker'>{{ sampling }}</span>
-                    </th>
-                    <th class="text-center p-0" colspan="1">
-                        <a class="d-block" href="{{ path_for('tma') }}?sampling={{ next_date }}">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="text-center" colspan="5">Telemetri (meter)</th>
+                    <th class="text-center" colspan="3">Telemetri (meter)</th>
                     <th class="text-center" colspan="3">Manual</th>
                 </tr>
                 <tr>
-                    <th class="text-center">Hijau</th>
-                    <th class="text-center">Kuning</th>
-                    <th class="text-center">Merah</th>
-                    <th>06</th>
+                    <th>07</th>
                     <th>12</th>
-                    <th>18</th>
-                    <th>00</th>
-                    <th>*</th>
-                    <th>06</th>
+                    <th>17</th>
+                    <th>07</th>
                     <th>12</th>
-                    <th>18</th>
+                    <th>17</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,14 +53,6 @@
                         <td>{{ r.jam6 }}</td>
                         <td>{{ r.jam12 }}</td>
                         <td>{{ r.jam18 }}</td>
-                        <td>{{ r.jam0 }}</td>
-                        <td>
-                            {{ r.latest_wlev }}
-                            {% if r.latest_time is not empty %}
-                                <br>
-                                <small>{{ r.latest_time }}</small>
-                            {% endif %}
-                        </td>
                         <td>{{ r.jam6_manual }}</td>
                         <td>{{ r.jam12_manual }}</td>
                         <td>{{ r.jam18_manual }}</td>

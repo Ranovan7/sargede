@@ -26,6 +26,10 @@
     vertical-align: middle;
 }
 
+.table-bordered { border: 2px solid #222; }
+
+.table-bordered td, .table-bordered thead th, .table-bordered th { border: 1px solid #222; }
+
 .text-body { color: #343a40!important }
 .text-muted { color: #6c757d!important }
 .text-dark { color: #212529!important; }
@@ -50,4 +54,10 @@
 }
 .datepicker {
     z-index: 10000 !important;
+}
+
+.datepicker, .table-condensed {
+  width: 330px;
+  height: 330px;
+  background: #efefef;
 }
