@@ -1,7 +1,7 @@
 <div class="container mt-2 mb-2 d-none d-sm-block">
     <div class="row">
         <div class="col flex-1 d-flex flex-row align-items-center">
-            <!-- <div class="flex-1">
+            <div class="flex-1">
                 <a href="/">
                     <img class="mr-2" src="/img/logo-sda.jpg" alt="" width="40">
                 </a>
@@ -11,7 +11,7 @@
                     <h2 class="h6 font-weight-normal small mb-0">KEMENTRIAN PEKERJAAN UMUM DAN PERUMAHAN RAKYAT</h2>
                     <h2 class="h6 font-weight-bold mb-0">DIREKTORAT JENDERAL SUMBER DAYA AIR</h2>
                 </a>
-            </div> -->
+            </div>
         </div>
         <div class="col flex-1 text-right">
             <a href="/">
@@ -57,6 +57,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item {% if title == 'Klimatologi'%}active{% endif %}">
+                    <a class="nav-link" href="/klimatologi">
+                        <i class="fas fa-cloud-sun-rain ml-2 mr-2"></i>
+                        Klimatologi
+                    </a>
+                </li>
                 <li class="nav-item {% if title == 'Kualitas Air'%}active{% endif %}">
                     <a class="nav-link" href="/kualitas">
                         <i class="fas fa-water ml-2 mr-2"></i>
@@ -64,18 +70,17 @@
                     </a>
                 </li>
 
-                <li class="nav-item {% if title == 'Klimatologi'%}active{% endif %}">
-                    <a class="nav-link" href="/klimatologi">
-                        <i class="fas fa-cloud-sun-rain ml-2 mr-2"></i>
-                        Klimatologi
-                    </a>
-                </li>
-
-                <li class="nav-item {% if title == 'Map'%}active{% endif %}">
-                    <a class="nav-link" href="/map">
+                <li class="nav-item dropdown {% if title == 'Map'%}active{% endif %}">
+                    <a class="nav-link dropdown-toggle" href="#"
+                      id="navbarPetaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-map ml-2 mr-2"></i>
-                        Map
+                        Peta
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarPetaDropdown">
+                        <a class="dropdown-item" href="/map/ch">Curah Hujan</a>
+                        <a class="dropdown-item" href="/map/tma">TMA</a>
+                        <a class="dropdown-item" href="/map/klimatologi">Klimatologi</a>
+                    </div>
                 </li>
                 {% if user() %}
                     <li class="nav-item dropdown">

@@ -3,14 +3,6 @@
 {% set title = "Curah Hujan" %}
 {% block css %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <style>
-        table.table-bordered > thead > tr > th{
-          border:1px solid black;
-        }
-        table.table-bordered > tbody > tr > td{
-          border:1px solid black;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
@@ -21,28 +13,16 @@
         <li class="breadcrumb-item">Curah Hujan</li>
     </ol>
     </section>
+    <div class="text-center"><h3><span id="datepicker">{{ sampling }}</span></h3></div>
     <table class="table table-bordered">
         <thead>
             <tr>
-          <th rowspan="3">No</th>
-                <th rowspan="3">Lokasi / Pos</th>
-          <th>
-              <a href="{{ path_for('curahhujan') }}?sampling={{ prev_date }}">
-                  <i class="fas fa-chevron-left"></i>
-              </a>
-          </th>
-          <th colspan="2"><span id="datepicker">{{ sampling }}</span></th>
-          <th>
-              <a href="{{ path_for('curahhujan') }}?sampling={{ next_date }}">
-                  <i class="fas fa-chevron-right"></i>
-              </a>
-          </th>
-                <th rowspan="3">Total Telemetri</th>
-                <th rowspan="3">Manual 24 jam</th>
-        </tr>
-        <tr>
+              <th rowspan="2">No</th>
+              <th rowspan="2">Lokasi / Pos</th>
           <th colspan="4">Waktu (WITA)</th>
-        </tr>
+              <th rowspan="2">Telemetri 24 jam</th>
+              <th rowspan="2">Manual 24 jam</th>
+            </tr>
         <tr>
                 <th>07 - 13</th>
                 <th>13 - 19</th>
