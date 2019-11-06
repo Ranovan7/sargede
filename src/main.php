@@ -25,7 +25,6 @@ $app->get('/', function(Request $request, Response $response, $args) {
                             ORDER BY lokasi.id")->fetchAll();
 
     $result = [
-        'tma' => [],
         'curahhujan' => []
     ];
 
@@ -61,29 +60,24 @@ $app->get('/', function(Request $request, Response $response, $args) {
     }
 
     // generating tma data
-    foreach ($lokasi_tma as $lokasi) {
-        $latest = $this->db->query("SELECT * FROM periodik
-                                WHERE lokasi_id = {$lokasi['id']} AND wlev IS NOT NULL
-                                    AND sampling BETWEEN '{$from}' AND '{$to}'
-                                ORDER BY sampling DESC")->fetch();
-
-        if ($latest) {
-            $result['tma'][] = [
-                'waktu' => date("Y-m-d", strtotime($latest['sampling'])),
-                'jam' => date('H:i', strtotime($latest['sampling'])),
-                'lokasi' => $lokasi,
-                'wlev' => max(round($latest['wlev'], 2), 0)
-            ];
-        } else {
-            $result['tma'][] = [
-                'lokasi' => $lokasi,
-            ];
-        }
+    $tmalatest = $this->db->query("SELECT * FROM lokasi
+                                    LEFT JOIN periodik ON periodik.id = (
+                                        SELECT id from periodik
+                                            WHERE periodik.lokasi_id = lokasi.id
+                                                AND periodik.sampling <= '{$to}'
+                                            ORDER BY sampling DESC
+                                            LIMIT 1
+                                    )
+                                    WHERE lokasi.jenis = '2'
+                                    ORDER BY lokasi.id")->fetchAll();
+    foreach ($tmalatest as $tma) {
+        $tma['wlev'] = max(round($tma['wlev'], 2), 0);
     }
 
     return $this->view->render($response, 'main/index.html', [
         'hujan_sejak' => $sejak,
         'result' => $result,
+        'tmalatest' => $tmalatest
     ]);
 });
 
