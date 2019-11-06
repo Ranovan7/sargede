@@ -1,0 +1,2208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Pos_Hidrologi_2018_copy" id="Pos_Hidrologi_2018_copy">
+	<SimpleField name="NO" type="float"></SimpleField>
+	<SimpleField name="DAS" type="string"></SimpleField>
+	<SimpleField name="X" type="float"></SimpleField>
+	<SimpleField name="Y" type="float"></SimpleField>
+	<SimpleField name="Sungai_Ind" type="string"></SimpleField>
+	<SimpleField name="Nama_Pos" type="string"></SimpleField>
+	<SimpleField name="Nomor_Regi" type="string"></SimpleField>
+	<SimpleField name="F8" type="float"></SimpleField>
+	<SimpleField name="F9" type="float"></SimpleField>
+	<SimpleField name="F10" type="string"></SimpleField>
+	<SimpleField name="F11" type="string"></SimpleField>
+	<SimpleField name="Jenis_Pos" type="string"></SimpleField>
+	<SimpleField name="Desa_Kel" type="string"></SimpleField>
+	<SimpleField name="Kecamatan" type="string"></SimpleField>
+	<SimpleField name="Kabupaten" type="string"></SimpleField>
+	<SimpleField name="Perekaman" type="string"></SimpleField>
+	<SimpleField name="Jenis_Alat" type="string"></SimpleField>
+	<SimpleField name="Merk_Alat" type="string"></SimpleField>
+	<SimpleField name="Kondisi" type="string"></SimpleField>
+	<SimpleField name="Nama_Penga" type="string"></SimpleField>
+	<SimpleField name="No__Telp" type="string"></SimpleField>
+	<SimpleField name="Ketrsediaa" type="string"></SimpleField>
+	<SimpleField name="Image" type="string"></SimpleField>
+</Schema>
+<Folder><name>Pos_Hidrologi_2018_copy</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">1.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBATO</SimpleData>
+		<SimpleData name="X">122.26840000000</SimpleData>
+		<SimpleData name="Y">0.99366700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BULOILA</SimpleData>
+		<SimpleData name="Nama_Pos">1. MRG DAS LIMBATO BULOILA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">03</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BULOILA</SimpleData>
+		<SimpleData name="Kecamatan">SUMALATA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">TATI ZEES</SimpleData>
+		<SimpleData name="No__Telp">085255311653</SimpleData>
+		<SimpleData name="Ketrsediaa">2011-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LIMBATO BULOILA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.2684,0.993666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">2.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLIOHULU</SimpleData>
+		<SimpleData name="X">122.42566700000</SimpleData>
+		<SimpleData name="Y">0.97700000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLIOHULU</SimpleData>
+		<SimpleData name="Nama_Pos">2. MRG DAS BOLIYOHULU BULONTIO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">07</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BULONTIO TIMUR</SimpleData>
+		<SimpleData name="Kecamatan">SUMALATA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">NURDIN LOWANGA</SimpleData>
+		<SimpleData name="No__Telp">081243490254</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BOLIYOHULU BULONTIO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.425666666667,0.977</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">3.00000000000</SimpleData>
+		<SimpleData name="DAS">TUDI</SimpleData>
+		<SimpleData name="X">122.70063300000</SimpleData>
+		<SimpleData name="Y">0.86666700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TUDI</SimpleData>
+		<SimpleData name="Nama_Pos">3. MRG DAS TUDI ANGGREK</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">19</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  TUDI</SimpleData>
+		<SimpleData name="Kecamatan">ANGGREK</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">LISNA TILOLA</SimpleData>
+		<SimpleData name="No__Telp">085299827234</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS TUDI ANGGREK.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.700633333333,0.866666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">4.00000000000</SimpleData>
+		<SimpleData name="DAS">PONTOLO</SimpleData>
+		<SimpleData name="X">122.85925000000</SimpleData>
+		<SimpleData name="Y">0.77533300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PONTOLO</SimpleData>
+		<SimpleData name="Nama_Pos">4. ARR/MRG DAS PONTOLO MOLINGKAPOTO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">24</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PONTOLO</SimpleData>
+		<SimpleData name="Kecamatan">KWANDANG</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">HADIJA RAHMAN</SimpleData>
+		<SimpleData name="Ketrsediaa">2004-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS PONTOLO MOLINGKAPOTO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.85925,0.775333333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">5.00000000000</SimpleData>
+		<SimpleData name="DAS">POSSO</SimpleData>
+		<SimpleData name="X">122.91306700000</SimpleData>
+		<SimpleData name="Y">0.79733300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI POSSO</SimpleData>
+		<SimpleData name="Nama_Pos">5. MRG DAS POSSO BOALEMO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">26</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BOALEMO</SimpleData>
+		<SimpleData name="Kecamatan">KWANDANG</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">NURJANAH H. YUSUF</SimpleData>
+		<SimpleData name="Ketrsediaa">2014-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS POSSO BUALEMO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.913066666667,0.797333333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">6.00000000000</SimpleData>
+		<SimpleData name="DAS">IMANA</SimpleData>
+		<SimpleData name="X">123.11671700000</SimpleData>
+		<SimpleData name="Y">0.89900000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI ANDAGILE</SimpleData>
+		<SimpleData name="Nama_Pos">6. ARR/MRG DAS ANDAGILE ATINGGOLA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">35</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  KOTAJIN</SimpleData>
+		<SimpleData name="Kecamatan">ATINGGOLA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">THEIS OTT</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">MARTA H.R UMAR</SimpleData>
+		<SimpleData name="Ketrsediaa">2004-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS ANDEGILE ATINGGOLA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.116716666667,0.899</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">7.00000000000</SimpleData>
+		<SimpleData name="DAS">SOGITIA</SimpleData>
+		<SimpleData name="X">123.45320000000</SimpleData>
+		<SimpleData name="Y">0.33383300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI SOGITIA</SimpleData>
+		<SimpleData name="Nama_Pos">7. MRG DAS SOGITIA PERMATA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">37</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PERMATA</SimpleData>
+		<SimpleData name="Kecamatan">BONE</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">MAHYUDIN INOMBI</SimpleData>
+		<SimpleData name="No__Telp">085341856430</SimpleData>
+		<SimpleData name="Ketrsediaa">2004-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS SOGITIA PERMATA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.4532,0.333833333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">8.00000000000</SimpleData>
+		<SimpleData name="DAS">SOGITIA</SimpleData>
+		<SimpleData name="X">123.32850000000</SimpleData>
+		<SimpleData name="Y">0.31333300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI OMBULO</SimpleData>
+		<SimpleData name="Nama_Pos">8. MRG DAS OMBULO INOMATA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">37</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  INOMATA</SimpleData>
+		<SimpleData name="Kecamatan">BONE RAYA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">ARJUN DJAINULU</SimpleData>
+		<SimpleData name="No__Telp">085240681474</SimpleData>
+		<SimpleData name="Ketrsediaa">2015-2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.3285,0.313333333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">9.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.08251700000</SimpleData>
+		<SimpleData name="Y">0.62850000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">9. ARR/MRG DAS BOLANGO BONE BOIDU</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BOIDU</SimpleData>
+		<SimpleData name="Kecamatan">BULANGO UTARA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">WARNI DJAFAR</SimpleData>
+		<SimpleData name="No__Telp">081340335092</SimpleData>
+		<SimpleData name="Ketrsediaa">1972-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BOLANGO BOIDU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.082516666667,0.6285</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">10.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.07763300000</SimpleData>
+		<SimpleData name="Y">0.66283300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">10. ARR/MRG DAS BOLANGO BONE LONGALO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  LONGALO</SimpleData>
+		<SimpleData name="Kecamatan">BULANGO UTARA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">THEIS OTT</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">LASINDRA MOHAMAD</SimpleData>
+		<SimpleData name="No__Telp">085256801761</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BOLANGO LONGALO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.077633333333,0.662833333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">11.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.03956700000</SimpleData>
+		<SimpleData name="Y">0.70283300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">11. ARR/MRG DAS BOLANGO BONE DULAMAYO SELATAN</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. DULAMAYO SELATAN</SimpleData>
+		<SimpleData name="Kecamatan">TELAGA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">INTI</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">MANSYUR BILONDATU</SimpleData>
+		<SimpleData name="No__Telp">085256954132</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BOLANGO DULAMAYO SELATAN.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.039566666667,0.702833333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">12.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.17230000000</SimpleData>
+		<SimpleData name="Y">0.53400000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BONE</SimpleData>
+		<SimpleData name="Nama_Pos">12. ARR/MRG DAS BOLANGO BONE ALALE</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">04</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  LOMBONGO</SimpleData>
+		<SimpleData name="Kecamatan">SUWAWA TENGAH</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">TRI YUDISTIYO R. HILIPITO</SimpleData>
+		<SimpleData name="No__Telp">085342233444</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BONE ALALE.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.1723,0.534</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">13.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.24643300000</SimpleData>
+		<SimpleData name="Y">0.50883300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">13. ARR/MRG DAS BOLANGO BONE PANGI</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">05</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PANGI</SimpleData>
+		<SimpleData name="Kecamatan">SUWAWA TIMUR</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">HAJIJASMIN SUGENG</SimpleData>
+		<SimpleData name="No__Telp">085342496832</SimpleData>
+		<SimpleData name="Ketrsediaa">2010-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BONE PANGI.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.246433333333,0.508833333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">14.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.42960000000</SimpleData>
+		<SimpleData name="Y">0.50616700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">14. MRG DAS BOLANGO BONE PINOGU</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">06</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PINOGU</SimpleData>
+		<SimpleData name="Kecamatan">SUWAWA TIMUR</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">MEYLAN SALAPA</SimpleData>
+		<SimpleData name="No__Telp">085398538678</SimpleData>
+		<SimpleData name="Ketrsediaa">2010-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BONE PINOGU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.4296,0.506166666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">15.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.18061700000</SimpleData>
+		<SimpleData name="Y">0.65100000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI MONGIILO</SimpleData>
+		<SimpleData name="Nama_Pos">15. MRG DAS MONGIILO SUKAMAKMUR</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">07</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  SUKAMAKMUR</SimpleData>
+		<SimpleData name="Kecamatan">BOLANGOULU</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">SULEMAN A. PASULU</SimpleData>
+		<SimpleData name="No__Telp">082396696189</SimpleData>
+		<SimpleData name="Ketrsediaa">2015-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BULANGO MONGIILO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.180616666667,0.651</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">16.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.85786700000</SimpleData>
+		<SimpleData name="Y">0.65333300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">16. ARR/MRG DAS LIMBOTO DATAHU</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  DATAHU</SimpleData>
+		<SimpleData name="Kecamatan">TIBAWA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">NUNU HAKA</SimpleData>
+		<SimpleData name="No__Telp">085256669354</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LIMBOTO DATAHU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.857866666667,0.653333333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">17.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.98985000000</SimpleData>
+		<SimpleData name="Y">0.68783300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">17. ARR/MRG DAS LIMBOTO BIYONGA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. BIYONGA</SimpleData>
+		<SimpleData name="Kecamatan">LIMBOTO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">SARCE KADIR</SimpleData>
+		<SimpleData name="No__Telp">082393601073</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LIMBOTO BIYONGA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.98985,0.687833333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">18.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.87271700000</SimpleData>
+		<SimpleData name="Y">0.60350000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">18. ARR/MRG DAS LIMBOTO PILOLALENGA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">04</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PILOLALENGA</SimpleData>
+		<SimpleData name="Kecamatan">BONGOMEME</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">RITA MOHA</SimpleData>
+		<SimpleData name="No__Telp">085340520628</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LIMBOTO PILOLALENGA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.872716666667,0.6035</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">19.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.93156700000</SimpleData>
+		<SimpleData name="Y">0.57266700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">19. ARR/MRG DAS LIMBOTO TABONGO TIMUR</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">05</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  TABONGO TIMUR</SimpleData>
+		<SimpleData name="Kecamatan">TABONGO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">THEIS OTT</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">AINUN ARIFIN</SimpleData>
+		<SimpleData name="No__Telp">081244279999</SimpleData>
+		<SimpleData name="Ketrsediaa">2007-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS TABONGO TIMUR.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.931566666667,0.572666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">20.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">123.02975000000</SimpleData>
+		<SimpleData name="Y">0.58250000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">20. MRG DAS LIMBOTO BUNGGALO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">06</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BUNGGALO</SimpleData>
+		<SimpleData name="Kecamatan">TELAGA JAYA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">RIKI YASIN</SimpleData>
+		<SimpleData name="Ketrsediaa">2011-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LIMBOTO BUNGGALO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.02975,0.5825</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">21.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.85548300000</SimpleData>
+		<SimpleData name="Y">0.70850000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">21. MRG DAS LIMBOTO ILOPONU</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">07</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. ILOPONU</SimpleData>
+		<SimpleData name="Kecamatan">TIBAWA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">SANCE DJAFAR</SimpleData>
+		<SimpleData name="No__Telp">082349093959</SimpleData>
+		<SimpleData name="Ketrsediaa">2012-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LIMBOTO ILOPONU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.855483333333,0.7085</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">22.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">123.04130000000</SimpleData>
+		<SimpleData name="Y">0.61450000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">22. MRG DAS LIMBOTO DUMATI</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">08</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  DUMATI</SimpleData>
+		<SimpleData name="Kecamatan">TELAGA BIRU</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">NURDIN MAHAJANI</SimpleData>
+		<SimpleData name="No__Telp">085398608332</SimpleData>
+		<SimpleData name="Ketrsediaa">2013-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LIMBOTO DUMATI.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.0413,0.6145</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">23.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.91990000000</SimpleData>
+		<SimpleData name="Y">0.65066700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI MARISA</SimpleData>
+		<SimpleData name="Nama_Pos">23. MRG DAS LIMBOTO OMBULO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">09</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. OMBULO</SimpleData>
+		<SimpleData name="Kecamatan">LIMBOTO BARAT</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">YANTI SAMSUDIN</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.9199,0.650666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">24.00000000000</SimpleData>
+		<SimpleData name="DAS">LANGGULA</SimpleData>
+		<SimpleData name="X">122.89436700000</SimpleData>
+		<SimpleData name="Y">0.49016700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LANGGULA</SimpleData>
+		<SimpleData name="Nama_Pos">24. MRG DAS LANGGULA LAMU</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">68</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  LAMU</SimpleData>
+		<SimpleData name="Kecamatan">BATUDAA PANTAI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">AHMAD YUNUS</SimpleData>
+		<SimpleData name="No__Telp">085241511896</SimpleData>
+		<SimpleData name="Ketrsediaa">2012-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LANGGULA LAMU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.894366666667,0.490166666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">25.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.44008300000</SimpleData>
+		<SimpleData name="Y">0.77350000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">25. ARR/MRG DAS PAGUYAMAN MOHIOLO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  MOHIOLO</SimpleData>
+		<SimpleData name="Kecamatan">ASPARAGA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">THEIS OTT</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">RAHMAT THALIB</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS PAGUYAMAN MOHIOLO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.440083333333,0.7735</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">26.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.53445000000</SimpleData>
+		<SimpleData name="Y">0.71366700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">26. ARR/MRG DAS PAGUYAMAN LAKEYA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  LAKEYA</SimpleData>
+		<SimpleData name="Kecamatan">TOLANGOHULA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">THEIS OTT</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">LINDAWATI NGADI</SimpleData>
+		<SimpleData name="No__Telp">085240049254</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS PAGUYAMAN LAKEYA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.53445,0.713666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">27.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.60598300000</SimpleData>
+		<SimpleData name="Y">0.62066700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">27. ARR/MRG DAS PAGUYAMAN TANGKOBU</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. TANGKOBU</SimpleData>
+		<SimpleData name="Kecamatan">PAGUYAMAN</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">SEBBA</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">NOVIA MODJO</SimpleData>
+		<SimpleData name="No__Telp">085343788281</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS PAGUYAMAN TANGKOBU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.605983333333,0.620666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">28.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.44946700000</SimpleData>
+		<SimpleData name="Y">0.75800000000</SimpleData>
+		<SimpleData name="Sungai_Ind">BENDUNG PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">28. ARR/MRG DAS BENDUNG PAGUYAMAN</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">04</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  ALIMOHULO</SimpleData>
+		<SimpleData name="Kecamatan">ASPARAGA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">INTI</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">SARIYATI RAWIT</SimpleData>
+		<SimpleData name="No__Telp">081342201337</SimpleData>
+		<SimpleData name="Ketrsediaa">2012-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BENDUNG PAGUYAMAN.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.449466666667,0.758</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">29.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.34000000000</SimpleData>
+		<SimpleData name="Y">0.77416700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">29. ARR/MRG DAS PAGUYAMAN SARITANI</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">05</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  SARITANI</SimpleData>
+		<SimpleData name="Kecamatan">WONOSARI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">AMIN UWADINGO</SimpleData>
+		<SimpleData name="No__Telp">085256530819</SimpleData>
+		<SimpleData name="Ketrsediaa">2015-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS PAGUYAMAN SARITANI.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.34,0.774166666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">30.00000000000</SimpleData>
+		<SimpleData name="DAS">BUBAA</SimpleData>
+		<SimpleData name="X">122.55665000000</SimpleData>
+		<SimpleData name="Y">0.52266700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">30. MRG DAS BUBAA PAGUYAMAN PANTAI</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">06</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BUBAA</SimpleData>
+		<SimpleData name="Kecamatan">PAGUYAMAN PANTAI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">WIWIN S. BAKARI</SimpleData>
+		<SimpleData name="No__Telp">085340039210</SimpleData>
+		<SimpleData name="Ketrsediaa">2012-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BUBAA PAGUYAMAN PANTAI.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.55665,0.522666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">32.00000000000</SimpleData>
+		<SimpleData name="DAS">TILAMUTA</SimpleData>
+		<SimpleData name="X">122.34688300000</SimpleData>
+		<SimpleData name="Y">0.52316700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TILAMUTA</SimpleData>
+		<SimpleData name="Nama_Pos">32. ARR/MRG DAS TILAMUTA HUNGAYONAA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">12</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  HUNGAYONAA</SimpleData>
+		<SimpleData name="Kecamatan">TILAMUTA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">SEBBA</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">GINANJAR DAUD</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS TILAMUTA HUNGAYONAA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.346883333333,0.523166666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">33.00000000000</SimpleData>
+		<SimpleData name="DAS">TILAMUTA</SimpleData>
+		<SimpleData name="X">122.33968300000</SimpleData>
+		<SimpleData name="Y">0.57350000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TILAMUTA</SimpleData>
+		<SimpleData name="Nama_Pos">33. MRG DAS TILAMUTA PILOLIANGA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">12</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PILOLIANGA</SimpleData>
+		<SimpleData name="Kecamatan">TILAMUTA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">VIAN NASARU</SimpleData>
+		<SimpleData name="No__Telp">085398023781</SimpleData>
+		<SimpleData name="Ketrsediaa">2012-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS TILAMUTA PILOLIYANGA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.339683333333,0.5735</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">34.00000000000</SimpleData>
+		<SimpleData name="DAS">TABULO</SimpleData>
+		<SimpleData name="X">122.15555000000</SimpleData>
+		<SimpleData name="Y">0.52650000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TABULO</SimpleData>
+		<SimpleData name="Nama_Pos">34. MRG DAS TABULO BENDUNGAN</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">17</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BENDUNGAN</SimpleData>
+		<SimpleData name="Kecamatan">MANANGGU</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">CICI NUSI</SimpleData>
+		<SimpleData name="No__Telp">085342339703</SimpleData>
+		<SimpleData name="Ketrsediaa">2014-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS TABULO BENDUNGAN.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.15555,0.5265</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">35.00000000000</SimpleData>
+		<SimpleData name="DAS">BUMBULAN</SimpleData>
+		<SimpleData name="X">122.07900000000</SimpleData>
+		<SimpleData name="Y">0.49500000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BUMBULAN</SimpleData>
+		<SimpleData name="Nama_Pos">35. MRG DAS BUMBULAN  BUNOYO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">53.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">18</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BUNUYO</SimpleData>
+		<SimpleData name="Kecamatan">PAGUAT</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">IBRAHIM LAWANI</SimpleData>
+		<SimpleData name="No__Telp">081340878582</SimpleData>
+		<SimpleData name="Ketrsediaa">2011-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS BUMBULAN BUNUYO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.079,0.495</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">36.00000000000</SimpleData>
+		<SimpleData name="DAS">MOLOSIPAT</SimpleData>
+		<SimpleData name="X">121.35076700000</SimpleData>
+		<SimpleData name="Y">0.48900000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI MOLOSIPAT</SimpleData>
+		<SimpleData name="Nama_Pos">36. MRG DAS MOLOSIPAT POPAYATO BARAT</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">62.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">02</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  MOLOSIPAT</SimpleData>
+		<SimpleData name="Kecamatan">POPAYATO BARAT</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">SARIF ABDULAH</SimpleData>
+		<SimpleData name="No__Telp">085398722669</SimpleData>
+		<SimpleData name="Ketrsediaa">2013-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS MOLOSIPAT POPAYATO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.350766666667,0.489</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">38.00000000000</SimpleData>
+		<SimpleData name="DAS">WONGGARASI</SimpleData>
+		<SimpleData name="X">121.57346700000</SimpleData>
+		<SimpleData name="Y">0.54466700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LEMITO</SimpleData>
+		<SimpleData name="Nama_Pos">38. MRG DAS LEMITO LEMITO UTARA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">62.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">09</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  LEMITO UTARA</SimpleData>
+		<SimpleData name="Kecamatan">LEMITO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">ABD. KARIM DUNGGIO</SimpleData>
+		<SimpleData name="No__Telp">081340857966</SimpleData>
+		<SimpleData name="Ketrsediaa">2011-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS LEMITO UTARA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.573466666667,0.544666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">39.00000000000</SimpleData>
+		<SimpleData name="DAS">RANDANGAN</SimpleData>
+		<SimpleData name="X">121.82353300000</SimpleData>
+		<SimpleData name="Y">0.54100000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI RANDANGAN</SimpleData>
+		<SimpleData name="Nama_Pos">39. ARR/MRG DAS RANDANGAN MOTOLOHU</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">62.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">13</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  MOTOLOHU</SimpleData>
+		<SimpleData name="Kecamatan">RANDANGAN</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">THAMBRIN MAHABU</SimpleData>
+		<SimpleData name="No__Telp">082393326967</SimpleData>
+		<SimpleData name="Ketrsediaa">2002-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS RANDANGAN MOTOLOHU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.823533333333,0.541</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">40.00000000000</SimpleData>
+		<SimpleData name="DAS">RANDANGAN</SimpleData>
+		<SimpleData name="X">121.86256700000</SimpleData>
+		<SimpleData name="Y">0.64716700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI RANDANGAN</SimpleData>
+		<SimpleData name="Nama_Pos">40. ARR/MRG DAS RANDANGAN KALIMAS</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">62.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">13</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  KALIMAS</SimpleData>
+		<SimpleData name="Kecamatan">TALUDITI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">B O Y M I N</SimpleData>
+		<SimpleData name="No__Telp">081244190901</SimpleData>
+		<SimpleData name="Ketrsediaa">2004-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS RANDANGAN KALIMAS.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.862566666667,0.647166666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">41.00000000000</SimpleData>
+		<SimpleData name="DAS">BERINGIN</SimpleData>
+		<SimpleData name="X">121.85360000000</SimpleData>
+		<SimpleData name="Y">0.56500000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI MOLOMBUE</SimpleData>
+		<SimpleData name="Nama_Pos">41. MRG DAS MOLOMBUE PATILANGGIO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">62.00000000000</SimpleData>
+		<SimpleData name="F9">2.00000000000</SimpleData>
+		<SimpleData name="F10">14</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Curah Hujan</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  ILOHELUMA</SimpleData>
+		<SimpleData name="Kecamatan">PATILANGGIO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">RISWAN LAIYA</SimpleData>
+		<SimpleData name="No__Telp">085394494224</SimpleData>
+		<SimpleData name="Ketrsediaa">2012-2017</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\CURAH HUJAN\DAS MOLIMBUE PATILANGGIO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.8536,0.565</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">42.00000000000</SimpleData>
+		<SimpleData name="DAS">TOLINGGULA</SimpleData>
+		<SimpleData name="X">122.15396700000</SimpleData>
+		<SimpleData name="Y">1.01826700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TOLINGGULA</SimpleData>
+		<SimpleData name="Nama_Pos">1. AWLR/SG  SUNGAI TOLINGGULA ULU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. TOLINGGULA ULU</SimpleData>
+		<SimpleData name="Kecamatan">TOLINGGULA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">YACOB IJHAM</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI TOLINGGULA ULU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.153966666667,1.01826666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">43.00000000000</SimpleData>
+		<SimpleData name="DAS">BIAWU</SimpleData>
+		<SimpleData name="X">122.21388300000</SimpleData>
+		<SimpleData name="Y">0.98930000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BIAWU</SimpleData>
+		<SimpleData name="Nama_Pos">2. SG  SUNGAI POTANGA BIAWU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">02</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. BIAWU</SimpleData>
+		<SimpleData name="Kecamatan">TOLINGGULA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">SULASTRI RAHMAN</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.213883333333,0.9893</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">44.00000000000</SimpleData>
+		<SimpleData name="DAS">BULOILA</SimpleData>
+		<SimpleData name="X">122.27258300000</SimpleData>
+		<SimpleData name="Y">0.99388300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BULOILA</SimpleData>
+		<SimpleData name="Nama_Pos">3. SG  SUNGAI BULOILA TUMBA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">03</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. TUMBA</SimpleData>
+		<SimpleData name="Kecamatan">SUMALATA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">HASRIL NAPU</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.272583333333,0.993883333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">45.00000000000</SimpleData>
+		<SimpleData name="DAS">BULONTIO</SimpleData>
+		<SimpleData name="X">122.41776700000</SimpleData>
+		<SimpleData name="Y">0.97873300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BULONTIO</SimpleData>
+		<SimpleData name="Nama_Pos">4. SG  SUNGAI BOLIOHULU BULONTIO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">07</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. BULONTIO TIMUR</SimpleData>
+		<SimpleData name="Kecamatan">SUMALATA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">NILAWATI AHMAD</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI BOLIYOHULU BULONTIO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.417766666667,0.978733333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">46.00000000000</SimpleData>
+		<SimpleData name="DAS">KOIYO</SimpleData>
+		<SimpleData name="X">122.70210000000</SimpleData>
+		<SimpleData name="Y">0.86766700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI KOIYO</SimpleData>
+		<SimpleData name="Nama_Pos">5. SG  SUNGAI KOIYO MOKONOU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">19</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. PILOHULATA</SimpleData>
+		<SimpleData name="Kecamatan">MONANO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">RISTAN UGE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.7021,0.867666666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">47.00000000000</SimpleData>
+		<SimpleData name="DAS">POSSO</SimpleData>
+		<SimpleData name="X">122.92268300000</SimpleData>
+		<SimpleData name="Y">0.82638300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI POSSO</SimpleData>
+		<SimpleData name="Nama_Pos">6. AWLR/SG  SUNGAI POSSO TITIDU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">26</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. TITIDU</SimpleData>
+		<SimpleData name="Kecamatan">KWANDANG</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">AWLR-H</SimpleData>
+		<SimpleData name="Nama_Penga">MARNI DARMIN</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.922683333333,0.826383333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">48.00000000000</SimpleData>
+		<SimpleData name="DAS">SOKLAT</SimpleData>
+		<SimpleData name="X">123.02320000000</SimpleData>
+		<SimpleData name="Y">0.88876700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI SOKLAT</SimpleData>
+		<SimpleData name="Nama_Pos">7.SG  SUNGAI SOKLAT IPILO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">33</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. IPILO</SimpleData>
+		<SimpleData name="Kecamatan">GENTUMA RAYA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">HARTATI PATILIMA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.0232,0.888766666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">49.00000000000</SimpleData>
+		<SimpleData name="DAS">ANDEGILE</SimpleData>
+		<SimpleData name="X">123.11958300000</SimpleData>
+		<SimpleData name="Y">0.90191700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI ANDEGILE</SimpleData>
+		<SimpleData name="Nama_Pos">8. AWLR/SG  SUNGAI ANDEGILE ATINGGOLA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">35</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. KOTAJIN</SimpleData>
+		<SimpleData name="Kecamatan">ATINGGOLA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">RANSES GOBEL</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI ANDEGILE ATINGGOLA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.119583333333,0.901916666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">50.00000000000</SimpleData>
+		<SimpleData name="DAS">TALUDAA</SimpleData>
+		<SimpleData name="X">123.46695000000</SimpleData>
+		<SimpleData name="Y">0.33928300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TALUDAA</SimpleData>
+		<SimpleData name="Nama_Pos">9. AWLR/SG  SUNGAI TALUDAA MASIAGA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">36</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. MASIAGA</SimpleData>
+		<SimpleData name="Kecamatan">TALUDAA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">AWLR-H</SimpleData>
+		<SimpleData name="Nama_Penga">ERWIN MUSTAFA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.46695,0.339283333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">51.00000000000</SimpleData>
+		<SimpleData name="DAS">BILUNGALA</SimpleData>
+		<SimpleData name="X">123.20990000000</SimpleData>
+		<SimpleData name="Y">0.38118300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BILUNGALA</SimpleData>
+		<SimpleData name="Nama_Pos">10. SG  SUNGAI BILUNGALA BONE PANTAI</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">48</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. BILUNGALA</SimpleData>
+		<SimpleData name="Kecamatan">BONE PANTAI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">AJIS DAINTAW</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI ANDEGILE ATINGGOLA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.2099,0.381183333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">52.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.07888300000</SimpleData>
+		<SimpleData name="Y">0.66738300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">11. AWLR/SG  SUNGAI  BOLANGO LONGALO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. LONGALO</SimpleData>
+		<SimpleData name="Kecamatan">BOLANGO UTARA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">RATNA THALIB</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.078883333333,0.667383333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">53.00000000000</SimpleData>
+		<SimpleData name="DAS">TAMALATE</SimpleData>
+		<SimpleData name="X">123.07356700000</SimpleData>
+		<SimpleData name="Y">0.54310000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TAMALATE</SimpleData>
+		<SimpleData name="Nama_Pos">12. SG  SUNGAI TAMALATE MOODU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. MOODU</SimpleData>
+		<SimpleData name="Kecamatan">KOTA TIMUR</SimpleData>
+		<SimpleData name="Kabupaten">KOTA GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">NORCE PANIGORO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.073566666667,0.5431</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">54.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.26710000000</SimpleData>
+		<SimpleData name="Y">0.49968300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BONE</SimpleData>
+		<SimpleData name="Nama_Pos">13. AWLR/SG  SUNGAI BONE TULABOLO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. TULABOLO</SimpleData>
+		<SimpleData name="Kecamatan">SUWAWA TIMUR</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">JHONI MOPUTI</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.2671,0.499683333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">55.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.08561700000</SimpleData>
+		<SimpleData name="Y">0.63400000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">14. AWLR/SG  SUNGAI BOLANGO BOIDU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">04</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. BOIDU</SimpleData>
+		<SimpleData name="Kecamatan">BOLANGO UTARA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">RAHMAWATY KADIR</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI BOLANGO BOIDU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.085616666667,0.634</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">56.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.17163300000</SimpleData>
+		<SimpleData name="Y">0.53075000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BONE</SimpleData>
+		<SimpleData name="Nama_Pos">15. AWLR/SG  SUNGAI BONE ALALE</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">05</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. LOMBONGO</SimpleData>
+		<SimpleData name="Kecamatan">SUWAWA TENGAH</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">BUDIARTO ENTE</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.171633333333,0.53075</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">57.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.04458300000</SimpleData>
+		<SimpleData name="Y">0.57555000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">16. AWLR/SG  SUNGAI BOLANGO TELAGA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">06</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel.BULILA</SimpleData>
+		<SimpleData name="Kecamatan">TELEGA</SimpleData>
+		<SimpleData name="Kabupaten">KAB.GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">DEDE  ALI</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI BOLANGO TELAGA.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.044583333333,0.57555</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">58.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.06323300000</SimpleData>
+		<SimpleData name="Y">0.51563300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BONE</SimpleData>
+		<SimpleData name="Nama_Pos">17. AWLR/SG SUNGAI BONE TALUMOLO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">07</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. TALUMOLO</SimpleData>
+		<SimpleData name="Kecamatan">KOTA TIMUR</SimpleData>
+		<SimpleData name="Kabupaten">KOTA GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">YURNI MA'RUF</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.063233333333,0.515633333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">59.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.04445000000</SimpleData>
+		<SimpleData name="Y">0.54206700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BOLANGO</SimpleData>
+		<SimpleData name="Nama_Pos">18. SG  SUNGAI BOLANGO MOLOSIPAT w</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">08</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. MOLOSIPAT w</SimpleData>
+		<SimpleData name="Kecamatan">KOTA BARAT</SimpleData>
+		<SimpleData name="Kabupaten">KOTA GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">ARMAN HUSA</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI BOLANGO MOLOSIPAT.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.04445,0.542066666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">60.00000000000</SimpleData>
+		<SimpleData name="DAS">TAMALATE</SimpleData>
+		<SimpleData name="X">123.10391700000</SimpleData>
+		<SimpleData name="Y">0.56018300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TAMALATE</SimpleData>
+		<SimpleData name="Nama_Pos">19. AWLR/SG  SUNGAI TAMALATE BONGOIME</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">09</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BONGOIME</SimpleData>
+		<SimpleData name="Kecamatan">TILONGKABILA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">AWLR-H</SimpleData>
+		<SimpleData name="Nama_Penga">ADELIA R LAMA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.103916666667,0.560183333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">61.00000000000</SimpleData>
+		<SimpleData name="DAS">MONGIILO</SimpleData>
+		<SimpleData name="X">123.11221700000</SimpleData>
+		<SimpleData name="Y">0.66513300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI MONGIILO</SimpleData>
+		<SimpleData name="Nama_Pos">20. SG  SUNGAI MONGIILO OWATA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">10</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  OWATA</SimpleData>
+		<SimpleData name="Kecamatan">BOLANGO ULU</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">YUNUS K. ABUDI</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.112216666667,0.665133333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">62.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.99591700000</SimpleData>
+		<SimpleData name="Y">0.55206700000</SimpleData>
+		<SimpleData name="Sungai_Ind">DANAU LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">21. AWLR/SG  DANAU LIMBOTO DEMBE I</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. DEMBE I</SimpleData>
+		<SimpleData name="Kecamatan">KOTA BARAT</SimpleData>
+		<SimpleData name="Kabupaten">KOTA GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">ERIK ABUBAKAR</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\DANAU LIMBOTO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.995916666667,0.552066666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">63.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.97685000000</SimpleData>
+		<SimpleData name="Y">0.62730000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BIYONGA</SimpleData>
+		<SimpleData name="Nama_Pos">22. AWLR/SG  SUNGAI BIYONGA KAYU BULAN</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. KAYUBULAN</SimpleData>
+		<SimpleData name="Kecamatan">LIMBOTO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">CANDRA TANGAHU</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI BIYONGA KAYUBULAN.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.97685,0.6273</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">64.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.86768300000</SimpleData>
+		<SimpleData name="Y">0.64780000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI ALO</SimpleData>
+		<SimpleData name="Nama_Pos">23. AWLR/SG  SUNGAI ALO ISIMU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. ISIMU SELATAN</SimpleData>
+		<SimpleData name="Kecamatan">TIBAWA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">AFANDI HINTA</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI ALO.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.867683333333,0.6478</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">65.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.80198300000</SimpleData>
+		<SimpleData name="Y">0.65083300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PULUBALA</SimpleData>
+		<SimpleData name="Nama_Pos">24. SG  SUNGAI PULUBALA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">04</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PULUBALA</SimpleData>
+		<SimpleData name="Kecamatan">PULUBALA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">YULINDA POMALANGO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.801983333333,0.650833333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">66.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">123.02995000000</SimpleData>
+		<SimpleData name="Y">0.54746700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TAPODU</SimpleData>
+		<SimpleData name="Nama_Pos">25. AWLR/SG  SUNGAI TAPODU TUALANGO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">05</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  TUALANGO</SimpleData>
+		<SimpleData name="Kecamatan">TILANGO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">DEDE BUNTINA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.02995,0.547466666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">67.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.84555000000</SimpleData>
+		<SimpleData name="Y">0.56350000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI POHU</SimpleData>
+		<SimpleData name="Nama_Pos">26. SG  SUNGAI POHU TOHUPO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">06</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  TAHUPO</SimpleData>
+		<SimpleData name="Kecamatan">BONGOMEME</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">SATIRA DAUD</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.84555,0.5635</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">68.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.91455000000</SimpleData>
+		<SimpleData name="Y">0.61670000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI ALOPOHU</SimpleData>
+		<SimpleData name="Nama_Pos">27. SG  SUNGAI ALOPOHU LIMEHU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">07</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  LIMEHU</SimpleData>
+		<SimpleData name="Kecamatan">TABONGO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">JUFRI ALI</SimpleData>
+		<SimpleData name="Image">&lt;img src=&quot;D:\ISOHYET 2017\JPEG\DATABASE POS HIDROLOGI\DUGA AIR\SUNGAI ALOPOHU LIMEHU.jpg&quot; widht=&quot;300&quot; height=&quot;300&quot; /&gt;</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.91455,0.6167</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">69.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.98700000000</SimpleData>
+		<SimpleData name="Y">0.63020000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BULOTA</SimpleData>
+		<SimpleData name="Nama_Pos">28. SG  SUNGAI BULOTA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">08</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. HEPUHULAWA</SimpleData>
+		<SimpleData name="Kecamatan">LIMBOTO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">NURLAILA HULA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.987,0.6302</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">70.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.61003300000</SimpleData>
+		<SimpleData name="Y">0.61543300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">29. AWLR/SG  SUNGAI PAGUYAMAN PARUNGI</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PARUNGI</SimpleData>
+		<SimpleData name="Kecamatan">PAGUYAMAN</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">HARYONO MODJO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.610033333333,0.615433333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">71.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.55310000000</SimpleData>
+		<SimpleData name="Y">0.74906700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">30. AWLR/SG  SUNGAI  BONGO LAKEYA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">DS.  LAKEYA</SimpleData>
+		<SimpleData name="Kecamatan">TOLANGOHULA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Jenis_Alat">AWLR-H</SimpleData>
+		<SimpleData name="Nama_Penga">NATSIR NGADI</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.5531,0.749066666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">72.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.52771700000</SimpleData>
+		<SimpleData name="Y">0.70280000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">31. AWLR/SG  SUNGAI  PAGUYAMAN DILOATO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  DILOATO</SimpleData>
+		<SimpleData name="Kecamatan">PAGUYAMAN</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">ANIS K AHMAD</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.527716666667,0.7028</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">73.00000000000</SimpleData>
+		<SimpleData name="DAS">TILAMUTA</SimpleData>
+		<SimpleData name="X">122.34780000000</SimpleData>
+		<SimpleData name="Y">0.52545000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TILAMUTA</SimpleData>
+		<SimpleData name="Nama_Pos">32. AWLR/SG SUNGAI TILAMUTA HUNGAYONAA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">12</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel.  HUNGAYONAA</SimpleData>
+		<SimpleData name="Kecamatan">TILAMUTA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">RATNO DAUD</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.3478,0.52545</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">74.00000000000</SimpleData>
+		<SimpleData name="DAS">TABULO</SimpleData>
+		<SimpleData name="X">122.15390000000</SimpleData>
+		<SimpleData name="Y">0.52501700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TABULO</SimpleData>
+		<SimpleData name="Nama_Pos">33. SG  SUNGAI TABULO BENDUNGAN</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">17</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BENDUNGAN</SimpleData>
+		<SimpleData name="Kecamatan">MANANGGU</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">AGUS LENGKENG</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.1539,0.525016666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">75.00000000000</SimpleData>
+		<SimpleData name="DAS">BUMBULAN</SimpleData>
+		<SimpleData name="X">122.07595000000</SimpleData>
+		<SimpleData name="Y">0.48798300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BUMBULAN</SimpleData>
+		<SimpleData name="Nama_Pos">34. SG. SUNGAI BUMBULAN PENTADU</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">18</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. PENTADU</SimpleData>
+		<SimpleData name="Kecamatan">PAGUAT</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">PEILSCAL</SimpleData>
+		<SimpleData name="Nama_Penga">WENI LAHAY</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.07595,0.487983333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">76.00000000000</SimpleData>
+		<SimpleData name="DAS">TALUDUYUNU</SimpleData>
+		<SimpleData name="X">121.95241700000</SimpleData>
+		<SimpleData name="Y">0.52813300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TALUDUYUNU</SimpleData>
+		<SimpleData name="Nama_Pos">35. AWLR/SG SUNGAI TALUDUYUNU HULAWA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">20</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  HULAWA</SimpleData>
+		<SimpleData name="Kecamatan">BUNTULIA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">SAIFUL MUSTAPA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.952416666667,0.528133333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">77.00000000000</SimpleData>
+		<SimpleData name="DAS">LEMITO</SimpleData>
+		<SimpleData name="X">121.57453300000</SimpleData>
+		<SimpleData name="Y">0.54578300000</SimpleData>
+		<SimpleData name="Sungai_Ind">LEMITO WONGGARASI</SimpleData>
+		<SimpleData name="Nama_Pos">36. AWLR/SG SUNGAI LEMITO WONGGARASI BARAT</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">07</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  WONGGARASI BARAT</SimpleData>
+		<SimpleData name="Kecamatan">LEMITO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">AWLR-H</SimpleData>
+		<SimpleData name="Nama_Penga">BENY PADENG</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.574533333333,0.545783333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">78.00000000000</SimpleData>
+		<SimpleData name="DAS">MALANGO</SimpleData>
+		<SimpleData name="X">121.80358300000</SimpleData>
+		<SimpleData name="Y">0.60271700000</SimpleData>
+		<SimpleData name="Sungai_Ind">MALANGO PANCAKARSA</SimpleData>
+		<SimpleData name="Nama_Pos">37. AWLR/SG  SUNGAI  MALANGO PANCAKARSA I</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">13</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PANCAKARSA I</SimpleData>
+		<SimpleData name="Kecamatan">TALUDITI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">AGUS HARI UTOMO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.803583333333,0.602716666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">79.00000000000</SimpleData>
+		<SimpleData name="DAS">RANDANGAN</SimpleData>
+		<SimpleData name="X">121.82365000000</SimpleData>
+		<SimpleData name="Y">0.54200000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI RANDANGAN</SimpleData>
+		<SimpleData name="Nama_Pos">38. AWLR/SG SUNGAI RANDANGAN AYULA</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">13</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  AYULA</SimpleData>
+		<SimpleData name="Kecamatan">RANDANGAN</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">YULIANA DEPOTA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.82365,0.542</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">80.00000000000</SimpleData>
+		<SimpleData name="DAS">TALUDITI</SimpleData>
+		<SimpleData name="X">121.81278300000</SimpleData>
+		<SimpleData name="Y">0.60111700000</SimpleData>
+		<SimpleData name="Sungai_Ind">TALUDITI PANCAKARSA</SimpleData>
+		<SimpleData name="Nama_Pos">39. AWLR/SG  SUNGAI TALUDITI PANCAKARSA I</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">13</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  PANCAKARSA I</SimpleData>
+		<SimpleData name="Kecamatan">TALUDITI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">SUJATMIKO</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.812783333333,0.601116666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">81.00000000000</SimpleData>
+		<SimpleData name="DAS">MOLOSIPAT</SimpleData>
+		<SimpleData name="X">121.35058300000</SimpleData>
+		<SimpleData name="Y">0.49016700000</SimpleData>
+		<SimpleData name="Sungai_Ind">MOLOSIPAT POPAYATO</SimpleData>
+		<SimpleData name="Nama_Pos">40. AWLR/SG  SUNGAI MOLOSIPAT POPAYATO BARAT</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">02</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  MOLOSIPAT</SimpleData>
+		<SimpleData name="Kecamatan">POPAYATO BARAT</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">AWLR-H</SimpleData>
+		<SimpleData name="Nama_Penga">RADIMAN ALULU</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.350583333333,0.490166666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">82.00000000000</SimpleData>
+		<SimpleData name="DAS">POPAYATO</SimpleData>
+		<SimpleData name="X">121.47558300000</SimpleData>
+		<SimpleData name="Y">0.51153300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI  POPAYATO</SimpleData>
+		<SimpleData name="Nama_Pos">41. AWLR/SG  SUNGAI  POPAYATO MALEO</SimpleData>
+		<SimpleData name="Nomor_Regi">04</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">1.00000000000</SimpleData>
+		<SimpleData name="F10">04</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Duga Air</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  MALEO</SimpleData>
+		<SimpleData name="Kecamatan">POPAYATO TIMUR</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Nama_Penga">MUNAIR DAENG PATOLA</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.475583333333,0.511533333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">83.00000000000</SimpleData>
+		<SimpleData name="DAS">TOLINGGULA</SimpleData>
+		<SimpleData name="X">122.13195000000</SimpleData>
+		<SimpleData name="Y">0.99746700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI TOLINGGULA</SimpleData>
+		<SimpleData name="Nama_Pos">1. KLIMATOLOGI DAS TOLINGGULA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  ILO TOLINGGULA</SimpleData>
+		<SimpleData name="Kecamatan">TOLINGGULA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">ALPAMAS</SimpleData>
+		<SimpleData name="Kondisi">Rusak</SimpleData>
+		<SimpleData name="Nama_Penga">ENDRIYANTO NTOI</SimpleData>
+		<SimpleData name="No__Telp">085342363266</SimpleData>
+		<SimpleData name="Ketrsediaa">2010-2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.13195,0.997466666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">84.00000000000</SimpleData>
+		<SimpleData name="DAS">SOKLAT</SimpleData>
+		<SimpleData name="X">123.03756700000</SimpleData>
+		<SimpleData name="Y">0.93101700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI SOKLAT</SimpleData>
+		<SimpleData name="Nama_Pos">2. KLIMATOLOGI DAS SOKLAT KETAPANG</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">33</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  KETAPANG</SimpleData>
+		<SimpleData name="Kecamatan">GENTUMA RAYA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORUT</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">THEIS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">ASMITA PEVILIA POU</SimpleData>
+		<SimpleData name="No__Telp">085341850100</SimpleData>
+		<SimpleData name="Ketrsediaa">2013-2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.037566666667,0.931016666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">85.00000000000</SimpleData>
+		<SimpleData name="DAS">BOLANGO - BONE</SimpleData>
+		<SimpleData name="X">123.09390000000</SimpleData>
+		<SimpleData name="Y">0.54500000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI BONE</SimpleData>
+		<SimpleData name="Nama_Pos">3. KLIMATOLOGI DAS  BONE TUMBIHE</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">60</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  TUMBIHE</SimpleData>
+		<SimpleData name="Kecamatan">KABILA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BONEBOLANGO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">INTI</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">SRI DEU</SimpleData>
+		<SimpleData name="No__Telp">085240599631</SimpleData>
+		<SimpleData name="Ketrsediaa">2010-2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>123.0939,0.545</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">86.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.63673300000</SimpleData>
+		<SimpleData name="Y">0.68346700000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">4. KLIMATOLOGI DAS PAGUYAMAN BENDUNGREJO</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BENDUNGREJO</SimpleData>
+		<SimpleData name="Kecamatan">BOLIYOHUTO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">SEBBA</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">SUWARTI WIYOTO</SimpleData>
+		<SimpleData name="No__Telp">081244205056</SimpleData>
+		<SimpleData name="Ketrsediaa">2006-2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.636733333333,0.683466666666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">87.00000000000</SimpleData>
+		<SimpleData name="DAS">PAGUYAMAN</SimpleData>
+		<SimpleData name="X">122.48376700000</SimpleData>
+		<SimpleData name="Y">0.70068300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI PAGUYAMAN</SimpleData>
+		<SimpleData name="Nama_Pos">5. KLIMATOLOGI DAS PAGUYAMAN HARAPAN</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">01</SimpleData>
+		<SimpleData name="F11">02</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  HARAPAN</SimpleData>
+		<SimpleData name="Kecamatan">WONOSARI</SimpleData>
+		<SimpleData name="Kabupaten">KAB. BOALEMO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">SEBBA</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">MOH. DOFIR ADAM</SimpleData>
+		<SimpleData name="No__Telp">085240129376</SimpleData>
+		<SimpleData name="Ketrsediaa">2010-2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.483766666667,0.700683333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">88.00000000000</SimpleData>
+		<SimpleData name="DAS">MARISA</SimpleData>
+		<SimpleData name="X">121.93055000000</SimpleData>
+		<SimpleData name="Y">0.50340000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI MARISA</SimpleData>
+		<SimpleData name="Nama_Pos">6. KLIMATOLOGI DAS MARISA BUNTULIA UTARA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">0.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">20</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Ds.  BUNTULIA UTARA</SimpleData>
+		<SimpleData name="Kecamatan">BUNTULIA</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Perekaman">TELEMETRI</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual &amp; Otomatis</SimpleData>
+		<SimpleData name="Merk_Alat">TATONAS</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">ISMAWATI MADU</SimpleData>
+		<SimpleData name="No__Telp">081356798346</SimpleData>
+		<SimpleData name="Ketrsediaa">2006-2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.93055,0.5034</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">89.00000000000</SimpleData>
+		<SimpleData name="DAS">LIMBOTO</SimpleData>
+		<SimpleData name="X">122.98701700000</SimpleData>
+		<SimpleData name="Y">0.62903300000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI LIMBOTO</SimpleData>
+		<SimpleData name="Nama_Pos">7. KLIMATOLOGI DAS LIMBOTO HEPUHULAWA</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">52.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">61</SimpleData>
+		<SimpleData name="F11">01</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Kel. HEPUHULAWA</SimpleData>
+		<SimpleData name="Kecamatan">LIMBOTO</SimpleData>
+		<SimpleData name="Kabupaten">KAB. GORONTALO</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">NINGSI K. TAU</SimpleData>
+		<SimpleData name="No__Telp">082191758900</SimpleData>
+		<SimpleData name="Ketrsediaa">2016 - 2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>122.987016666667,0.629033333333333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Pos_Hidrologi_2018_copy">
+		<SimpleData name="NO">90.00000000000</SimpleData>
+		<SimpleData name="DAS">MOLOSIPAT</SimpleData>
+		<SimpleData name="X">121.36113000000</SimpleData>
+		<SimpleData name="Y">0.48851000000</SimpleData>
+		<SimpleData name="Sungai_Ind">SUNGAI MOLOSIPAT</SimpleData>
+		<SimpleData name="Nama_Pos">8. KLIMATOLOGI DAS DUDEULO MOLOSIPAT POPAYATO BARAT</SimpleData>
+		<SimpleData name="Nomor_Regi">05</SimpleData>
+		<SimpleData name="F8">62.00000000000</SimpleData>
+		<SimpleData name="F9">3.00000000000</SimpleData>
+		<SimpleData name="F10">02</SimpleData>
+		<SimpleData name="F11">03</SimpleData>
+		<SimpleData name="Jenis_Pos">Klimatologi</SimpleData>
+		<SimpleData name="Desa_Kel">Ds. MOLOSIPAT</SimpleData>
+		<SimpleData name="Kecamatan">POPAYATO BARAT</SimpleData>
+		<SimpleData name="Kabupaten">KAB. POHUWATO</SimpleData>
+		<SimpleData name="Jenis_Alat">Manual</SimpleData>
+		<SimpleData name="Merk_Alat">LOKAL</SimpleData>
+		<SimpleData name="Kondisi">Baik</SimpleData>
+		<SimpleData name="Nama_Penga">KASMAT ABDULAH</SimpleData>
+		<SimpleData name="Ketrsediaa">2017</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>121.36113,0.48851</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -68,15 +68,18 @@
       </div>
       <div class="col col-md-6" style="border-left: solid 1px #ccc;">
         <h3>Tinggi Muka Air</h3>
-        {% if not result.tma %}
+        <!-- {% if not result.tma %}
             <p><i>Belum ada data Tinggi Muka Air.</i></p>
         {% else %}
         	<p class="text-muted mb-5">
         		<i>Data Tinggi Muka Air terbaru.</i>
         	</p>
-        {% endif %}
+        {% endif %} -->
+        <p class="text-muted mb-5">
+            <i>Data Tinggi Muka Air terbaru.</i>
+        </p>
     	<table class="table table-hover">
-            {% for tma in result.tma %}
+            {% for tma in tmalatest %}
                 <tr>
         			{% if loop.first %}
                         <td colspan="3">Lokasi</td>
@@ -87,15 +90,15 @@
                     <th></th>
         			<td colspan="2">
         				<i class="fas fa-map-marker-alt"></i>
-        				<a href="{{ path_for('tma.show', {'id': tma.lokasi.id}) }}">
-                            {{ tma.lokasi.nama }}
+        				<a href="{{ path_for('tma.show', {'id': tma.lokasi_id}) }}">
+                            {{ tma.nama }}
         				</a>
         			</td>
         			<td class="text-right">
                         {% if tma.wlev or tma.wlev == 0 %}
-                            <b>{{ tma.wlev }}</b> meter
+                            <b>{{ tma.wlev | round(2) }}</b> meter
                             <br>
-                            <small class="hari text-muted" data-tgl="{{ tma.waktu }} {{ tma.jam }}:00"></small>
+                            <small class="hari text-muted" data-tgl="{{ tma.sampling }}"></small>
                         {% else %}
                             Tidak Ada Data
                         {% endif %}
