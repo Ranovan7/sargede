@@ -22,7 +22,7 @@ $app->group('/map', function() {
 
     // Peta Pos CH
     $this->get('/ch', function(Request $req, Response $res, $args) {
-        $lokasis_raw = $this->db->query("SELECT * FROM lokasi")->fetchAll();
+        $lokasis_raw = $this->db->query("SELECT * FROM lokasi WHERE jenis='1'")->fetchAll();
 	    $lokasis = [];
 	    foreach ($lokasis_raw as $l) {
 	        if (strpos($l['ll'], ",") !== false ) {
@@ -33,10 +33,10 @@ $app->group('/map', function() {
             'lokasis' => $lokasis
         ]);
     });
-    
+
     // Peta Pos TMA
     $this->get('/tma', function(Request $req, Response $res, $args) {
-        $lokasis_raw = $this->db->query("SELECT * FROM lokasi")->fetchAll();
+        $lokasis_raw = $this->db->query("SELECT * FROM lokasi WHERE jenis='2'")->fetchAll();
 	    $lokasis = [];
 	    foreach ($lokasis_raw as $l) {
 	        if (strpos($l['ll'], ",") !== false ) {
@@ -50,7 +50,7 @@ $app->group('/map', function() {
 
     // peta pos Klimatologi
     $this->get('/klimatologi', function(request $req, response $res, $args) {
-        $lokasis_raw = $this->db->query("SELECT * FROM lokasi")->fetchAll();
+        $lokasis_raw = $this->db->query("SELECT * FROM lokasi WHERE jenis='4'")->fetchAll();
 	    $lokasis = [];
 	    foreach ($lokasis_raw as $l) {
 	        if (strpos($l['ll'], ",") !== false ) {

@@ -26,6 +26,7 @@
 
 {% block js %}
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
     <script>
         var mymap = L.map('mymap').setView([0.68, 122.7], 10);
 
@@ -36,6 +37,30 @@
                 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox.streets'
         }).addTo(mymap);
+
+        let kmlGroup = L.geoJSON(null, {
+            style: {
+                color: "#808080",
+                weight: 4
+            }
+        });
+
+        // Load kml file
+        let kml1 = omnivore.kml("{{ asset('kml/wilayah_sungai.kml') }}", null, kmlGroup)
+            .on('ready', function() {
+                // mymap.fitBounds(kml1.getBounds());
+
+                // After the 'ready' event fires, the GeoJSON contents are accessible
+                // and you can iterate through layers to bind custom popups.
+                kml1.eachLayer(function(layer) {
+                    // See the `.bindPopup` documentation for full details. This
+                    // dataset has a property called `name`: your dataset might not,
+                    // so inspect it and customize to taste.
+                    layer.bindPopup(layer.feature.properties.name);
+                });
+            })
+            .addTo(mymap);
+
         var arrIcon = L.icon({
             iconSize: [25, 41],
             iconAnchor: [12, 41],
