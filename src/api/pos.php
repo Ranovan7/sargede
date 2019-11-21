@@ -34,7 +34,7 @@ $app->group('/pos', function() {
             "jenis" => $request->getParam('jenis', "0")
         ];
 
-        if ($check) {
+        if ($pos_device) {
             // if sn already exist (update)
             $lokasi_id = $pos_device['lokasi_id'];
 
