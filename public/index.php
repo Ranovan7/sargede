@@ -307,7 +307,8 @@ $app->group('/api', function() {
 
     require __DIR__ . '/../src/api/main.php';
     require __DIR__ . '/../src/api/periodik.php';
-    require __DIR__ . '/../src/api/pos.php';
+    require __DIR__ . '/../src/api/lokasi.php';
+    require __DIR__ . '/../src/api/device.php';
 });
 
 require __DIR__ . '/../src/main.php';
