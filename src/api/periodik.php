@@ -23,7 +23,7 @@ $app->group('/periodik', function() {
         $sampling = $request->getParam('sampling');
         $lokasi_id = $request->getParam('lokasi_id');
 
-        // check periodik existance first
+        // check if periodik exist first
         $check = $this->db->query("SELECT * FROM periodik
                                     WHERE sampling='{$sampling}'
                                         AND lokasi_id={$lokasi_id}")->fetch();
@@ -52,7 +52,6 @@ $app->group('/periodik', function() {
         $columns = "sampling,lokasi_id";
         $values = "'{$sampling}',{$lokasi_id}";
         $str_list = ['device_sn', 'up_s', 'ts_a', 'recieved'];
-        // $raw_form = "";
         // generating dynamic columns and values for insert
         foreach ($data as $col => $val) {
             if ($val) {
