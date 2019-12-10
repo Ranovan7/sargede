@@ -47,11 +47,11 @@ $app->group('/periodik', function() {
             "wlev" => $request->getParam('wlev', ""),
             "up_s" => $request->getParam('up_s', ""),
             "ts_a" => $request->getParam('ts_a', ""),
-            "recieved" => $request->getParam('recieved', "")
+            "received" => $request->getParam('received', "")
         ];
         $columns = "sampling,lokasi_id";
         $values = "'{$sampling}',{$lokasi_id}";
-        $str_list = ['device_sn', 'up_s', 'ts_a', 'recieved'];
+        $str_list = ['device_sn', 'up_s', 'ts_a', 'received'];
         // generating dynamic columns and values for insert
         foreach ($data as $col => $val) {
             if ($val) {
