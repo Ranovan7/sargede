@@ -45,9 +45,10 @@ $app->group('/curahhujan', function() {
                 $durasi_all += $c['rain'];
             };
 
+            $hari_manual = date('Y-m-d', strtotime($hari .' -1day'));
             $ch_manual = $this->db->query("SELECT * FROM curahujan
                                 WHERE lokasi_id = {$l['id']} AND manual IS NOT NULL
-                                    AND sampling = '{$hari}'")->fetch();
+                                    AND sampling = '{$hari_manual}'")->fetch();
 
             $result[] = [
                 'lokasi' => $l,

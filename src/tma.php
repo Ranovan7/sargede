@@ -14,6 +14,8 @@ $app->group('/tma', function() {
         $from = "{$hari} 00:00:00";
         $to = "{$hari} 23:55:00";
         // dump($to);
+
+        $depth = 12;  // nearby TMA depth search, in 5 minutes intervals
         $lokasi = $this->db->query("SELECT * FROM lokasi WHERE lokasi.jenis='2'")->fetchAll();
         $result = [];
         foreach ($lokasi as $l) {
@@ -21,41 +23,50 @@ $app->group('/tma', function() {
             $wlev = $this->db->query("SELECT * FROM periodik
                                     WHERE lokasi_id = {$l['id']} AND wlev IS NOT NULL
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
-                                    ORDER BY sampling")->fetchAll();
-            
-            $jam6 = 0;
-            $jam12 = 0;
-            $jam18 = 0;
-            $jam0 = 0;
+                                    ORDER BY sampling, id")->fetchAll();
+
+            $jam = [];
+            $hour_minutes_wlev = [];
             $latest_wlev = 0;
             $latest_time = "";
 
             foreach ($wlev as $w) {
-                $time = date('H:i', strtotime($w['sampling']));
-                switch ($time) {
-                    case '06:00':
-                        $jam6 = $w['wlev'];
-                        break;
-                    case '12:00':
-                        $jam12 = $w['wlev'];
-                        break;
-                    case '18:00':
-                        $jam18 = $w['wlev'];
-                        break;
-                    case '00:00':
-                    case '24:00':
-                        $jam0 = $w['wlev'];
-                        break;
-                }
+                $hour = (int) date('H', strtotime($w['sampling']));
+                $minute = (int) date('i', strtotime($w['sampling']));
+                $timestamp = "{$hour}:{$minute}";
+                $hour_minutes_wlev[$timestamp] = $w['wlev'];
 
                 $latest_wlev = $w['wlev'];
                 $latest_time = $w['sampling'];
             }
+            // dump($hour_minutes_wlev);
 
-            $jam6 = $jam6 > 0 ? number_format($jam6,1) : '-';
-            $jam12 = $jam12 > 0 ? number_format($jam12,1) : '-';
-            $jam18 = $jam18 > 0 ? number_format($jam18,1) : '-';
-            $jam0 = $jam0 > 0 ? number_format($jam0,1) : '-';
+            // Set TMA value on timestamp, if null check nearby timestamp
+            foreach ([7,12,17] as $t) {
+                if (is_null($hour_minutes_wlev["{$t}:0"])) {
+                    for ($m = 1; $m <= $depth; $m++) {
+                        $front = ($m * 5) % 60;
+                        $back = 60 - $front;
+                        $next = $t + (int) (($m * 5) / 60);
+                        $prev = $t - 1 - (int) (($m * 5) / 60);
+                        if (!is_null($hour_minutes_wlev["{$next}:{$front}"])){
+                            $jam[$t] = $hour_minutes_wlev["{$next}:{$front}"];
+                            break;
+                        }
+                        if (!is_null($hour_minutes_wlev["{$prev}:{$back}"])){
+                            $jam[$t] = $hour_minutes_wlev["{$prev}:{$back}"];
+                            break;
+                        }
+                    }
+                } else {
+                    $jam[$t] = $hour_minutes_wlev["{$t}:0"];
+                }
+            }
+
+            $jam6 = $jam[7] > 0 ? number_format($jam[7],1) : '-';
+            $jam12 = $jam[12] > 0 ? number_format($jam[12],1) : '-';
+            $jam18 = $jam[17] > 0 ? number_format($jam[17],1) : '-';
+            // $jam0 = $jam0 > 0 ? number_format($jam0,1) : '-';
             $latest_wlev = $latest_wlev > 0 ? number_format($latest_wlev,1) : '-';
             if (!empty($latest_time)) {
                 $latest_time = date('H:i', strtotime($latest_time));
@@ -71,7 +82,7 @@ $app->group('/tma', function() {
             $jam6_manual = 0;
             $jam12_manual = 0;
             $jam18_manual = 0;
-            
+
             foreach ($wlev_manual as $w) {
                 $time = date('H:i', strtotime($w['sampling']));
                 switch ($time) {
@@ -86,12 +97,12 @@ $app->group('/tma', function() {
                         break;
                 }
             }
-            
+
             $jam6_manual = $jam6_manual > 0 ? number_format($jam6_manual,1) : '-';
             $jam12_manual = $jam12_manual > 0 ? number_format($jam12_manual,1) : '-';
             $jam18_manual = $jam18_manual > 0 ? number_format($jam18_manual,1) : '-';
 
-            
+
             $result[] = [
                 'lokasi' => $l,
                 'jam6' => $jam6,
@@ -105,7 +116,7 @@ $app->group('/tma', function() {
                 'jam18_manual' => $jam18_manual,
             ];
         }
-        
+
         return $this->view->render($response, 'tma/index.html', [
             'sampling' => tanggal_format(strtotime($hari)),
             'prev_date' => $prev_date,
@@ -153,7 +164,7 @@ $app->group('/tma', function() {
                 $data[] = 0;
                 $prev_time += 300;
             }
-            
+
             $result['datasets'][] = [
                 'label' => "Tinggi Mata Air",
                 'data' => $data,
