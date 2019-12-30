@@ -24,13 +24,20 @@ $app->group('/periodik', function() {
         $lokasi_id = $request->getParam('lokasi_id');
 
         // check if periodik exist first
-        $check = $this->db->query("SELECT * FROM periodik
-                                    WHERE sampling='{$sampling}'
-                                        AND lokasi_id={$lokasi_id}")->fetch();
-        if ($check) {
+        try {
+            $check = $this->db->query("SELECT * FROM periodik
+                                        WHERE sampling='{$sampling}'
+                                            AND lokasi_id={$lokasi_id}")->fetch();
+            if ($check) {
+                return $response->withJson([
+                    "status" => "208",
+                    "message" => "periodik already exist"
+                ]);
+            }
+        } catch (Exception $e) {
             return $response->withJson([
-                "status" => "208",
-                "message" => "periodik already exist"
+                "status" => "500",
+                "message" => "Data incomplete or formatted incorrectly"
             ]);
         }
 
@@ -63,12 +70,17 @@ $app->group('/periodik', function() {
                 }
             }
         }
-        $stmt = $this->db->prepare("INSERT INTO periodik ({$columns}) VALUES ($values)");
-        $stmt->execute();
+        try {
+            $stmt = $this->db->prepare("INSERT INTO periodik ({$columns}) VALUES ($values)");
+            $stmt->execute();
+            $message = "insertion succeded";
+        } catch (Exception $e) {
+            $message = "Error when trying to record : {$e}";
+        }
 
         return $response->withJson([
             "status" => "200",
-            "message" => "insertion succeded",
+            "message" => $message,
             "data" => [
                 "columns" => "({$columns})",
                 "values" => "({$values})",

@@ -45,22 +45,22 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 if (!isset($tmas[$date][$lokasi_id])) {
                     $tmas[$date][$lokasi_id] = [
                         'sampling' => $date,
-                        'jam6' => "-",
+                        'jam7' => "-",
                         'jam12' => "-",
-                        'jam18' => "-",
+                        'jam17' => "-",
                         'lokasi' => $tma['lokasi_nama']
                     ];
                 }
 
                 switch ($time) {
-                    case '06:00':
-                        $tmas[$date][$lokasi_id]['jam6'] = $tma['manual'];
+                    case '07:00':
+                        $tmas[$date][$lokasi_id]['jam7'] = $tma['manual'];
                         break;
                     case '12:00':
                         $tmas[$date][$lokasi_id]['jam12'] = $tma['manual'];
                         break;
-                    case '18:00':
-                        $tmas[$date][$lokasi_id]['jam18'] = $tma['manual'];
+                    case '17:00':
+                        $tmas[$date][$lokasi_id]['jam17'] = $tma['manual'];
                         break;
                 }
             }
@@ -100,32 +100,32 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     if (!isset($tmas[$date])) {
                         $tmas[$date] = [
                             'sampling' => $date,
-                            'jam6' => 0,
+                            'jam7' => 0,
                             'jam12' => 0,
-                            'jam18' => 0,
+                            'jam17' => 0,
                         ];
                     }
 
                     switch ($time) {
-                        case '06:00':
-                            $tmas[$date]['jam6'] = $tma['manual'];
+                        case '07:00':
+                            $tmas[$date]['jam7'] = $tma['manual'];
                             break;
                         case '12:00':
                             $tmas[$date]['jam12'] = $tma['manual'];
                             break;
-                        case '18:00':
-                            $tmas[$date]['jam18'] = $tma['manual'];
+                        case '17:00':
+                            $tmas[$date]['jam17'] = $tma['manual'];
                             break;
                     }
                 }
 
                 $current_hour = date('H');
                 if ($current_hour < 12) {
-                    $inputjam = '06:00';
-                } else if ($current_hour < 18) {
+                    $inputjam = '07:00';
+                } else if ($current_hour < 17) {
                     $inputjam = '12:00';
                 } else {
-                    $inputjam = '18:00';
+                    $inputjam = '17:00';
                 }
 
                 return $this->view->render($response, 'admin/tma.html', [

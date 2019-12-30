@@ -34,9 +34,9 @@
                     <div class="form-group">
                         <label class="form-text" for="jam">Jam</label>
                         <select name="jam" id="jam" class="form-control" required>
-                            <option value="06:00" {{ inputjam == "06:00" ? 'selected' : '' }}>6</option>
+                            <option value="07:00" {{ inputjam == "07:00" ? 'selected' : '' }}>7</option>
                             <option value="12:00" {{ inputjam == "12:00" ? 'selected' : '' }}>12</option>
-                            <option value="18:00" {{ inputjam == "18:00" ? 'selected' : '' }}>18</option>
+                            <option value="17:00" {{ inputjam == "17:00" ? 'selected' : '' }}>17</option>
                         </select>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
             <thead>
                 <tr>
                     <th>Tanggal</th>
-                    <th>Jam 6</th>
+                    <th>Jam 7</th>
                     <th>Jam 12</th>
-                    <th>Jam 18</th>
+                    <th>Jam 17</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,8 +67,8 @@
                     <tr>
                         <td>{{ tma.sampling | date('d M Y') }}</td>
                         <td align="right">
-                            {% if tma.jam6 %}
-                                {{ tma.jam6 | number_format(2) }}
+                            {% if tma.jam7 %}
+                                {{ tma.jam7 | number_format(2) }}
                             {% else %}
                                 -
                             {% endif %}
@@ -81,8 +81,8 @@
                             {% endif %}
                         </td>
                         <td align="right">
-                            {% if tma.jam18 %}
-                                {{ tma.jam18 | number_format(2) }}
+                            {% if tma.jam17 %}
+                                {{ tma.jam17 | number_format(2) }}
                             {% else %}
                                 -
                             {% endif %}
