@@ -63,9 +63,9 @@ $app->group('/tma', function() {
                 }
             }
 
-            $jam6 = $jam[7] > 0 ? number_format($jam[7],1) : '-';
+            $jam7 = $jam[7] > 0 ? number_format($jam[7],1) : '-';
             $jam12 = $jam[12] > 0 ? number_format($jam[12],1) : '-';
-            $jam18 = $jam[17] > 0 ? number_format($jam[17],1) : '-';
+            $jam17 = $jam[17] > 0 ? number_format($jam[17],1) : '-';
             // $jam0 = $jam0 > 0 ? number_format($jam0,1) : '-';
             $latest_wlev = $latest_wlev > 0 ? number_format($latest_wlev,1) : '-';
             if (!empty($latest_time)) {
@@ -79,41 +79,41 @@ $app->group('/tma', function() {
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
                                     ORDER BY sampling")->fetchAll();
 
-            $jam6_manual = 0;
+            $jam7_manuall = 0;
             $jam12_manual = 0;
-            $jam18_manual = 0;
+            $jam17_manuall = 0;
 
             foreach ($wlev_manual as $w) {
                 $time = date('H:i', strtotime($w['sampling']));
                 switch ($time) {
-                    case '06:00':
-                        $jam6_manual = $w['manual'];
+                    case '07:00':
+                        $jam7_manual = $w['manual'];
                         break;
                     case '12:00':
                         $jam12_manual = $w['manual'];
                         break;
-                    case '18:00':
-                        $jam18_manual = $w['manual'];
+                    case '17:00':
+                        $jam17_manual = $w['manual'];
                         break;
                 }
             }
 
-            $jam6_manual = $jam6_manual > 0 ? number_format($jam6_manual,1) : '-';
+            $jam7_manual = $jam7_manual > 0 ? number_format($jam7_manual,1) : '-';
             $jam12_manual = $jam12_manual > 0 ? number_format($jam12_manual,1) : '-';
-            $jam18_manual = $jam18_manual > 0 ? number_format($jam18_manual,1) : '-';
+            $jam17_manual = $jam17_manual > 0 ? number_format($jam17_manual,1) : '-';
 
 
             $result[] = [
                 'lokasi' => $l,
-                'jam6' => $jam6,
+                'jam7' => $jam7,
                 'jam12' => $jam12,
-                'jam18' => $jam18,
+                'jam17' => $jam17,
                 'jam0' => $jam0,
                 'latest_wlev' => $latest_wlev,
                 'latest_time' => $latest_time,
-                'jam6_manual' => $jam6_manual,
+                'jam7_manual' => $jam7_manual,
                 'jam12_manual' => $jam12_manual,
-                'jam18_manual' => $jam18_manual,
+                'jam17_manual' => $jam17_manual,
             ];
         }
 

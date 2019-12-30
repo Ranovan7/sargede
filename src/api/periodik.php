@@ -63,12 +63,17 @@ $app->group('/periodik', function() {
                 }
             }
         }
-        $stmt = $this->db->prepare("INSERT INTO periodik ({$columns}) VALUES ($values)");
-        $stmt->execute();
+        try {
+            $stmt = $this->db->prepare("INSERT INTO periodik ({$columns}) VALUES ($values)");
+            $stmt->execute();
+            $message = "insertion succeded"
+        } catch (Exception $e) {
+            $message = "Error when trying to record : {$e}"
+        }
 
         return $response->withJson([
             "status" => "200",
-            "message" => "insertion succeded",
+            "message" => $message,
             "data" => [
                 "columns" => "({$columns})",
                 "values" => "({$values})",
