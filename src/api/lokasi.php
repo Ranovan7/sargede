@@ -18,8 +18,18 @@ $app->group('/lokasi', function() {
         $lokasi_id = $request->getParam('id');
 
         // check periodik existance first
-        $lokasi = $this->db->query("SELECT * FROM lokasi
-                                    WHERE id='{$lokasi_id}'")->fetch();
+        try {
+            $lokasi = $this->db->query("SELECT * FROM lokasi
+                                        WHERE id='{$lokasi_id}'")->fetch();
+        } catch (Exception $e) {
+            return $response->withJson([
+                "status" => "400",
+                "message" => "Data not complete",
+                "data" => [
+                    "sn" => $sn
+                ]
+            ], 200, JSON_PRETTY_PRINT);
+        }
 
         $params = [
             "nama" => $request->getParam('nama', "Belum ada"),
