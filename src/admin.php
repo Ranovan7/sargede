@@ -159,6 +159,20 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         }
     })->setName('admin');
 
+    $this->get('/periodik', function(Request $request, Response $response, $args) {
+        $now = date("Y-m-d H:i");
+        $periodics = $this->db->query("SELECT periodik.*, lokasi.nama as lok_nama
+                                        FROM periodik
+                                            LEFT JOIN lokasi ON (lokasi.id = periodik.lokasi_id)
+                                        WHERE periodik.sampling <= '{$now}'
+                                        ORDER BY periodik.sampling DESC
+                                        LIMIT 300")->fetchAll();
+
+        return $this->view->render($response, 'admin/periodik.html', [
+            'periodics' => $periodics
+        ]);
+    })->setName('admin.periodik');
+
     /**
      * GROUP ADD
      */

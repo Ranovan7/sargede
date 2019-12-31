@@ -19,8 +19,18 @@ $app->group('/device', function() {
         $device_id = $request->getParam('id');
 
         // check periodik existance first
-        $device = $this->db->query("SELECT * FROM device
-                                    WHERE sn='{$sn}'")->fetch();
+        try {
+            $device = $this->db->query("SELECT * FROM device
+                                        WHERE sn='{$sn}'")->fetch();
+        } catch (Exception $e) {
+            return $response->withJson([
+                "status" => "400",
+                "message" => "Data not complete",
+                "data" => [
+                    "sn" => $sn
+                ]
+            ], 200, JSON_PRETTY_PRINT);
+        }
 
         $params = [
             "temp_cor" => $request->getParam('temp_cor', ""),
