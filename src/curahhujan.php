@@ -163,7 +163,7 @@ $app->group('/curahhujan', function() {
             }
 
             return $this->view->render($response, 'curahhujan/harian.html', [
-                'sampling' => tanggal_format(strtotime($hari)),
+                'sampling' => date('Y-m', strtotime($hari)),
                 'lokasi' => $lokasi,
                 'prev_date' => $prev_date,
                 'next_date' => $next_date,
