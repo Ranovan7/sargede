@@ -41,21 +41,21 @@
                         <td>
                             <a href="{{ path_for('tma.show', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a>
                         </td>
-                        <td style="background-color: green">
+                        <td align="right" style="background-color: green">
                            {{r.lokasi.siaga1}}
                         </td>
-                        <td style="background-color: yellow">
+                        <td align="right" style="background-color: yellow">
                             {{r.lokasi.siaga2}}
                         </td>
-                        <td style="background-color: red">
+                        <td align="right" style="background-color: red">
                             {{r.lokasi.siaga3}}
                         </td>
-                        <td>{{ r.jam7 }}</td>
-                        <td>{{ r.jam12 }}</td>
-                        <td>{{ r.jam17 }}</td>
-                        <td>{{ r.jam7_manual }}</td>
-                        <td>{{ r.jam12_manual }}</td>
-                        <td>{{ r.jam17_manual }}</td>
+                        <td align="right">{{ r.jam7 }}</td>
+                        <td align="right">{{ r.jam12 }}</td>
+                        <td align="right">{{ r.jam17 }}</td>
+                        <td align="right">{{ r.jam7_manual }}</td>
+                        <td align="right">{{ r.jam12_manual }}</td>
+                        <td align="right">{{ r.jam17_manual }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

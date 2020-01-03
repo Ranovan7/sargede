@@ -35,12 +35,12 @@
             <tr>
               <td>{{ loop.index }}</td>
               <td><a href="{{ path_for('curahhujan.jamjaman', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a></td>
-              <td>{{ r.durasi_07_13 }} mm</td>
-              <td>{{ r.durasi_13_19 }} mm</td>
-              <td>{{ r.durasi_19_01 }} mm</td>
-              <td>{{ r.durasi_01_07 }} mm</td>
-              <td>{{ r.durasi_all }} mm</td>
-              <td>{{ r.durasi_manual != null ? r.durasi_manual ~" mm" : '-' }}</td>
+              <td align="right">{{ r.durasi_07_13 }} mm</td>
+              <td align="right">{{ r.durasi_13_19 }} mm</td>
+              <td align="right">{{ r.durasi_19_01 }} mm</td>
+              <td align="right">{{ r.durasi_01_07 }} mm</td>
+              <td align="right">{{ r.durasi_all }} mm</td>
+              <td align="right">{{ r.durasi_manual != null ? r.durasi_manual ~" mm" : '-' }}</td>
             </tr>
         {% endfor %}
         </tbody>

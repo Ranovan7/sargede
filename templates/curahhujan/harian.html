@@ -3,6 +3,7 @@
 {% set title = "Curah Hujan" %}
 
 {% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
     <style>
         .datepicker {
             z-index: 10000 !important;
@@ -29,7 +30,7 @@
                 </a>
               </div>
               <div class="form-control" align="center">
-                  <span id="datepicker">{{ sampling }}</span>
+                  <span id="datepicker">{{ sampling|date('M Y') }}</span>
               </div>
               <!-- <input id="datepicker" type="text" class="form-control"> -->
               <div class="input-group-append">
@@ -64,7 +65,9 @@
         $('#datepicker').datepicker({
             todayHighlight: true,
             autoclose: true,
-            format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd',
+            viewMode: "months",
+            minViewMode: "months"
         });
         $('#datepicker').on('changeDate', function () {
             window.location = "{{ path_for('curahhujan.harian', {'id': lokasi.id}) }}?sampling=" + $('#datepicker').datepicker('getFormattedDate')
@@ -80,7 +83,7 @@
                 labels: {{ result.labels|json_encode|raw }},
                 datasets: [
                     {
-                        label: "Curah Hujan {{ sampling }}",
+                        label: "Curah Hujan {{ sampling|date('M Y') }}",
                         data: {{ result.datasets|json_encode|raw }},
                         backgroundColor: 'rgba(0,0,255,0.5)',
                         borderColor: 'rgba(0,0,255,1)',
@@ -89,6 +92,7 @@
                 ]
             },
             options: {
+                responsive: true,
                 scales: {
                     yAxes: [{
                         ticks: {
