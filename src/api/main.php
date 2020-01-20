@@ -18,27 +18,34 @@ $app->group('/', function() {
                                     WHERE jenis = '1'
                                         OR jenis = '4'")->fetchAll();
 
+        $today = date("Y-m-d");
+        $now = date("{$today} H:i");
+        $start_date = new DateTime("{$start} 07:00:00");
+        $dt_now = new DateTime("{$now}:00");
+        if ($dt_now->h < 7) {
+            $start = date('Y-m-d', strtotime($today ." -1day"));
+        } else {
+            $start = $today;
+        }
+        $start_date = new DateTime("{$start} 07:00:00");
+        $since_start = $start_date->diff(new DateTime("{$now}:00"));
+
+        $minutes = 0;
+        $minutes = $since_start->days * 24 * 60;
+        $minutes += $since_start->h * 60;
+        $minutes += $since_start->i;
+        $total_rec = intval($minutes / 5);
+        // dump($total_rec);
+
         $data = [];
         foreach($lokasi as $l){
-            $today = date("Y-m-d");
-            $now = date("Y-m-d H:i");
-
-            $start_date = new DateTime("{$today} 04:10:58");
-            $since_start = $start_date->diff(new DateTime("{$now}:00"));
-            $minutes = 0;
-            $minutes = $since_start->days * 24 * 60;
-            $minutes += $since_start->h * 60;
-            $minutes += $since_start->i;
-            $total_rec = intval($minutes / 5);
-            // dump($total_rec);
-
             $ch_manual = $this->db->query("SELECT * FROM curahujan
                                             WHERE lokasi_id={$l['id']}
-                                                AND sampling > '{$today} 07:00:00'
+                                                AND sampling > '{$start} 07:00:00'
                                             ORDER BY sampling DESC")->fetchAll();
             $ch_device = $this->db->query("SELECT * FROM periodik
                                             WHERE lokasi_id={$l['id']}
-                                                AND sampling >= '{$today} 07:00:00'
+                                                AND sampling >= '{$start} 07:00:00'
                                             ORDER BY sampling DESC")->fetchAll();
 
             $latest_man_samp = NULL;
