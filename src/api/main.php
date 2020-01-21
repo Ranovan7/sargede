@@ -14,9 +14,15 @@ $app->group('/', function() {
     });
 
     $this->get('curahhujan', function(Request $request, Response $response, $args) {
-        $lokasi = $this->db->query("SELECT * FROM lokasi
-                                    WHERE jenis = '1'
-                                        OR jenis = '4'")->fetchAll();
+        $lokasi = $this->db->query("SELECT lokasi.*, curahujan.sampling AS sampling FROM lokasi
+                                    LEFT JOIN curahujan ON curahujan.id = (
+                                            SELECT id from curahujan
+                                                WHERE lokasi_id = lokasi.id
+                                                ORDER BY sampling DESC
+                                                LIMIT 1
+                                        )
+                                    WHERE lokasi.jenis = '1'
+                                        OR lokasi.jenis = '4'")->fetchAll();
 
         $today = date("Y-m-d");
         $now = date("{$today} H:i");
@@ -69,21 +75,19 @@ $app->group('/', function() {
                 'lokasi' => $l['nama'],
                 'manual' => [
                     'ch' => $ch_man,
-                    'sampling' => "{$today} 07:00 - {$now}",
-                    'lastest_sampling' => $latest_man_samp
+                    'sampling' => $today
                 ],
                 'device' => [
                     'ch' => $ch_dev,
-                    'sampling' => "{$today} 07:00 - {$now}",
-                    'persen_data' => round($available_rec/$total_rec, 2),
-                    'lastest_sampling' => $latest_dev_samp
+                    'sampling' => str_replace(' ', 'T', $latest_dev_samp),
+                    'persen_data' => round($available_rec/$total_rec, 2)
                 ]
             ];
         }
 
         return $response->withJson([
-          'balai' => "Balai Wilayah Sungai 2 Sulawesi",
-          'timezone' => "Asia/Makassar",
+          'balai' => "Balai Wilayah Sungai Sulawesi II",
+          'timezone' => "Asia/Makassar (GMT+8)",
           'deskripsi' => "Data Curah Hujan diambil untuk data hari ini dimulai dari jam 7 pagi",
           'satuan' => "mm",
           'data' => $data
@@ -117,8 +121,8 @@ $app->group('/', function() {
         }
 
         return $response->withJson([
-          'balai' => "Balai Wilayah Sungai 2 Sulawesi",
-          'timezone' => "Asia/Makassar",
+          'balai' => "Balai Wilayah Sungai Sulawesi II",
+          'timezone' => "Asia/Makassar (GMT+8)",
           'deskripsi' => "Data Tinggi Muka Air diambil dari data terbaru/terakhir",
           'satuan' => "meter",
           'data' => $data
