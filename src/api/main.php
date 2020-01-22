@@ -48,17 +48,17 @@ $app->group('/', function() {
             $ch_manual = $this->db->query("SELECT * FROM curahujan
                                             WHERE lokasi_id={$l['id']}
                                                 AND sampling > '{$start} 07:00:00'
-                                            ORDER BY sampling DESC")->fetchAll();
+                                            ORDER BY sampling DESC")->fetch();
             $ch_device = $this->db->query("SELECT * FROM periodik
                                             WHERE lokasi_id={$l['id']}
                                                 AND sampling >= '{$start} 07:00:00'
                                             ORDER BY sampling DESC")->fetchAll();
 
             $latest_man_samp = NULL;
-            $ch_man = 0;
-            foreach ($ch_manual as $man) {
-                $ch_man += $man['manual'];
-                $latest_man_samp = $man['sampling'];
+            $ch_man = NULL;
+            if ($ch_manual['manual']) {
+                $ch_man = $ch_manual['manual'];
+                // $latest_man_samp = $man['sampling'];
             }
 
             $latest_dev_samp = NULL;
