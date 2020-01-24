@@ -70,16 +70,21 @@ $app->group('/', function() {
                 $available_rec += 1;
             }
 
+            if ($latest_dev_samp) {
+                $latest = str_replace(' ', 'T', $latest_dev_samp) . "+08:00";
+            } else {
+                $latest = NULL;
+            }
 
             $data[] = [
                 'lokasi' => $l['nama'],
                 'manual' => [
                     'ch' => $ch_man,
-                    'sampling' => $today
+                    'sampling' => str_replace(' ', 'T', $today)
                 ],
                 'device' => [
                     'ch' => $ch_dev,
-                    'sampling' => str_replace(' ', 'T', $latest_dev_samp),
+                    'sampling' => $latest,
                     'persen_data' => round($available_rec/$total_rec, 2)
                 ]
             ];
@@ -111,11 +116,11 @@ $app->group('/', function() {
                 'lokasi' => $l['nama'],
                 'manual' => [
                     'tma' => $latest_man['wlev'],
-                    'sampling' => $latest_man['sampling']
+                    'sampling' => str_replace(' ', 'T', $latest_man['sampling']) . "+08:00"
                 ],
                 'device' => [
                     'tma' => round($latest_dev['wlev'], 2),
-                    'sampling' => $latest_dev['sampling']
+                    'sampling' => str_replace(' ', 'T', $latest_dev['sampling']) . "+08:00"
                 ]
             ];
         }
