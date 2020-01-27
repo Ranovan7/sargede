@@ -79,9 +79,9 @@ $app->group('/tma', function() {
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
                                     ORDER BY sampling")->fetchAll();
 
-            $jam7_manuall = 0;
+            $jam7_manual = 0;
             $jam12_manual = 0;
-            $jam17_manuall = 0;
+            $jam17_manual = 0;
 
             foreach ($wlev_manual as $w) {
                 $time = date('H:i', strtotime($w['sampling']));
@@ -99,9 +99,9 @@ $app->group('/tma', function() {
                 }
             }
 
-            $jam7_manual = $jam7_manual > 0 ? number_format($jam7_manual,1) : '-';
-            $jam12_manual = $jam12_manual > 0 ? number_format($jam12_manual,1) : '-';
-            $jam17_manual = $jam17_manual > 0 ? number_format($jam17_manual,1) : '-';
+            $jam7_manual = $jam7_manual > 0 ? number_format($jam7_manual,2) : '-';
+            $jam12_manual = $jam12_manual > 0 ? number_format($jam12_manual,2) : '-';
+            $jam17_manual = $jam17_manual > 0 ? number_format($jam17_manual,2) : '-';
 
 
             $result[] = [
