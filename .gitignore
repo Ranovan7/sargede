@@ -9,4 +9,5 @@ vendor/
 raw/
 .env
 *.zip
+/*.bat
 composer.lock

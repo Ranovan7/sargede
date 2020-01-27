@@ -1,0 +1,162 @@
+{% extends 'layouts/master.html' %}
+
+{% set title = "Admin" %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+<section class="content-header mb-4">
+    <h1>{{ lokasi.nama }}
+        <small class="text-muted">
+            (Klimat)
+            <!-- {{ user().lokasi.str_jenis }} -->
+        </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Admin</li>
+    </ol>
+</section>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <h2>
+            Curah Hujan
+            <small>Manual</small>
+            <button class="btn btn-outline-primary btn-sm" data-toggle="collapse"
+                data-target="#form-add">Tambah</button>
+        </h2>
+        <div class="collapse bg-light shadow rounded" id="form-add">
+            <form class="row align-items-end p-3" action="{{ path_for('admin.add.curahhujan') }}" method="POST">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="form-text" for="sampling">Tanggal</label>
+                        <input class="form-control" type="date" name="sampling" id="sampling" required
+                            value="{{ 'now' | date('Y-m-d') }}">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="form-text" for="manual">Curah Hujan</label>
+                        <input class="form-control" type="number" step="0.1" name="manual" id="manual" value="">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="">
+            <table class="table table-bordered table-hover mt-4">
+                <thead>
+                    <tr>
+                        <th>Sampling</th>
+                        <th>Nilai Manual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ch in chs %}
+                    <tr>
+                        <td>{{ ch.sampling | date('d M Y') }}</td>
+                        <td class="text-right">{{ ch.manual }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <h2>
+            Klimat
+            <small>Manual</small>
+            <button class="btn btn-outline-primary btn-sm" data-toggle="collapse"
+                data-target="#form-add-klimat">Tambah</button>
+        </h2>
+        <div class="collapse bg-light shadow rounded" id="form-add-klimat">
+            <form class="p-3" action="{{ path_for('admin.add.klimat') }}" method="POST">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="form-text" for="sampling">Tanggal</label>
+                        <input class="form-control" type="date" name="sampling" id="sampling" required
+                            value="{{ 'now' | date('Y-m-d') }}">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="form-text" for="manual">Curah Hujan</label>
+                        <input class="form-control" type="number" step="0.1" name="manual" id="manual" value="">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="">
+            <table class="table table-bordered table-hover mt-4">
+                <thead>
+                    <tr>
+                        <th>Sampling</th>
+                        <th>
+                            Rad. Matahari / <br>
+                            Lama Penyinaran
+                        </th>
+                        <th>
+                            Suhu <br>
+                            Min / Max
+                        </th>
+                        <th>
+                            Kelembaban <br>
+                            Min / Max
+                        </th>
+                        <th>
+                            Kec. Angin
+                        </th>
+                        <th>
+                            Tekanan
+                        </th>
+                        <th>
+                            Evaporation
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k in klimat %}
+                    <tr>
+                        <td>{{ k.sampling | date('d M Y') }}</td>
+                        <td class="text-center">
+                            {{ k.rad }} / {{ k.rad_rec }}%
+                        </td>
+                        <td class="text-center">
+                            {{ k.temp_max }} / {{ k.temp_min }}
+                        </td>
+                        <td class="text-center">
+                            {{ k.humi_max }} / {{ k.humi_min }}
+                        </td>
+                        <td class="text-center">
+                            {{ k.wind }}
+                        </td>
+                        <td class="text-center">
+                            {{ k.apre }}
+                        </td>
+                        <td class="text-center">
+                            {{ k.evaporation }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

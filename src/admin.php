@@ -134,7 +134,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     'inputjam' => $inputjam,
                 ]);
             }
-            else // ch
+            else if ($lokasi['jenis'] == 1) // ch
             {
                 $chs_temp = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$user['lokasi_id']} ORDER BY sampling DESC")->fetchAll();
 
@@ -154,6 +154,37 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 return $this->view->render($response, 'admin/curahhujan.html', [
                     'lokasi' => $lokasi,
                     'chs' => $chs,
+                ]);
+            }
+            else // klimat
+            {
+                $chs = $this->db->query("SELECT * FROM curahujan
+                    WHERE lokasi_id={$user['lokasi_id']}
+                    ORDER BY sampling DESC"
+                    )->fetchAll();
+                $klimat = $this->db->query("SELECT * FROM klimat
+                    WHERE lokasi_id={$user['lokasi_id']}
+                    ORDER BY sampling DESC"
+                    )->fetchAll();
+
+                // $chs = [];
+                // foreach ($chs_temp as $ch) {
+                //     $date = date('Y-m-d', strtotime($ch['sampling']));
+
+                //     if (!isset($chs[$date])) {
+                //         $chs[$date] = [
+                //             'sampling' => $date,
+                //             'manual' => 0,
+                //         ];
+                //     }
+                //     $chs[$date]['manual'] = $ch['manual'];
+                // }
+                // dump($chs_temp);
+
+                return $this->view->render($response, 'admin/klimat.html', [
+                    'lokasi' => $lokasi,
+                    'chs' => $chs,
+                    'klimat' => $klimat,
                 ]);
             }
         }
@@ -274,6 +305,53 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
 
             return $response->withRedirect('/admin');
         })->setName('admin.add.curahhujan');
+
+        $this->post('/klimat', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user'); // didapat dari middleware
+            $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
+            $now = date('Y-m-d H:i:s');
+
+            $form = $request->getParams();
+            // check if exists, if not insert if yes update
+            $sampling = $form['sampling'];
+            $available = $this->db->query("SELECT * FROM klimat WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+            if (!empty($available)) {
+                $stmt = $this->db->prepare("UPDATE klimat SET
+                                    manual=:manual,
+                                    received=:received,
+                                    petugas=:petugas
+                                 WHERE sampling=:sampling");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." 07:00:00",
+                    ':received' => $now,
+                    ':petugas' => $user['id'],
+                    ':manual' => $form['manual'],
+                ]);
+            } else {
+                $stmt = $this->db->prepare("INSERT INTO curahujan (
+                                    sampling,
+                                    manual,
+                                    lokasi_id,
+                                    received,
+                                    petugas
+                                ) VALUES (
+                                    :sampling,
+                                    :manual,
+                                    :lokasi_id,
+                                    :received,
+                                    :petugas
+                                )");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." 07:00:00",
+                    ':lokasi_id' => $lokasi['id'],
+                    ':received' => $now,
+                    ':petugas' => $user['id'],
+                    ':manual' => $form['manual'],
+                ]);
+            }
+
+            return $response->withRedirect('/admin');
+        })->setName('admin.add.klimat');
 
     })->add(function(Request $request, Response $response, $next) {
 
