@@ -14,12 +14,12 @@ $app->group('/klimatologi', function() {
         $from = "{$hari} 07:00:00";
         $to = "{$end} 06:55:00";
 
-        $lokasi = $this->db->query("SELECT * FROM lokasi WHERE lokasi.jenis='1' OR lokasi.jenis='4'")->fetchAll();
+        $lokasi = $this->db->query("SELECT * FROM lokasi WHERE lokasi.jenis='4'")->fetchAll();
 
         $result = [];
         foreach ($lokasi as $l) {
             $klimat = $this->db->query("SELECT * FROM periodik
-                                    WHERE lokasi_id = {$l['id']} AND jenis = '4'
+                                    WHERE lokasi_id = {$l['id']}
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
                                     ORDER BY sampling")->fetchAll();
 
