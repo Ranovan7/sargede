@@ -7,66 +7,125 @@
 {% endblock %}
 
 {% block content %}
-    <section class="content-header mb-5">
-        <h1>Admin</h1>
-        <p>Data-data pengukuran <b>Manual</b> dari para <b>Pengamat</b></p>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item">Admin</li>
-        </ol>
-    </section>
-    <div class="row">
-        <div class="col">
-            <h2>Curah Hujan <small class="text-muted">Data Manual terbaru</small></h2>
-        <table class="table table-bordered table-hover">
-          <thead>
-                    <tr>
-                        <th>Tanggal</th>
-                        <th>POS</th>
-                        <th>Hujan (mm)</th>
-                    </tr>
-          </thead>
-          <tbody>
-            {% for ch in chs %}
-                <tr>
-                  <td>{{ ch.sampling }}</td>
-                  <td>{{ ch.lokasi_nama }}</td>
-                  <td class="text-right">{{ ch.manual }}</td>
-                </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        </div>
-        <div class="col">
-        <h2>TMA <small class="text-muted">Data Manual terbaru</small></h2>
-            <table class="table table-bordered table-hover">
-              <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>POS</th>
-                            <th>Jam 7</th>
-                            <th>Jam 12</th>
-                            <th>Jam 17</th>
-                            <th>TMA (meter)</th>
-                        </tr>
-              </thead>
-              <tbody>
-                  {% for date, tma_date in tmas %}
-                    {% for tma in tma_date %}
-                      <tr>
-                          <td>{{ date }}</td>
-                          <td>{{ tma.lokasi }}</td>
-                          <td class="text-right">{{ tma.jam7 }}</td>
-                          <td class="text-right">{{ tma.jam12 }}</td>
-                          <td class="text-right">{{ tma.jam17 }}</td>
-                          <td class="text-right">-</td>
-                      </tr>
-                    {% endfor %}
-                  {% endfor %}
-              </tbody>
-            </table>
-        </div>
-    </div>
+<section class="content-header mb-5">
+  <h1>Admin</h1>
+  <p>Data-data pengukuran <b>Manual</b> dari para <b>Pengamat</b></p>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item">Admin</li>
+  </ol>
+</section>
+<div class="row">
+  <div class="col">
+    <h2>Curah Hujan <small class="text-muted">Data Manual terbaru</small></h2>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>POS</th>
+          <th>Hujan (mm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ch in chs %}
+        <tr>
+          <td>{{ ch.sampling }}</td>
+          <td>{{ ch.lokasi_nama }}</td>
+          <td class="text-right">{{ ch.manual }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <h2>TMA <small class="text-muted">Data Manual terbaru</small></h2>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>POS</th>
+          <th>Jam 7</th>
+          <th>Jam 12</th>
+          <th>Jam 17</th>
+          <th>TMA (meter)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for date, tma_date in tmas %}
+        {% for tma in tma_date %}
+        <tr>
+          <td>{{ date }}</td>
+          <td>{{ tma.lokasi }}</td>
+          <td class="text-right">{{ tma.jam7 }}</td>
+          <td class="text-right">{{ tma.jam12 }}</td>
+          <td class="text-right">{{ tma.jam17 }}</td>
+          <td class="text-right">-</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <h2>Klimat <small class="text-muted">Data Manual terbaru</small></h2>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>POS</th>
+          <th>
+            Rad. Matahari / <br>
+            Lama Penyinaran
+          </th>
+          <th>
+            Suhu <br>
+            Min / Max
+          </th>
+          <th>
+            Kelembaban <br>
+            Min / Max
+          </th>
+          <th>
+            Kec. Angin
+          </th>
+          <th>
+            Tekanan
+          </th>
+          <th>
+            Evaporation
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for k in klimat %}
+        <tr>
+          <td>{{ k.sampling | date('Y-m-d') }}</td>
+          <td>{{ k.lokasi_nama }}</td>
+          <td class="text-center">
+            {{ k.rad }} / {{ k.rad_rec }}%
+          </td>
+          <td class="text-center">
+            {{ k.temp_max }} / {{ k.temp_min }}
+          </td>
+          <td class="text-center">
+            {{ k.humi_max }} / {{ k.humi_min }}
+          </td>
+          <td class="text-center">
+            {{ k.wind }}
+          </td>
+          <td class="text-center">
+            {{ k.apre }}
+          </td>
+          <td class="text-center">
+            {{ k.evaporation }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}
 
 {% block js %}
