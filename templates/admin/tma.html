@@ -42,8 +42,8 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label class="form-text" for="manual">Manual</label>
-                        <input class="form-control" type="number" step="0.1" name="manual" id="manual" required value="">
+                        <label class="form-text" for="manual">Manual (cm)</label>
+                        <input class="form-control" type="number" step="0.01" name="manual" id="manual" required value="">
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -68,21 +68,21 @@
                         <td>{{ tma.sampling | date('d M Y') }}</td>
                         <td align="right">
                             {% if tma.jam7 %}
-                                {{ tma.jam7 | number_format(2) }}
+                                {{ tma.jam7 | number_format(2) }} cm
                             {% else %}
                                 -
                             {% endif %}
                         </td>
                         <td align="right">
                             {% if tma.jam12 %}
-                                {{ tma.jam12 | number_format(2) }}
+                                {{ tma.jam12 | number_format(2) }} cm
                             {% else %}
                                 -
                             {% endif %}
                         </td>
                         <td align="right">
                             {% if tma.jam17 %}
-                                {{ tma.jam17 | number_format(2) }}
+                                {{ tma.jam17 | number_format(2) }} cm
                             {% else %}
                                 -
                             {% endif %}
