@@ -195,12 +195,13 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                                     manual=:manual,
                                     received=:received,
                                     petugas=:petugas
-                                 WHERE sampling=:sampling");
+                                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
                 $stmt->execute([
                     ':sampling' => $form['sampling'] ." {$form['jam']}",
                     ':received' => $now,
                     ':petugas' => $user['id'],
                     ':manual' => $form['manual'],
+                    ':lokasi_id' => $lokasi['id'],
                 ]);
             } else {
                 $stmt = $this->db->prepare("INSERT INTO tma (
@@ -242,12 +243,13 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                                     manual=:manual,
                                     received=:received,
                                     petugas=:petugas
-                                 WHERE sampling=:sampling");
+                                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
                 $stmt->execute([
                     ':sampling' => $form['sampling'] ." 07:00:00",
                     ':received' => $now,
                     ':petugas' => $user['id'],
                     ':manual' => $form['manual'],
+                    ':lokasi_id' => $lokasi['id']
                 ]);
             } else {
                 $stmt = $this->db->prepare("INSERT INTO curahujan (
