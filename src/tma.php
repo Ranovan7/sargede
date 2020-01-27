@@ -85,15 +85,16 @@ $app->group('/tma', function() {
 
             foreach ($wlev_manual as $w) {
                 $time = date('H:i', strtotime($w['sampling']));
+                $wlev = floatval($w['manual'])/100;
                 switch ($time) {
                     case '07:00':
-                        $jam7_manual = $w['manual'];
+                        $jam7_manual = $wlev;
                         break;
                     case '12:00':
-                        $jam12_manual = $w['manual'];
+                        $jam12_manual = $wlev;
                         break;
                     case '17:00':
-                        $jam17_manual = $w['manual'];
+                        $jam17_manual = $wlev;
                         break;
                 }
             }
