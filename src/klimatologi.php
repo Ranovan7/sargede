@@ -10,94 +10,56 @@ $app->group('/klimatologi', function() {
         $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
         $next_date = date('Y-m-d', strtotime($hari .' +1day'));
 
-        $end = date('Y-m-d', strtotime($hari .' +1day'));
-        $from = "{$hari} 07:00:00";
-        $to = "{$end} 06:55:00";
+        // $end = date('Y-m-d', strtotime($hari .' +1day'));
+        // $from = "{$hari} 07:00:00";
+        // $to = "{$end} 06:55:00";
 
-        $lokasi = $this->db->query("SELECT * FROM lokasi WHERE lokasi.jenis='4'")->fetchAll();
-
-        $result = [];
-        foreach ($lokasi as $l) {
-            $klimat = $this->db->query("SELECT * FROM periodik
-                                    WHERE lokasi_id = {$l['id']}
-                                        AND sampling BETWEEN '{$from}' AND '{$to}'
-                                    ORDER BY sampling")->fetchAll();
-
-            $res = [
-                'ch' => 0,
-                'temp_min' => NULL,
-                'temp_max' => NULL,
-                'humi_min' => NULL,
-                'humi_max' => NULL,
-                'wind' => NULL,
-                'rad' => NULL,
-                'rad_rec' => NULL,
-                'pressure' => NULL,
-                'evaporation' => NULL
-            ];
-            foreach ($klimat as $k) {
-                if ($k['rain']){
-                    $res['ch'] += $k['rain'];
-                }
-
-                if ($res['temp_min']) {
-                    $res['temp_min'] = min($res['temp_min'], $k['temp']);
-                } else {
-                    $res['temp_min'] = $k['temp'];
-                }
-                if ($res['temp_max']) {
-                    $res['temp_max'] = max($res['temp_max'], $k['temp']);
-                } else {
-                    $res['temp_max'] = $k['temp'];
-                }
-
-                if ($res['humi_min']) {
-                    $res['humi_min'] = min($res['humi_min'], $k['humi']);
-                } else {
-                    $res['humi_min'] = $k['humi'];
-                }
-                if ($res['humi_max']) {
-                    $res['humi_max'] = max($res['humi_max'], $k['humi']);
-                } else {
-                    $res['humi_max'] = $k['humi'];
-                }
-            }
-
-            $result[] = [
-                'lokasi' => $l,
-                'durasi_07_13' => $durasi_07_13,
-                'durasi_13_19' => $durasi_13_19,
-                'durasi_19_01' => $durasi_19_01,
-                'durasi_01_07' => $durasi_01_07,
-                'durasi_all' => $durasi_all,
-                'durasi_manual' => $ch_manual ? $ch_manual['manual'] : null,
-            ];
-        }
+        $lokasi_daily = $this->db->query("SELECT lokasi.*,
+                                            manual_daily.temp_max as temp_max,
+                                            manual_daily.temp_min as temp_min,
+                                            manual_daily.temp_avg as temp_avg,
+                                            manual_daily.humi as humi,
+                                            manual_daily.temp_tangki as temp_tangki,
+                                            manual_daily.evaporation as evaporation,
+                                            manual_daily.wind as wind,
+                                            manual_daily.rad as rad,
+                                            manual_daily.rain as rain
+                                        FROM lokasi
+                                        LEFT JOIN manual_daily ON manual_daily.id = (
+                                            SELECT id from manual_daily
+                                                WHERE lokasi_id = lokasi.id
+                                                    AND sampling='{$hari} 00:00:00'
+                                                ORDER BY sampling DESC
+                                                LIMIT 1
+                                        )
+                                        WHERE lokasi.jenis='4'")->fetchAll();
 
         return $this->view->render($response, 'klimatologi/index.html', [
-            'key' => 'value'
+            'lokasi_daily' => $lokasi_daily,
+            'sampling' => $hari
         ]);
     })->setName('klimatologi');
 
     $this->group('/{id}', function() {
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
-            return $this->view->render($response, 'klimatologi/jamjaman.html', [
-                'key' => 'value'
-            ]);
-        })->setName('klimatologi.jamjaman');
+            $lokasi_id = $request->getAttribute('id');
+            $hari = $request->getParam('sampling', date('Y-m-d'));
+            $bulan = $request->getParam('sampling', date('m'));
+            $tahun = $request->getParam('sampling', date('Y'));
 
-        $this->get('/harian', function(Request $request, Response $response, $args) {
-            return $this->view->render($response, 'klimatologi/harian.html', [
-                'key' => 'value'
-            ]);
-        })->setName('klimatologi.harian');
+            $manual_daily = $this->db->query("SELECT *
+                                            FROM manual_daily
+                                            WHERE EXTRACT(month FROM sampling) = {$bulan}
+                                                AND EXTRACT(year FROM sampling) = {$tahun}
+                                            ORDER BY sampling DESC")->fetchAll();
 
-        $this->get('/bulanan', function(Request $request, Response $response, $args) {
-            return $this->view->render($response, 'klimatologi/bulanan.html', [
-                'key' => 'value'
+            return $this->view->render($response, 'klimatologi/pos.html', [
+                'manual_daily' => $manual_daily,
+                'lokasi_id' => $lokasi_id,
+                'sampling' => $hari
             ]);
-        })->setName('klimatologi.bulanan');
+        })->setName('klimatologi.pos');
 
     });
 
