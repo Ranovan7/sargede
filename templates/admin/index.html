@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="content-header mb-5">
+<section class="content-header mb-3">
   <h1>Admin</h1>
   <p>Data-data pengukuran <b>Manual</b> dari para <b>Pengamat</b></p>
   <ol class="breadcrumb">
@@ -16,27 +16,6 @@
   </ol>
 </section>
 <div class="row">
-  <div class="col">
-    <h2>Curah Hujan <small class="text-muted">Data Manual terbaru</small></h2>
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Tanggal</th>
-          <th>POS</th>
-          <th>Hujan (mm)</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for ch in chs %}
-        <tr>
-          <td>{{ ch.sampling }}</td>
-          <td>{{ ch.lokasi_nama }}</td>
-          <td class="text-right">{{ ch.manual }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
   <div class="col">
     <h2>TMA <small class="text-muted">Data Manual terbaru</small></h2>
     <table class="table table-bordered table-hover">
@@ -72,53 +51,54 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Tanggal</th>
-          <th>POS</th>
-          <th>
-            Rad. Matahari / <br>
-            Lama Penyinaran
-          </th>
-          <th>
-            Suhu <br>
-            Min / Max
-          </th>
-          <th>
-            Kelembaban <br>
-            Min / Max
-          </th>
-          <th>
-            Kec. Angin
-          </th>
-          <th>
-            Tekanan
-          </th>
-          <th>
-            Evaporation
-          </th>
+          <th rowspan="2">Tanggal</th>
+          <th rowspan="2">POS</th>
+          <th colspan="3">Temperatur (°C)</th>
+          <th rowspan="2">RH (%)</th>
+          <th colspan="2">PAN 'A'</th>
+          <th rowspan="2">Kec. Angin (km/hari)</th>
+          <th rowspan="2">Sinar Matahari (%)</th>
+          <th rowspan="2">Hujan Biasa (mm)</th>
+        </tr>
+        <tr>
+          <th>Max</th>
+          <th>Min</th>
+          <th>Rata-rata</th>
+          <th>Temp. Air dlm. Tangki (°C)</th>
+          <th>Penguapan (mm)</th>
         </tr>
       </thead>
       <tbody>
         {% for k in klimat %}
         <tr>
-          <td>{{ k.sampling | date('Y-m-d') }}</td>
+          <td class="text-center text-nowrap">{{ k.sampling | date('Y-m-d') }}</td>
           <td>{{ k.lokasi_nama }}</td>
           <td class="text-center">
-            {{ k.rad }} / {{ k.rad_rec }}%
+              {{ k.temp_max is null ? '-' : k.temp_max }}
           </td>
           <td class="text-center">
-            {{ k.temp_max }} / {{ k.temp_min }}
+              {{ k.temp_min is null ? '-' : k.temp_min }}
           </td>
           <td class="text-center">
-            {{ k.humi_max }} / {{ k.humi_min }}
+              {{ k.temp_avg is null ? '-' : k.temp_avg }}
           </td>
           <td class="text-center">
-            {{ k.wind }}
+              {{ k.humi is null ? '-' : k.humi }}
           </td>
           <td class="text-center">
-            {{ k.apre }}
+              {{ k.temp_tangki is null ? '-' : k.temp_tangki }}
           </td>
           <td class="text-center">
-            {{ k.evaporation }}
+              {{ k.evaporation is null ? '-' : k.evaporation }}
+          </td>
+          <td class="text-center">
+              {{ k.wind is null ? '-' : k.wind }}
+          </td>
+          <td class="text-center">
+              {{ k.rad is null ? '-' : k.rad }}
+          </td>
+          <td class="text-center">
+              {{ k.rain is null ? '-' : k.rain }}
           </td>
         </tr>
         {% endfor %}

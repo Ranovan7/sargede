@@ -65,30 +65,15 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 }
             }
 
-            $chs = $this->db->query("SELECT
-                                curahujan.id,
-                                curahujan.sampling,
-                                curahujan.lokasi_id,
-                                curahujan.received,
-                                curahujan.petugas,
-                                curahujan.manual,
-                                lokasi.nama AS lokasi_nama
-                            FROM
-                                curahujan LEFT JOIN lokasi ON (lokasi.id = curahujan.lokasi_id)
-                            WHERE
-                                curahujan.manual IS NOT NULL
-                            ORDER BY sampling DESC")->fetchAll();
-
             $klimat = $this->db->query("SELECT
-                                klimat.*,
+                                manual_daily.*,
                                 lokasi.nama AS lokasi_nama
                             FROM
-                                klimat LEFT JOIN lokasi ON (lokasi.id = klimat.lokasi_id)
+                                manual_daily LEFT JOIN lokasi ON (lokasi.id = manual_daily.lokasi_id)
                             ORDER BY sampling DESC")->fetchAll();
 
             return $this->view->render($response, 'admin/index.html', [
                 'tmas' => $tmas,
-                'chs' => $chs,
                 'klimat' => $klimat,
             ]);
         }
@@ -142,56 +127,15 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     'inputjam' => $inputjam,
                 ]);
             }
-            else if ($lokasi['jenis'] == 1) // ch
+            else // ch & klimat
             {
-                $chs_temp = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$user['lokasi_id']} ORDER BY sampling DESC")->fetchAll();
-
-                $chs = [];
-                foreach ($chs_temp as $ch) {
-                    $date = date('Y-m-d', strtotime($ch['sampling']));
-
-                    if (!isset($chs[$date])) {
-                        $chs[$date] = [
-                            'sampling' => $date,
-                            'manual' => 0,
-                        ];
-                    }
-                    $chs[$date]['manual'] = $ch['manual'];
-                }
-
-                return $this->view->render($response, 'admin/curahhujan.html', [
-                    'lokasi' => $lokasi,
-                    'chs' => $chs,
-                ]);
-            }
-            else // klimat
-            {
-                $chs = $this->db->query("SELECT * FROM curahujan
+                $klimat = $this->db->query("SELECT * FROM manual_daily
                     WHERE lokasi_id={$user['lokasi_id']}
                     ORDER BY sampling DESC"
                     )->fetchAll();
-                $klimat = $this->db->query("SELECT * FROM klimat
-                    WHERE lokasi_id={$user['lokasi_id']}
-                    ORDER BY sampling DESC"
-                    )->fetchAll();
-
-                // $chs = [];
-                // foreach ($chs_temp as $ch) {
-                //     $date = date('Y-m-d', strtotime($ch['sampling']));
-
-                //     if (!isset($chs[$date])) {
-                //         $chs[$date] = [
-                //             'sampling' => $date,
-                //             'manual' => 0,
-                //         ];
-                //     }
-                //     $chs[$date]['manual'] = $ch['manual'];
-                // }
-                // dump($chs_temp);
 
                 return $this->view->render($response, 'admin/klimat.html', [
                     'lokasi' => $lokasi,
-                    'chs' => $chs,
                     'klimat' => $klimat,
                 ]);
             }
@@ -268,53 +212,53 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             return $response->withRedirect('/admin');
         })->setName('admin.add.tma');
 
-        $this->post('/curahhujan', function(Request $request, Response $response) {
-            $user = $request->getAttribute('user'); // didapat dari middleware
-            $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
-            $now = date('Y-m-d H:i:s');
+        // $this->post('/curahhujan', function(Request $request, Response $response) {
+        //     $user = $request->getAttribute('user'); // didapat dari middleware
+        //     $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
+        //     $now = date('Y-m-d H:i:s');
 
-            $form = $request->getParams();
-            // check if exists, if not insert if yes update
-            $sampling = $form['sampling'];
-            $available = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
-            if (!empty($available)) {
-                $stmt = $this->db->prepare("UPDATE curahujan SET
-                                    manual=:manual,
-                                    received=:received,
-                                    petugas=:petugas
-                                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
-                $stmt->execute([
-                    ':sampling' => $form['sampling'] ." 07:00:00",
-                    ':received' => $now,
-                    ':petugas' => $user['id'],
-                    ':manual' => $form['manual'],
-                    ':lokasi_id' => $lokasi['id']
-                ]);
-            } else {
-                $stmt = $this->db->prepare("INSERT INTO curahujan (
-                                    sampling,
-                                    manual,
-                                    lokasi_id,
-                                    received,
-                                    petugas
-                                ) VALUES (
-                                    :sampling,
-                                    :manual,
-                                    :lokasi_id,
-                                    :received,
-                                    :petugas
-                                )");
-                $stmt->execute([
-                    ':sampling' => $form['sampling'] ." 07:00:00",
-                    ':lokasi_id' => $lokasi['id'],
-                    ':received' => $now,
-                    ':petugas' => $user['id'],
-                    ':manual' => $form['manual'],
-                ]);
-            }
+        //     $form = $request->getParams();
+        //     // check if exists, if not insert if yes update
+        //     $sampling = $form['sampling'];
+        //     $available = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+        //     if (!empty($available)) {
+        //         $stmt = $this->db->prepare("UPDATE curahujan SET
+        //                             manual=:manual,
+        //                             received=:received,
+        //                             petugas=:petugas
+        //                          WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+        //         $stmt->execute([
+        //             ':sampling' => $form['sampling'] ." 07:00:00",
+        //             ':received' => $now,
+        //             ':petugas' => $user['id'],
+        //             ':manual' => $form['manual'],
+        //             ':lokasi_id' => $lokasi['id']
+        //         ]);
+        //     } else {
+        //         $stmt = $this->db->prepare("INSERT INTO curahujan (
+        //                             sampling,
+        //                             manual,
+        //                             lokasi_id,
+        //                             received,
+        //                             petugas
+        //                         ) VALUES (
+        //                             :sampling,
+        //                             :manual,
+        //                             :lokasi_id,
+        //                             :received,
+        //                             :petugas
+        //                         )");
+        //         $stmt->execute([
+        //             ':sampling' => $form['sampling'] ." 07:00:00",
+        //             ':lokasi_id' => $lokasi['id'],
+        //             ':received' => $now,
+        //             ':petugas' => $user['id'],
+        //             ':manual' => $form['manual'],
+        //         ]);
+        //     }
 
-            return $response->withRedirect('/admin');
-        })->setName('admin.add.curahhujan');
+        //     return $response->withRedirect('/admin');
+        // })->setName('admin.add.curahhujan');
 
         $this->post('/klimat', function(Request $request, Response $response) {
             $user = $request->getAttribute('user'); // didapat dari middleware
@@ -324,79 +268,79 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $form = $request->getParams();
             // check if exists, if not insert if yes update
             $sampling = $form['sampling'];
-            $available = $this->db->query("SELECT * FROM klimat WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+            $available = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
             if (!empty($available)) {
-                $stmt = $this->db->prepare("UPDATE klimat SET
-                                    received=:received,
+                $stmt = $this->db->prepare("UPDATE manual_daily SET
                                     petugas=:petugas,
-                                    rad=:rad,
-                                    rad_rec=:rad_rec,
+                                    received=:received,
                                     temp_max=:temp_max,
                                     temp_min=:temp_min,
-                                    humi_max=:humi_max,
-                                    humi_min=:humi_min,
-                                    apre=:apre,
+                                    temp_avg=:temp_avg,
+                                    humi=:humi,
+                                    temp_tangki=:temp_tangki,
                                     evaporation=:evaporation,
                                     wind=:wind
+                                    rad=:rad,
+                                    rain=:rain,
                                  WHERE lokasi_id={$lokasi['id']} AND sampling=:sampling");
                 $stmt->execute([
                     ':sampling' => $form['sampling'] ." 07:00:00",
-                    ':received' => $now,
                     ':petugas' => $user['username'],
-                    ':rad' => $form['rad'],
-                    ':rad_rec' => $form['rad_rec'],
+                    ':received' => $now,
                     ':temp_max' => $form['temp_max'],
                     ':temp_min' => $form['temp_min'],
-                    ':humi_max' => $form['humi_max'],
-                    ':humi_min' => $form['humi_min'],
-                    ':apre' => $form['apre'],
+                    ':temp_avg' => $form['temp_avg'],
+                    ':humi' => $form['humi'],
+                    ':temp_tangki' => $form['temp_tangki'],
                     ':evaporation' => $form['evaporation'],
                     ':wind' => $form['wind'],
+                    ':rad' => $form['rad'],
+                    ':rain' => $form['rain'],
                 ]);
             } else {
-                $stmt = $this->db->prepare("INSERT INTO klimat (
+                $stmt = $this->db->prepare("INSERT INTO manual_daily (
+                                    lokasi_id,
                                     sampling,
                                     petugas,
                                     received,
-                                    lokasi_id,
-                                    rad,
-                                    rad_rec,
                                     temp_max,
                                     temp_min,
-                                    humi_max,
-                                    humi_min,
-                                    apre,
+                                    temp_avg,
+                                    humi,
+                                    temp_tangki,
                                     evaporation,
-                                    wind
+                                    wind,
+                                    rad,
+                                    rain
                                 ) VALUES (
+                                    :lokasi_id,
                                     :sampling,
                                     :petugas,
                                     :received,
-                                    :lokasi_id,
-                                    :rad,
-                                    :rad_rec,
                                     :temp_max,
                                     :temp_min,
-                                    :humi_max,
-                                    :humi_min,
-                                    :apre,
+                                    :temp_avg,
+                                    :humi,
+                                    :temp_tangki,
                                     :evaporation,
-                                    :wind
+                                    :wind,
+                                    :rad,
+                                    :rain
                                 )");
                 $stmt->execute([
+                    ':lokasi_id' => $lokasi['id'],
                     ':sampling' => $form['sampling'] ." 07:00:00",
                     ':petugas' => $user['username'],
                     ':received' => $now,
-                    ':lokasi_id' => $lokasi['id'],
-                    ':rad' => $form['rad'] ?: 0,
-                    ':rad_rec' => $form['rad_rec'] ?: 0,
-                    ':temp_max' => $form['temp_max'] ?: 0,
-                    ':temp_min' => $form['temp_min'] ?: 0,
-                    ':humi_max' => $form['humi_max'] ?: 0,
-                    ':humi_min' => $form['humi_min'] ?: 0,
-                    ':apre' => $form['apre'] ?: 0,
-                    ':evaporation' => $form['evaporation'] ?: 0,
-                    ':wind' => $form['wind'] ?: 0,
+                    ':temp_max' => $form['temp_max'] ?: null,
+                    ':temp_min' => $form['temp_min'] ?: null,
+                    ':temp_avg' => $form['temp_avg'] ?: null,
+                    ':humi' => $form['humi'] ?: null,
+                    ':temp_tangki' => $form['temp_tangki'] ?: null,
+                    ':evaporation' => $form['evaporation'] ?: null,
+                    ':wind' => $form['wind'] ?: null,
+                    ':rad' => $form['rad'] ?: null,
+                    ':rain' => $form['rain'] ?: null,
                 ]);
             }
 
