@@ -3,6 +3,8 @@
 {% set title = "Admin" %}
 
 {% block css %}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 
 {% endblock %}
 
@@ -50,8 +52,22 @@
     <h2>Klimat <small class="text-muted">Data Manual terbaru</small></h2>
     <table class="table table-bordered table-hover">
       <thead>
+        <tr class="bg-dark text-white">
+          <th class="text-uppercase" colspan="10">
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-dark">
+                <i class="fas fa-chevron-left mr-2"></i>
+                {{ prev | date('d M Y') }}
+              </a>
+              <span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+              <a href="/admin?sampling={{ next }}" class="btn btn-sm btn-dark">
+                {{ next | date('d M Y') }}
+                <i class="fas fa-chevron-right ml-2"></i>
+              </a>
+            </div>
+          </th>
+        </tr>
         <tr>
-          <th rowspan="2">Tanggal</th>
           <th rowspan="2">POS</th>
           <th colspan="3">Temperatur (°C)</th>
           <th rowspan="2">RH (%)</th>
@@ -69,36 +85,36 @@
         </tr>
       </thead>
       <tbody>
-        {% for k in klimat %}
+        {% for l in lokasi %}
+        {% set k = l.klimat %}
         <tr>
-          <td class="text-center text-nowrap">{{ k.sampling | date('Y-m-d') }}</td>
-          <td>{{ k.lokasi_nama }}</td>
+          <td>{{ l.nama }}</td>
           <td class="text-center">
-              {{ k.temp_max is null ? '-' : k.temp_max }}
+            {{ k.temp_max is null ? '-' : k.temp_max }}
           </td>
           <td class="text-center">
-              {{ k.temp_min is null ? '-' : k.temp_min }}
+            {{ k.temp_min is null ? '-' : k.temp_min }}
           </td>
           <td class="text-center">
-              {{ k.temp_avg is null ? '-' : k.temp_avg }}
+            {{ k.temp_avg is null ? '-' : k.temp_avg }}
           </td>
           <td class="text-center">
-              {{ k.humi is null ? '-' : k.humi }}
+            {{ k.humi is null ? '-' : k.humi }}
           </td>
           <td class="text-center">
-              {{ k.temp_tangki is null ? '-' : k.temp_tangki }}
+            {{ k.temp_tangki is null ? '-' : k.temp_tangki }}
           </td>
           <td class="text-center">
-              {{ k.evaporation is null ? '-' : k.evaporation }}
+            {{ k.evaporation is null ? '-' : k.evaporation }}
           </td>
           <td class="text-center">
-              {{ k.wind is null ? '-' : k.wind }}
+            {{ k.wind is null ? '-' : k.wind }}
           </td>
           <td class="text-center">
-              {{ k.rad is null ? '-' : k.rad }}
+            {{ k.rad is null ? '-' : k.rad }}
           </td>
           <td class="text-center">
-              {{ k.rain is null ? '-' : k.rain }}
+            {{ k.rain is null ? '-' : k.rain }}
           </td>
         </tr>
         {% endfor %}
@@ -109,5 +125,18 @@
 {% endblock %}
 
 {% block js %}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+  type="text/javascript"></script>
+<script>
+  $(function () {
+    $('#datepicker').datepicker({
+      todayHighlight: true,
+      autoclose: true,
+      format: 'yyyy-mm-dd'
+    });
+    $('#datepicker').on('changeDate', function () {
+      window.location = "/admin?sampling=" + $('#datepicker').datepicker('getFormattedDate')
+    });
+  })
+</script>
 {% endblock %}

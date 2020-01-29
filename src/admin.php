@@ -10,6 +10,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
     $this->get('[/]', function(Request $request, Response $response, $args) {
         // get user yg didapat dari middleware
         $user = $request->getAttribute('user');
+        $sampling = $request->getParam('sampling', date('Y-m-d'));
 
         // $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-26");
         // $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
@@ -64,17 +65,29 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                         break;
                 }
             }
+            
+            $from = date('Y-m-d 00:00:00', strtotime($sampling));
+            $to = date('Y-m-d 23:59:59', strtotime($sampling));
+            $prev = date('Y-m-d', strtotime("{$sampling} -1day"));
+            $next = date('Y-m-d', strtotime("{$sampling} +1day"));
 
-            $klimat = $this->db->query("SELECT
-                                manual_daily.*,
-                                lokasi.nama AS lokasi_nama
-                            FROM
-                                manual_daily LEFT JOIN lokasi ON (lokasi.id = manual_daily.lokasi_id)
-                            ORDER BY sampling DESC")->fetchAll();
+            $lokasi = $this->db->query("SELECT * FROM lokasi ORDER BY nama")->fetchAll();
+            foreach ($lokasi as &$l) {
+                $l['klimat'] = $this->db->query("SELECT * FROM manual_daily
+                    WHERE lokasi_id={$l['id']}
+                        AND sampling BETWEEN '{$from}' AND '{$to}'
+                    ORDER BY sampling DESC
+                    LIMIT 1")
+                    ->fetch();
+            }
+            unset($l);
 
             return $this->view->render($response, 'admin/index.html', [
                 'tmas' => $tmas,
-                'klimat' => $klimat,
+                'lokasi' => $lokasi,
+                'prev' => $prev,
+                'next' => $next,
+                'sampling' => $sampling,
             ]);
         }
         else
@@ -129,14 +142,23 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             }
             else // ch & klimat
             {
+                $from = date('Y-m-01 00:00:00', strtotime($sampling));
+                $to = date('Y-m-t 23:59:59', strtotime($sampling));
+                $prev = date('Y-m-d', strtotime("{$sampling} first day of last month"));
+                $next = date('Y-m-d', strtotime("{$sampling} first day of next month"));
+
                 $klimat = $this->db->query("SELECT * FROM manual_daily
                     WHERE lokasi_id={$user['lokasi_id']}
-                    ORDER BY sampling DESC"
+                        AND sampling BETWEEN '{$from}' AND '{$to}'
+                    ORDER BY sampling"
                     )->fetchAll();
 
                 return $this->view->render($response, 'admin/klimat.html', [
                     'lokasi' => $lokasi,
                     'klimat' => $klimat,
+                    'prev' => $prev,
+                    'next' => $next,
+                    'sampling' => $sampling,
                 ]);
             }
         }
