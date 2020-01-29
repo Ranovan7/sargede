@@ -17,6 +17,9 @@ $app->group('/lokasi', function() {
     $this->group('/{id:[0-9]+}', function() {
 
         $this->post('/update', function(Request $request, Response $response, $args) {
+            return $this->response->withRedirect('/lokasi');
+
+            // no more support
             $id = intval($args['id']);
             $stmt = $this->db->prepare("SELECT * FROM lokasi WHERE id=:id");
             $stmt->execute([':id' => $id]);
