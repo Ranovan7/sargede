@@ -114,11 +114,11 @@ $app->post('/login', function(Request $request, Response $response, $args) {
 //     if (empty($credentials['username']) || empty($credentials['password'])) {
 //         die("Masukkan username dan password");
 //     }
-
+//
 //     $stmt = $this->db->prepare("SELECT * FROM public.user WHERE username=:username");
 //     $stmt->execute([':username' => $credentials['username']]);
 //     $user = $stmt->fetch();
-
+//
 //     // jika belum ada di DB, tambahkan
 //     if (!$user) {
 //         $stmt = $this->db->prepare("INSERT INTO public.user (username, password, role) VALUES (:username, :password, 1)");

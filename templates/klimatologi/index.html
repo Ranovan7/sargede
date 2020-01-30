@@ -21,8 +21,16 @@
         <li class="breadcrumb-item">Klimatologi</li>
     </ol>
     </section>
-    <div class="form-control" align="center">
-        <span id="datepicker">{{ sampling | date("d M Y") }}</span>
+    <div class="d-flex justify-content-between align-items-center">
+        <a href="/klimatologi?sampling={{ prev }}" class="">
+            <i class="fas fa-chevron-left mr-2"></i>
+            {{ prev | date('d M') }}
+        </a>
+        <span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+        <a href="/klimatologi?sampling={{ next }}" class="">
+            {{ next | date('d M') }}
+            <i class="fas fa-chevron-right ml-2"></i>
+        </a>
     </div>
     <div class="">
         <table class="table table-bordered">
@@ -48,15 +56,15 @@
                 {% for lok in lokasi_daily %}
                 <tr>
                     <td><a href="/klimatologi/{{ lok.id }}">{{ lok.nama }}</a></td>
-                    <td>{{ lok.temp_max }}</td>
-                    <td>{{ lok.temp_min }}</td>
-                    <td>{{ lok.temp_avg }}</td>
-                    <td>{{ lok.humi }}</td>
-                    <td>{{ lok.temp_tangki }}</td>
-                    <td>{{ lok.evaporation }}</td>
-                    <td>{{ lok.wind }}</td>
-                    <td>{{ lok.rad }}</td>
-                    <td>{{ lok.rain }}</td>
+                    <td align="right">{{ lok.temp_max }}</td>
+                    <td align="right">{{ lok.temp_min }}</td>
+                    <td align="right">{{ lok.temp_avg }}</td>
+                    <td align="right">{{ lok.humi }}</td>
+                    <td align="right">{{ lok.temp_tangki }}</td>
+                    <td align="right">{{ lok.evaporation }}</td>
+                    <td align="right">{{ lok.wind }}</td>
+                    <td align="right">{{ lok.rad }}</td>
+                    <td align="right">{{ lok.rain }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

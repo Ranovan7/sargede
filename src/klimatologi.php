@@ -28,7 +28,7 @@ $app->group('/klimatologi', function() {
                                         LEFT JOIN manual_daily ON manual_daily.id = (
                                             SELECT id from manual_daily
                                                 WHERE lokasi_id = lokasi.id
-                                                    AND sampling='{$hari} 00:00:00'
+                                                    AND sampling='{$hari} 07:00:00'
                                                 ORDER BY sampling DESC
                                                 LIMIT 1
                                         )
@@ -36,7 +36,9 @@ $app->group('/klimatologi', function() {
 
         return $this->view->render($response, 'klimatologi/index.html', [
             'lokasi_daily' => $lokasi_daily,
-            'sampling' => $hari
+            'sampling' => $hari,
+            'next' => $next_date,
+            'prev' => $prev_date
         ]);
     })->setName('klimatologi');
 
@@ -45,6 +47,8 @@ $app->group('/klimatologi', function() {
         $this->get('[/]', function(Request $request, Response $response, $args) {
             $lokasi_id = $request->getAttribute('id');
             $hari = $request->getParam('sampling', date('Y-m-d'));
+            $prev_date = date('Y-m-d', strtotime("{$hari} first day of last month"));
+            $next_date = date('Y-m-d', strtotime("{$hari} first day of next month"));
             $bulan = $request->getParam('sampling', date('m'));
             $tahun = $request->getParam('sampling', date('Y'));
 
@@ -57,7 +61,9 @@ $app->group('/klimatologi', function() {
             return $this->view->render($response, 'klimatologi/pos.html', [
                 'manual_daily' => $manual_daily,
                 'lokasi_id' => $lokasi_id,
-                'sampling' => $hari
+                'sampling' => $hari,
+                'next' => $next_date,
+                'prev' => $prev_date
             ]);
         })->setName('klimatologi.pos');
 

@@ -7,7 +7,7 @@
 
 {% block content %}
     <section class="content-header">
-      <h1>{{ title }} <span class="text-muted sampling">{{ sampling }}</span></h1>
+      <h1>{{ title }}</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/">Home</a>
@@ -15,6 +15,17 @@
             <li class="breadcrumb-item">{{ title }}</li>
         </ol>
     </section>
+    <div class="d-flex justify-content-between align-items-center">
+        <a href="/tma?sampling={{ prev }}" class="">
+            <i class="fas fa-chevron-left mr-2"></i>
+            {{ prev | date('d M') }}
+        </a>
+        <span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+        <a href="/tma?sampling={{ next }}" class="">
+            {{ next | date('d M') }}
+            <i class="fas fa-chevron-right ml-2"></i>
+        </a>
+    </div>
     <div class="table-responsiv">
         <table class="table table-hover table-bordered">
             <thead>
