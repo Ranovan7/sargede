@@ -18,8 +18,17 @@ $app->group('/curahhujan', function() {
 
         $lokasi = $this->db->query("SELECT * FROM lokasi WHERE lokasi.jenis='1' OR lokasi.jenis='4'")->fetchAll();
 
+        $device = $this->db->query("SELECT * FROM device")->fetchAll();
+        $logger_ids = [];
+        foreach ($device as $d) {
+            $logger_ids[] = $d['lokasi_id'];
+        }
+
         $result = [];
         foreach ($lokasi as $l) {
+            if (!in_array($l['id'], $logger_ids)) {
+                continue;
+            }
             $ch = $this->db->query("SELECT * FROM periodik
                                     WHERE lokasi_id = {$l['id']} AND rain IS NOT NULL
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
@@ -62,9 +71,9 @@ $app->group('/curahhujan', function() {
         }
 
         return $this->view->render($response, 'curahhujan/index.html', [
-            'sampling' => tanggal_format(strtotime($hari)),
-            'prev_date' => $prev_date,
-            'next_date' => $next_date,
+            'sampling' => $hari,
+            'prev' => $prev_date,
+            'next' => $next_date,
             'result' => $result
         ]);
     })->setName('curahhujan');

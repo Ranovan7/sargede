@@ -119,9 +119,9 @@ $app->group('/tma', function() {
         }
 
         return $this->view->render($response, 'tma/index.html', [
-            'sampling' => tanggal_format(strtotime($hari)),
-            'prev_date' => $prev_date,
-            'next_date' => $next_date,
+            'sampling' => $hari,
+            'prev' => $prev_date,
+            'next' => $next_date,
             'result' => $result,
         ]);
     })->setName('tma');

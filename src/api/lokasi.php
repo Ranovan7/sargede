@@ -26,7 +26,7 @@ $app->group('/lokasi', function() {
                 "status" => "400",
                 "message" => "Data not complete",
                 "data" => [
-                    "sn" => $sn
+                    "lokasi_id" => $lokasi_id
                 ]
             ], 200, JSON_PRETTY_PRINT);
         }
@@ -34,7 +34,10 @@ $app->group('/lokasi', function() {
         $params = [
             "nama" => $request->getParam('nama', "Belum ada"),
             "ll" => $request->getParam('ll', "Belum ada"),
-            "jenis" => $request->getParam('jenis', "0")
+            "jenis" => $request->getParam('jenis', "0"),
+            "siaga1" => $request->getParam('siaga1', "null"),
+            "siaga2" => $request->getParam('siaga2', "null"),
+            "siaga3" => $request->getParam('siaga3', "null")
         ];
 
         if ($lokasi) {
@@ -42,24 +45,33 @@ $app->group('/lokasi', function() {
             $stmt = $this->db->prepare("UPDATE lokasi SET
                                                     nama=:nama,
                                                     ll=:ll,
-                                                    jenis=:jenis
+                                                    jenis=:jenis,
+                                                    siaga1=:siaga1,
+                                                    siaga2=:siaga2,
+                                                    siaga3=:siaga3
                                                 WHERE id={$lokasi_id}");
             $stmt->execute([
                 ':nama' => $params["nama"],
                 ':ll' => $params["ll"],
-                ':jenis' => $params["jenis"]
+                ':jenis' => $params["jenis"],
+                ':siaga1' => $params["siaga1"],
+                ':siaga2' => $params["siaga2"],
+                ':siaga3' => $params["siaga3"]
             ]);
         } else {
             // insert
             $stmt = $this->db->prepare("INSERT INTO lokasi
                                                 (id,nama,ll,jenis)
                                                 VALUES
-                                                (:id,:nama,:ll,:jenis)");
+                                                (:id,:nama,:ll,:jenis,:siaga1,:siaga2,:siaga3)");
             $stmt->execute([
                 ":id" => $lokasi_id,
                 ":nama" => $params['nama'],
                 ":ll" => $params['ll'],
-                ":jenis" => $params['jenis']
+                ":jenis" => $params['jenis'],
+                ':siaga1' => $params["siaga1"],
+                ':siaga2' => $params["siaga2"],
+                ':siaga3' => $params["siaga3"]
             ]);
         }
 
@@ -67,7 +79,7 @@ $app->group('/lokasi', function() {
             "status" => "200",
             "message" => "Lokasi berhasil ditambahkan/diupdate",
             "data" => [
-                "sn" => $sn
+                "lokasi_id" => $lokasi_id
             ]
         ], 200, JSON_PRETTY_PRINT);
 
