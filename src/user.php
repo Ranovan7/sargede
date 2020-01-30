@@ -96,16 +96,16 @@ $app->group('/user', function() {
 
     })->add(function(Request $request, Response $response, $next) { // middleware untuk mendapatkan lokasi
         $args = $request->getAttribute('routeInfo')[2];
-        $lokasi_id = intval($args['id']);
-        $stmt = $this->db->prepare("SELECT * FROM lokasi WHERE id=:id");
-        $stmt->execute([':id' => $lokasi_id]);
-        $lokasi = $stmt->fetch();
+        $user_id = intval($args['id']);
+        $stmt = $this->db->prepare("SELECT * FROM public.user WHERE id=:id");
+        $stmt->execute([':id' => $user_id]);
+        $user = $stmt->fetch();
 
-        if (!$lokasi) {
+        if (!$user) {
             throw new \Slim\Exception\NotFoundException($request, $response);
         }
 
-        $request = $request->withAttribute('lokasi', $lokasi);
+        $request = $request->withAttribute('user', $user);
 
         return $next($request, $response);
     });
