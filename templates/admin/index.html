@@ -18,7 +18,7 @@
 	</ol>
 </section>
 <div class="row">
-	<div class="col">
+	<div class="col-12">
 		<h2>Curah Hujan <small class="text-muted">Data Manual terbaru</small></h2>
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -40,22 +40,36 @@
 				<tr>
 					<th>POS</th>
 					<th>Hujan (mm)</th>
+					<th>Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for l in lokasi_ch %}
 				{% set ch = l.manual %}
 				<tr>
-					<td>{{ l.nama }}</td>
-					<td class="text-right">
-						{{ ch.rain is null ? '-' : ch.rain }}
-					</td>
+					<form action="{{ path_for('admin.edit.curahhujan') }}" method="post">
+						<td>{{ l.nama }}</td>
+						<td class="text-right">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ ch.rain is null ? '-' : ch.rain }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="rain" id="rain" step="0.01" value="{{ ch.rain }}" required>
+							<input type="hidden" name="lokasi_id" value="{{ l.id }}" readonly required>
+							<input type="hidden" name="sampling" value="{{ sampling }}" readonly required>
+						</td>
+						<td class="fit text-nowrap">
+							<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
+							<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
+								<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
+								<button class="btn btn-sm btn-primary" type="submit">simpan</button>
+							</div>
+							<!-- <button class="btn btn-sm btn-danger" type="button">hapus</button> -->
+						</td>
+					</form>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
-	<div class="col">
+	<div class="col-12">
 		<h2>TMA <small class="text-muted">Data Manual terbaru</small></h2>
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -83,16 +97,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for date, tma_date in tmas %}
-				{% for tma in tma_date %}
+				{% for l in lokasi_tma %}
+				{% set tma = l.manual %}
 				<tr>
-					<td>{{ tma.lokasi }}</td>
-					<td class="text-right">{{ tma.jam7 }}</td>
-					<td class="text-right">{{ tma.jam12 }}</td>
-					<td class="text-right">{{ tma.jam17 }}</td>
+					<td>{{ l.nama }}</td>
+					<td class="text-right">{{ tma.jam7 is null ? '-' : tma.jam7 }}</td>
+					<td class="text-right">{{ tma.jam12 is null ? '-' : tma.jam12 }}</td>
+					<td class="text-right">{{ tma.jam17 is null ? '-' : tma.jam17 }}</td>
 					<td class="text-right">-</td>
 				</tr>
-				{% endfor %}
 				{% endfor %}
 			</tbody>
 		</table>
@@ -188,5 +201,9 @@
 			window.location = "/admin?sampling=" + $('#datepicker').datepicker('getFormattedDate')
 		});
 	})
+
+	toggleEdit = function (cname) {
+		$("."+ cname).toggle();
+	}
 </script>
 {% endblock %}
