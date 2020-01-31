@@ -23,8 +23,7 @@
 <section class="content-header mb-4">
     <h1>{{ lokasi.nama }}
         <small class="text-muted">
-            (Klimat)
-            <!-- {{ user().lokasi.str_jenis }} -->
+            ({{ lokasi.jenis == 4 ? 'KLIMAT' : 'CH'}})
         </small>
     </h1>
     <ol class="breadcrumb">
@@ -41,26 +40,33 @@
                 data-target="#form-add">Tambah</button>
         </h2>
         <div class="collapse bg-light shadow rounded" id="form-add">
-            <form class="p-3" action="{{ path_for('admin.add.klimat') }}" method="POST">
+            <form class="p-3" action="{{ path_for(lokasi.jenis == 4 ? 'admin.add.klimat' : 'admin.add.curahhujan') }}" method="POST">
                 <div class="">
                     <table class="table table-bordered table-hover mb-0">
                         <thead>
                             <tr>
-                                <th rowspan="2">Tanggal</th>
-                                <th colspan="3">Temperatur (°C)</th>
-                                <th rowspan="2">RH (%)</th>
-                                <th colspan="2">PAN 'A'</th>
-                                <th rowspan="2">Kec. Angin (km/hari)</th>
-                                <th rowspan="2">Sinar Matahari (%)</th>
-                                <th rowspan="2">Hujan Biasa (mm)</th>
+                                {% if lokasi.jenis == 4 %}
+                                    <th rowspan="2">Tanggal</th>
+                                    <th colspan="3">Temperatur (°C)</th>
+                                    <th rowspan="2">RH (%)</th>
+                                    <th colspan="2">PAN 'A'</th>
+                                    <th rowspan="2">Kec. Angin (km/hari)</th>
+                                    <th rowspan="2">Sinar Matahari (%)</th>
+                                    <th rowspan="2">Hujan Biasa (mm)</th>
+                                {% else %}
+                                    <th>Tanggal</th>
+                                    <th>Hujan Biasa (mm)</th>
+                                {% endif %}
                             </tr>
-                            <tr>
-                                <th>Max</th>
-                                <th>Min</th>
-                                <th>Rata-rata</th>
-                                <th>Temp. Air dlm. Tangki (°C)</th>
-                                <th>Penguapan (mm)</th>
-                            </tr>
+                            {% if lokasi.jenis == 4 %}
+                                <tr>
+                                    <th>Max</th>
+                                    <th>Min</th>
+                                    <th>Rata-rata</th>
+                                    <th>Temp. Air dlm. Tangki (°C)</th>
+                                    <th>Penguapan (mm)</th>
+                                </tr>
+                            {% endif %}
                         </thead>
                         <tbody>
                             <tr>
@@ -68,32 +74,34 @@
                                     <input class="form-control" type="date" name="sampling" id="sampling" required
                                         value="{{ 'now' | date('Y-m-d') }}">
                                 </td>
-                                <td>
-                                    <input class="form-control" type="number" name="temp_max" id="temp_max" step="0.01">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" name="temp_min" id="temp_min" step="0.01">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" name="temp_avg" id="temp_avg" step="0.01">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" name="humi" id="humi" step="0.01">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" name="temp_tangki" id="temp_tangki"
-                                        step="0.01">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" name="evaporation" id="evaporation"
-                                        step="0.01">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" name="wind" id="wind" step="0.01">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" name="rad" id="rad" step="0.01">
-                                </td>
+                                {% if lokasi.jenis == 4 %}
+                                    <td>
+                                        <input class="form-control" type="number" name="temp_max" id="temp_max" step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="temp_min" id="temp_min" step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="temp_avg" id="temp_avg" step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="humi" id="humi" step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="temp_tangki" id="temp_tangki"
+                                            step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="evaporation" id="evaporation"
+                                            step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="wind" id="wind" step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="rad" id="rad" step="0.01">
+                                    </td>
+                                {% endif %}
                                 <td>
                                     <input class="form-control" type="number" name="rain" id="rain" step="0.01">
                                 </td>
@@ -126,50 +134,59 @@
                         </th>
                     </tr>
                     <tr>
-                        <th rowspan="2">Tanggal</th>
-                        <th colspan="3">Temperatur (°C)</th>
-                        <th rowspan="2">RH (%)</th>
-                        <th colspan="2">PAN 'A'</th>
-                        <th rowspan="2">Kec. Angin (km/hari)</th>
-                        <th rowspan="2">Sinar Matahari (%)</th>
-                        <th rowspan="2">Hujan Biasa (mm)</th>
+                        {% if lokasi.jenis == 4 %}
+                            <th rowspan="2">Tanggal</th>
+                            <th colspan="3">Temperatur (°C)</th>
+                            <th rowspan="2">RH (%)</th>
+                            <th colspan="2">PAN 'A'</th>
+                            <th rowspan="2">Kec. Angin (km/hari)</th>
+                            <th rowspan="2">Sinar Matahari (%)</th>
+                            <th rowspan="2">Hujan Biasa (mm)</th>
+                        {% else %}
+                            <th>Tanggal</th>
+                            <th>Hujan Biasa (mm)</th>
+                        {% endif %}
                     </tr>
-                    <tr>
-                        <th>Max</th>
-                        <th>Min</th>
-                        <th>Rata-rata</th>
-                        <th>Temp. Air dlm. Tangki (°C)</th>
-                        <th>Penguapan (mm)</th>
-                    </tr>
+                    {% if lokasi.jenis == 4 %}
+                        <tr>
+                            <th>Max</th>
+                            <th>Min</th>
+                            <th>Rata-rata</th>
+                            <th>Temp. Air dlm. Tangki (°C)</th>
+                            <th>Penguapan (mm)</th>
+                        </tr>
+                    {% endif %}
                 </thead>
                 <tbody>
                     {% for k in klimat %}
                     <tr>
                         <td class="text-center text-nowrap">{{ k.sampling | date('d') }}</td>
-                        <td class="text-center">
-                            {{ k.temp_max is null ? '-' : k.temp_max }}
-                        </td>
-                        <td class="text-center">
-                            {{ k.temp_min is null ? '-' : k.temp_min }}
-                        </td>
-                        <td class="text-center">
-                            {{ k.temp_avg is null ? '-' : k.temp_avg }}
-                        </td>
-                        <td class="text-center">
-                            {{ k.humi is null ? '-' : k.humi }}
-                        </td>
-                        <td class="text-center">
-                            {{ k.temp_tangki is null ? '-' : k.temp_tangki }}
-                        </td>
-                        <td class="text-center">
-                            {{ k.evaporation is null ? '-' : k.evaporation }}
-                        </td>
-                        <td class="text-center">
-                            {{ k.wind is null ? '-' : k.wind }}
-                        </td>
-                        <td class="text-center">
-                            {{ k.rad is null ? '-' : k.rad }}
-                        </td>
+                        {% if lokasi.jenis == 4 %}
+                            <td class="text-center">
+                                {{ k.temp_max is null ? '-' : k.temp_max }}
+                            </td>
+                            <td class="text-center">
+                                {{ k.temp_min is null ? '-' : k.temp_min }}
+                            </td>
+                            <td class="text-center">
+                                {{ k.temp_avg is null ? '-' : k.temp_avg }}
+                            </td>
+                            <td class="text-center">
+                                {{ k.humi is null ? '-' : k.humi }}
+                            </td>
+                            <td class="text-center">
+                                {{ k.temp_tangki is null ? '-' : k.temp_tangki }}
+                            </td>
+                            <td class="text-center">
+                                {{ k.evaporation is null ? '-' : k.evaporation }}
+                            </td>
+                            <td class="text-center">
+                                {{ k.wind is null ? '-' : k.wind }}
+                            </td>
+                            <td class="text-center">
+                                {{ k.rad is null ? '-' : k.rad }}
+                            </td>
+                        {% endif %}
                         <td class="text-center">
                             {{ k.rain is null ? '-' : k.rain }}
                         </td>
