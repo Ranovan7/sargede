@@ -26,9 +26,9 @@ $app->group('/curahhujan', function() {
 
         $result = [];
         foreach ($lokasi as $l) {
-            if (!in_array($l['id'], $logger_ids)) {
-                continue;
-            }
+            // if (!in_array($l['id'], $logger_ids)) {
+            //     continue;
+            // }
             $ch = $this->db->query("SELECT * FROM periodik
                                     WHERE lokasi_id = {$l['id']} AND rain IS NOT NULL
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
@@ -53,6 +53,20 @@ $app->group('/curahhujan', function() {
                 }
                 $durasi_all += $c['rain'];
             };
+
+            if (!in_array($l['id'], $logger_ids)) {
+                $durasi_07_13 = "-";
+                $durasi_13_19 = "-";
+                $durasi_19_01 = "-";
+                $durasi_01_07 = "-";
+                $durasi_all = "-";
+            } else {
+                $durasi_07_13 = "{$durasi_07_13} mm";
+                $durasi_13_19 = "{$durasi_13_19} mm";
+                $durasi_19_01 = "{$durasi_19_01} mm";
+                $durasi_01_07 = "{$durasi_01_07} mm";
+                $durasi_all = "{$durasi_all} mm";
+            }
 
             $hari_manual = date('Y-m-d', strtotime($hari .' -1day'));
             $ch_manual = $this->db->query("SELECT * FROM curahujan
