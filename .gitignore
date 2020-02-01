@@ -10,4 +10,5 @@ raw/
 .env
 *.zip
 /*.bat
+/commit_messages
 composer.lock

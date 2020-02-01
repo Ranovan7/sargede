@@ -44,10 +44,12 @@
                       {% for l in lokasi %}
                             <option value="{{ l.id }}">
                                 {{ l.nama }}
-                                {% if l.jenis == '1' or l.jenis == '4' %}
+                                {% if l.jenis == '1' %}
                                     (CH)
                                 {% elseif l.jenis == '2' %}
                                     (TMA)
+                                {% elseif l.jenis == '4' %}
+                                    (KLIMAT)
                                 {% endif %}
                             </option>
                       {% endfor %}
@@ -83,10 +85,12 @@
             {% endif %}
             <td>
                 {{ u.lokasi_nama }}
-                {% if u.lokasi_jenis == '1' or u.lokasi_jenis == '4' %}
+                {% if u.lokasi_jenis == '1' %}
                     (CH)
                 {% elseif u.lokasi_jenis == '2' %}
                     (TMA)
+                {% elseif u.lokasi_jenis == '4' %}
+                    (KLIMAT)
                 {% endif %}
             </td>
             <td>

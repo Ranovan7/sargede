@@ -21,59 +21,72 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         // ADMIN
         if ($user['role'] == 1)
         {
+            $from = date('Y-m-d 00:00:00', strtotime($sampling));
+            $to = date('Y-m-d 23:59:59', strtotime($sampling));
+            $prev = date('Y-m-d', strtotime("{$sampling} -1day"));
+            $next = date('Y-m-d', strtotime("{$sampling} +1day"));
+
+            $lokasi_tma = $this->db->query("SELECT * FROM lokasi WHERE jenis='2' ORDER BY nama")->fetchAll();
             $tmas_temp = $this->db->query("SELECT
-                                tma.id,
-                                tma.sampling,
-                                tma.lokasi_id,
-                                tma.received,
-                                tma.petugas,
-                                tma.manual,
-                                lokasi.nama AS lokasi_nama
+                                tma.*
                             FROM
-                                tma LEFT JOIN lokasi ON (lokasi.id = tma.lokasi_id)
+                                tma
                             WHERE
                                 tma.manual IS NOT NULL
-                            ORDER BY sampling DESC")->fetchAll();
+                                AND sampling BETWEEN '{$from}' AND '{$to}'
+                            ORDER BY sampling")->fetchAll();
             $tmas = [];
             foreach ($tmas_temp as $tma) {
                 $date = date('Y-m-d', strtotime($tma['sampling']));
                 $time = date('H:i', strtotime($tma['sampling']));
                 $lokasi_id = $tma['lokasi_id'];
 
-                if (!isset($tmas[$date])) {
-                    $tmas[$date] = [];
-                }
-                if (!isset($tmas[$date][$lokasi_id])) {
-                    $tmas[$date][$lokasi_id] = [
+                // if (!isset($tmas[$date])) {
+                //     $tmas[$date] = [];
+                // }
+                if (!isset($tmas[$lokasi_id])) {
+                    $tmas[$lokasi_id] = [
                         'sampling' => $date,
                         'jam7' => "-",
                         'jam12' => "-",
                         'jam17' => "-",
-                        'lokasi' => $tma['lokasi_nama']
+                        // 'lokasi' => $tma['lokasi_nama']
                     ];
                 }
 
                 switch ($time) {
                     case '07:00':
-                        $tmas[$date][$lokasi_id]['jam7'] = $tma['manual'];
+                        $tmas[$lokasi_id]['jam7'] = $tma['manual'];
                         break;
                     case '12:00':
-                        $tmas[$date][$lokasi_id]['jam12'] = $tma['manual'];
+                        $tmas[$lokasi_id]['jam12'] = $tma['manual'];
                         break;
                     case '17:00':
-                        $tmas[$date][$lokasi_id]['jam17'] = $tma['manual'];
+                        $tmas[$lokasi_id]['jam17'] = $tma['manual'];
                         break;
                 }
             }
+            foreach ($lokasi_tma as &$l) {
+                $l['manual'] = isset($tmas[$l['id']]) ? $tmas[$l['id']] : null;
+            }
+            unset($l);
             
-            $from = date('Y-m-d 00:00:00', strtotime($sampling));
-            $to = date('Y-m-d 23:59:59', strtotime($sampling));
-            $prev = date('Y-m-d', strtotime("{$sampling} -1day"));
-            $next = date('Y-m-d', strtotime("{$sampling} +1day"));
-
-            $lokasi = $this->db->query("SELECT * FROM lokasi ORDER BY nama")->fetchAll();
-            foreach ($lokasi as &$l) {
-                $l['klimat'] = $this->db->query("SELECT * FROM manual_daily
+            // CH
+            $lokasi_ch = $this->db->query("SELECT * FROM lokasi WHERE jenis='1' ORDER BY nama")->fetchAll();
+            foreach ($lokasi_ch as &$l) {
+                $l['manual'] = $this->db->query("SELECT * FROM manual_daily
+                    WHERE lokasi_id={$l['id']}
+                        AND sampling BETWEEN '{$from}' AND '{$to}'
+                    ORDER BY sampling DESC
+                    LIMIT 1")
+                    ->fetch();
+            }
+            unset($l);
+            
+            // KLIMAT
+            $lokasi_klimat = $this->db->query("SELECT * FROM lokasi WHERE jenis='4' ORDER BY nama")->fetchAll();
+            foreach ($lokasi_klimat as &$l) {
+                $l['manual'] = $this->db->query("SELECT * FROM manual_daily
                     WHERE lokasi_id={$l['id']}
                         AND sampling BETWEEN '{$from}' AND '{$to}'
                     ORDER BY sampling DESC
@@ -83,8 +96,9 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             unset($l);
 
             return $this->view->render($response, 'admin/index.html', [
-                'tmas' => $tmas,
-                'lokasi' => $lokasi,
+                'lokasi_tma' => $lokasi_tma,
+                'lokasi_ch' => $lokasi_ch,
+                'lokasi_klimat' => $lokasi_klimat,
                 'prev' => $prev,
                 'next' => $next,
                 'sampling' => $sampling,
@@ -92,11 +106,19 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         }
         else
         {
+            $from = date('Y-m-01 00:00:00', strtotime($sampling));
+            $to = date('Y-m-t 23:59:59', strtotime($sampling));
+            $prev = date('Y-m-d', strtotime("{$sampling} first day of last month"));
+            $next = date('Y-m-d', strtotime("{$sampling} first day of next month"));
+
             // PENGAMAT
             $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$user['lokasi_id']}")->fetch();
             if ($lokasi['jenis'] == 2) // tma
             {
-                $tmas_temp = $this->db->query("SELECT * FROM tma WHERE lokasi_id={$user['lokasi_id']} ORDER BY sampling DESC")->fetchAll();
+                $tmas_temp = $this->db->query("SELECT * FROM tma
+                    WHERE lokasi_id={$user['lokasi_id']}
+                        AND sampling BETWEEN '{$from}' AND '{$to}'
+                    ORDER BY sampling")->fetchAll();
 
                 $tmas = [];
                 foreach ($tmas_temp as $tma) {
@@ -106,9 +128,9 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     if (!isset($tmas[$date])) {
                         $tmas[$date] = [
                             'sampling' => $date,
-                            'jam7' => 0,
-                            'jam12' => 0,
-                            'jam17' => 0,
+                            'jam7' => null,
+                            'jam12' => null,
+                            'jam17' => null,
                         ];
                     }
 
@@ -138,15 +160,13 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     'lokasi' => $lokasi,
                     'tmas' => $tmas,
                     'inputjam' => $inputjam,
+                    'prev' => $prev,
+                    'next' => $next,
+                    'sampling' => $sampling,
                 ]);
             }
             else // ch & klimat
             {
-                $from = date('Y-m-01 00:00:00', strtotime($sampling));
-                $to = date('Y-m-t 23:59:59', strtotime($sampling));
-                $prev = date('Y-m-d', strtotime("{$sampling} first day of last month"));
-                $next = date('Y-m-d', strtotime("{$sampling} first day of next month"));
-
                 $klimat = $this->db->query("SELECT * FROM manual_daily
                     WHERE lokasi_id={$user['lokasi_id']}
                         AND sampling BETWEEN '{$from}' AND '{$to}'
@@ -231,56 +251,58 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 ]);
             }
 
-            return $response->withRedirect('/admin');
+            $sampling = date('Y-m-d', strtotime($sampling));
+            return $response->withRedirect("/admin?sampling={$sampling}");
         })->setName('admin.add.tma');
 
-        // $this->post('/curahhujan', function(Request $request, Response $response) {
-        //     $user = $request->getAttribute('user'); // didapat dari middleware
-        //     $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
-        //     $now = date('Y-m-d H:i:s');
+        $this->post('/curahhujan', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user'); // didapat dari middleware
+            $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
+            $now = date('Y-m-d H:i:s');
 
-        //     $form = $request->getParams();
-        //     // check if exists, if not insert if yes update
-        //     $sampling = $form['sampling'];
-        //     $available = $this->db->query("SELECT * FROM curahujan WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
-        //     if (!empty($available)) {
-        //         $stmt = $this->db->prepare("UPDATE curahujan SET
-        //                             manual=:manual,
-        //                             received=:received,
-        //                             petugas=:petugas
-        //                          WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
-        //         $stmt->execute([
-        //             ':sampling' => $form['sampling'] ." 07:00:00",
-        //             ':received' => $now,
-        //             ':petugas' => $user['id'],
-        //             ':manual' => $form['manual'],
-        //             ':lokasi_id' => $lokasi['id']
-        //         ]);
-        //     } else {
-        //         $stmt = $this->db->prepare("INSERT INTO curahujan (
-        //                             sampling,
-        //                             manual,
-        //                             lokasi_id,
-        //                             received,
-        //                             petugas
-        //                         ) VALUES (
-        //                             :sampling,
-        //                             :manual,
-        //                             :lokasi_id,
-        //                             :received,
-        //                             :petugas
-        //                         )");
-        //         $stmt->execute([
-        //             ':sampling' => $form['sampling'] ." 07:00:00",
-        //             ':lokasi_id' => $lokasi['id'],
-        //             ':received' => $now,
-        //             ':petugas' => $user['id'],
-        //             ':manual' => $form['manual'],
-        //         ]);
-        //     }
+            $form = $request->getParams();
+            // check if exists, if not insert if yes update
+            $sampling = $form['sampling'] ." 07:00:00";
+            $available = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+            if (!empty($available)) {
+                $stmt = $this->db->prepare("UPDATE manual_daily SET
+                                    rain=:rain,
+                                    received=:received,
+                                    petugas=:petugas
+                                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." 07:00:00",
+                    ':received' => $now,
+                    ':petugas' => $user['username'],
+                    ':rain' => $form['rain'],
+                    ':lokasi_id' => $lokasi['id']
+                ]);
+            } else {
+                $stmt = $this->db->prepare("INSERT INTO manual_daily (
+                                    sampling,
+                                    rain,
+                                    lokasi_id,
+                                    received,
+                                    petugas
+                                ) VALUES (
+                                    :sampling,
+                                    :rain,
+                                    :lokasi_id,
+                                    :received,
+                                    :petugas
+                                )");
+                $stmt->execute([
+                    ':sampling' => $form['sampling'] ." 07:00:00",
+                    ':lokasi_id' => $lokasi['id'],
+                    ':received' => $now,
+                    ':petugas' => $user['username'],
+                    ':rain' => $form['rain'],
+                ]);
+            }
 
-        //     return $response->withRedirect('/admin');
-        // })->setName('admin.add.curahhujan');
+            $sampling = date('Y-m-d', strtotime($sampling));
+            return $response->withRedirect("/admin?sampling={$sampling}");
+        })->setName('admin.add.curahhujan');
 
         $this->post('/klimat', function(Request $request, Response $response) {
             $user = $request->getAttribute('user'); // didapat dari middleware
@@ -289,7 +311,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
 
             $form = $request->getParams();
             // check if exists, if not insert if yes update
-            $sampling = $form['sampling'];
+            $sampling = $form['sampling'] ." 07:00:00";
             $available = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
             if (!empty($available)) {
                 $stmt = $this->db->prepare("UPDATE manual_daily SET
@@ -366,12 +388,13 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 ]);
             }
 
-            return $response->withRedirect('/admin');
+            $sampling = date('Y-m-d', strtotime($sampling));
+            return $response->withRedirect("/admin?sampling={$sampling}");
         })->setName('admin.add.klimat');
 
     })->add(function(Request $request, Response $response, $next) {
 
-        // hanya user role pengamat yg dapat akses
+        // hanya user role pengamat & admin yg dapat akses
         $user = $request->getAttribute('user');
         if ($user['role'] != 2) {
             throw new \Slim\Exception\NotFoundException($request, $response);
@@ -380,10 +403,59 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         return $next($request, $response);
     });
 
+    /**
+     * GROUP EDIT
+     */
+    $this->group('/edit', function() {
+        $this->post('/tma', function(Request $request, Response $response) {
+
+        });
+
+        $this->post('/curahhujan', function(Request $request, Response $response) {
+            $form = $request->getParams();
+            $sampling = $form['sampling'] ." 07:00:00";
+            $manual = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$form['lokasi_id']} AND sampling='{$sampling}'")->fetch();
+            if (!$manual) {
+                $stmt = $this->db->prepare("INSERT INTO manual_daily (
+                        lokasi_id,
+                        sampling,
+                        rain)
+                    VALUES (
+                        :lokasi_id,
+                        :sampling,
+                        :rain)");
+            } else {
+                $stmt = $this->db->prepare("UPDATE manual_daily SET rain=:rain
+                    WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+            }
+            $stmt->execute([
+                'lokasi_id' => $form['lokasi_id'],
+                'sampling' => $sampling,
+                'rain' => $form['rain'],
+            ]);
+
+            return $response->withRedirect("/admin?sampling={$form['sampling']}");
+        })->setName('admin.edit.curahhujan');
+
+        $this->post('/klimat', function(Request $request, Response $response) {
+
+        });
+    })->add(function(Request $request, Response $response, $next) {
+        $user = $request->getAttribute('user', null);
+        if ($user['role'] != 1) {
+            throw new \Slim\Exception\NotFoundException($request, $response);
+        }
+
+        $lokasi_id = $request->getParam('lokasi_id');
+        $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+        $request = $request->withAttribute('lokasi', $lokasi);
+
+        return $next($request, $response);
+    });
 })->add(function(Request $request, Response $response, $next) {
 
     $user = $request->getAttribute('user', null);
-    if ($user && $user['role'] == 2) {
+    if ($user['role'] == 2) {
         $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$user['lokasi_id']}")->fetch();
         $request = $request->withAttribute('lokasi', $lokasi);
     }
