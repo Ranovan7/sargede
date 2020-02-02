@@ -40,7 +40,7 @@
 				<tr>
 					<th>POS</th>
 					<th>Hujan (mm)</th>
-					<th>Aksi</th>
+					{# <th>Aksi</th> #}
 				</tr>
 			</thead>
 			<tbody>
@@ -55,14 +55,14 @@
 							<input type="hidden" name="lokasi_id" value="{{ l.id }}" readonly required>
 							<input type="hidden" name="sampling" value="{{ sampling }}" readonly required>
 						</td>
-						<td class="fit text-nowrap">
+						{# <td class="fit text-nowrap">
 							<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
 							<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
 								<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
 								<button class="btn btn-sm btn-primary" type="submit">simpan</button>
 							</div>
 							<!-- <button class="btn btn-sm btn-danger" type="button">hapus</button> -->
-						</td>
+						</td> #}
 					</form>
 				</tr>
 				{% endfor %}
@@ -94,17 +94,42 @@
 					<th>Jam 12</th>
 					<th>Jam 17</th>
 					<th>TMA (meter)</th>
+					{# <th>Aksi</th> #}
 				</tr>
 			</thead>
 			<tbody>
 				{% for l in lokasi_tma %}
 				{% set tma = l.manual %}
 				<tr>
-					<td>{{ l.nama }}</td>
-					<td class="text-right">{{ tma.jam7 is null ? '-' : tma.jam7 }}</td>
-					<td class="text-right">{{ tma.jam12 is null ? '-' : tma.jam12 }}</td>
-					<td class="text-right">{{ tma.jam17 is null ? '-' : tma.jam17 }}</td>
-					<td class="text-right">-</td>
+					<form action="{{ path_for('admin.edit.tma') }}" method="post">
+						<td>{{ l.nama }}</td>
+						<td class="text-right">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ tma.jam7 is null ? '-' : tma.jam7 }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="tma[0][manual]" step="0.01" value="{{ tma.jam7 }}" required>
+							<input type="hidden" name="tma[0][jam]" value="07:00" readonly required>
+							<input type="hidden" name="lokasi_id" value="{{ l.id }}" readonly required>
+							<input type="hidden" name="sampling" value="{{ sampling }}" readonly required>
+						</td>
+						<td class="text-right">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ tma.jam12 is null ? '-' : tma.jam12 }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="tma[1][manual]" step="0.01" value="{{ tma.jam12 }}" required>
+							<input type="hidden" name="tma[1][jam]" value="12:00" readonly required>
+						</td>
+						<td class="text-right">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ tma.jam17 is null ? '-' : tma.jam17 }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="tma[2][manual]" step="0.01" value="{{ tma.jam17 }}" required>
+							<input type="hidden" name="tma[2][jam]" value="17:00" readonly required>
+						</td>
+						<td class="text-right">-</td>
+						{# <td class="fit text-nowrap">
+							<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
+							<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
+								<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
+								<button class="btn btn-sm btn-primary" type="submit">simpan</button>
+							</div>
+							<!-- <button class="btn btn-sm btn-danger" type="button">hapus</button> -->
+						</td> #}
+					</form>
 				</tr>
 				{% endfor %}
 			</tbody>
