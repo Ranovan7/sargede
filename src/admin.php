@@ -323,23 +323,23 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                                     humi=:humi,
                                     temp_tangki=:temp_tangki,
                                     evaporation=:evaporation,
-                                    wind=:wind
+                                    wind=:wind,
                                     rad=:rad,
-                                    rain=:rain,
+                                    rain=:rain
                                  WHERE lokasi_id={$lokasi['id']} AND sampling=:sampling");
                 $stmt->execute([
                     ':sampling' => $form['sampling'] ." 07:00:00",
                     ':petugas' => $user['username'],
                     ':received' => $now,
-                    ':temp_max' => $form['temp_max'],
-                    ':temp_min' => $form['temp_min'],
-                    ':temp_avg' => $form['temp_avg'],
-                    ':humi' => $form['humi'],
-                    ':temp_tangki' => $form['temp_tangki'],
-                    ':evaporation' => $form['evaporation'],
-                    ':wind' => $form['wind'],
-                    ':rad' => $form['rad'],
-                    ':rain' => $form['rain'],
+                    ':temp_max' => $form['temp_max'] ?: null,
+                    ':temp_min' => $form['temp_min'] ?: null,
+                    ':temp_avg' => $form['temp_avg'] ?: null,
+                    ':humi' => $form['humi'] ?: null,
+                    ':temp_tangki' => $form['temp_tangki'] ?: null,
+                    ':evaporation' => $form['evaporation'] ?: null,
+                    ':wind' => $form['wind'] ?: null,
+                    ':rad' => $form['rad'] ?: null,
+                    ':rain' => $form['rain'] ?: null,
                 ]);
             } else {
                 $stmt = $this->db->prepare("INSERT INTO manual_daily (
@@ -408,10 +408,49 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
      */
     $this->group('/edit', function() {
         $this->post('/tma', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user');
+            $form = $request->getParams();
+            $sampling = $form['sampling'];
+            $lokasi_id = $form['lokasi_id'];
+            foreach ($form['tma'] as $dt) {
+                $tma = $this->db->query("SELECT * FROM tma
+                    WHERE lokasi_id={$lokasi_id}
+                        AND sampling='{$sampling} {$dt['jam']}'")->fetch();
+                if (!$tma) {
+                    $stmt = $this->db->prepare("INSERT INTO tma (
+                            lokasi_id,
+                            sampling,
+                            petugas,
+                            received,
+                            manual)
+                        VALUES (
+                            :lokasi_id,
+                            :sampling,
+                            :petugas,
+                            :received,
+                            :manual)");
+                } else {
+                    $stmt = $this->db->prepare("UPDATE tma
+                        SET petugas=:petugas,
+                            received=:received,
+                            manual=:manual
+                        WHERE lokasi_id=:lokasi_id
+                            AND sampling=:sampling");
+                }
+                $stmt->execute([
+                    'lokasi_id' => $lokasi_id,
+                    'sampling' => "{$sampling} {$dt['jam']}",
+                    'petugas' => $user['username'],
+                    'received' => date('Y-m-d H:i:s'),
+                    'manual' => $dt['manual'],
+                ]);
 
-        });
+                return $response->withRedirect("/admin?sampling={$form['sampling']}");
+            }
+        })->setName('admin.edit.tma');
 
         $this->post('/curahhujan', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user');
             $form = $request->getParams();
             $sampling = $form['sampling'] ." 07:00:00";
             $manual = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$form['lokasi_id']} AND sampling='{$sampling}'")->fetch();
@@ -419,18 +458,27 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 $stmt = $this->db->prepare("INSERT INTO manual_daily (
                         lokasi_id,
                         sampling,
+                        petugas,
+                        received,
                         rain)
                     VALUES (
                         :lokasi_id,
                         :sampling,
+                        :petugas,
+                        :received,
                         :rain)");
             } else {
-                $stmt = $this->db->prepare("UPDATE manual_daily SET rain=:rain
+                $stmt = $this->db->prepare("UPDATE manual_daily 
+                    SET rain=:rain,
+                        petugas=:petugas,
+                        received=:received
                     WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             }
             $stmt->execute([
                 'lokasi_id' => $form['lokasi_id'],
                 'sampling' => $sampling,
+                'petugas' => $user['username'],
+                'received' => date("Y-m-d H:i:s"),
                 'rain' => $form['rain'],
             ]);
 
