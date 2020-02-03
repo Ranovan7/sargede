@@ -250,7 +250,7 @@ $container->get('view')->getEnvironment()->addFunction($session);
 
 // Menambahkan fungsi flash() pada Twig
 $flash = new Twig\TwigFunction('flash', function ($key) use ($container) {
-    return $container->get('flash')->getMessages($key);
+    return $container->get('flash')->getMessage($key);
 });
 $container->get('view')->getEnvironment()->addFunction($flash);
 
