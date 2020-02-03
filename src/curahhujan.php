@@ -69,8 +69,8 @@ $app->group('/curahhujan', function() {
             }
 
             $hari_manual = date('Y-m-d', strtotime($hari .' -1day'));
-            $ch_manual = $this->db->query("SELECT * FROM curahujan
-                                WHERE lokasi_id = {$l['id']} AND manual IS NOT NULL
+            $ch_manual = $this->db->query("SELECT * FROM manual_daily
+                                WHERE lokasi_id = {$l['id']} AND rain IS NOT NULL
                                     AND sampling = '{$hari_manual}'")->fetch();
 
             $result[] = [
@@ -80,7 +80,7 @@ $app->group('/curahhujan', function() {
                 'durasi_19_01' => $durasi_19_01,
                 'durasi_01_07' => $durasi_01_07,
                 'durasi_all' => $durasi_all,
-                'durasi_manual' => $ch_manual ? $ch_manual['manual'] : null,
+                'durasi_manual' => $ch_manual ? $ch_manual['rain'] : null,
             ];
         }
 
