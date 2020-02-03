@@ -167,7 +167,7 @@ $app->group('/tma', function() {
             }
 
             $result['datasets'][] = [
-                'label' => "Tinggi Mata Air",
+                'label' => "Tinggi Muka Air",
                 'data' => $data,
                 'backgroundColor' => "rgba(255, 255, 255, 0.5)",
                 'borderColor' => "rgba(205, 50, 0, 0.5)",
