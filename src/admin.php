@@ -10,7 +10,10 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
     $this->get('[/]', function(Request $request, Response $response, $args) {
         // get user yg didapat dari middleware
         $user = $request->getAttribute('user');
-        $sampling = $request->getParam('sampling', date('Y-m-d'));
+        $sampling = $request->getParam('sampling', null);
+        if (empty($sampling)) {
+            $sampling = date('Y-m-d');
+        }
 
         // $hari = $request->getParam('sampling', date('Y-m-d'));//"2019-06-26");
         // $prev_date = date('Y-m-d', strtotime($hari .' -1day'));
@@ -410,43 +413,29 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         $this->post('/tma', function(Request $request, Response $response) {
             $user = $request->getAttribute('user');
             $form = $request->getParams();
-            $sampling = $form['sampling'];
             $lokasi_id = $form['lokasi_id'];
             foreach ($form['tma'] as $dt) {
+                $sampling = $dt['sampling'];
                 $tma = $this->db->query("SELECT * FROM tma
                     WHERE lokasi_id={$lokasi_id}
-                        AND sampling='{$sampling} {$dt['jam']}'")->fetch();
+                        AND sampling='{$sampling}'")->fetch();
                 if (!$tma) {
-                    $stmt = $this->db->prepare("INSERT INTO tma (
-                            lokasi_id,
-                            sampling,
-                            petugas,
-                            received,
-                            manual)
-                        VALUES (
-                            :lokasi_id,
-                            :sampling,
-                            :petugas,
-                            :received,
-                            :manual)");
-                } else {
-                    $stmt = $this->db->prepare("UPDATE tma
-                        SET petugas=:petugas,
-                            received=:received,
-                            manual=:manual
-                        WHERE lokasi_id=:lokasi_id
-                            AND sampling=:sampling");
+                    throw new Slim\Exception\NotFoundException($request, $response);
                 }
+                
+                $stmt = $this->db->prepare("UPDATE tma
+                    SET
+                        manual=:manual
+                    WHERE lokasi_id=:lokasi_id
+                        AND sampling=:sampling");
                 $stmt->execute([
                     'lokasi_id' => $lokasi_id,
-                    'sampling' => "{$sampling} {$dt['jam']}",
-                    'petugas' => $user['username'],
-                    'received' => date('Y-m-d H:i:s'),
+                    'sampling' => "{$sampling}",
                     'manual' => $dt['manual'],
                 ]);
-
-                return $response->withRedirect("/admin?sampling={$form['sampling']}");
             }
+            $sampling = date('Y-m-d', strtotime($sampling));
+            return $response->withRedirect("/admin?sampling={$sampling}");
         })->setName('admin.edit.tma');
 
         $this->post('/curahhujan', function(Request $request, Response $response) {
@@ -455,30 +444,15 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $sampling = $form['sampling'] ." 07:00:00";
             $manual = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$form['lokasi_id']} AND sampling='{$sampling}'")->fetch();
             if (!$manual) {
-                $stmt = $this->db->prepare("INSERT INTO manual_daily (
-                        lokasi_id,
-                        sampling,
-                        petugas,
-                        received,
-                        rain)
-                    VALUES (
-                        :lokasi_id,
-                        :sampling,
-                        :petugas,
-                        :received,
-                        :rain)");
-            } else {
-                $stmt = $this->db->prepare("UPDATE manual_daily 
-                    SET rain=:rain,
-                        petugas=:petugas,
-                        received=:received
-                    WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+                throw new Slim\Exception\NotFoundException($request, $response);
             }
+            
+            $stmt = $this->db->prepare("UPDATE manual_daily 
+                SET rain=:rain
+                WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             $stmt->execute([
                 'lokasi_id' => $form['lokasi_id'],
                 'sampling' => $sampling,
-                'petugas' => $user['username'],
-                'received' => date("Y-m-d H:i:s"),
                 'rain' => $form['rain'],
             ]);
 
@@ -486,7 +460,112 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
         })->setName('admin.edit.curahhujan');
 
         $this->post('/klimat', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user'); // didapat dari middleware
+            $lokasi = $request->getAttribute('lokasi'); // didapat dari middleware
+            $now = date('Y-m-d H:i:s');
 
+            $form = $request->getParams();
+            // check if exists, if not insert if yes update
+            $sampling = $form['sampling'] ." 07:00:00";
+            $available = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+            if (!$available) {
+                throw new Slim\Exception\NotFoundException($request, $response);
+            }
+
+            $stmt = $this->db->prepare("UPDATE manual_daily SET
+                                temp_max=:temp_max,
+                                temp_min=:temp_min,
+                                temp_avg=:temp_avg,
+                                humi=:humi,
+                                temp_tangki=:temp_tangki,
+                                evaporation=:evaporation,
+                                wind=:wind,
+                                rad=:rad,
+                                rain=:rain
+                                WHERE lokasi_id={$lokasi['id']} AND sampling=:sampling");
+            $stmt->execute([
+                ':sampling' => $form['sampling'] ." 07:00:00",
+                ':temp_max' => $form['temp_max'] ?: null,
+                ':temp_min' => $form['temp_min'] ?: null,
+                ':temp_avg' => $form['temp_avg'] ?: null,
+                ':humi' => $form['humi'] ?: null,
+                ':temp_tangki' => $form['temp_tangki'] ?: null,
+                ':evaporation' => $form['evaporation'] ?: null,
+                ':wind' => $form['wind'] ?: null,
+                ':rad' => $form['rad'] ?: null,
+                ':rain' => $form['rain'] ?: null,
+            ]);
+
+            $sampling = date('Y-m-d', strtotime($sampling));
+            return $response->withRedirect("/admin?sampling={$sampling}");
+        })->setName('admin.edit.klimat');
+    })->add(function(Request $request, Response $response, $next) {
+        $user = $request->getAttribute('user', null);
+        if ($user['role'] != 1) {
+            throw new \Slim\Exception\NotFoundException($request, $response);
+        }
+
+        $lokasi_id = $request->getParam('lokasi_id');
+        $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+        $request = $request->withAttribute('lokasi', $lokasi);
+
+        return $next($request, $response);
+    });
+
+    /**
+     * GROUP DELETE
+     */
+    $this->group('/delete', function() {
+        $this->get('/tma', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user');
+            $form = $request->getParams();
+            $lokasi_id = $form['lokasi_id'];
+            $sampling = $form['sampling'];
+            $sampling = [
+                "'{$sampling} 07:00'",
+                "'{$sampling} 12:00'",
+                "'{$sampling} 17:00'"
+            ];
+            $sampling = implode(",", $sampling);
+
+            $stmt = $this->db->prepare("DELETE FROM tma WHERE lokasi_id=:lokasi_id AND sampling IN ({$sampling})");
+            $stmt->execute([
+                'lokasi_id' => $lokasi_id
+            ]);
+            
+            return $response->withRedirect("/admin?sampling={$form['sampling']}");
+        });
+
+        $this->get('/curahhujan', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user');
+            $form = $request->getParams();
+            $lokasi_id = $form['lokasi_id'];
+            $sampling = $form['sampling'] ." 07:00:00";
+            
+            $stmt = $this->db->prepare("DELETE FROM manual_daily
+                WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+            $stmt->execute([
+                'lokasi_id' => $form['lokasi_id'],
+                'sampling' => $sampling
+            ]);
+
+            return $response->withRedirect("/admin?sampling={$form['sampling']}");
+        });
+
+        $this->get('/klimat', function(Request $request, Response $response) {
+            $user = $request->getAttribute('user');
+            $form = $request->getParams();
+            $lokasi_id = $form['lokasi_id'];
+            $sampling = $form['sampling'] ." 07:00:00";
+            
+            $stmt = $this->db->prepare("DELETE FROM manual_daily
+                WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+            $stmt->execute([
+                'lokasi_id' => $form['lokasi_id'],
+                'sampling' => $sampling
+            ]);
+
+            return $response->withRedirect("/admin?sampling={$form['sampling']}");
         });
     })->add(function(Request $request, Response $response, $next) {
         $user = $request->getAttribute('user', null);

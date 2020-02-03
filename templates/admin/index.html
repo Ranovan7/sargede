@@ -5,7 +5,23 @@
 {% block css %}
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<style>
+td input {
+	min-width: 65px;
+	text-align: center;
+}
+/* Chrome, Safari, Edge, Opera */
+td input::-webkit-outer-spin-button,
+td input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+td input[type=number] {
+  -moz-appearance:textfield;
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +45,7 @@
 								<i class="fas fa-chevron-left mr-2"></i>
 								{{ prev | date('d M Y') }}
 							</a>
-							<span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+							<span class="mx-3" id="datepicker-1">{{ sampling | date('d M Y') }}</span>
 							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-dark">
 								{{ next | date('d M Y') }}
 								<i class="fas fa-chevron-right ml-2"></i>
@@ -40,7 +56,7 @@
 				<tr>
 					<th>POS</th>
 					<th>Hujan (mm)</th>
-					{# <th>Aksi</th> #}
+					<th>Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -55,14 +71,18 @@
 							<input type="hidden" name="lokasi_id" value="{{ l.id }}" readonly required>
 							<input type="hidden" name="sampling" value="{{ sampling }}" readonly required>
 						</td>
-						{# <td class="fit text-nowrap">
-							<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
-							<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
-								<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
-								<button class="btn btn-sm btn-primary" type="submit">simpan</button>
-							</div>
-							<!-- <button class="btn btn-sm btn-danger" type="button">hapus</button> -->
-						</td> #}
+						<td class="fit text-nowrap text-center">
+							{% if l.manual %}
+								<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
+								<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
+									<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
+									<button class="btn btn-sm btn-primary" type="submit">simpan</button>
+								</div>
+								<button class="btn btn-sm btn-danger" type="button" data-id="{{ l.id }}" data-nama="{{ l.nama }}" data-jenis="curahhujan" onclick="confirmDelete(this)">hapus</button>
+							{% else %}
+								-
+							{% endif %}
+						</td>
 					</form>
 				</tr>
 				{% endfor %}
@@ -80,7 +100,7 @@
 								<i class="fas fa-chevron-left mr-2"></i>
 								{{ prev | date('d M Y') }}
 							</a>
-							<span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+							<span class="mx-3" id="datepicker-2">{{ sampling | date('d M Y') }}</span>
 							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-dark">
 								{{ next | date('d M Y') }}
 								<i class="fas fa-chevron-right ml-2"></i>
@@ -94,7 +114,7 @@
 					<th>Jam 12</th>
 					<th>Jam 17</th>
 					<th>TMA (meter)</th>
-					{# <th>Aksi</th> #}
+					<th>Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -106,29 +126,32 @@
 						<td class="text-right">
 							<span class="ch_{{ l.id }}_{{ sampling }}">{{ tma.jam7 is null ? '-' : tma.jam7 }}</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="tma[0][manual]" step="0.01" value="{{ tma.jam7 }}" required>
-							<input type="hidden" name="tma[0][jam]" value="07:00" readonly required>
+							<input type="hidden" name="tma[0][sampling]" value="{{ sampling }} 07:00" readonly required>
 							<input type="hidden" name="lokasi_id" value="{{ l.id }}" readonly required>
-							<input type="hidden" name="sampling" value="{{ sampling }}" readonly required>
 						</td>
 						<td class="text-right">
 							<span class="ch_{{ l.id }}_{{ sampling }}">{{ tma.jam12 is null ? '-' : tma.jam12 }}</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="tma[1][manual]" step="0.01" value="{{ tma.jam12 }}" required>
-							<input type="hidden" name="tma[1][jam]" value="12:00" readonly required>
+							<input type="hidden" name="tma[1][sampling]" value="{{ sampling }} 12:00" readonly required>
 						</td>
 						<td class="text-right">
 							<span class="ch_{{ l.id }}_{{ sampling }}">{{ tma.jam17 is null ? '-' : tma.jam17 }}</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="tma[2][manual]" step="0.01" value="{{ tma.jam17 }}" required>
-							<input type="hidden" name="tma[2][jam]" value="17:00" readonly required>
+							<input type="hidden" name="tma[2][sampling]" value="{{ sampling }} 17:00" readonly required>
 						</td>
 						<td class="text-right">-</td>
-						{# <td class="fit text-nowrap">
-							<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
-							<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
-								<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
-								<button class="btn btn-sm btn-primary" type="submit">simpan</button>
-							</div>
-							<!-- <button class="btn btn-sm btn-danger" type="button">hapus</button> -->
-						</td> #}
+						<td class="fit text-nowrap text-center">
+							{% if l.manual %}
+								<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
+								<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
+									<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
+									<button class="btn btn-sm btn-primary" type="submit">simpan</button>
+								</div>
+								<button class="btn btn-sm btn-danger" type="button" data-id="{{ l.id }}" data-nama="{{ l.nama }}" data-jenis="tma" onclick="confirmDelete(this)">hapus</button>
+							{% else %}
+								-
+							{% endif %}
+						</td>
 					</form>
 				</tr>
 				{% endfor %}
@@ -141,13 +164,13 @@
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr class="bg-dark text-white">
-					<th class="text-uppercase" colspan="10">
+					<th class="text-uppercase" colspan="99">
 						<div class="d-flex justify-content-between align-items-center">
 							<a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-dark">
 								<i class="fas fa-chevron-left mr-2"></i>
 								{{ prev | date('d M Y') }}
 							</a>
-							<span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+							<span class="mx-3" id="datepicker-3">{{ sampling | date('d M Y') }}</span>
 							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-dark">
 								{{ next | date('d M Y') }}
 								<i class="fas fa-chevron-right ml-2"></i>
@@ -163,6 +186,7 @@
 					<th rowspan="2">Kec. Angin (km/hari)</th>
 					<th rowspan="2">Sinar Matahari (%)</th>
 					<th rowspan="2">Hujan Biasa (mm)</th>
+					<th rowspan="2">Aksi</th>
 				</tr>
 				<tr>
 					<th>Max</th>
@@ -176,34 +200,59 @@
 				{% for l in lokasi_klimat %}
 				{% set k = l.manual %}
 				<tr>
-					<td>{{ l.nama }}</td>
-					<td class="text-center">
-						{{ k.temp_max is null ? '-' : k.temp_max }}
-					</td>
-					<td class="text-center">
-						{{ k.temp_min is null ? '-' : k.temp_min }}
-					</td>
-					<td class="text-center">
-						{{ k.temp_avg is null ? '-' : k.temp_avg }}
-					</td>
-					<td class="text-center">
-						{{ k.humi is null ? '-' : k.humi }}
-					</td>
-					<td class="text-center">
-						{{ k.temp_tangki is null ? '-' : k.temp_tangki }}
-					</td>
-					<td class="text-center">
-						{{ k.evaporation is null ? '-' : k.evaporation }}
-					</td>
-					<td class="text-center">
-						{{ k.wind is null ? '-' : k.wind }}
-					</td>
-					<td class="text-center">
-						{{ k.rad is null ? '-' : k.rad }}
-					</td>
-					<td class="text-center">
-						{{ k.rain is null ? '-' : k.rain }}
-					</td>
+					<form action="{{ path_for('admin.edit.klimat') }}" method="post">
+						<td>{{ l.nama }}</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.temp_max is null ? '-' : k.temp_max }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="temp_max" step="0.01" value="{{ k.temp_max }}" required>
+							<input type="hidden" name="sampling" value="{{ sampling }}" readonly required>
+							<input type="hidden" name="lokasi_id" value="{{ l.id }}" readonly required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.temp_min is null ? '-' : k.temp_min }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="temp_min" step="0.01" value="{{ k.temp_min }}" required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.temp_avg is null ? '-' : k.temp_avg }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="temp_avg" step="0.01" value="{{ k.temp_avg }}" required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.humi is null ? '-' : k.humi }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="humi" step="0.01" value="{{ k.humi }}" required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.temp_tangki is null ? '-' : k.temp_tangki }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="temp_tangki" step="0.01" value="{{ k.temp_tangki }}" required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.evaporation is null ? '-' : k.evaporation }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="evaporation" step="0.01" value="{{ k.evaporation }}" required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.wind is null ? '-' : k.wind }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="wind" step="0.01" value="{{ k.wind }}" required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.rad is null ? '-' : k.rad }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="rad" step="0.01" value="{{ k.rad }}" required>
+						</td>
+						<td class="text-center">
+							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.rain is null ? '-' : k.rain }}</span>
+							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="rain" step="0.01" value="{{ k.rain }}" required>
+						</td>
+						<td class="fit text-nowrap text-center">
+							{% if l.manual %}
+								<button class="btn btn-sm btn-warning ch_{{ l.id }}_{{ sampling }}" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">edit</button>
+								<div class="btn-group ch_{{ l.id }}_{{ sampling }}" style="display: none;">
+									<button class="btn btn-sm btn-secondary" type="button" onclick="toggleEdit('ch_{{ l.id }}_{{ sampling }}')">batal</button>
+									<button class="btn btn-sm btn-primary" type="submit">simpan</button>
+								</div>
+								<button class="btn btn-sm btn-danger" type="button" data-id="{{ l.id }}" data-nama="{{ l.nama }}" data-jenis="klimat" onclick="confirmDelete(this)">hapus</button>
+							{% else %}
+								-
+							{% endif %}
+						</td>
+					</form>
 				</tr>
 				{% endfor %}
 			</tbody>
@@ -217,18 +266,33 @@
 	type="text/javascript"></script>
 <script>
 	$(function () {
-		$('#datepicker').datepicker({
-			todayHighlight: true,
-			autoclose: true,
-			format: 'yyyy-mm-dd'
-		});
-		$('#datepicker').on('changeDate', function () {
-			window.location = "/admin?sampling=" + $('#datepicker').datepicker('getFormattedDate')
-		});
+		for (var i=1; i<4; i++) {
+			$('#datepicker-'+ i).datepicker({
+				todayHighlight: true,
+				autoclose: true,
+				format: 'yyyy-mm-dd'
+			});
+			$('#datepicker-'+ i).on('changeDate', function () {
+				window.location = "/admin?sampling=" + $(this).datepicker('getFormattedDate')
+			});
+		}
 	})
 
 	toggleEdit = function (cname) {
 		$("."+ cname).toggle();
+	}
+
+	confirmDelete = function (btn) {
+		lokasi_id = $(btn).data('id')
+		lokasi_nama = $(btn).data('nama')
+		jenis = $(btn).data('jenis')
+		jenis_str = jenis == 'curahhujan' ? "Curah Hujan" : (jenis == 'tma' ? "TMA" : "Klimatologi")
+		sampling = '{{ sampling }}'
+		sampling_str = '{{ sampling | date('d M Y') }}'
+		sureDelete = confirm('Hapus data manual '+ jenis_str +'\nTanggal: '+ sampling_str +'\nPOS: '+ lokasi_nama +'?')
+		if (sureDelete) {
+			window.location = '/admin/delete/'+ jenis +'?lokasi_id='+ lokasi_id +'&sampling='+ sampling
+		}
 	}
 </script>
 {% endblock %}
