@@ -86,6 +86,63 @@ $app->group('/periodik', function() {
                 "values" => "({$values})",
             ]
         ], 200, JSON_PRETTY_PRINT);
-
     }); // post
+
+    $this->post('/bulk', function(Request $request, Response $response, $args) {
+        $params = $request->getParams();
+        $tenant = $params['tenant'];
+        $periodics = $params['data'];
+        $inserted = 0;
+        $errors = 0;
+        // dump($periodics);
+
+        foreach ($periodics as $per) {
+            $data = [
+                "device_sn" => !empty($per['device_sn']) ? $per['device_sn'] : "",
+                "mdpl" => !empty($per['mdpl']) ? $per['mdpl'] : "",
+                "apre" => !empty($per['apre']) ? $per['apre'] : "",
+                "sq" => !empty($per['sq']) ? $per['sq'] : "",
+                "temp" => !empty($per['temp']) ? $per['temp'] : "",
+                "humi" => !empty($per['humi']) ? $per['humi'] : "",
+                "batt" => !empty($per['batt']) ? $per['batt'] : "",
+                "rain" => !empty($per['rain']) ? $per['rain'] : "",
+                "wlev" => !empty($per['wlev']) ? $per['wlev'] : "",
+                "up_s" => !empty($per['up_s']) ? $per['up_s'] : "",
+                "ts_a" => !empty($per['ts_a']) ? $per['ts_a'] : ""
+            ];
+            $columns = "sampling,lokasi_id";
+            $values = "'{$per['sampling']}',{$per['lokasi_id']}";
+            $str_list = ['device_sn', 'up_s', 'ts_a', 'received'];
+            // generating dynamic columns and values for insert
+            foreach ($data as $col => $val) {
+                if ($val) {
+                    $columns .= ",{$col}";
+                    if (in_array($col, $str_list)) {
+                        $values .= ",'{$val}'";
+                    } else {
+                        $values .= ",{$val}";
+                    }
+                }
+            }
+            // dump($data);
+            try {
+                $stmt = $this->db->prepare("INSERT INTO periodik ({$columns}) VALUES ($values)");
+                $stmt->execute();
+                $message = "insertion succeded";
+                $inserted += 1;
+            } catch (Exception $e) {
+                $message = "Error when trying to record : {$e}";
+                $errors += 1;
+            }
+        }
+
+        return $response->withJson([
+            "status" => "200",
+            "message" => $tenant,
+            "data" => [
+                "success" => "{$inserted}",
+                "errors" => "{$errors}",
+            ]
+        ], 200, JSON_PRETTY_PRINT);
+    }); // post bulk
 });
