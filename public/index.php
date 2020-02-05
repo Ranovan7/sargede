@@ -3,6 +3,8 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+use Psr\Http\Message\ServerRequestInterface;
+
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
     // something which should probably be served as a static file
@@ -184,23 +186,30 @@ $container['user'] = function($c) {
  * MIDDLEWARES BLOCK
  */
 
-$loggedinMiddleware = function(Request $request, Response $response, $next) {
+$loggedinMiddleware = function(ServerRequestInterface $request, Response $response, $next) {
 
     $user_refresh_time = $this->session->user_refresh_time;
     $now = time();
+
+    $uri = $request->getUri();
+
+    $next = '?next=' . $uri->getPath();
+    if (strlen(trim($uri->getQuery())) > 2) {
+        $next .= '?' . $uri->getQuery();
+    }
 
     // cek masa aktif login
     if (empty($user_refresh_time) || $user_refresh_time < $now) {
         $this->session->destroy();
         // die('Silahkan login untuk melanjutkan');
-        return $this->response->withRedirect('/login');
+        return $this->response->withRedirect('/login' . $next);
     }
 
     // cek user exists, ada di index.php
     $user = $this->user;
     if (!$user) {
         $this->flash->addMessage('errors', 'Silahkan login untuk melanjutkan.');
-        return $this->response->withRedirect('/login');
+        return $this->response->withRedirect('/login' . $next);
     }
 
     // inject user ke dalam request agar bisa diakses di route

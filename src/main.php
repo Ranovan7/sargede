@@ -89,6 +89,11 @@ $app->get('/login', function(Request $request, Response $response, $args) {
 // dummy login flow, bisa di uncomment ke POST
 // $app->get('/lg', function(Request $request, Response $response, $args) {
 $app->post('/login', function(Request $request, Response $response, $args) {
+    $uri = $request->getUri();
+    $next = $request->getQueryParam('next');
+    if (! $next) {
+        $next = '/admin';
+    }
     $credentials = $request->getParams();
     if (empty($credentials['username']) || empty($credentials['password'])) {
         die("Masukkan username dan password");
@@ -105,7 +110,7 @@ $app->post('/login', function(Request $request, Response $response, $args) {
     $this->session->user_id = $user['id'];
     $this->session->user_refresh_time = strtotime("+1hour");
 
-    return $this->response->withRedirect('/admin');
+    return $this->response->withRedirect($next);
 });
 
 // generate admin, warning!
