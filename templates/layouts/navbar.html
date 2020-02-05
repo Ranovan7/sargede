@@ -82,6 +82,18 @@
                         <a class="dropdown-item" href="/map/klimatologi">Klimatologi</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown {% if title == 'Profil'%}active{% endif %}">
+                    <a class="nav-link dropdown-toggle" href="#"
+                      id="navbarPetaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-address-card ml-2 mr-2"></i>
+                       Profil 
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarPetaDropdown">
+                        <a class="dropdown-item" href="/about/wilayah">Wilayah Kerja</a>
+                        <a class="dropdown-item" href="/about/organisasi">Organisasi</a>
+                        <a class="dropdown-item" href="/about/alamat">Hubungi Kami</a>
+                    </div>
+                </li>
                 {% if user() %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -91,10 +103,10 @@
                           Data
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="/admin/">Data Harian</a>
+                          <a class="dropdown-item" href="/admin/">Data Manual</a>
                           {% if user().role == '1' %}
                               <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="/admin/periodik">Data Periodik</a>
+                              <a class="dropdown-item" href="/admin/periodik">Data Telemetri</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="/user">User</a>
                               <div class="dropdown-divider"></div>
