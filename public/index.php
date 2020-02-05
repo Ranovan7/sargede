@@ -325,6 +325,7 @@ require __DIR__ . '/../src/map.php';
 require __DIR__ . '/../src/user.php';
 require __DIR__ . '/../src/admin.php';
 require __DIR__ . '/../src/lokasi.php';
+require __DIR__ . '/../src/about.php';
 
 /**
  * # ROUTES BLOCK
