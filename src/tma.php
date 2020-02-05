@@ -25,7 +25,11 @@ $app->group('/tma', function() {
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
                                     ORDER BY sampling, id")->fetchAll();
 
-            $jam = [];
+            $jam = [
+                7 => 0,
+                12 => 0,
+                17 => 0
+            ];
             $hour_minutes_wlev = [];
             $latest_wlev = 0;
             $latest_time = "";
@@ -49,13 +53,15 @@ $app->group('/tma', function() {
                         $back = 60 - $front;
                         $next = $t + (int) (($m * 5) / 60);
                         $prev = $t - 1 - (int) (($m * 5) / 60);
-                        if (!is_null($hour_minutes_wlev["{$next}:{$front}"])){
-                            $jam[$t] = $hour_minutes_wlev["{$next}:{$front}"];
-                            break;
-                        }
-                        if (!is_null($hour_minutes_wlev["{$prev}:{$back}"])){
-                            $jam[$t] = $hour_minutes_wlev["{$prev}:{$back}"];
-                            break;
+                        if (in_array("{$next}:{$front}", $hour_minutes_wlev)) {
+                            if (!is_null($hour_minutes_wlev["{$next}:{$front}"])){
+                                $jam[$t] = $hour_minutes_wlev["{$next}:{$front}"];
+                                break;
+                            }
+                            if (!is_null($hour_minutes_wlev["{$prev}:{$back}"])){
+                                $jam[$t] = $hour_minutes_wlev["{$prev}:{$back}"];
+                                break;
+                            }
                         }
                     }
                 } else {
