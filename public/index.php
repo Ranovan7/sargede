@@ -193,23 +193,23 @@ $loggedinMiddleware = function(ServerRequestInterface $request, Response $respon
 
     $uri = $request->getUri();
 
-    $next = '?next=' . $uri->getPath();
+    $next_uri = '?next=' . $uri->getPath();
     if (strlen(trim($uri->getQuery())) > 2) {
-        $next .= '?' . $uri->getQuery();
+        $next_uri .= '&' . $uri->getQuery();
     }
 
     // cek masa aktif login
     if (empty($user_refresh_time) || $user_refresh_time < $now) {
         $this->session->destroy();
         // die('Silahkan login untuk melanjutkan');
-        return $this->response->withRedirect('/login' . $next);
+        return $this->response->withRedirect('/login' . $next_uri);
     }
 
     // cek user exists, ada di index.php
     $user = $this->user;
     if (!$user) {
         $this->flash->addMessage('errors', 'Silahkan login untuk melanjutkan.');
-        return $this->response->withRedirect('/login' . $next);
+        return $this->response->withRedirect('/login' . $next_uri);
     }
 
     // inject user ke dalam request agar bisa diakses di route
