@@ -78,6 +78,26 @@
                     label: (item, data) => `${data.datasets[item.datasetIndex].label} : ${item.yLabel} meter`,
                 },
             },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Tinggi Muka Air (M)'
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        maxTicksLimit: 12
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Waktu'
+                    }
+                }]
+            }
         }
     });
     </script>
