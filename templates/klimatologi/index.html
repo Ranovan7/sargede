@@ -26,7 +26,7 @@
             <i class="fas fa-chevron-left mr-2"></i>
             {{ prev | date('d M') }}
         </a>
-        <span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+        <span class="mx-3" id="datepicker"><i class="fas fa-calendar mr-2"></i>{{ sampling | date('d M Y') }}</span>
         <a href="/klimatologi?sampling={{ next }}" class="">
             {{ next | date('d M') }}
             <i class="fas fa-chevron-right ml-2"></i>
