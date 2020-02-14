@@ -20,7 +20,7 @@
             <i class="fas fa-chevron-left mr-2"></i>
             {{ prev | date('d M') }}
         </a>
-        <span class="mx-3" id="datepicker">{{ sampling | date('d M Y') }}</span>
+        <span class="mx-3" id="datepicker"><i class="fas fa-calendar mr-2"></i>{{ sampling | date('d M Y') }}</span>
         <a href="/tma?sampling={{ next }}" class="">
             {{ next | date('d M') }}
             <i class="fas fa-chevron-right ml-2"></i>
@@ -32,7 +32,7 @@
                 <tr>
                     <th class="align-middle" rowspan="2">No</th>
                     <th class="align-middle text-center" rowspan="2">Lokasi / Pos</th>
-                    <th class="align-middle text-center" colspan="3" rowspan="2">Level Siaga</th>
+                    <th class="align-middle text-center" colspan="3" rowspan="2">Level Siaga (meter)</th>
                     <th class="text-center" colspan="3">Telemetri (meter)</th>
                     <th class="text-center" colspan="3">Manual (meter)</th>
                 </tr>
@@ -52,14 +52,14 @@
                         <td>
                             <a href="{{ path_for('tma.show', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a>
                         </td>
-                        <td align="right" style="background-color: green">
-                           {{r.lokasi.siaga1}}
+                        <td align="right" style="background-color: red">
+                           {% if r.lokasi.siaga1 %}{{ r.lokasi.siaga1|number_format(2) }}{% else %}-{% endif %}
                         </td>
                         <td align="right" style="background-color: yellow">
-                            {{r.lokasi.siaga2}}
+                            {% if r.lokasi.siaga2 %}{{ r.lokasi.siaga2|number_format(2) }}{% else %}-{% endif %}
                         </td>
-                        <td align="right" style="background-color: red">
-                            {{r.lokasi.siaga3}}
+                        <td align="right" style="background-color: green">
+                            {% if r.lokasi.siaga3 %}{{ r.lokasi.siaga3|number_format(2) }}{% else %}-{% endif %}
                         </td>
                         <td align="right">{{ r.jam7 }}</td>
                         <td align="right">{{ r.jam12 }}</td>
