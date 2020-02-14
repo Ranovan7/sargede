@@ -26,8 +26,8 @@ td input[type=number] {
 
 {% block content %}
 <section class="content-header mb-3">
-	<h1>Admin</h1>
-	<p>Data-data pengukuran <b>Manual</b> dari para <b>Pengamat</b></p>
+	<h1>Data Manual<br><small class="text-muted small">Data-data pengukuran <b>Manual</b> dari para <b>Pengamat</b></small></h1>
+	
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="/">Home</a></li>
 		<li class="breadcrumb-item">Admin</li>
@@ -35,18 +35,18 @@ td input[type=number] {
 </section>
 <div class="row">
 	<div class="col-12">
-		<h2>Curah Hujan <small class="text-muted">Data Manual terbaru</small></h2>
+		<h2>Curah Hujan</h2>
 		<table class="table table-bordered table-hover">
 			<thead>
-				<tr class="bg-dark text-white">
+				<tr class="bg-light">
 					<th class="text-uppercase" colspan="10">
 						<div class="d-flex justify-content-between align-items-center">
-							<a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-dark">
+							<a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-primary">
 								<i class="fas fa-chevron-left mr-2"></i>
 								{{ prev | date('d M Y') }}
 							</a>
 							<span class="mx-3" id="datepicker-1">{{ sampling | date('d M Y') }}</span>
-							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-dark">
+							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-primary">
 								{{ next | date('d M Y') }}
 								<i class="fas fa-chevron-right ml-2"></i>
 							</a>
@@ -90,18 +90,18 @@ td input[type=number] {
 		</table>
 	</div>
 	<div class="col-12">
-		<h2>TMA <small class="text-muted">Data Manual terbaru</small></h2>
+		<h2>TMA</h2>
 		<table class="table table-bordered table-hover">
 			<thead>
-				<tr class="bg-dark text-white">
+				<tr class="bg-light">
 					<th class="text-uppercase" colspan="10">
 						<div class="d-flex justify-content-between align-items-center">
-							<a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-dark">
+							<a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-primary">
 								<i class="fas fa-chevron-left mr-2"></i>
 								{{ prev | date('d M Y') }}
 							</a>
 							<span class="mx-3" id="datepicker-2">{{ sampling | date('d M Y') }}</span>
-							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-dark">
+							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-primary">
 								{{ next | date('d M Y') }}
 								<i class="fas fa-chevron-right ml-2"></i>
 							</a>
@@ -160,18 +160,18 @@ td input[type=number] {
 	</div>
 
 	<div class="col">
-		<h2>Klimatologi <small class="text-muted">Data Manual terbaru</small></h2>
+		<h2>Klimatologi</h2>
 		<table class="table table-bordered table-hover">
 			<thead>
-				<tr class="bg-dark text-white">
+				<tr class="bg-light">
 					<th class="text-uppercase" colspan="99">
 						<div class="d-flex justify-content-between align-items-center">
-							<a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-dark">
+							<a href="/admin?sampling={{ prev }}" class="btn btn-sm btn-primary">
 								<i class="fas fa-chevron-left mr-2"></i>
 								{{ prev | date('d M Y') }}
 							</a>
 							<span class="mx-3" id="datepicker-3">{{ sampling | date('d M Y') }}</span>
-							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-dark">
+							<a href="/admin?sampling={{ next }}" class="btn btn-sm btn-primary">
 								{{ next | date('d M Y') }}
 								<i class="fas fa-chevron-right ml-2"></i>
 							</a>
