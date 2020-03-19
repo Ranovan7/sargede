@@ -61,6 +61,19 @@ $app->group('/map', function() {
             'lokasis' => $lokasis
         ]);
     });
+    // peta pos Kualitas Air
+    $this->get('/kualitasair', function(request $req, response $res, $args) {
+        $lokasis_raw = $this->db->query("SELECT * FROM lokasi WHERE jenis='4'")->fetchAll();
+	    $lokasis = [];
+	    foreach ($lokasis_raw as $l) {
+	        if (strpos($l['ll'], ",") !== false ) {
+	            $lokasis[] = $l;
+	        }
+	    }
+        return $this->view->render($res, 'map/kualitasair.html', [
+            'lokasis' => $lokasis
+        ]);
+    });
 
     // peta pos Klimatologi
     $this->get('/test', function(request $req, response $res, $args) {
