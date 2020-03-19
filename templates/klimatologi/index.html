@@ -2,7 +2,6 @@
 
 {% set title = "Pos Klimatologi" %}
 {% block css %}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <style>
         table.table-bordered > thead > tr > th{
           border:1px solid black;
@@ -21,7 +20,7 @@
         <li class="breadcrumb-item">Klimatologi</li>
     </ol>
     </section>
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-center mb-3">
         <span class="mx-3"><i class="fas fa-calendar mr-2"></i>{{ sampling | date('d M Y') }}</span>
     </div>
     <div class="">
