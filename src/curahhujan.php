@@ -15,8 +15,8 @@ $app->group('/curahhujan', function() {
         $end = date('Y-m-d', strtotime($hari .' +1day'));
         $from = "{$hari} 07:00:00";
         $to = "{$end} 06:55:00";
-
-        $lokasi = $this->db->query("SELECT * FROM lokasi WHERE lokasi.jenis='1' OR lokasi.jenis='4'")->fetchAll();
+        $y_from = "{$prev_date} 07:00:00";
+        $y_to = "{$hari} 06:55:00";
 
         $device = $this->db->query("SELECT * FROM device")->fetchAll();
         $logger_ids = [];
@@ -24,71 +24,15 @@ $app->group('/curahhujan', function() {
             $logger_ids[] = $d['lokasi_id'];
         }
 
-        $result = [];
-        foreach ($lokasi as $l) {
-            // if (!in_array($l['id'], $logger_ids)) {
-            //     continue;
-            // }
-            $ch = $this->db->query("SELECT * FROM periodik
-                                    WHERE lokasi_id = {$l['id']} AND rain IS NOT NULL
-                                        AND sampling BETWEEN '{$from}' AND '{$to}'
-                                    ORDER BY sampling")->fetchAll();
-
-            $durasi_07_13 = 0;
-            $durasi_13_19 = 0;
-            $durasi_19_01 = 0;
-            $durasi_01_07 = 0;
-            $durasi_all = 0;
-
-            foreach ($ch as $c) {
-                $time = date('H:i:s', strtotime(date('H:i:s', strtotime($c['sampling'])) .' -7hour'));
-                if ($time < '07:00:00') {
-                    $durasi_07_13 += $c['rain'];
-                } else if ($time < '13:00:00') {
-                    $durasi_13_19 += $c['rain'];
-                } else if ($time < '19:00:00') {
-                    $durasi_19_01 += $c['rain'];
-                } else {
-                    $durasi_01_07 += $c['rain'];
-                }
-                $durasi_all += $c['rain'];
-            };
-
-            if (!in_array($l['id'], $logger_ids)) {
-                $durasi_07_13 = "-";
-                $durasi_13_19 = "-";
-                $durasi_19_01 = "-";
-                $durasi_01_07 = "-";
-                $durasi_all = "-";
-            } else {
-                $durasi_07_13 = "{$durasi_07_13} mm";
-                $durasi_13_19 = "{$durasi_13_19} mm";
-                $durasi_19_01 = "{$durasi_19_01} mm";
-                $durasi_01_07 = "{$durasi_01_07} mm";
-                $durasi_all = "{$durasi_all} mm";
-            }
-
-            $hari_manual = date('Y-m-d', strtotime($hari .' -1day'));
-            $ch_manual = $this->db->query("SELECT * FROM manual_daily
-                                WHERE lokasi_id = {$l['id']} AND rain IS NOT NULL
-                                    AND sampling = '{$from}'")->fetch();
-
-            $result[] = [
-                'lokasi' => $l,
-                'durasi_07_13' => $durasi_07_13,
-                'durasi_13_19' => $durasi_13_19,
-                'durasi_19_01' => $durasi_19_01,
-                'durasi_01_07' => $durasi_01_07,
-                'durasi_all' => $durasi_all,
-                'durasi_manual' => $ch_manual ? $ch_manual['rain'] : null,
-            ];
-        }
+        $result = getCHdetail($this, $from, $to, $logger_ids);
+        $y_result = getCHdetail($this, $y_from, $y_to, $logger_ids);
 
         return $this->view->render($response, 'curahhujan/index.html', [
             'sampling' => $hari,
-            'prev' => $prev_date,
-            'next' => $next_date,
-            'result' => $result
+            'yesterday' => tanggal_format(strtotime($prev_date)),
+            'today' => tanggal_format(strtotime($hari)),
+            'result' => $result,
+            'y_result' => $y_result
         ]);
     })->setName('curahhujan');
 
@@ -354,3 +298,66 @@ $app->group('/curahhujan', function() {
 
     });
 });
+
+function getCHdetail($app, $from, $to, $logger_ids) {
+    $lokasi = $app->db->query("SELECT * FROM lokasi WHERE lokasi.jenis='1' OR lokasi.jenis='4'")->fetchAll();
+
+    $result = [];
+    foreach ($lokasi as $l) {
+        $ch = $app->db->query("SELECT * FROM periodik
+                                WHERE lokasi_id = {$l['id']} AND rain IS NOT NULL
+                                    AND sampling BETWEEN '{$from}' AND '{$to}'
+                                ORDER BY sampling")->fetchAll();
+
+        $durasi_07_13 = 0;
+        $durasi_13_19 = 0;
+        $durasi_19_01 = 0;
+        $durasi_01_07 = 0;
+        $durasi_all = 0;
+
+        foreach ($ch as $c) {
+            $time = date('H:i:s', strtotime(date('H:i:s', strtotime($c['sampling'])) .' -7hour'));
+            if ($time < '07:00:00') {
+                $durasi_07_13 += $c['rain'];
+            } else if ($time < '13:00:00') {
+                $durasi_13_19 += $c['rain'];
+            } else if ($time < '19:00:00') {
+                $durasi_19_01 += $c['rain'];
+            } else {
+                $durasi_01_07 += $c['rain'];
+            }
+            $durasi_all += $c['rain'];
+        };
+
+        if (!in_array($l['id'], $logger_ids)) {
+            $durasi_07_13 = "-";
+            $durasi_13_19 = "-";
+            $durasi_19_01 = "-";
+            $durasi_01_07 = "-";
+            $durasi_all = "-";
+        } else {
+            $durasi_07_13 = "{$durasi_07_13} mm";
+            $durasi_13_19 = "{$durasi_13_19} mm";
+            $durasi_19_01 = "{$durasi_19_01} mm";
+            $durasi_01_07 = "{$durasi_01_07} mm";
+            $durasi_all = "{$durasi_all} mm";
+        }
+
+        $hari_manual = date('Y-m-d', strtotime($hari .' -1day'));
+        $ch_manual = $app->db->query("SELECT * FROM manual_daily
+                            WHERE lokasi_id = {$l['id']} AND rain IS NOT NULL
+                                AND sampling = '{$from}'")->fetch();
+
+        $result[] = [
+            'lokasi' => $l,
+            'durasi_07_13' => $durasi_07_13,
+            'durasi_13_19' => $durasi_13_19,
+            'durasi_19_01' => $durasi_19_01,
+            'durasi_01_07' => $durasi_01_07,
+            'durasi_all' => $durasi_all,
+            'durasi_manual' => $ch_manual ? $ch_manual['rain'] : null,
+        ];
+    }
+
+    return $result;
+}
