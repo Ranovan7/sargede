@@ -21,9 +21,31 @@
     </ol>
     </section>
     <div class="d-flex justify-content-center mb-3">
-        <span class="mx-3"><i class="fas fa-calendar mr-2"></i>{{ sampling | date('d M Y') }}</span>
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link"
+                id="nav-profile-tab" data-toggle="tab"
+                href="#nav-profile" role="tab"
+                aria-controls="yesterday" aria-selected="false">
+                <h5>Kemarin</h5>
+            </a>
+            <a class="nav-item nav-link active"
+              id="nav-home-tab" data-toggle="tab"
+              href="#nav-home" role="tab"
+              aria-controls="today" aria-selected="true">
+              <h5>Hari Ini</h5>
+            </a>
+          </div>
+        </nav>
     </div>
-    <div class="">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active mt-2"
+        id="nav-home" role="tabpanel"
+        aria-labelledby="today-tab">
+        <div class="d-flex justify-content-center mb-3">
+            <span class="mx-3"><i class="fas fa-calendar mr-2"></i>{{ today }}</span>
+            <!-- <span class="mx-3">{{ today }}</span> -->
+        </div>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -60,6 +82,50 @@
                 {% endfor %}
             </tbody>
         </table>
+      </div>
+      <div class="tab-pane fade mt-2"
+        id="nav-profile" role="tabpanel"
+        aria-labelledby="yesteday-tab">
+        <div class="d-flex justify-content-center mb-3">
+            <span class="mx-3"><i class="fas fa-calendar mr-2"></i>{{ yesterday }}</span>
+            <!-- <span class="mx-3">{{ today }}</span> -->
+        </div>
+        <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th rowspan="2">Pos</th>
+                  <th colspan="3">Temperature (<small>o</small>C)</th>
+                  <th rowspan="2">RH (%)</th>
+                  <th colspan="2">PAN 'A'</th>
+                  <th rowspan="2">Kecepatan Angin (KM/hari)</th>
+                  <th rowspan="2">Sinar Matahari (%)</th>
+                  <th rowspan="2">Hujan Biasa (mm)</th>
+              </tr>
+              <tr>
+                  <th>Max</th>
+                  <th>Min</th>
+                  <th>Rata-rata</th>
+                  <th>Temp Air Dlm Tangki (<small>o</small>C)</th>
+                  <th>Penguapan (mm)</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for lok in y_lokasi_daily %}
+              <tr>
+                  <td><a href="/klimatologi/{{ lok.id }}">{{ lok.nama }}</a></td>
+                  <td align="right">{{ lok.temp_max }}</td>
+                  <td align="right">{{ lok.temp_min }}</td>
+                  <td align="right">{{ lok.temp_avg }}</td>
+                  <td align="right">{{ lok.humi }}</td>
+                  <td align="right">{{ lok.temp_tangki }}</td>
+                  <td align="right">{{ lok.evaporation }}</td>
+                  <td align="right">{{ lok.wind }}</td>
+                  <td align="right">{{ lok.rad }}</td>
+                  <td align="right">{{ lok.rain }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
 {% endblock %}
-

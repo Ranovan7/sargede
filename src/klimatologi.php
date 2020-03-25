@@ -33,12 +33,32 @@ $app->group('/klimatologi', function() {
                                                 LIMIT 1
                                         )
                                         WHERE lokasi.jenis='4'")->fetchAll();
+        $y_lokasi_daily = $this->db->query("SELECT lokasi.*,
+                                            manual_daily.temp_max as temp_max,
+                                            manual_daily.temp_min as temp_min,
+                                            manual_daily.temp_avg as temp_avg,
+                                            manual_daily.humi as humi,
+                                            manual_daily.temp_tangki as temp_tangki,
+                                            manual_daily.evaporation as evaporation,
+                                            manual_daily.wind as wind,
+                                            manual_daily.rad as rad,
+                                            manual_daily.rain as rain
+                                        FROM lokasi
+                                        LEFT JOIN manual_daily ON manual_daily.id = (
+                                            SELECT id from manual_daily
+                                                WHERE lokasi_id = lokasi.id
+                                                    AND sampling='{$prev_date} 07:00:00'
+                                                ORDER BY sampling DESC
+                                                LIMIT 1
+                                        )
+                                        WHERE lokasi.jenis='4'")->fetchAll();
 
         return $this->view->render($response, 'klimatologi/index.html', [
             'lokasi_daily' => $lokasi_daily,
+            'y_lokasi_daily' => $y_lokasi_daily,
             'sampling' => $hari,
-            'next' => $next_date,
-            'prev' => $prev_date
+            'yesterday' => tanggal_format(strtotime($prev_date)),
+            'today' => tanggal_format(strtotime($hari)),
         ]);
     })->setName('klimatologi');
 
