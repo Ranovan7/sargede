@@ -45,8 +45,8 @@ $app->group('/tma', function() {
                 'labels' => []
             ];
 
-            $from = "{$start_date} 00:00:00";
-            $to = "{$end_date} 23:55:00";
+            $from = "{$start_date} 07:00:00";
+            $to = "{$end_date} 07:00:00";
             $wlev = $this->db->query("SELECT * FROM periodik
                                     WHERE lokasi_id = {$lokasi['id']} AND wlev IS NOT NULL
                                         AND sampling BETWEEN '{$from}' AND '{$to}'
@@ -73,18 +73,10 @@ $app->group('/tma', function() {
 
                 $tele = floatval($wlev_samp[$prev_time]['wlev'])/100;
                 $man = floatval($manual_samp[$prev_time]['manual'])/100;
-                $data[] = $tele > 0 ? number_format($tele,2) : 0;
-                $data_man[] = $man > 0 ? number_format($man,2) : 0;
+                $val = $tele > 0 ? number_format($tele,2) : 0;
+                $data[] = array(x => $prev_tanggal, y => $val);
                 $prev_time += 300;
             }
-
-            // $result['datasets'][] = [
-            //     'label' => "TMA Manual (M)",
-            //     'data' => $data_man,
-            //     'backgroundColor' => "rgba(255, 0, 0, 0.5)",
-            //     'borderColor' => "rgba(255, 0, 0, 1)",
-            //     'fill' => false
-            // ];
             $result['datasets'][] = [
                 'label' => "TMA Telemetri (M)",
                 'data' => $data,
@@ -106,19 +98,20 @@ $app->group('/tma', function() {
                 $hour12 = strtotime("{$prev_tanggal} 12:00");
                 $hour17 = strtotime("{$prev_tanggal} 17:00");
 
-                $man7 = floatval($manual_samp[$hour7]['manual'])/100;
-                $man12 = floatval($manual_samp[$hour12]['manual'])/100;
-                $man17 = floatval($manual_samp[$hour17]['manual'])/100;
-                $data_man[] = $man7 > 0 ? number_format($man7,2) : 0;
-                $data_man[] = $man12 > 0 ? number_format($man12,2) : 0;
-                $data_man[] = $man17 > 0 ? number_format($man17,2) : 0;
+                $man7 = round(floatval($manual_samp[$hour7]['manual'])/100, 2);
+                $man12 = round(floatval($manual_samp[$hour12]['manual'])/100, 2);
+                $man17 = round(floatval($manual_samp[$hour17]['manual'])/100, 2);
+                $tglhour7 = tanggal_format($hour7, true);
+                $tglhour12 = tanggal_format($hour12, true);
+                $tglhour17 = tanggal_format($hour17, true);
 
-                $result_man['labels'][] = tanggal_format($hour7, true);
-                $result_man['labels'][] = tanggal_format($hour12, true);
-                $result_man['labels'][] = tanggal_format($hour17, true);
+                $data_man[] = array(x => $tglhour7, y => $man7);
+                $data_man[] = array(x => $tglhour12, y => $man12);
+                $data_man[] = array(x => $tglhour17, y => $man17);
+
                 $prev_time += 86400;
             }
-            $result_man['dataset'] = [
+            $result['datasets'][] = [
                 'label' => "TMA Manual (M)",
                 'data' => $data_man,
                 'backgroundColor' => "rgba(255, 0, 0, 0.5)",
