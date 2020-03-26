@@ -60,7 +60,12 @@
                     {% for data in result.datasets %}
                     {
                         label: "CH Max Telemetri {{ result.title[loop.index0] }}",
-                        data: {{ data|json_encode|raw }},
+                        // data: {{ data|json_encode|raw }},
+                        data: [
+                            {% for d in data %}
+                                {{ max(d) }},
+                            {% endfor %}
+                        ],
                         backgroundColor: 'rgba({{ result.colors[loop.index0] }},0.5)',
                         borderColor: 'rgba({{ result.colors[loop.index0] }},1)',
                         borderWidth: 1
@@ -94,7 +99,12 @@
                     {% for data in result_man.datasets %}
                     {
                         label: "CH Max Manual {{ result_man.title[loop.index0] }}",
-                        data: {{ data|json_encode|raw }},
+                        // data: {{ data|json_encode|raw }},
+                        data: [
+                            {% for d in data %}
+                                {{ max(d) }},
+                            {% endfor %}
+                        ],
                         backgroundColor: 'rgba({{ result_man.colors[loop.index0] }},0.5)',
                         borderColor: 'rgba({{ result_man.colors[loop.index0] }},1)',
                         borderWidth: 1

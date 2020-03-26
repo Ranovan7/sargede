@@ -38,6 +38,7 @@
 
 {% block js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script>
     $('#dateStart').datepicker({
         todayHighlight: true,
@@ -54,29 +55,41 @@
     <!-- ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
+    var timeFormat = 'YYYY-MM-DD HH:mm';
     let ctx = document.getElementById('tmaChart').getContext('2d');
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: {{ result.labels | json_encode() | raw }},
+            // labels: {{ result.labels | json_encode() | raw }},
+            labels: [
+                {% for sam in result.labels %}
+                    "{{ sam }}",
+                {% endfor %}
+            ],
             datasets: [
-            {% for dataset in result.datasets %}
             {
-                label: '{{ dataset.label }}',
+                label: '{{ result.datasets[0].label }}',
+                data: {{ result.datasets[0].data | json_encode() | raw}},
+                backgroundColor: '{{ result.datasets[0].backgroundColor }}',
+                borderColor: '{{ result.datasets[0].borderColor }}',
+                fill: {{ result.datasets[0].fill ? 'true' : 'false' }},
+                pointRadius: 1
+            },
+            {
+                label: '{{ result.datasets[1].label }}',
                 data: [
-                    {% for d in dataset.data %}
+                    {% for d in result.datasets[1].data %}
                         {
                             x: "{{ d.x }}",
                             y: {{ d.y }}
                         },
                     {% endfor %}
                 ],
-                backgroundColor: '{{ dataset.backgroundColor }}',
-                borderColor: '{{ dataset.borderColor }}',
-                fill: {{ dataset.fill ? 'true' : 'false' }},
-                pointRadius: 1
-            },
-            {% endfor %}
+                backgroundColor: '{{ result.datasets[1].backgroundColor }}',
+                borderColor: '{{ result.datasets[1].borderColor }}',
+                fill: {{ result.datasets[1].fill ? 'true' : 'false' }},
+                pointRadius: 3
+            }
             ]
         },
         options: {
@@ -96,6 +109,16 @@
                     }
                 }],
                 xAxes: [{
+                    type: 'time',
+                    time: {
+						parser: timeFormat,
+                        unit: 'minute',
+                        unitStepSize: 300,
+                        displayFormats: {
+                            minute: 'DD MMM, HH:mm'
+                        },
+						tooltipFormat: 'DD MMM YYYY, HH:mm'
+					},
                     ticks: {
                         maxTicksLimit: 12
                     },

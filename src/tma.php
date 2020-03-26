@@ -68,13 +68,13 @@ $app->group('/tma', function() {
             $data = [];
             $data_man = [];
             while ($prev_time <= strtotime($to)) {
-                $prev_tanggal = tanggal_format($prev_time, true);
+                $prev_tanggal = date("Y-m-d H:i", $prev_time);
                 $result['labels'][] = $prev_tanggal;
 
                 $tele = floatval($wlev_samp[$prev_time]['wlev'])/100;
                 $man = floatval($manual_samp[$prev_time]['manual'])/100;
                 $val = $tele > 0 ? number_format($tele,2) : 0;
-                $data[] = array(x => $prev_tanggal, y => $val);
+                $data[] = $val;
                 $prev_time += 300;
             }
             $result['datasets'][] = [
@@ -92,7 +92,7 @@ $app->group('/tma', function() {
             ];
             $prev_time = strtotime($from);
             $data_man = [];
-            while ($prev_time <= strtotime($to)) {
+            while ($prev_time + 86400 <= strtotime($to)) {
                 $prev_tanggal = date('Y-m-d', $prev_time);
                 $hour7 = strtotime("{$prev_tanggal} 07:00");
                 $hour12 = strtotime("{$prev_tanggal} 12:00");
@@ -101,9 +101,9 @@ $app->group('/tma', function() {
                 $man7 = round(floatval($manual_samp[$hour7]['manual'])/100, 2);
                 $man12 = round(floatval($manual_samp[$hour12]['manual'])/100, 2);
                 $man17 = round(floatval($manual_samp[$hour17]['manual'])/100, 2);
-                $tglhour7 = tanggal_format($hour7, true);
-                $tglhour12 = tanggal_format($hour12, true);
-                $tglhour17 = tanggal_format($hour17, true);
+                $tglhour7 = date("Y-m-d H:i", $hour7);
+                $tglhour12 = date("Y-m-d H:i", $hour12);
+                $tglhour17 = date("Y-m-d H:i", $hour17);
 
                 $data_man[] = array(x => $tglhour7, y => $man7);
                 $data_man[] = array(x => $tglhour12, y => $man12);
@@ -111,6 +111,12 @@ $app->group('/tma', function() {
 
                 $prev_time += 86400;
             }
+            // foreach ($manual_samp as $sam => $val) {
+            //     $time = tanggal_format($sam, true);
+            //
+            //     $man_val = round(floatval($val['manual'])/100, 2);
+            //     $data_man[] = array(x => $time, y => $man_val);
+            // }
             $result['datasets'][] = [
                 'label' => "TMA Manual (M)",
                 'data' => $data_man,
@@ -201,9 +207,9 @@ function getTMAdetail($app, $from, $to) {
             }
         }
 
-        $jam7 = $jam[7] > 0 ? number_format(floatval($jam[7])/100,1) : '-';
-        $jam12 = $jam[12] > 0 ? number_format(floatval($jam[12])/100,1) : '-';
-        $jam17 = $jam[17] > 0 ? number_format(floatval($jam[17])/100,1) : '-';
+        $jam7 = $jam[7] > 0 ? number_format(floatval($jam[7])/100,2) : '-';
+        $jam12 = $jam[12] > 0 ? number_format(floatval($jam[12])/100,2) : '-';
+        $jam17 = $jam[17] > 0 ? number_format(floatval($jam[17])/100,2) : '-';
         // $jam0 = $jam0 > 0 ? number_format($jam0,1) : '-';
         $latest_wlev = $latest_wlev > 0 ? number_format($latest_wlev,1) : '-';
         if (!empty($latest_time)) {
