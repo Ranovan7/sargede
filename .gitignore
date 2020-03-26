@@ -8,6 +8,7 @@ public/php_errors.log
 vendor/
 raw/
 .env
+*.rar
 *.zip
 /*.bat
 /commit_messages

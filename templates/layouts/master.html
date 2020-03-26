@@ -38,33 +38,33 @@
 
             {% if title == "Home" %}
                 {% include 'layouts/home.html' %}
-            {% endif %}
+            {% else %}
+                <!-- Content Wrapper -->
+                <div class="container" id="content-wrapper">
 
-            <!-- Content Wrapper -->
-            <div class="container" id="content-wrapper">
+                    <!-- Main Content -->
+                    <div class="mt-3 py-3" id="content">
 
-                <!-- Main Content -->
-                <div class="mt-3 py-3" id="content">
+                        {# {% include 'layouts/topbar.html' %} #}
 
-                    {# {% include 'layouts/topbar.html' %} #}
+                        <!-- Begin Page Content -->
+                        <div class="">
 
-                    <!-- Begin Page Content -->
-                    <div class="">
+                            {% include 'includes/flash.html' %}
 
-                        {% include 'includes/flash.html' %}
+                            {% block content %}{% endblock %}
 
-                        {% block content %}{% endblock %}
+                        </div>
+                        <!-- /.container-fluid -->
 
                     </div>
-                    <!-- /.container-fluid -->
+                    <!-- End of Main Content -->
+
+                    {# {% include 'layouts/footer.html' %} #}
 
                 </div>
-                <!-- End of Main Content -->
-
-                {# {% include 'layouts/footer.html' %} #}
-
-            </div>
-            <!-- End of Content Wrapper -->
+                <!-- End of Content Wrapper -->
+            {% endif %}
 
         </div>
         <!-- End of Page Wrapper -->

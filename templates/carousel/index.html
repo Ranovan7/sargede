@@ -1,0 +1,161 @@
+{% extends 'layouts/master.html' %}
+{% set title = 'Carousel' %}
+
+{% block content %}
+	<section class="content-header mb-3">
+		<h1>{{ title }}</h1>
+
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="/">Home</a>
+			</li>
+			<li class="breadcrumb-item">Carousel</li>
+		</ol>
+	</section>
+
+	<div class="mb-3 d-flex">
+		<div class="dropdown mr-3">
+			<button class="btn btn-primary" data-toggle="dropdown">
+				Buat baru
+			</button>
+			<div class="dropdown-menu shadow p-0" style="min-width: 320px">
+				<div class="card">
+					<div class="card-body">
+						<form action="/carousel/add" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="file">Masukkan gambar yang akan ditambahkan</label>
+								<input type="file" name="file" id="file" class="form-control" accept=".jpg,.jpeg,.png,.gif" required="required">
+							</div>
+							<div class="form-group">
+								<label for="name">Judul gambar</label>
+								<input type="text" name="name" id="name" class="form-control" required="required">
+							</div>
+							<div class="">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-upload"></i>
+                                    Upload
+                                </button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+            <i class="fas fa-exchange-alt fa-rotate-90"></i>
+			Ubah urutan
+		</button>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th class="fit">Urutan</th>
+					<th>Image</th>
+					<th>Name</th>
+					<th class="fit">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for carousel in carousels %}
+					<tr>
+						<td class="text-right">{{ carousel.id_order }}</td>
+						<td width="240">
+							<img class="img-fluid" src="{{ asset(directory) ~ '/' ~ carousel.filename }}" alt="{{ carousel.name }}">
+						</td>
+						<td>
+							{{ carousel.name }}
+						</td>
+						<td class="text-nowrap text-center">
+							<button class="btn btn-sm btn-danger" onclick="confirmDelete({{ carousel.id }}, '{{ carousel.name }}')">
+								<i class="fas fa-trash"></i>
+							</button>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ubah urutan</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<ul id="sortable" class="list-unstyled">
+					{% for carousel in carousels %}
+						<li class="sortable-item ui-state-default d-flex align-items-center p-2" data-id="{{ carousel.id }}">
+							<img class="mr-2" src="{{ asset(directory) ~ '/' ~ carousel.filename }}" alt="{{ carousel.name }}" width="60">
+							<p class="mb-0">{{ carousel.name }}</p>
+							<span class="ui-icon ui-icon-arrowthick-2-n-s ml-auto"></span>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+					<button type="button" class="btn btn-primary" onclick="saveOrder(this)">Simpan</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+{% block js %}
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		confirmDelete = function (id, name) {
+			var sureDelete = confirm(`Apakah Anda yakin ingin menghapus gambar '${name}'?`)
+			if (sureDelete) {
+				window.location = `/carousel/delete/${id}`
+			}
+		}
+
+		saveOrder = function (btn) {
+			$(btn).attr('disabled', 'disabled');
+
+			var ids = []
+			$('.sortable-item').each(function () {
+				ids.push($(this).data('id'))
+			})
+			
+			$.ajax({
+				url: '/carousel/reorder',
+				method: 'post',
+				data: {
+					ids
+				}
+			})
+			.then((res) => {
+				if (res.status == 'success') {
+					window.location.reload()
+				} else {
+					alert(res.message)
+				}
+			})
+			.fail((err) => {
+				alert("ERROR")
+				console.log(err)
+			})
+			.always(() => {
+				$(btn).removeAttr('disabled')
+			})
+		}
+
+		$(function () {
+			$( "#sortable" ).sortable();
+			$( "#sortable" ).disableSelection();
+		});
+	</script>
+{% endblock %}

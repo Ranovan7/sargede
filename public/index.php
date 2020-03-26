@@ -82,6 +82,9 @@ $app = new \Slim\App($settings);
 // Set up dependencies
 $container = $app->getContainer();
 
+// upload directory
+$container['upload_directory'] = __DIR__ . '/uploads';
+
 // view renderer
 $container['view'] = function ($c) {
     $settings = $c->get('settings')['renderer'];
@@ -335,6 +338,7 @@ require __DIR__ . '/../src/user.php';
 require __DIR__ . '/../src/admin.php';
 require __DIR__ . '/../src/lokasi.php';
 require __DIR__ . '/../src/about.php';
+require __DIR__ . '/../src/carousel.php';
 
 /**
  * # ROUTES BLOCK

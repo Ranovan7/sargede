@@ -7,10 +7,14 @@ use Slim\Http\Response;
 
 // home
 $app->get('/', function(Request $request, Response $response, $args) {
+    $directory = "uploads/carousel";
+    $carousels = $this->db->query("SELECT * FROM carousel ORDER BY id_order")->fetchAll();
     return $this->view->render($response, 'main/index.html', [
         'hujan_sejak' => '',
         'result' => array(),
-        'tmalatest' => array()
+        'tmalatest' => array(),
+        'directory' => $directory,
+        'carousels' => $carousels,
     ]);
 });
 
