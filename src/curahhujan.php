@@ -136,6 +136,7 @@ $app->group('/curahhujan', function() {
                 $result['datasets'][$j] = round($result['datasets'][$j] + $c['rain'], 2);
             }
             foreach ($ch_man as $c) {
+                echo "{$c['manual']}, ";
                 $current = date('d', strtotime($c['sampling'] ." -7hour"));
                 $j = intval($current) - 1;
                 $result['datasets_man'][$j] = round($result['datasets_man'][$j] + $c['manual'], 2);
@@ -260,54 +261,24 @@ function getCHmaximum($ch, $col_str) {
         'Oktober', 'November', 'Desember',
     ];
 
-    $curr_month = 1;
-    $curr_day = 1;
-    $curr_max = 0.0;      // current max value for the month
-    $curr_cal = 0.0;      // current day value calculation
     foreach ($ch as $c) {
         $year = date('Y', strtotime($c['sampling']));
         if (!array_key_exists($year, $result['datasets'])) {
             // initialize array for the year of current periodik data
             $result['datasets'][$year] = [];
             for ($i = 0; $i < 12; $i++) {
-                $result['datasets'][$year][] = 0;
+                $result['datasets'][$year][] = [];
+                for ($j = 0; $j < cal_days_in_month(CAL_GREGORIAN, $i, $year); $j++) {
+                    $result['datasets'][$year][$i][] = 0;
+                }
             }
             $result['title'][] = $year;
         }
-
         $month = date('m', strtotime($c['sampling'] .' -7hour'));
         $day = date('d', strtotime($c['sampling'] .' -7hour'));
-
-        // check if month changes,
-        // if true set month max then reset all curr
-        if ($month != $curr_month) {
-            // set max value to datasets
-            $i = (intval($month) - 2 + 12) % 12;
-            $curr_max = getmax($curr_max, $curr_cal);
-
-            // check if year changes
-            if ($i == 11) {
-                $result['datasets'][$year - 1][$i] += round($curr_max, 2);
-            } else {
-                $result['datasets'][$year][$i] += round($curr_max, 2);
-            }
-
-            // change curr_month, reset others
-            $curr_month = $month;
-            $curr_day = 1;
-            $curr_max = 0.0;
-            $curr_cal = 0.0;
-        }
-
-        // check if day changes
-        if ($day != $curr_day) {
-            $curr_max = getmax($curr_max, $curr_cal);
-            $curr_cal = 0;
-            $curr_day = $day;
-        }
-
-        // update curr_cal
-        $curr_cal += $c[$col_str];
+        $i = intval($month) -1;
+        $d = intval($day);
+        $result['datasets'][$year][$i][$d] = round($result['datasets'][$year][$i][$d] + $c[$col_str], 2);
     }
     return $result;
 }
