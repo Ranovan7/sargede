@@ -62,7 +62,7 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>
-                                <a href="{{ path_for('tma.show', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a>
+                                <a href="{{ path_for('tma.periodik', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a>
                             </td>
                             <td align="right" style="background-color: red">
                                {% if r.lokasi.siaga1 %}{{ r.lokasi.siaga1|number_format(2) }}{% else %}-{% endif %}
@@ -117,7 +117,7 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>
-                                <a href="{{ path_for('tma.show', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a>
+                                <a href="{{ path_for('tma.periodik', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a>
                             </td>
                             <td align="right" style="background-color: red">
                                {% if r.lokasi.siaga1 %}{{ r.lokasi.siaga1|number_format(2) }}{% else %}-{% endif %}
