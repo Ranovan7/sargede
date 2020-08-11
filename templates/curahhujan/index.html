@@ -48,7 +48,7 @@
                   <th rowspan="2">Telemetri 24 jam</th>
                   <th rowspan="2">Manual 24 jam</th>
                 </tr>
-            <tr>
+                <tr>
                     <th>07 - 13</th>
                     <th>13 - 19</th>
                     <th>19 - 01</th>
@@ -59,7 +59,7 @@
             {% for r in result %}
                 <tr>
                   <td>{{ loop.index }}</td>
-                  <td><a href="{{ path_for('curahhujan.jamjaman', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a></td>
+                  <td><a href="{{ path_for('curahhujan.periodik', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a></td>
                   <td align="right">{{ r.durasi_07_13 }}</td>
                   <td align="right">{{ r.durasi_13_19 }}</td>
                   <td align="right">{{ r.durasi_19_01 }}</td>
@@ -100,7 +100,7 @@
             {% for r in y_result %}
                 <tr>
                   <td>{{ loop.index }}</td>
-                  <td><a href="{{ path_for('curahhujan.jamjaman', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a></td>
+                  <td><a href="{{ path_for('curahhujan.periodik', {'id': r.lokasi.id}) }}">{{ r.lokasi.nama }}</a></td>
                   <td align="right">{{ r.durasi_07_13 }}</td>
                   <td align="right">{{ r.durasi_13_19 }}</td>
                   <td align="right">{{ r.durasi_19_01 }}</td>

@@ -16,7 +16,7 @@
     </ol>
     </section>
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <form class="text-center" action="{{ path_for('tma.show', {id:lokasi.id}) }}" method="GET"> <!-- full_url_for('tma.show', id=lokasi.id) -->
                 <div class="input-group" style="vertical-align: middle;">
                     <p>Dari &emsp;</p>
@@ -27,6 +27,12 @@
                     <button class="btn btn-sm btn-outline-primary" type="submit">Submit</button>
                 </div>
             </form>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group" role="group" style="float: right">
+                <a class="btn btn-primary" href="{{ path_for('tma.periodik', {'id': lokasi.id}) }}">Periodik</a>
+                <a class="btn btn-primary disabled" href="#">Grafik</a>
+            </div>
         </div>
     </div>
     <br>

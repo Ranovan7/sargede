@@ -135,6 +135,125 @@ $app->group('/tma', function() {
             ]);
         })->setName('tma.show');
 
+        $this->get('/periodik', function(Request $request, Response $response, $args) {
+            $sampling = $request->getParam('sampling', date('Y-m-d'));//"2019-06-01");
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+
+            $month = date('m', strtotime($sampling));
+            $year = date('Y', strtotime($sampling));
+            $hari = date('Y-m-d', strtotime("{$year}-{$month}-1"));
+
+            $prev_date = date('Y-m-d', strtotime($hari .' -1month'));
+            $next_date = date('Y-m-d', strtotime($hari .' +1month'));
+            $end_date = (date('m') == $month) ? date('Y-m-d') : date("Y-m-t", strtotime("{$year}-{$month}"));
+
+            $end = date('Y-m-d', strtotime($end_date .' +1day'));
+            $from = "{$hari} 07:00:00";
+            $to = "{$end} 06:55:00";
+            $y_from = "{$prev_date} 07:00:00";
+            $y_to = "{$hari} 06:55:00";
+
+            $wlev = $this->db->query("SELECT * FROM periodik
+                                    WHERE lokasi_id = {$lokasi_id} AND wlev IS NOT NULL
+                                        AND sampling BETWEEN '{$from}' AND '{$to}'
+                                    ORDER BY sampling, id")->fetchAll();
+
+            $result = [];
+            $hour_minutes_wlev = [];
+            $latest_wlev = 0;
+            $latest_time = "";
+            for($i = 1; $i <= intval(date('d', strtotime($end_date))); $i++) {
+                $date = date("Y-m-d", strtotime("{$year}-{$month}-{$i}"));
+                $hour_minutes_wlev[$date] = [];
+                $result[$date] = [
+                    'jam7' => 0,
+                    'jam12' => 0,
+                    'jam17' => 0,
+                    'latest_wlev' => 0,
+                    'latest_time' => 0,
+                    'jam7_manual' => 0,
+                    'jam12_manual' => 0,
+                    'jam17_manual' => 0,
+                ];
+                $wlev_manual = $this->db->query("SELECT * FROM tma
+                                        WHERE lokasi_id = {$lokasi_id} AND manual IS NOT NULL
+                                            AND sampling = '{$date}'
+                                        ORDER BY sampling")->fetchAll();
+
+                foreach ($wlev_manual as $w) {
+                    $time = date('H:i', strtotime($w['sampling']));
+                    $wlev = floatval($w['manual'])/100;
+                    switch ($time) {
+                        case '07:00':
+                            $result[$date]['jam7_manual'] = $wlev;
+                            break;
+                        case '12:00':
+                            $result[$date]['jam12_manual'] = $wlev;
+                            break;
+                        case '17:00':
+                            $result[$date]['jam17_manual'] = $wlev;
+                            break;
+                    }
+                }
+            }
+            forEach($wlev as $w) {
+                $date = date("Y-m-d", strtotime("{$w['sampling']}"));
+                $hour = (int) date('H', strtotime($w['sampling']));
+                $minute = (int) date('i', strtotime($w['sampling']));
+                $timestamp = "{$hour}:{$minute}";
+                $hour_minutes_wlev[$date][$timestamp] = $w['wlev'];
+
+                $latest_wlev = $w['wlev'];
+                $latest_time = $w['sampling'];
+            }
+            // Set TMA value on timestamp, if null check nearby timestamp
+            for($i = 1; $i <= intval(date('d', strtotime($end_date))); $i++) {
+                $date = date("Y-m-d", strtotime("{$year}-{$month}-{$i}"));
+                $jam = [
+                    7 => 0,
+                    12 => 0,
+                    17 => 0
+                ];
+                foreach ([7,12,17] as $t) {
+                    // today
+                    if (is_null($hour_minutes_wlev["{$t}:0"])) {
+                        for ($m = 1; $m <= $depth; $m++) {
+                            $front = ($m * 5) % 60;
+                            $back = 60 - $front;
+                            $next = $t + (int) (($m * 5) / 60);
+                            $prev = $t - 1 - (int) (($m * 5) / 60);
+                            if (in_array("{$next}:{$front}", $hour_minutes_wlev)) {
+                                if (!is_null($hour_minutes_wlev["{$next}:{$front}"])){
+                                    $jam[$t] = $hour_minutes_wlev["{$next}:{$front}"];
+                                    break;
+                                }
+                                if (!is_null($hour_minutes_wlev["{$prev}:{$back}"])){
+                                    $jam[$t] = $hour_minutes_wlev["{$prev}:{$back}"];
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        $jam[$t] = $hour_minutes_wlev["{$t}:0"];
+                    }
+                }
+                $result[$date]['jam7'] = ($jam[7]) ? number_format(floatval($jam[7])/100,2) : null;
+                $result[$date]['jam12'] = ($jam[12]) ? number_format(floatval($jam[12])/100,2) : null;
+                $result[$date]['jam17'] = ($jam[17]) ? number_format(floatval($jam[17])/100,2) : null;
+            }
+            $result = array_reverse($result);
+            // dump($result);
+
+            return $this->view->render($response, 'tma/periodik.html', [
+                'sampling' => date('Y-m', strtotime($hari)),
+                'lokasi' => $lokasi,
+                'prev_date' => $prev_date,
+                'next_date' => $next_date,
+                'result' => $result
+            ]);
+        })->setName('tma.periodik');
+
     })->add(function(Request $request, Response $response, $next) { // middleware untuk mendapatkan lokasi
         $args = $request->getAttribute('routeInfo')[2];
         $lokasi_id = intval($args['id']);

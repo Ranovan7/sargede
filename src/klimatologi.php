@@ -66,21 +66,37 @@ $app->group('/klimatologi', function() {
 
         $this->get('[/]', function(Request $request, Response $response, $args) {
             $lokasi_id = $request->getAttribute('id');
-            $hari = $request->getParam('sampling', date('Y-m-d'));
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+
+            $current_date = date('Y-m-d');
+            $hari = $request->getParam('sampling', $current_date);
             $prev_date = date('Y-m-d', strtotime("{$hari} first day of last month"));
             $next_date = date('Y-m-d', strtotime("{$hari} first day of next month"));
-            $bulan = $request->getParam('sampling', date('m'));
-            $tahun = $request->getParam('sampling', date('Y'));
+            $bulan = date("m", strtotime($hari));
+            $tahun = date("Y", strtotime($hari));
 
-            $manual_daily = $this->db->query("SELECT *
-                                            FROM manual_daily
-                                            WHERE EXTRACT(month FROM sampling) = {$bulan}
-                                                AND EXTRACT(year FROM sampling) = {$tahun}
-                                            ORDER BY sampling DESC")->fetchAll();
+            $end_date = (date('m') == $bulan) ? intval(date('d')) : intval(date("t", strtotime("{$tahun}-{$bulan}")));
+
+            $results = $this->db->query("SELECT *
+                                        FROM manual_daily
+                                        WHERE EXTRACT(month FROM sampling) = {$bulan}
+                                            AND EXTRACT(year FROM sampling) = {$tahun}
+                                        ORDER BY sampling DESC")->fetchAll();
+
+            $manual_daily = [];
+            for($i = 1; $i <= $end_date; $i++) {
+                $manual_daily[date("Y-m-d", strtotime("{$tahun}-{$bulan}-{$i}"))] = [];
+            }
+            forEach($results as $r) {
+                $manual_daily[date("Y-m-d", strtotime("{$r['sampling']}"))] = $r;
+            }
+            $manual_daily = array_reverse($manual_daily);
+            // dump([$tahun, $bulan]);
 
             return $this->view->render($response, 'klimatologi/pos.html', [
                 'manual_daily' => $manual_daily,
                 'lokasi_id' => $lokasi_id,
+                'lokasi' => $lokasi,
                 'sampling' => $hari,
                 'next' => $next_date,
                 'prev' => $prev_date

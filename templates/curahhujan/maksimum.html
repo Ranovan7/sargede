@@ -30,6 +30,7 @@
         </div>
         <div class="col-md-6">
             <div class="btn-group" role="group" style="float: right">
+                <a class="btn btn-primary" href="{{ path_for('curahhujan.periodik', {'id': lokasi.id}) }}">Periodik</a>
                 <a class="btn btn-primary" href="{{ path_for('curahhujan.jamjaman', {'id': lokasi.id}) }}">Jam-jaman</a>
                 <a class="btn btn-primary" href="{{ path_for('curahhujan.harian', {'id': lokasi.id}) }}">Harian</a>
                 <a class="btn btn-primary" href="{{ path_for('curahhujan.bulanan', {'id': lokasi.id}) }}">Bulanan</a>

@@ -214,6 +214,70 @@ $app->group('/curahhujan', function() {
             ]);
         })->setName('curahhujan.maksimum');
 
+        $this->get('/periodik', function(Request $request, Response $response, $args) {
+            $sampling = $request->getParam('sampling', date('Y-m-d'));//"2019-06-01");
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+
+            $month = date('m', strtotime($sampling));
+            $year = date('Y', strtotime($sampling));
+            $hari = date('Y-m-d', strtotime("{$year}-{$month}-1"));
+
+            $prev_date = date('Y-m-d', strtotime($hari .' -1month'));
+            $next_date = date('Y-m-d', strtotime($hari .' +1month'));
+            $end_date = (date('m') == $month) ? date('Y-m-d') : date("Y-m-t", strtotime("{$year}-{$month}"));
+
+            $end = date('Y-m-d', strtotime($end_date .' +1day'));
+            $from = "{$hari} 07:00:00";
+            $to = "{$end} 06:55:00";
+            $y_from = "{$prev_date} 07:00:00";
+            $y_to = "{$hari} 06:55:00";
+
+            $chs = $this->db->query("SELECT * FROM periodik
+                                    WHERE lokasi_id = {$lokasi_id} AND rain IS NOT NULL
+                                        AND sampling BETWEEN '{$from}' AND '{$to}'
+                                    ORDER BY sampling")->fetchAll();
+
+            $result = [];
+            for($i = 1; $i <= intval(date('d', strtotime($end_date))); $i++) {
+                $hari_manual = date('Y-m-d', strtotime($hari .' -1day'));
+                $ch_manual = $this->db->query("SELECT * FROM manual_daily
+                                    WHERE lokasi_id = {$lokasi_id} AND rain IS NOT NULL
+                                        AND sampling = '{$from}'")->fetch();
+                $result[date("Y-m-d", strtotime("{$year}-{$month}-{$i}"))] = [
+                    'durasi_07_13' => 0,
+                    'durasi_13_19' => 0,
+                    'durasi_19_01' => 0,
+                    'durasi_01_07' => 0,
+                    'durasi_all' => 0,
+                    'durasi_manual' => $ch_manual ? $ch_manual['rain'] : null,
+                ];
+            }
+            forEach($chs as $c) {
+                $date = date("Y-m-d", strtotime("{$c['sampling']}"));
+                $time = date('H:i:s', strtotime(date('H:i:s', strtotime($c['sampling'])) .' -7hour'));
+                if ($time < '07:00:00') {
+                    $result[$date]['durasi_07_13'] += $c['rain'];
+                } else if ($time < '13:00:00') {
+                    $result[$date]['durasi_13_19'] += $c['rain'];
+                } else if ($time < '19:00:00') {
+                    $result[$date]['durasi_19_01'] += $c['rain'];
+                } else {
+                    $result[$date]['durasi_01_07'] += $c['rain'];
+                }
+                $result[$date]['durasi_all'] += $c['rain'];
+            }
+            $result = array_reverse($result);
+
+            return $this->view->render($response, 'curahhujan/periodik.html', [
+                'sampling' => date('Y-m', strtotime($hari)),
+                'lokasi' => $lokasi,
+                'prev_date' => $prev_date,
+                'next_date' => $next_date,
+                'result' => $result
+            ]);
+        })->setName('curahhujan.periodik');
+
     });
 });
 
