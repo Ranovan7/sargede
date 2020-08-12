@@ -254,7 +254,7 @@ $app->group('/curahhujan', function() {
                 ];
             }
             forEach($chs as $c) {
-                $date = date("Y-m-d", strtotime("{$c['sampling']}"));
+                $date = date("Y-m-d", strtotime($c['sampling'] .' -7hour'));
                 $time = date('H:i:s', strtotime(date('H:i:s', strtotime($c['sampling'])) .' -7hour'));
                 if ($time < '07:00:00') {
                     $result[$date]['durasi_07_13'] += $c['rain'];
@@ -267,6 +267,7 @@ $app->group('/curahhujan', function() {
                 }
                 $result[$date]['durasi_all'] += $c['rain'];
             }
+
             $result = array_reverse($result);
 
             return $this->view->render($response, 'curahhujan/periodik.html', [
