@@ -178,7 +178,9 @@ $app->group('/tma', function() {
                 ];
                 $wlev_manual = $this->db->query("SELECT * FROM tma
                                         WHERE lokasi_id = {$lokasi_id} AND manual IS NOT NULL
-                                            AND sampling = '{$date}'
+                                            AND EXTRACT(day FROM sampling) = {$i}
+                                            AND EXTRACT(month FROM sampling) = {$month}
+                                            AND EXTRACT(year FROM sampling) = {$year}
                                         ORDER BY sampling")->fetchAll();
 
                 foreach ($wlev_manual as $w) {
@@ -199,14 +201,15 @@ $app->group('/tma', function() {
             }
             forEach($wlev as $w) {
                 $date = date("Y-m-d", strtotime("{$w['sampling']}"));
-                $hour = (int) date('H', strtotime($w['sampling']));
-                $minute = (int) date('i', strtotime($w['sampling']));
+                $hour = intval(date('H', strtotime($w['sampling'])));
+                $minute = intval(date('i', strtotime($w['sampling'])));
                 $timestamp = "{$hour}:{$minute}";
                 $hour_minutes_wlev[$date][$timestamp] = $w['wlev'];
 
                 $latest_wlev = $w['wlev'];
                 $latest_time = $w['sampling'];
             }
+
             // Set TMA value on timestamp, if null check nearby timestamp
             for($i = 1; $i <= intval(date('d', strtotime($end_date))); $i++) {
                 $date = date("Y-m-d", strtotime("{$year}-{$month}-{$i}"));
@@ -217,25 +220,25 @@ $app->group('/tma', function() {
                 ];
                 foreach ([7,12,17] as $t) {
                     // today
-                    if (is_null($hour_minutes_wlev["{$t}:0"])) {
+                    if (is_null($hour_minutes_wlev[$date]["{$t}:0"])) {
                         for ($m = 1; $m <= $depth; $m++) {
                             $front = ($m * 5) % 60;
                             $back = 60 - $front;
                             $next = $t + (int) (($m * 5) / 60);
                             $prev = $t - 1 - (int) (($m * 5) / 60);
                             if (in_array("{$next}:{$front}", $hour_minutes_wlev)) {
-                                if (!is_null($hour_minutes_wlev["{$next}:{$front}"])){
-                                    $jam[$t] = $hour_minutes_wlev["{$next}:{$front}"];
+                                if (!is_null($hour_minutes_wlev[$date]["{$next}:{$front}"])){
+                                    $jam[$t] = $hour_minutes_wlev[$date]["{$next}:{$front}"];
                                     break;
                                 }
-                                if (!is_null($hour_minutes_wlev["{$prev}:{$back}"])){
-                                    $jam[$t] = $hour_minutes_wlev["{$prev}:{$back}"];
+                                if (!is_null($hour_minutes_wlev[$date]["{$prev}:{$back}"])){
+                                    $jam[$t] = $hour_minutes_wlev[$date]["{$prev}:{$back}"];
                                     break;
                                 }
                             }
                         }
                     } else {
-                        $jam[$t] = $hour_minutes_wlev["{$t}:0"];
+                        $jam[$t] = $hour_minutes_wlev[$date]["{$t}:0"];
                     }
                 }
                 $result[$date]['jam7'] = ($jam[7]) ? number_format(floatval($jam[7])/100,2) : null;
@@ -243,7 +246,7 @@ $app->group('/tma', function() {
                 $result[$date]['jam17'] = ($jam[17]) ? number_format(floatval($jam[17])/100,2) : null;
             }
             $result = array_reverse($result);
-            // dump($result);
+            // dump($hour_minutes_wlev);
 
             return $this->view->render($response, 'tma/periodik.html', [
                 'sampling' => date('Y-m', strtotime($hari)),
