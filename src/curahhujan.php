@@ -243,7 +243,7 @@ $app->group('/curahhujan', function() {
                 $hari_manual = date('Y-m-d', strtotime("{$year}-{$month}-{$i}"));
                 $ch_manual = $this->db->query("SELECT * FROM manual_daily
                                     WHERE lokasi_id = {$lokasi_id} AND rain IS NOT NULL
-                                        AND sampling = '{$hari_manual}'")->fetch();
+                                        AND sampling = '{$hari_manual} 07:00:00'")->fetch();
                 $result[date("Y-m-d", strtotime("{$year}-{$month}-{$i}"))] = [
                     'durasi_07_13' => 0,
                     'durasi_13_19' => 0,
@@ -267,8 +267,8 @@ $app->group('/curahhujan', function() {
                 }
                 $result[$date]['durasi_all'] += $c['rain'];
             }
-
             $result = array_reverse($result);
+            // dump($result);
 
             return $this->view->render($response, 'curahhujan/periodik.html', [
                 'sampling' => date('Y-m', strtotime($hari)),
