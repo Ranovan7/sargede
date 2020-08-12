@@ -79,7 +79,8 @@ $app->group('/klimatologi', function() {
 
             $results = $this->db->query("SELECT *
                                         FROM manual_daily
-                                        WHERE EXTRACT(month FROM sampling) = {$bulan}
+                                        WHERE lokasi_id = {$lokasi_id}
+                                            AND EXTRACT(month FROM sampling) = {$bulan}
                                             AND EXTRACT(year FROM sampling) = {$tahun}
                                         ORDER BY sampling DESC")->fetchAll();
 
