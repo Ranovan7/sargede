@@ -267,6 +267,7 @@ $app->group('/curahhujan', function() {
                 }
                 $result[$date]['durasi_all'] += $c['rain'];
             }
+
             $result = array_reverse($result);
 
             return $this->view->render($response, 'curahhujan/periodik.html', [
