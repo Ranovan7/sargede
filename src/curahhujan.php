@@ -240,10 +240,10 @@ $app->group('/curahhujan', function() {
 
             $result = [];
             for($i = 1; $i <= intval(date('d', strtotime($end_date))); $i++) {
-                $hari_manual = date('Y-m-d', strtotime($hari .' -1day'));
+                $hari_manual = date('Y-m-d', strtotime("{$year}-{$month}-{$i}"));
                 $ch_manual = $this->db->query("SELECT * FROM manual_daily
                                     WHERE lokasi_id = {$lokasi_id} AND rain IS NOT NULL
-                                        AND sampling = '{$from}'")->fetch();
+                                        AND sampling = '{$hari_manual}'")->fetch();
                 $result[date("Y-m-d", strtotime("{$year}-{$month}-{$i}"))] = [
                     'durasi_07_13' => 0,
                     'durasi_13_19' => 0,
