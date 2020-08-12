@@ -163,6 +163,7 @@ $app->group('/tma', function() {
             $hour_minutes_wlev = [];
             $latest_wlev = 0;
             $latest_time = "";
+            $depth = 12;
             for($i = 1; $i <= intval(date('d', strtotime($end_date))); $i++) {
                 $date = date("Y-m-d", strtotime("{$year}-{$month}-{$i}"));
                 $hour_minutes_wlev[$date] = [];
@@ -226,7 +227,7 @@ $app->group('/tma', function() {
                             $back = 60 - $front;
                             $next = $t + (int) (($m * 5) / 60);
                             $prev = $t - 1 - (int) (($m * 5) / 60);
-                            if (in_array("{$next}:{$front}", $hour_minutes_wlev)) {
+                            if (in_array("{$next}:{$front}", $hour_minutes_wlev[$date])) {
                                 if (!is_null($hour_minutes_wlev[$date]["{$next}:{$front}"])){
                                     $jam[$t] = $hour_minutes_wlev[$date]["{$next}:{$front}"];
                                     break;
