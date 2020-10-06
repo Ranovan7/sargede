@@ -61,7 +61,7 @@ $app->group('/lokasi', function() {
         } else {
             // insert
             $stmt = $this->db->prepare("INSERT INTO lokasi
-                                                (id,nama,ll,jenis)
+                                                (id,nama,ll,jenis,siaga1,siaga2,siaga3)
                                                 VALUES
                                                 (:id,:nama,:ll,:jenis,:siaga1,:siaga2,:siaga3)");
             $stmt->execute([
