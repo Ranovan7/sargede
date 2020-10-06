@@ -35,13 +35,13 @@ $app->group('/lokasi', function() {
             "nama" => $request->getParam('nama', "Belum ada"),
             "ll" => $request->getParam('ll', "Belum ada"),
             "jenis" => $request->getParam('jenis', "0"),
-            "siaga1" => $request->getParam('siaga1', "null"),
-            "siaga2" => $request->getParam('siaga2', "null"),
-            "siaga3" => $request->getParam('siaga3', "null")
+            "siaga1" => $request->getParam('siaga1', null),
+            "siaga2" => $request->getParam('siaga2', null),
+            "siaga3" => $request->getParam('siaga3', null)
         ];
 
         if ($lokasi) {
-            // if sn already exist (update)
+            // if lokasi already exist (update)
             $stmt = $this->db->prepare("UPDATE lokasi SET
                                                     nama=:nama,
                                                     ll=:ll,
