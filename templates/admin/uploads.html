@@ -1,0 +1,49 @@
+{% extends 'layouts/master.html' %}
+
+{% set title = "Admin" %}
+
+{% block css %}
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <section class="content-header mb-5">
+			<h1>Upload Data Manual</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Uploads</li>
+        </ol>
+    </section>
+    <div style="width: 100%;">
+      <h5>{{ lokasi.nama }} ({{ jenis }})</h5>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleformUpload">
+                  Pilih File CSV
+                </label>
+                <input type="file" class="form-control-file" id="formUpload">
+                <small class="form-text text-muted">delimiter = ' ; '</small>
+              </div>
+              <div class="form-group">
+                  <button type="button" name="uploads" class="btn btn-sm btn-primary">Upload</button>
+                  <a href="{{ path_for('admin.uploads.example', {'id':lokasi.id}) }}" class="btn btn-sm btn-outline-secondary">Download Contoh</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+{% endblock %}
+
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready( function () {
+
+        });
+    </script>
+{% endblock %}

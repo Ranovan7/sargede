@@ -5,7 +5,7 @@ use Slim\Http\Response;
 
 // Tinggi Muka Air
 
-$app->group('/admin', function() use ($loggedinMiddleware) {
+$app->group('/admin', function() use ($loggedinMiddleware,  $adminRoleMiddleware) {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
         // get user yg didapat dari middleware
@@ -73,7 +73,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 $l['manual'] = isset($tmas[$l['id']]) ? $tmas[$l['id']] : null;
             }
             unset($l);
-            
+
             // CH
             $lokasi_ch = $this->db->query("SELECT * FROM lokasi WHERE jenis='1' ORDER BY nama")->fetchAll();
             foreach ($lokasi_ch as &$l) {
@@ -85,7 +85,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     ->fetch();
             }
             unset($l);
-            
+
             // KLIMAT
             $lokasi_klimat = $this->db->query("SELECT * FROM lokasi WHERE jenis='4' ORDER BY nama")->fetchAll();
             foreach ($lokasi_klimat as &$l) {
@@ -422,7 +422,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 if (!$tma) {
                     throw new Slim\Exception\NotFoundException($request, $response);
                 }
-                
+
                 $stmt = $this->db->prepare("UPDATE tma
                     SET
                         manual=:manual
@@ -446,8 +446,8 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             if (!$manual) {
                 throw new Slim\Exception\NotFoundException($request, $response);
             }
-            
-            $stmt = $this->db->prepare("UPDATE manual_daily 
+
+            $stmt = $this->db->prepare("UPDATE manual_daily
                 SET rain=:rain
                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             $stmt->execute([
@@ -532,7 +532,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $stmt->execute([
                 'lokasi_id' => $lokasi_id
             ]);
-            
+
             return $response->withRedirect("/admin?sampling={$form['sampling']}");
         });
 
@@ -541,7 +541,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $form = $request->getParams();
             $lokasi_id = $form['lokasi_id'];
             $sampling = $form['sampling'] ." 07:00:00";
-            
+
             $stmt = $this->db->prepare("DELETE FROM manual_daily
                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             $stmt->execute([
@@ -557,7 +557,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $form = $request->getParams();
             $lokasi_id = $form['lokasi_id'];
             $sampling = $form['sampling'] ." 07:00:00";
-            
+
             $stmt = $this->db->prepare("DELETE FROM manual_daily
                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             $stmt->execute([
@@ -579,6 +579,99 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
 
         return $next($request, $response);
     });
+
+    $this->group('/uploads/{id}', function() {
+        $this->get('[/]', function(Request $request, Response $response) {
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+
+            $lokasi_str = [
+                '1' => 'Curah Hujan',
+                '2' => 'TMA',
+                '4' => 'Klimat'
+            ];
+
+            return $this->view->render($response, 'admin/uploads.html', [
+                'lokasi' => $lokasi,
+                'jenis' => $lokasi_str[$lokasi["jenis"]]
+            ]);
+        })->setName('admin.uploads');
+
+        $this->get('/example', function(Request $request, Response $response) {
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+            $delimiter = ";";
+
+            if ($lokasi['jenis'] == '1'){
+                $header = ['hari', 'hujan'];
+                $data = [
+                    "2020-11-05, 0.0",
+                    "2020-11-06, 6.8",
+                    "2020-11-07, 2.6"
+                ];
+                $filename = "contoh_curahhujan.csv";
+            } else if ($lokasi['jenis'] == '2'){
+                $header = ['hari', 'jam', 'tma'];
+                $data = [
+                    "2020-11-05, 6, 123.5",
+                    "2020-11-05, 12, 125.7",
+                    "2020-11-06, 12, 121.2"
+                ];
+                $filename = "contoh_tma.csv";
+            } else {
+                $header = [
+                    'hari',
+                    'temp_max',
+                    'temp_min',
+                    'temp_rata_rata',
+                    'temp_air_tangki',
+                    'penguapan',
+                    'kecepatan_angin',
+                    'sinar_matahari',
+                    'hujan'
+                ];
+                $data = [
+                    "2020-11-05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0",
+                    "2020-11-06, 6.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0",
+                    "2020-11-07, 2.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
+                ];
+                $filename = "contoh_klimat.csv";
+            };
+
+            // to csv
+            $csv = implode($delimiter, $header) . "\n";
+            $csv .= implode("\n", $data);
+
+            // stream
+            $stream = fopen('php://memory', 'r+');
+            fwrite($stream, $csv);
+            rewind($stream);
+
+            return $response
+                ->withHeader('Content-Type', 'application/octet-stream')
+                ->withHeader('Content-Disposition', 'attachment;filename="' . $filename . '"')
+                ->withBody(new \Slim\Http\Stream($stream));
+        })->setName('admin.uploads.example');
+
+        $this->get('/tma', function(Request $request, Response $response) {
+
+
+            return $response->withRedirect("/admin");
+        })->setName('admin.uploads.tma');
+
+        $this->get('/curahhujan', function(Request $request, Response $response) {
+
+
+            return $response->withRedirect("/admin");
+        })->setName('admin.uploads.curahhujan');
+
+        $this->get('/klimat', function(Request $request, Response $response) {
+
+
+            return $response->withRedirect("/admin");
+        })->setName('admin.uploads.klimat');
+    })->add($adminRoleMiddleware);
+
 })->add(function(Request $request, Response $response, $next) {
 
     $user = $request->getAttribute('user', null);
