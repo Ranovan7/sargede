@@ -18,21 +18,23 @@
       <h5>{{ lokasi.nama }} ({{ jenis }})</h5>
       <div class="row">
         <div class="col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="form-group">
-                <label for="exampleformUpload">
-                  Pilih File CSV
-                </label>
-                <input type="file" class="form-control-file" id="formUpload">
-                <small class="form-text text-muted">delimiter = ' ; '</small>
-              </div>
-              <div class="form-group">
-                  <button type="button" name="uploads" class="btn btn-sm btn-primary">Upload</button>
-                  <a href="{{ path_for('admin.uploads.example', {'id':lokasi.id}) }}" class="btn btn-sm btn-outline-secondary">Download Contoh</a>
+          <form class="" action="{{ path_for('admin.uploads.csv', {'id':lokasi.id}) }}" method="post" enctype="multipart/form-data">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleformUpload">
+                    Pilih File CSV
+                  </label>
+                  <input type="file" class="form-control-file" name="datacsv">
+                  <small class="form-text text-muted">delimiter = ' ; '</small>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-sm btn-primary">Upload</button>
+                    <a href="{{ path_for('admin.uploads.example', {'id':lokasi.id}) }}" class="btn btn-sm btn-outline-secondary">Download Contoh</a>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
