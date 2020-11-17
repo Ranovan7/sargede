@@ -27,7 +27,7 @@ td input[type=number] {
 {% block content %}
 <section class="content-header mb-3">
 	<h1>Data Manual<br><small class="text-muted small">Data-data pengukuran <b>Manual</b> dari para <b>Pengamat</b></small></h1>
-	
+
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="/">Home</a></li>
 		<li class="breadcrumb-item">Admin</li>
@@ -64,7 +64,10 @@ td input[type=number] {
 				{% set ch = l.manual %}
 				<tr>
 					<form action="{{ path_for('admin.edit.curahhujan') }}" method="post">
-						<td>{{ l.nama }}</td>
+						<td>
+							{{ l.nama }}
+							<a href="/admin/uploads/{{ l.id }}"><i class="fas fa-file-upload"></i></a>
+						</td>
 						<td class="text-right">
 							<span class="ch_{{ l.id }}_{{ sampling }}">{{ ch.rain is null ? '-' : ch.rain }}</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="rain" id="rain" step="0.01" value="{{ ch.rain }}" required>
@@ -122,7 +125,10 @@ td input[type=number] {
 				{% set tma = l.manual %}
 				<tr>
 					<form action="{{ path_for('admin.edit.tma') }}" method="post">
-						<td>{{ l.nama }}</td>
+						<td>
+							{{ l.nama }}
+							<a href="/admin/uploads/{{ l.id }}"><i class="fas fa-file-upload"></i></a>
+						</td>
 						<td class="text-right">
 							<span class="ch_{{ l.id }}_{{ sampling }}">{{ tma.jam7 is null ? '-' : tma.jam7 }}</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="tma[0][manual]" step="0.01" value="{{ tma.jam7 }}" required>
@@ -201,7 +207,10 @@ td input[type=number] {
 				{% set k = l.manual %}
 				<tr>
 					<form action="{{ path_for('admin.edit.klimat') }}" method="post">
-						<td>{{ l.nama }}</td>
+						<td>
+							{{ l.nama }}
+							<a href="/admin/uploads/{{ l.id }}"><i class="fas fa-file-upload"></i></a>
+						</td>
 						<td class="text-center">
 							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.temp_max is null ? '-' : k.temp_max }}</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="temp_max" step="0.01" value="{{ k.temp_max }}" required>

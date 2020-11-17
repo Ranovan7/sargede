@@ -5,7 +5,7 @@ use Slim\Http\Response;
 
 // Tinggi Muka Air
 
-$app->group('/admin', function() use ($loggedinMiddleware) {
+$app->group('/admin', function() use ($loggedinMiddleware,  $adminRoleMiddleware) {
 
     $this->get('[/]', function(Request $request, Response $response, $args) {
         // get user yg didapat dari middleware
@@ -73,7 +73,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 $l['manual'] = isset($tmas[$l['id']]) ? $tmas[$l['id']] : null;
             }
             unset($l);
-            
+
             // CH
             $lokasi_ch = $this->db->query("SELECT * FROM lokasi WHERE jenis='1' ORDER BY nama")->fetchAll();
             foreach ($lokasi_ch as &$l) {
@@ -85,7 +85,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                     ->fetch();
             }
             unset($l);
-            
+
             // KLIMAT
             $lokasi_klimat = $this->db->query("SELECT * FROM lokasi WHERE jenis='4' ORDER BY nama")->fetchAll();
             foreach ($lokasi_klimat as &$l) {
@@ -422,7 +422,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
                 if (!$tma) {
                     throw new Slim\Exception\NotFoundException($request, $response);
                 }
-                
+
                 $stmt = $this->db->prepare("UPDATE tma
                     SET
                         manual=:manual
@@ -446,8 +446,8 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             if (!$manual) {
                 throw new Slim\Exception\NotFoundException($request, $response);
             }
-            
-            $stmt = $this->db->prepare("UPDATE manual_daily 
+
+            $stmt = $this->db->prepare("UPDATE manual_daily
                 SET rain=:rain
                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             $stmt->execute([
@@ -532,7 +532,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $stmt->execute([
                 'lokasi_id' => $lokasi_id
             ]);
-            
+
             return $response->withRedirect("/admin?sampling={$form['sampling']}");
         });
 
@@ -541,7 +541,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $form = $request->getParams();
             $lokasi_id = $form['lokasi_id'];
             $sampling = $form['sampling'] ." 07:00:00";
-            
+
             $stmt = $this->db->prepare("DELETE FROM manual_daily
                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             $stmt->execute([
@@ -557,7 +557,7 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
             $form = $request->getParams();
             $lokasi_id = $form['lokasi_id'];
             $sampling = $form['sampling'] ." 07:00:00";
-            
+
             $stmt = $this->db->prepare("DELETE FROM manual_daily
                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
             $stmt->execute([
@@ -579,6 +579,349 @@ $app->group('/admin', function() use ($loggedinMiddleware) {
 
         return $next($request, $response);
     });
+
+    $this->group('/uploads/{id}', function() {
+        $this->get('[/]', function(Request $request, Response $response) {
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+
+            $lokasi_str = [
+                '1' => 'Curah Hujan',
+                '2' => 'TMA',
+                '4' => 'Klimat'
+            ];
+
+            return $this->view->render($response, 'admin/uploads.html', [
+                'lokasi' => $lokasi,
+                'jenis' => $lokasi_str[$lokasi["jenis"]]
+            ]);
+        })->setName('admin.uploads');
+
+        $this->get('/example', function(Request $request, Response $response) {
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+            $delimiter = ";";
+
+            if ($lokasi['jenis'] == '1'){
+                $header = ['hari', 'hujan'];
+                $data = [
+                    "2020-11-05; 0.0",
+                    "2020-11-06; 6.8",
+                    "2020-11-07; 2.6"
+                ];
+                $filename = "contoh_curahhujan.csv";
+            } else if ($lokasi['jenis'] == '2'){
+                $header = ['hari', 'jam', 'tma'];
+                $data = [
+                    "2020-11-05; 07; 123.5",
+                    "2020-11-05; 12; 125.7",
+                    "2020-11-06; 12; 121.2"
+                ];
+                $filename = "contoh_tma.csv";
+            } else {
+                $header = [
+                    'hari',
+                    'temp_max',
+                    'temp_min',
+                    'temp_rata_rata',
+                    'humidity',
+                    'temp_air_tangki',
+                    'penguapan',
+                    'kecepatan_angin',
+                    'sinar_matahari',
+                    'hujan'
+                ];
+                $data = [
+                    "2020-11-05; 34.8; 21.4; 28.1; ; 30.5; 3.3; 28.5; ;	",
+                    "2020-11-06; 32.8; 24.6; 27.1; ; 28; 1.8; 74.3; ; 1.2",
+                    "2020-11-07; 32.2; 24; 28.1; ; 29; 1.4; 78.3; ; 3.2"
+                ];
+                $filename = "contoh_klimat.csv";
+            };
+
+            // to csv
+            $csv = implode($delimiter, $header) . "\n";
+            $csv .= implode("\n", $data);
+
+            // stream
+            $stream = fopen('php://memory', 'r+');
+            fwrite($stream, $csv);
+            rewind($stream);
+
+            return $response
+                ->withHeader('Content-Type', 'application/octet-stream')
+                ->withHeader('Content-Disposition', 'attachment;filename="' . $filename . '"')
+                ->withBody(new \Slim\Http\Stream($stream));
+        })->setName('admin.uploads.example');
+
+        $this->post('/csv', function(Request $request, Response $response) {
+            $lokasi_id = $request->getAttribute('id');
+            $lokasi = $this->db->query("SELECT * FROM lokasi WHERE id={$lokasi_id}")->fetch();
+            $user = $request->getAttribute('user');
+
+            $delimiter = ';';
+
+            $uploaded_files = $request->getUploadedFiles();
+            if (empty($uploaded_files['datacsv'])) {
+                $this->flash->addMessage('errors', "File CSV tidak ditemukan, mohon upload file CSV yang akan diimport");
+                return $response->withRedirect("/admin/uploads/{$lokasi_id}");
+            }
+
+            $csv_file = $uploaded_files['datacsv'];
+            $csv_content = trim(file_get_contents($csv_file->file));
+            if (empty($csv_content)) {
+                $this->flash->addMessage('errors', "File CSV kosong / currupt, mohon upload ulang file CSV yang akan diimport");
+                return $response->withRedirect("/admin/uploads/{$lokasi_id}");
+            }
+
+            $rows = explode("\n", $csv_content);
+            if (count($rows) < 2) {
+                $this->flash->addMessage('errors', "File CSV kosong / currupt, mohon upload ulang file CSV yang akan diimport");
+                return $response->withRedirect("/admin/uploads/{$lokasi_id}");
+            }
+
+            if ($lokasi['jenis'] == '1'){
+                $header = ['hari', 'hujan'];
+                $header_input = explode($delimiter, trim($rows[0]));
+
+                if (serialize($header) !== serialize($header_input)){
+                    $this->flash->addMessage('errors', "Kolom data tidak sesuai dengan kolom Curah Hujan");
+                } else {
+                    $success = 0;
+                    $failed = 0;
+                    foreach ($rows as $i => $row){
+                        if ($i < 1) {
+                            continue;
+                        }
+                        try {
+                            $row = explode($delimiter, trim($row));
+                            $sampling = $row[0] ." 07:00:00";
+                            $now = date('Y-m-d H:i:s');
+
+                            $available = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+                            if (!empty($available)) {
+                                $stmt = $this->db->prepare("UPDATE manual_daily SET
+                                                    rain=:rain,
+                                                    received=:received,
+                                                    petugas=:petugas
+                                                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+                                $stmt->execute([
+                                    ':sampling' => $sampling,
+                                    ':received' => $now,
+                                    ':petugas' => $user['username'],
+                                    ':rain' => $row[1],
+                                    ':lokasi_id' => $lokasi_id
+                                ]);
+                            } else {
+                                $stmt = $this->db->prepare("INSERT INTO manual_daily (
+                                                    sampling,
+                                                    rain,
+                                                    lokasi_id,
+                                                    received,
+                                                    petugas
+                                                ) VALUES (
+                                                    :sampling,
+                                                    :rain,
+                                                    :lokasi_id,
+                                                    :received,
+                                                    :petugas
+                                                )");
+                                $stmt->execute([
+                                    ':sampling' => $sampling,
+                                    ':received' => $now,
+                                    ':petugas' => $user['username'],
+                                    ':rain' => floatval($row[1]),
+                                    ':lokasi_id' => $lokasi_id
+                                ]);
+                            }
+                            $success += 1;
+                        } catch (Exception $e) {
+                            $failed += 1;
+                        }
+                    }
+
+                    $this->flash->addMessage('messages', "Data Curah Hujan berhasil di upload, tersimpan: {$success}, gagal disimpan: {$failed}");
+                }
+            } else if ($lokasi['jenis'] == '2'){
+                $header = ['hari', 'jam', 'tma'];
+
+                $header_input = explode($delimiter, trim($rows[0]));
+
+                if (serialize($header) !== serialize($header_input)){
+                    $this->flash->addMessage('errors', "Kolom data tidak sesuai dengan kolom Curah Hujan");
+                } else {
+                    $success = 0;
+                    $failed = 0;
+                    foreach ($rows as $i => $row){
+                        if ($i < 1) {
+                            continue;
+                        }
+                        try {
+                            $row = explode($delimiter, trim($row));
+                            $sampling = $row[0] ." {$row[1]}:00:00";
+                            $now = date('Y-m-d H:i:s');
+
+                            $available = $this->db->query("SELECT * FROM tma WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+                            if (!empty($available)) {
+                                $stmt = $this->db->prepare("UPDATE tma SET
+                                                    manual=:manual,
+                                                    received=:received,
+                                                    petugas=:petugas
+                                                 WHERE lokasi_id=:lokasi_id AND sampling=:sampling");
+                                $stmt->execute([
+                                    ':sampling' => $sampling,
+                                    ':received' => $now,
+                                    ':petugas' => $user['id'],
+                                    ':manual' => floatval($row[2]),
+                                    ':lokasi_id' => $lokasi['id'],
+                                ]);
+                            } else {
+                                $stmt = $this->db->prepare("INSERT INTO tma (
+                                                    sampling,
+                                                    manual,
+                                                    lokasi_id,
+                                                    received,
+                                                    petugas
+                                                ) VALUES (
+                                                    :sampling,
+                                                    :manual,
+                                                    :lokasi_id,
+                                                    :received,
+                                                    :petugas
+                                                )");
+                                $stmt->execute([
+                                    ':sampling' => $sampling,
+                                    ':received' => $now,
+                                    ':petugas' => $user['id'],
+                                    ':manual' => floatval($row[2]),
+                                    ':lokasi_id' => $lokasi['id'],
+                                ]);
+                            }
+                            $success += 1;
+                        } catch (Exception $e) {
+                            $failed += 1;
+                        }
+                    }
+                }
+                $this->flash->addMessage('messages', "Data TMA berhasil di upload, tersimpan: {$success}, gagal disimpan: {$failed}");
+            } else {
+                $header = [
+                    'hari',
+                    'temp_max',
+                    'temp_min',
+                    'temp_rata_rata',
+                    'humidity',
+                    'temp_air_tangki',
+                    'penguapan',
+                    'kecepatan_angin',
+                    'sinar_matahari',
+                    'hujan'
+                ];
+
+                $header_input = explode($delimiter, trim($rows[0]));
+
+                if (serialize($header) !== serialize($header_input)){
+                    $this->flash->addMessage('errors', "Kolom data tidak sesuai dengan kolom Curah Hujan");
+                } else {
+                    $success = 0;
+                    $failed = 0;
+                    foreach ($rows as $i => $row){
+                        if ($i < 1) {
+                            continue;
+                        }
+                        try {
+                            $row = explode($delimiter, trim($row));
+                            $sampling = $row[0] ." 07:00:00";
+                            $now = date('Y-m-d H:i:s');
+
+                            $available = $this->db->query("SELECT * FROM manual_daily WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
+                            if (!empty($available)) {
+                                $stmt = $this->db->prepare("UPDATE manual_daily SET
+                                                    petugas=:petugas,
+                                                    received=:received,
+                                                    temp_max=:temp_max,
+                                                    temp_min=:temp_min,
+                                                    temp_avg=:temp_avg,
+                                                    humi=:humi,
+                                                    temp_tangki=:temp_tangki,
+                                                    evaporation=:evaporation,
+                                                    wind=:wind,
+                                                    rad=:rad,
+                                                    rain=:rain
+                                                 WHERE lokasi_id={$lokasi['id']} AND sampling=:sampling");
+                                $stmt->execute([
+                                    ':sampling' => $sampling,
+                                    ':petugas' => $user['username'],
+                                    ':received' => $now,
+                                    ':temp_max' => floatval($row[1]) ?: null,
+                                    ':temp_min' => floatval($row[2]) ?: null,
+                                    ':temp_avg' => floatval($row[3]) ?: null,
+                                    ':humi' => floatval($row[4]) ?: null,
+                                    ':temp_tangki' => floatval($row[5]) ?: null,
+                                    ':evaporation' => floatval($row[6]) ?: null,
+                                    ':wind' => floatval($row[7]) ?: null,
+                                    ':rad' => floatval($row[8]) ?: null,
+                                    ':rain' => floatval($row[9]) ?: null,
+                                ]);
+                            } else {
+                                $stmt = $this->db->prepare("INSERT INTO manual_daily (
+                                                    lokasi_id,
+                                                    sampling,
+                                                    petugas,
+                                                    received,
+                                                    temp_max,
+                                                    temp_min,
+                                                    temp_avg,
+                                                    humi,
+                                                    temp_tangki,
+                                                    evaporation,
+                                                    wind,
+                                                    rad,
+                                                    rain
+                                                ) VALUES (
+                                                    :lokasi_id,
+                                                    :sampling,
+                                                    :petugas,
+                                                    :received,
+                                                    :temp_max,
+                                                    :temp_min,
+                                                    :temp_avg,
+                                                    :humi,
+                                                    :temp_tangki,
+                                                    :evaporation,
+                                                    :wind,
+                                                    :rad,
+                                                    :rain
+                                                )");
+                                $stmt->execute([
+                                    ':lokasi_id' => $lokasi['id'],
+                                    ':sampling' => $sampling,
+                                    ':petugas' => $user['username'],
+                                    ':received' => $now,
+                                    ':temp_max' => floatval($row[1]) ?: null,
+                                    ':temp_min' => floatval($row[2]) ?: null,
+                                    ':temp_avg' => floatval($row[3]) ?: null,
+                                    ':humi' => floatval($row[4]) ?: null,
+                                    ':temp_tangki' => floatval($row[5]) ?: null,
+                                    ':evaporation' => floatval($row[6]) ?: null,
+                                    ':wind' => floatval($row[7]) ?: null,
+                                    ':rad' => floatval($row[8]) ?: null,
+                                    ':rain' => floatval($row[9]) ?: null,
+                                ]);
+                            }
+                            $success += 1;
+                        } catch (Exception $e) {
+                            $failed += 1;
+                        }
+                    }
+                }
+                $this->flash->addMessage('messages', "Data Klimat berhasil di upload, tersimpan: {$success}, gagal disimpan: {$failed}");
+            };
+
+            return $response->withRedirect("/admin/uploads/{$lokasi_id}");
+        })->setName('admin.uploads.csv');
+    })->add($adminRoleMiddleware);
+
 })->add(function(Request $request, Response $response, $next) {
 
     $user = $request->getAttribute('user', null);
