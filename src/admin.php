@@ -613,7 +613,7 @@ $app->group('/admin', function() use ($loggedinMiddleware,  $adminRoleMiddleware
             } else if ($lokasi['jenis'] == '2'){
                 $header = ['hari', 'jam', 'tma'];
                 $data = [
-                    "2020-11-05; 07; 123.5",
+                    "2020-11-05; '07'; 123.5",
                     "2020-11-05; 12; 125.7",
                     "2020-11-06; 12; 121.2"
                 ];
