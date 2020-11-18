@@ -613,7 +613,7 @@ $app->group('/admin', function() use ($loggedinMiddleware,  $adminRoleMiddleware
             } else if ($lokasi['jenis'] == '2'){
                 $header = ['hari', 'jam', 'tma'];
                 $data = [
-                    "2020-11-05; 07; 123.5",
+                    "2020-11-05; 7; 123.5",
                     "2020-11-05; 12; 125.7",
                     "2020-11-06; 12; 121.2"
                 ];
@@ -758,7 +758,8 @@ $app->group('/admin', function() use ($loggedinMiddleware,  $adminRoleMiddleware
                         }
                         try {
                             $row = explode($delimiter, trim($row));
-                            $sampling = $row[0] ." {$row[1]}:00:00";
+                            $hour = $row[1] < 10 ? "0".trim($row[1]) : $row[1];
+                            $sampling = $row[0] ." {$hour}:00:00";
                             $now = date('Y-m-d H:i:s');
 
                             $available = $this->db->query("SELECT * FROM tma WHERE lokasi_id={$lokasi['id']} AND sampling='{$sampling}'")->fetch();
