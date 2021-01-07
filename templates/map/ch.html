@@ -97,6 +97,14 @@
                 },
             {% endfor %}
         ];
+        // <ul>
+        // <li>Desa: ${e.desa}</li>
+        // <li>Kecamatan: ${e.kec}</li>
+        // <li>Kabupaten: ${e.kab}</li>
+        // </ul>
+        // <ul>
+        // <li>Petugas: </li>
+        // </ul>
         lokasi.forEach(e => {
             var m = L.marker(e.ll);
             m.bindTooltip(e.nama);
@@ -105,14 +113,6 @@
             m.setIcon(icon);
 					m.bindPopup(`<div class="card">
 						<div class="card-body"><h5>${e.nama}</h5>
-						<ul>
-						<li>Desa: </li>
-						<li>Kecamatan: </li>
-						<li>Kabupaten: </li>
-						</ul>
-						<ul>
-						<li>Petugas: </li>
-						</ul>
 						<b><a href=/${jenis}/${e.id}>Data Hari ini</a></b>
 						</div>
 						</div>`);
