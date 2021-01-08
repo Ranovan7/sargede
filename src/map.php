@@ -63,7 +63,7 @@ $app->group('/map', function() {
     });
     // peta pos Kualitas Air
     $this->get('/kualitasair', function(request $req, response $res, $args) {
-        $lokasis_raw = $this->db->query("SELECT * FROM lokasi WHERE jenis='4'")->fetchAll();
+        $lokasis_raw = $this->db->query("SELECT * FROM lokasi WHERE jenis='3'")->fetchAll();
 	    $lokasis = [];
 	    foreach ($lokasis_raw as $l) {
 	        if (strpos($l['ll'], ",") !== false ) {
