@@ -234,7 +234,11 @@ td input[type=number] {
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="temp_tangki" step="0.01" value="{{ k.temp_tangki }}" required>
 						</td>
 						<td class="text-center">
-							<span class="ch_{{ l.id }}_{{ sampling }}">{{ k.evaporation is null ? '-' : k.evaporation }}</span>
+							<span class="ch_{{ l.id }}_{{ sampling }}">
+								{% if k.evaporation is null %}-{% else %}
+                                    {{ k.evaporation == -1 ? '<strong>+</strong>' : k.evaporation }}
+                                {% endif %}
+							</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="evaporation" step="0.01" value="{{ k.evaporation }}" required>
 						</td>
 						<td class="text-center">
