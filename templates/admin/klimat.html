@@ -178,9 +178,9 @@
                                 {{ k.temp_tangki is null ? '-' : k.temp_tangki }}
                             </td>
                             <td class="text-center">
-                                {% if k.evaporation %}
+                                {% if k.evaporation is null %}-{% else %}
                                     {{ k.evaporation == -1 ? '<strong>+</strong>' : k.evaporation }}
-                                {% else %}-{% endif %}
+                                {% endif %}
                             </td>
                             <td class="text-center">
                                 {{ k.wind is null ? '-' : k.wind }}

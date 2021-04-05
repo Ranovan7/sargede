@@ -235,9 +235,9 @@ td input[type=number] {
 						</td>
 						<td class="text-center">
 							<span class="ch_{{ l.id }}_{{ sampling }}">
-								{% if k.evaporation %}
+								{% if k.evaporation is null %}-{% else %}
                                     {{ k.evaporation == -1 ? '<strong>+</strong>' : k.evaporation }}
-                                {% else %}-{% endif %}
+                                {% endif %}
 							</span>
 							<input class="ch_{{ l.id }}_{{ sampling }} form-control form-control-sm" style="display: none;" type="number" name="evaporation" step="0.01" value="{{ k.evaporation }}" required>
 						</td>
