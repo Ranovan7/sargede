@@ -74,7 +74,9 @@
                     <td align="right">{{ lok.temp_avg }}</td>
                     <td align="right">{{ lok.humi }}</td>
                     <td align="right">{{ lok.temp_tangki }}</td>
-                    <td align="right">{{ lok.evaporation }}</td>
+                    <td align="right">
+                        {{ lok.evaporation == -1 ? '<strong>+</strong>' : lok.evaporation }}
+                    </td>
                     <td align="right">{{ lok.wind }}</td>
                     <td align="right">{{ lok.rad }}</td>
                     <td align="right">{{ lok.rain }}</td>

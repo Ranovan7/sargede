@@ -68,7 +68,9 @@
                     <td align="right">{{ man.temp_avg }}</td>
                     <td align="right">{{ man.humi }}</td>
                     <td align="right">{{ man.temp_tangki }}</td>
-                    <td align="right">{{ man.evaporation }}</td>
+                    <td align="right">
+                        {{ man.evaporation == -1 ? '<strong>+</strong>' : man.evaporation }}
+                    </td>
                     <td align="right">{{ man.wind }}</td>
                     <td align="right">{{ man.rad }}</td>
                     <td align="right">{{ man.rain }}</td>
