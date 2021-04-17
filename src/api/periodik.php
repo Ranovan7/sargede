@@ -52,6 +52,9 @@ $app->group('/periodik', function() {
             "batt" => $request->getParam('batt', ""),
             "rain" => $request->getParam('rain', ""),
             "wlev" => $request->getParam('wlev', ""),
+            "wind_speed" => $request->getParam('wind_speed', ""),
+            "wind_dir" => $request->getParam('wind_dir', ""),
+            "sun_rad" => $request->getParam('sun_rad', ""),
             "up_s" => $request->getParam('up_s', ""),
             "ts_a" => $request->getParam('ts_a', ""),
             "received" => $request->getParam('received', "")
@@ -107,6 +110,9 @@ $app->group('/periodik', function() {
                 "batt" => !empty($per['batt']) ? $per['batt'] : "",
                 "rain" => !empty($per['rain']) ? $per['rain'] : "",
                 "wlev" => !empty($per['wlev']) ? $per['wlev'] : "",
+                "wind_speed" => !empty($per['wind_speed']) ? $per['wind_speed'] : "",
+                "wind_dir" => !empty($per['wind_dir']) ? $per['wind_dir'] : "",
+                "sun_rad" => !empty($per['sun_rad']) ? $per['sun_rad'] : "",
                 "up_s" => !empty($per['up_s']) ? $per['up_s'] : "",
                 "ts_a" => !empty($per['ts_a']) ? $per['ts_a'] : ""
             ];
