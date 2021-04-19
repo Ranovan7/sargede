@@ -43,28 +43,28 @@ $app->group('/periodik', function() {
 
         // insert if not exist
         $data = [
-            "device_sn" => $request->getParam('device_sn', ""),
-            "mdpl" => $request->getParam('mdpl', ""),
-            "apre" => $request->getParam('apre', ""),
-            "sq" => $request->getParam('sq', ""),
-            "temp" => $request->getParam('temp', ""),
-            "humi" => $request->getParam('humi', ""),
-            "batt" => $request->getParam('batt', ""),
-            "rain" => $request->getParam('rain', ""),
-            "wlev" => $request->getParam('wlev', ""),
-            "wind_speed" => $request->getParam('wind_speed', ""),
-            "wind_dir" => $request->getParam('wind_dir', ""),
-            "sun_rad" => $request->getParam('sun_rad', ""),
-            "up_s" => $request->getParam('up_s', ""),
-            "ts_a" => $request->getParam('ts_a', ""),
-            "received" => $request->getParam('received', "")
+            "device_sn" => $request->getParam('device_sn', null),
+            "mdpl" => $request->getParam('mdpl', null),
+            "apre" => $request->getParam('apre', null),
+            "sq" => $request->getParam('sq', null),
+            "temp" => $request->getParam('temp', null),
+            "humi" => $request->getParam('humi', null),
+            "batt" => $request->getParam('batt', null),
+            "rain" => $request->getParam('rain', null),
+            "wlev" => $request->getParam('wlev', null),
+            "wind_speed" => $request->getParam('wind_speed', null),
+            "wind_dir" => $request->getParam('wind_dir', null),
+            "sun_rad" => $request->getParam('sun_rad', null),
+            "up_s" => $request->getParam('up_s', null),
+            "ts_a" => $request->getParam('ts_a', null),
+            "received" => $request->getParam('received', null)
         ];
         $columns = "sampling,lokasi_id";
         $values = "'{$sampling}',{$lokasi_id}";
-        $str_list = ['device_sn', 'up_s', 'ts_a', 'received'];
+        $str_list = ['device_sn', 'up_s', 'ts_a', 'received', 'wind_dir'];
         // generating dynamic columns and values for insert
         foreach ($data as $col => $val) {
-            if ($val) {
+            if ($val !== null) {
                 $columns .= ",{$col}";
                 if (in_array($col, $str_list)) {
                     $values .= ",'{$val}'";
